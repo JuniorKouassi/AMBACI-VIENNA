@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="900" height="200" fill="#FFFFFF"/>
+  <rect y="200" width="900" height="200" fill="#003DA5"/>
+  <rect y="400" width="900" height="200" fill="#E20339"/>
+  <!-- Shield with Triglav (simplified) -->
+  <g transform="translate(120,100)">
+    <path d="M0,0 L80,0 L80,160 Q80,220 40,240 Q0,220 0,160 Z" fill="#FFFFFF" stroke="#003DA5" stroke-width="4"/>
+    <path d="M0,160 Q0,220 40,240 Q80,220 80,160 Z" fill="#003DA5"/>
+    <!-- Three blue peaks (Triglav) -->
+    <polygon points="20,80 40,40 60,80" fill="#003DA5"/>
+    <polygon points="5,95 25,55 45,95" fill="#003DA5"/>
+    <polygon points="35,95 55,55 75,95" fill="#003DA5"/>
+    <!-- Three stars above -->
+    <text x="8" y="30" font-size="16" fill="#FFD700">★</text>
+    <text x="28" y="18" font-size="16" fill="#FFD700">★</text>
+    <text x="48" y="30" font-size="16" fill="#FFD700">★</text>
+  </g>
+</svg>

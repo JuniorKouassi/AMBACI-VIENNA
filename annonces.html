@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informations & Annonces — Ambassade de Côte d'Ivoire à Vienne</title>
+  <meta name="description" content="Retrouvez toutes les informations officielles et annonces de l'Ambassade de Côte d'Ivoire en Autriche : fermetures, nouveaux tarifs, journées consulaires, événements.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ambaci-vienne.ci/annonces.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-2xl);
+    }
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--grey-300);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--grey-700);
+      background: var(--white);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .filter-btn.active { background: var(--orange); border-color: var(--orange); color: var(--white); }
+    .filter-btn .count {
+      background: rgba(0,0,0,0.12);
+      border-radius: 999px;
+      font-size: 0.7rem;
+      padding: 0 0.4rem;
+      line-height: 1.5;
+    }
+    .filter-btn.active .count { background: rgba(255,255,255,0.25); }
+
+    /* ── PINNED ALERT ── */
+    .pinned-block {
+      background: linear-gradient(135deg, #FFF4E0, #FFF8ED);
+      border: 2px solid var(--orange);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-2xl);
+      position: relative;
+      overflow: hidden;
+    }
+    .pinned-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+    }
+    .pinned-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: var(--space-md);
+    }
+
+    /* ── ANNONCE CARD ── */
+    .annonces-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .annonce-card {
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .annonce-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .annonce-card-top {
+      display: flex;
+      align-items: stretch;
+    }
+    .annonce-stripe {
+      width: 5px;
+      flex-shrink: 0;
+    }
+    .stripe-urgent    { background: #e53e3e; }
+    .stripe-admin     { background: var(--orange); }
+    .stripe-event     { background: var(--green); }
+    .stripe-communique{ background: var(--dark); }
+    .stripe-info      { background: var(--grey-300); }
+
+    .annonce-body {
+      flex: 1;
+      padding: var(--space-xl);
+    }
+    .annonce-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-sm);
+    }
+    .annonce-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+    .cat-urgent    { background: #fff5f5; color: #e53e3e; border: 1px solid #fed7d7; }
+    .cat-admin     { background: var(--orange-pale); color: var(--orange-dark); border: 1px solid #ffd9a0; }
+    .cat-event     { background: var(--green-pale); color: var(--green-dark); border: 1px solid #b2e6cc; }
+    .cat-communique{ background: var(--grey-100); color: var(--dark); border: 1px solid var(--grey-200); }
+    .cat-info      { background: var(--grey-100); color: var(--grey-700); border: 1px solid var(--grey-200); }
+
+    /* .annonce-date défini plus bas avec le style pill */
+    .annonce-title {
+      font-family: var(--font-primary);
+      font-size: 1.1875rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: var(--space-sm);
+    }
+    .annonce-text {
+      font-size: 0.9375rem;
+      color: var(--grey-700);
+      line-height: 1.7;
+      margin-bottom: var(--space-lg);
+    }
+    .annonce-footer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .btn-annonce {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .btn-annonce-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .btn-annonce-primary:hover { background: var(--orange-dark); }
+    .btn-annonce-ghost {
+      background: var(--grey-100);
+      color: var(--grey-700);
+      border: 1px solid var(--grey-200);
+    }
+    .btn-annonce-ghost:hover { background: var(--grey-200); color: var(--dark); }
+    .btn-annonce-dl {
+      background: var(--green-pale);
+      color: var(--green-dark);
+      border: 1px solid #b2e6cc;
+    }
+    .btn-annonce-dl:hover { background: var(--green); color: var(--white); border-color: var(--green); }
+
+    /* annonce image thumbnail */
+    .annonce-thumb {
+      flex-shrink: 0;
+      width: 180px;
+      background: var(--grey-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border-left: 1px solid var(--grey-200);
+    }
+    @media (max-width: 640px) { .annonce-thumb { display: none; } }
+
+    /* ── SIDEBAR ── */
+    .annonces-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .annonces-layout { grid-template-columns: 1fr; }
+      .annonces-sidebar { display: none; }
+    }
+    .sidebar-widget {
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin-bottom: var(--space-lg);
+    }
+    .sidebar-widget-header {
+      background: var(--dark);
+      color: var(--white);
+      padding: var(--space-md) var(--space-lg);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .sidebar-widget-body { padding: var(--space-lg); }
+    .sidebar-link-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .sidebar-link-list a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--grey-700);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--grey-100);
+      transition: color var(--transition);
+    }
+    .sidebar-link-list a:last-child { border-bottom: none; }
+    .sidebar-link-list a:hover { color: var(--orange); }
+    .sidebar-link-list a i { color: var(--orange); width: 16px; }
+
+    .subscribe-box {
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      color: var(--white);
+      text-align: center;
+    }
+    .subscribe-box h4 {
+      font-family: var(--font-primary);
+      font-size: 1rem;
+      margin-bottom: var(--space-sm);
+    }
+    .subscribe-box p { font-size: 0.8125rem; color: rgba(255,255,255,0.85); margin-bottom: var(--space-md); }
+    .subscribe-input {
+      width: 100%;
+      padding: 0.6rem 0.9rem;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 0.875rem;
+      margin-bottom: var(--space-sm);
+      outline: none;
+    }
+    .subscribe-btn {
+      width: 100%;
+      padding: 0.6rem;
+      background: var(--dark);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .subscribe-btn:hover { background: var(--dark-mid); }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: var(--space-2xl);
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--grey-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--grey-700);
+      cursor: pointer;
+      transition: all var(--transition);
+      background: var(--white);
+    }
+    .page-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .page-btn.active { background: var(--orange); border-color: var(--orange); color: var(--white); }
+    .page-btn.disabled { opacity: 0.4; pointer-events: none; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-3xl) 0;
+      color: var(--grey-500);
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: var(--space-lg); color: var(--grey-300); }
+    .empty-state p { font-size: 1rem; }
+
+    /* Hide cards by category filter */
+    .annonce-card[data-hidden="true"] { display: none; }
+
+    /* ── STYLED ICON BOX (remplace les emojis thumbnail) ── */
+    .annonce-icon-box {
+      flex-shrink: 0;
+      width: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid var(--grey-200);
+      background: var(--grey-100);
+    }
+    @media (max-width: 640px) { .annonce-icon-box { display: none; } }
+    .annonce-icon-inner {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--white);
+    }
+    .icon-urgent     { background: linear-gradient(135deg, #f56565, #c53030); box-shadow: 0 8px 24px rgba(197,48,48,.35); }
+    .icon-admin      { background: linear-gradient(135deg, var(--orange-light), var(--orange-dark)); box-shadow: 0 8px 24px rgba(247,127,0,.35); }
+    .icon-event      { background: linear-gradient(135deg, var(--green-light), var(--green-dark)); box-shadow: 0 8px 24px rgba(0,154,68,.35); }
+    .icon-communique { background: linear-gradient(135deg, var(--dark-light), var(--dark)); box-shadow: 0 8px 24px rgba(10,31,16,.35); }
+
+    /* ── STYLED FILTER ICONS ── */
+    .filter-icon-wrap {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      background: rgba(0,0,0,0.08);
+    }
+    .filter-btn.active .filter-icon-wrap { background: rgba(255,255,255,0.2); }
+
+    /* ── PINNED ICON ── */
+    .pinned-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* ── SIDEBAR ICON HEADER ── */
+    .sidebar-header-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.15);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* ── DATE PILL ── */
+    .annonce-date {
+      font-size: 0.78rem;
+      color: var(--grey-500);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--grey-100);
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid var(--grey-200);
+    }
+    .annonce-date i { color: var(--orange); font-size: 0.7rem; }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+  <div class="tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <!-- Top bar -->
+  <div class="top-bar" role="complementary">
+    <div class="container">
+      <div class="top-bar-left">
+        <span><span class="top-bar-icon"><i class="fa-solid fa-location-dot"></i></span><span data-i18n="topbar.address">Michael-Neumann-Gasse 2 - 3ème Etage, 1190 Wien</span></span>
+        <span><span class="top-bar-icon"><i class="fa-regular fa-clock"></i></span><span data-i18n="topbar.hours">Lun–Ven : 09h30 – 16h00</span></span>
+      </div>
+      <div class="top-bar-right">
+        <a href="tel:+43158100761"><span class="top-bar-icon"><i class="fa-solid fa-phone"></i></span>+43 1 581007610</a>
+        <a href="mailto:consulat.vienne@mae.ci"><span class="top-bar-icon"><i class="fa-solid fa-envelope"></i></span>consulat.vienne@mae.ci</a>
+        <div class="top-bar-socials">
+          <a href="https://www.facebook.com/ambaciautriche" target="_blank" rel="noopener" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/AmbaCI_autriche" target="_blank" rel="noopener" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" rel="noopener" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://linktr.ee/ambacivienna" target="_blank" rel="noopener" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo" aria-label="Ambassade de Côte d'Ivoire — Accueil">
+          <img src="img/armoiries-ci.png" alt="Armoiries de la République de Côte d'Ivoire" class="logo-emblem">
+          <div class="logo-text">
+            <strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong>
+            <span data-i18n="logo.subtitle">République de Côte d'Ivoire — Vienne, Autriche</span>
+          </div>
+        </a>
+        <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+          <ul class="nav-list" role="list">
+            <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
+            <li><a href="ambassade.html" data-i18n="nav.embassy">L'Ambassade</a></li>
+            <li><a href="services.html" data-i18n="nav.services">Services consulaires</a></li>
+            <li><a href="annonces.html" aria-current="page">Informations &amp; Annonces</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">Contact &amp; Horaires</a></li>
+          </ul>
+        </nav>
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="fr" onclick="setLang('fr')">FR <span class="fi fi-fr"></span></button>
+          <span class="lang-sep"></span>
+          <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE <span class="fi fi-at"></span></button>
+          <span class="lang-sep"></span>
+          <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN <span class="fi fi-gb"></span></button>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Page Header -->
+    <div class="page-header" style="position:relative;">
+      <div class="elephant-watermark" aria-hidden="true"></div>
+      <div class="container page-header-inner">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a href="index.html" data-i18n="nav.home">Accueil</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span aria-current="page">Informations &amp; Annonces</span>
+        </nav>
+        <h1>Informations &amp; Annonces</h1>
+        <p>Retrouvez ici toutes les informations officielles, avis importants et annonces de l'Ambassade de Côte d'Ivoire à Vienne.</p>
+      </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <section style="padding:var(--space-3xl) 0;">
+      <div class="container">
+        <div class="annonces-layout">
+
+          <!-- ── LEFT COLUMN : annonces ── -->
+          <div>
+
+            <!-- Annonce épinglée / Urgente -->
+            <div class="pinned-block">
+              <div class="pinned-label"><span class="pinned-icon"><i class="fa-solid fa-bell"></i></span> Épinglé — Urgent</div>
+              <h2 style="font-family:var(--font-primary);font-size:1.25rem;color:var(--dark);margin-bottom:var(--space-sm);">
+                Fermeture exceptionnelle — Fête Nationale de Côte d'Ivoire
+              </h2>
+              <p style="font-size:.9375rem;color:var(--grey-700);line-height:1.7;margin-bottom:var(--space-lg);">
+                L'Ambassade de Côte d'Ivoire à Vienne sera <strong>fermée le lundi 7 août 2025</strong> à l'occasion de la Fête Nationale de la République de Côte d'Ivoire (65ème anniversaire de l'indépendance). Les services reprendront normalement le mardi 8 août 2025 à 09h30.
+              </p>
+              <div style="display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap;">
+                <span style="font-size:.8125rem;color:var(--grey-500);display:flex;align-items:center;gap:.35rem;">
+                  <i class="fa-regular fa-calendar"></i> Publié le 10 juillet 2025
+                </span>
+              </div>
+            </div>
+
+            <!-- Filtres -->
+            <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrer les annonces">
+              <button class="filter-btn active" data-filter="all" onclick="filterAnnonces('all', this)">
+                <span class="filter-icon-wrap"><i class="fa-solid fa-layer-group"></i></span> Toutes <span class="count" id="count-all">5</span>
+              </button>
+              <button class="filter-btn" data-filter="urgent" onclick="filterAnnonces('urgent', this)">
+                <span class="filter-icon-wrap"><i class="fa-solid fa-circle-exclamation"></i></span> Urgentes <span class="count" id="count-urgent">1</span>
+              </button>
+              <button class="filter-btn" data-filter="admin" onclick="filterAnnonces('admin', this)">
+                <span class="filter-icon-wrap"><i class="fa-solid fa-briefcase"></i></span> Administratif <span class="count" id="count-admin">2</span>
+              </button>
+              <button class="filter-btn" data-filter="event" onclick="filterAnnonces('event', this)">
+                <span class="filter-icon-wrap"><i class="fa-solid fa-calendar-days"></i></span> Événements <span class="count" id="count-event">1</span>
+              </button>
+              <button class="filter-btn" data-filter="communique" onclick="filterAnnonces('communique', this)">
+                <span class="filter-icon-wrap"><i class="fa-solid fa-scroll"></i></span> Communiqués <span class="count" id="count-communique">1</span>
+              </button>
+            </div>
+
+            <!-- Liste des annonces -->
+            <div class="annonces-list" id="annonces-list">
+
+              <!-- ANNONCE 1 — Urgente -->
+              <article class="annonce-card" data-cat="urgent">
+                <div class="annonce-card-top">
+                  <div class="annonce-stripe stripe-urgent"></div>
+                  <div class="annonce-body">
+                    <div class="annonce-meta">
+                      <span class="annonce-cat cat-urgent"><i class="fa-solid fa-circle-exclamation"></i> Urgent</span>
+                      <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 15 juillet 2025</span>
+                    </div>
+                    <h3 class="annonce-title">Perturbation des services consulaires — Travaux de rénovation</h3>
+                    <p class="annonce-text">
+                      En raison de travaux de rénovation dans les locaux de l'Ambassade, les services consulaires seront perturbés du <strong>21 au 25 juillet 2025</strong>. Les dépôts de dossiers se feront uniquement sur rendez-vous préalable. Nous vous prions de bien vouloir nous excuser pour la gêne occasionnée.
+                    </p>
+                    <div class="annonce-footer">
+                      <a href="contact.html" class="btn-annonce btn-annonce-primary">
+                        <i class="fa-solid fa-calendar-check"></i> Prendre rendez-vous
+                      </a>
+                      <a href="mailto:consulat.vienne@mae.ci" class="btn-annonce btn-annonce-ghost">
+                        <i class="fa-solid fa-paper-plane"></i> Nous contacter
+                      </a>
+                    </div>
+                  </div>
+                  <div class="annonce-icon-box">
+                    <div class="annonce-icon-inner icon-urgent"><i class="fa-solid fa-shield-halved"></i></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ANNONCE 2 — Administrative -->
+              <article class="annonce-card" data-cat="admin">
+                <div class="annonce-card-top">
+                  <div class="annonce-stripe stripe-admin"></div>
+                  <div class="annonce-body">
+                    <div class="annonce-meta">
+                      <span class="annonce-cat cat-admin"><i class="fa-solid fa-briefcase"></i> Administratif</span>
+                      <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 1er juillet 2025</span>
+                    </div>
+                    <h3 class="annonce-title">Nouveaux tarifs consulaires — En vigueur à partir du 1er août 2025</h3>
+                    <p class="annonce-text">
+                      Suite aux instructions de la Direction des Affaires Consulaires du Ministère des Affaires Étrangères, les tarifs des prestations consulaires sont révisés. Le nouveau barème sera applicable à compter du <strong>1er août 2025</strong>. Veuillez télécharger le document ci-dessous pour consulter le détail des nouveaux tarifs.
+                    </p>
+                    <div class="annonce-footer">
+                      <a href="#" class="btn-annonce btn-annonce-dl">
+                        <i class="fa-solid fa-file-arrow-down"></i> Télécharger le barème (PDF)
+                      </a>
+                      <a href="services.html" class="btn-annonce btn-annonce-ghost">
+                        <i class="fa-solid fa-chevron-right"></i> Voir les services
+                      </a>
+                    </div>
+                  </div>
+                  <div class="annonce-icon-box">
+                    <div class="annonce-icon-inner icon-admin"><i class="fa-solid fa-scale-balanced"></i></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ANNONCE 3 — Événement -->
+              <article class="annonce-card" data-cat="event">
+                <div class="annonce-card-top">
+                  <div class="annonce-stripe stripe-event"></div>
+                  <div class="annonce-body">
+                    <div class="annonce-meta">
+                      <span class="annonce-cat cat-event"><i class="fa-solid fa-calendar-days"></i> Événement</span>
+                      <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 20 juin 2025</span>
+                    </div>
+                    <h3 class="annonce-title">Journée Consulaire Itinérante à Budapest — 12 septembre 2025</h3>
+                    <p class="annonce-text">
+                      L'Ambassade organise une <strong>Journée Consulaire Itinérante à Budapest (Hongrie)</strong> le vendredi 12 septembre 2025. Les ressortissants ivoiriens résidant en Hongrie pourront effectuer leurs démarches administratives sur place : renouvellement de passeport, état civil, légalisation de documents. Inscription obligatoire avant le 29 août 2025.
+                    </p>
+                    <div class="annonce-footer">
+                      <a href="contact.html" class="btn-annonce btn-annonce-primary">
+                        <i class="fa-solid fa-user-check"></i> S'inscrire
+                      </a>
+                      <a href="#" class="btn-annonce btn-annonce-dl">
+                        <i class="fa-solid fa-file-arrow-down"></i> Programme (PDF)
+                      </a>
+                    </div>
+                  </div>
+                  <div class="annonce-icon-box">
+                    <div class="annonce-icon-inner icon-event"><i class="fa-solid fa-earth-europe"></i></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ANNONCE 4 — Administrative -->
+              <article class="annonce-card" data-cat="admin">
+                <div class="annonce-card-top">
+                  <div class="annonce-stripe stripe-admin"></div>
+                  <div class="annonce-body">
+                    <div class="annonce-meta">
+                      <span class="annonce-cat cat-admin"><i class="fa-solid fa-briefcase"></i> Administratif</span>
+                      <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 5 juin 2025</span>
+                    </div>
+                    <h3 class="annonce-title">Rappel — Documents requis pour le renouvellement de passeport</h3>
+                    <p class="annonce-text">
+                      L'Ambassade rappelle à tous les ressortissants ivoiriens les documents obligatoires pour le renouvellement de passeport biométrique : ancien passeport, extrait d'acte de naissance légalisé, 2 photos d'identité récentes, justificatif de domicile en Autriche. Tout dossier incomplet sera retourné.
+                    </p>
+                    <div class="annonce-footer">
+                      <a href="services.html#passeport" class="btn-annonce btn-annonce-primary">
+                        <i class="fa-solid fa-passport"></i> Voir la procédure complète
+                      </a>
+                    </div>
+                  </div>
+                  <div class="annonce-icon-box">
+                    <div class="annonce-icon-inner icon-admin"><i class="fa-solid fa-id-card"></i></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- ANNONCE 5 — Communiqué -->
+              <article class="annonce-card" data-cat="communique">
+                <div class="annonce-card-top">
+                  <div class="annonce-stripe stripe-communique"></div>
+                  <div class="annonce-body">
+                    <div class="annonce-meta">
+                      <span class="annonce-cat cat-communique"><i class="fa-solid fa-scroll"></i> Communiqué</span>
+                      <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 15 mai 2025</span>
+                    </div>
+                    <h3 class="annonce-title">Communiqué officiel — Présentation de lettres de créance</h3>
+                    <p class="annonce-text">
+                      Son Excellence Monsieur Cissé Yacouba, Ambassadeur Extraordinaire et Plénipotentiaire de la République de Côte d'Ivoire, a présenté ses lettres de créance au Président fédéral de la République d'Autriche lors d'une cérémonie officielle au Palais de la Hofburg à Vienne.
+                    </p>
+                    <div class="annonce-footer">
+                      <a href="#" class="btn-annonce btn-annonce-ghost">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire le communiqué complet
+                      </a>
+                    </div>
+                  </div>
+                  <div class="annonce-icon-box">
+                    <div class="annonce-icon-inner icon-communique"><i class="fa-solid fa-landmark"></i></div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- État vide (affiché quand aucun résultat) -->
+              <div class="empty-state" id="empty-state" style="display:none;">
+                <i class="fa-solid fa-bell-slash"></i>
+                <p>Aucune annonce dans cette catégorie pour le moment.</p>
+              </div>
+
+            </div><!-- /.annonces-list -->
+
+            <!-- Pagination -->
+            <div class="pagination" aria-label="Pagination">
+              <button class="page-btn disabled" aria-label="Page précédente"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="page-btn active" aria-current="page">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn" aria-label="Page suivante"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+          </div><!-- /.left column -->
+
+          <!-- ── RIGHT COLUMN : sidebar ── -->
+          <aside class="annonces-sidebar">
+
+            <!-- Liens rapides -->
+            <div class="sidebar-widget">
+              <div class="sidebar-widget-header">
+                <span class="sidebar-header-icon"><i class="fa-solid fa-compass"></i></span> Liens utiles
+              </div>
+              <div class="sidebar-widget-body">
+                <ul class="sidebar-link-list">
+                  <li><a href="services.html#passeport"><i class="fa-solid fa-passport"></i> Renouvellement de passeport</a></li>
+                  <li><a href="services.html#visa"><i class="fa-solid fa-stamp"></i> Demande de visa</a></li>
+                  <li><a href="services.html#etat-civil"><i class="fa-solid fa-file-contract"></i> État civil</a></li>
+                  <li><a href="contact.html"><i class="fa-solid fa-calendar-check"></i> Prendre rendez-vous</a></li>
+                  <li><a href="contact.html#horaires"><i class="fa-solid fa-clock-rotate-left"></i> Horaires d'ouverture</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Contact rapide -->
+            <div class="sidebar-widget">
+              <div class="sidebar-widget-header">
+                <span class="sidebar-header-icon"><i class="fa-solid fa-headset"></i></span> Contact direct
+              </div>
+              <div class="sidebar-widget-body">
+                <ul class="sidebar-link-list">
+                  <li><a href="tel:+43158100761"><i class="fa-solid fa-phone-volume"></i> +43 1 581007610</a></li>
+                  <li><a href="mailto:consulat.vienne@mae.ci"><i class="fa-solid fa-paper-plane"></i> consulat.vienne@mae.ci</a></li>
+                  <li><a href="https://wa.me/436765373926" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+                </ul>
+                <div style="margin-top:var(--space-md);padding:var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-700);">
+                  <i class="fa-solid fa-clock-rotate-left" style="color:var(--orange);margin-right:.3rem;"></i>
+                  <strong>Lun–Ven :</strong> 09h30 – 16h00
+                </div>
+              </div>
+            </div>
+
+            <!-- Abonnement aux alertes -->
+            <div class="subscribe-box">
+              <h4><i class="fa-solid fa-envelope-open-text" style="margin-right:.4rem;"></i> Recevez les annonces</h4>
+              <p>Inscrivez-vous pour être notifié des nouvelles annonces et informations importantes.</p>
+              <input class="subscribe-input" type="email" placeholder="votre@email.com" />
+              <button class="subscribe-btn">S'inscrire aux alertes</button>
+            </div>
+
+          </aside>
+
+        </div><!-- /.annonces-layout -->
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 data-i18n="cta.title">Besoin d'un service consulaire ?</h2>
+        <p data-i18n="cta.desc">Notre équipe est prête à vous accompagner dans toutes vos démarches administratives. Prenez rendez-vous dès maintenant.</p>
+        <div class="cta-actions">
+          <a href="services.html" class="btn btn-white" data-i18n="cta.btn1">Voir tous les services</a>
+          <a href="contact.html" class="btn btn-ghost" data-i18n="cta.btn2">Prendre rendez-vous</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="img/armoiries-ci.png" alt="Armoiries de Côte d'Ivoire" class="footer-emblem">
+          <strong style="color:var(--white);font-size:1rem;" data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/ambaciautriche" target="_blank" rel="noopener" class="footer-social" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://x.com/AmbaCI_autriche" target="_blank" rel="noopener" class="footer-social" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" rel="noopener" class="footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://linktr.ee/ambacivienna" target="_blank" rel="noopener" class="footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+          </div>
+          <p data-i18n="footer.desc">Ambassade de la République de Côte d'Ivoire en Autriche — Service Consulaire Officiel.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.srv">Services</h4>
+          <ul>
+            <li><a href="services.html#passeport">→ Passeport</a></li>
+            <li><a href="services.html#visa">→ Visa</a></li>
+            <li><a href="services.html#etat-civil">→ État civil</a></li>
+            <li><a href="services.html#legalisation">→ Légalisation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Informations</h4>
+          <ul>
+            <li><a href="ambassade.html">→ L'Ambassade</a></li>
+            <li><a href="annonces.html">→ Informations &amp; Annonces</a></li>
+            <li><a href="ambassade.html#ambassadeur">→ L'Ambassadeur</a></li>
+            <li><a href="contact.html">→ Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.contact">Contact</h4>
+          <ul>
+            <li><a href="tel:+43158100761"><i class="fa-solid fa-phone"></i> +43 1 581007610</a></li>
+            <li><a href="mailto:consulat.vienne@mae.ci"><i class="fa-solid fa-envelope"></i> consulat.vienne@mae.ci</a></li>
+            <li><a href="#"><i class="fa-solid fa-location-dot"></i> Michael-Neumann-Gasse 2, 1190 Wien</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer.copy">&copy; 2025 Ambassade de la République de Côte d'Ivoire en Autriche. Tous droits réservés.</p>
+        <div style="display:flex;gap:var(--space-md);flex-wrap:wrap;">
+          <a href="#" data-i18n="footer.legal">Mentions légales</a>
+          <a href="#" data-i18n="footer.access">Accessibilité</a>
+          <a href="sitemap.xml" data-i18n="footer.sitemap">Plan du site</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="wa-label" aria-hidden="true">💬 CONTACTEZ-NOUS SUR WHATSAPP</div>
+  <a href="https://wa.me/436765373926" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contacter l'Ambassade sur WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ── FILTER ── */
+    function filterAnnonces(cat, btn) {
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('#annonces-list .annonce-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+
+      document.getElementById('empty-state').style.display = visible === 0 ? 'flex' : 'none';
+    }
+
+    /* ── SUBSCRIBE FORM ── */
+    document.querySelector('.subscribe-btn').addEventListener('click', function () {
+      const input = document.querySelector('.subscribe-input');
+      if (input.value && input.value.includes('@')) {
+        this.textContent = '✓ Inscrit !';
+        this.style.background = 'var(--green)';
+        input.value = '';
+        setTimeout(() => {
+          this.textContent = 'S\'inscrire aux alertes';
+          this.style.background = '';
+        }, 3000);
+      } else {
+        input.style.outline = '2px solid #e53e3e';
+        setTimeout(() => input.style.outline = '', 2000);
+      }
+    });
+  </script>
+</body>
+</html>
