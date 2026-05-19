@@ -132,24 +132,51 @@
             <span class="badge" data-i18n="info.badge">Horaires</span>
             <h2 class="section-title" style="margin-bottom:var(--space-lg);" data-i18n="info.title">Heures d'ouverture</h2>
 
-            <table class="horaires-table" aria-label="Horaires d'ouverture">
-              <thead>
-                <tr>
-                  <th scope="col" data-i18n="table.day">Jour</th>
-                  <th scope="col" data-i18n="pcon.table.window">Guichet consulaire</th>
-                  <th scope="col" data-i18n="info.tel.lbl">Téléphone</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Lundi</td><td class="closed">Fermé</td><td class="closed">Fermé</td></tr>
-                <tr><td>Mardi</td><td>09h30 – 16h00</td><td>09h30 – 16h00</td></tr>
-                <tr><td>Mercredi</td><td>09h30 – 16h00</td><td>09h30 – 16h00</td></tr>
-                <tr><td>Jeudi</td><td>09h30 – 16h00</td><td>09h30 – 16h00</td></tr>
-                <tr><td>Vendredi</td><td>09h30 – 16h00</td><td>09h30 – 16h00</td></tr>
-                <tr><td>Samedi</td><td class="closed">Fermé</td><td class="closed">Fermé</td></tr>
-                <tr><td>Dimanche</td><td class="closed">Fermé</td><td class="closed">Fermé</td></tr>
-              </tbody>
-            </table>
+            <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+
+              <!-- Dépôt de dossiers -->
+              <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--grey-200);box-shadow:var(--shadow-sm);">
+                <div style="background:#FFF0E0;padding:var(--space-md) var(--space-lg);display:flex;align-items:center;gap:.5rem;border-bottom:1px solid rgba(247,127,0,.15);">
+                  <i class="fa-solid fa-folder-arrow-up" style="color:var(--orange);font-size:1.1rem;"></i>
+                  <div>
+                    <p style="font-size:.9375rem;font-weight:700;color:var(--orange-dark);">Dépôt de dossiers</p>
+                    <p style="font-size:.8rem;color:var(--orange-dark);opacity:.75;">Documents &amp; formulaires</p>
+                  </div>
+                </div>
+                <div style="background:var(--white);padding:var(--space-lg);">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <div style="display:flex;align-items:center;gap:var(--space-sm);">
+                      <i class="fa-regular fa-calendar" style="color:var(--orange);"></i>
+                      <span style="font-size:.9375rem;font-weight:600;color:var(--dark);">Mardi – Vendredi</span>
+                    </div>
+                    <span style="font-size:1rem;font-weight:700;color:var(--orange-dark);background:#FFF0E0;padding:.3rem .9rem;border-radius:999px;">09:00 – 14:00</span>
+                  </div>
+                  <p style="margin-top:var(--space-sm);font-size:.8125rem;color:var(--grey-500);">Lundi · Samedi · Dimanche — <strong style="color:#e53e3e;">Fermé</strong></p>
+                </div>
+              </div>
+
+              <!-- Retraits de dossiers -->
+              <div style="border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--grey-200);box-shadow:var(--shadow-sm);">
+                <div style="background:var(--green-pale);padding:var(--space-md) var(--space-lg);display:flex;align-items:center;gap:.5rem;border-bottom:1px solid rgba(0,154,68,.15);">
+                  <i class="fa-solid fa-folder-open" style="color:var(--green);font-size:1.1rem;"></i>
+                  <div>
+                    <p style="font-size:.9375rem;font-weight:700;color:var(--green-dark);">Retraits de dossiers</p>
+                    <p style="font-size:.8rem;color:var(--green-dark);opacity:.75;">Sur rendez-vous uniquement</p>
+                  </div>
+                </div>
+                <div style="background:var(--white);padding:var(--space-lg);">
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <div style="display:flex;align-items:center;gap:var(--space-sm);">
+                      <i class="fa-regular fa-calendar" style="color:var(--green);"></i>
+                      <span style="font-size:.9375rem;font-weight:600;color:var(--dark);">Mardi – Vendredi</span>
+                    </div>
+                    <span style="font-size:1rem;font-weight:700;color:var(--green-dark);background:var(--green-pale);padding:.3rem .9rem;border-radius:999px;">14:00 – 16:00</span>
+                  </div>
+                  <p style="margin-top:var(--space-sm);font-size:.8125rem;color:var(--grey-500);">Lundi · Samedi · Dimanche — <strong style="color:#e53e3e;">Fermé</strong></p>
+                </div>
+              </div>
+
+            </div>
 
             <div style="margin-top:var(--space-xl);">
               <h3 style="font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-md);">Quelques jours fériés</h3>
