@@ -71,7 +71,7 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body { font-family: var(--font-ui); color: var(--grey-900); background: var(--white); line-height: 1.6; min-height: 100vh; }
+body { font-family: var(--font-ui); color: var(--grey-900); background: var(--white); line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
@@ -310,7 +310,7 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
    ============================================================ */
 .quick-services { padding: var(--space-3xl) 0; background: var(--grey-100); }
 .section-header { text-align: center; margin-bottom: var(--space-2xl); }
-.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-lg); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--space-lg); }
 .service-card {
   background: var(--white);
   border-radius: var(--radius-lg);
@@ -369,7 +369,7 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
    PAYS DESSERVIS
    ============================================================ */
 .pays-section { padding: var(--space-3xl) 0; background: linear-gradient(180deg, var(--grey-100) 0%, var(--white) 100%); }
-.pays-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); margin-top: var(--space-2xl); }
+.pays-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: var(--space-md); margin-top: var(--space-2xl); }
 .pays-card { background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: var(--space-lg); display: flex; align-items: center; gap: var(--space-md); transition: box-shadow var(--transition), transform var(--transition); }
 .pays-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 .pays-flag { font-size: 2rem; line-height: 1; }
@@ -501,7 +501,7 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
 /* ============================================================
    CARDS SERVICES (page services)
    ============================================================ */
-.services-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl); }
+.services-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-xl); }
 .service-detail-card { border: 1px solid var(--grey-200); border-radius: var(--radius-xl); overflow: hidden; background: var(--white); }
 .service-detail-header {
   padding: var(--space-xl);
@@ -558,42 +558,212 @@ select.form-control { cursor: pointer; }
 .map-placeholder .map-icon { font-size: 3rem; }
 
 /* ============================================================
-   RESPONSIVE
+   TYPOGRAPHIE FLUIDE (clamp)
    ============================================================ */
+.section-title  { font-size: clamp(1.25rem, 3vw, 2.25rem); }
+.hero h1        { font-size: clamp(1.6rem,  4vw, 3rem);    }
+.page-header h1 { font-size: clamp(1.4rem,  4vw, 2.75rem); }
+.cta-section h2 { font-size: clamp(1.4rem,  3.5vw, 2.5rem);}
+
+/* Images responsives globales */
+img { max-width: 100%; height: auto; }
+
+/* ============================================================
+   RESPONSIVE — mobile-first, breakpoints ascendants
+   ============================================================ */
+
+/* ── XL ≥ 1280px — rien de spécial, les valeurs par défaut s'appliquent ── */
+
+/* ── LG 1024px ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .hero .container { grid-template-columns: 1fr; }
-  .hero-card { display: none; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
-  .actualites-grid { grid-template-columns: 1fr; }
-  .contact-layout { grid-template-columns: 1fr; }
+  .hero .container      { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .hero-card            { display: none; }
+  .hero-content         { max-width: 100%; }
+  .footer-grid          { grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+  .actualites-grid      { grid-template-columns: 1fr; }
+  .contact-layout       { grid-template-columns: 1fr; }
+  .info-grid            { grid-template-columns: 1fr; }
+  .services-detail-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .pays-grid            { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+}
+
+/* ── MD 768px ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --space-4xl: 3rem;
+    --space-3xl: 2rem;
+    --space-2xl: 1.75rem;
+    --space-xl:  1.25rem;
+  }
+
+  /* Top bar masquée sur mobile */
+  .top-bar { display: none; }
+
+  /* Navigation hamburger */
+  .main-nav { display: none; }
+  .main-nav.is-open {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    top: 68px;
+    background: var(--white);
+    z-index: 999;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-xl);
+    overflow-y: auto;
+  }
+  .main-nav.is-open .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.25rem;
+  }
+  .main-nav.is-open .nav-list a {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.875rem var(--space-md);
+    border-radius: var(--radius-md);
+    min-height: 44px; /* tap target */
+  }
+  .menu-toggle { display: flex; }
+
+  /* Lang switcher plus compact */
+  .lang-btn { padding: 0.25rem 0.45rem; font-size: 0.6rem; }
+
+  /* Hero */
+  .hero { padding: 2rem 0 2.5rem; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .hero-actions .btn { width: 100%; justify-content: center; min-height: 48px; }
+
+  /* Grilles */
+  .services-grid        { grid-template-columns: 1fr 1fr; }
+  .services-detail-grid { grid-template-columns: 1fr; }
+  .pays-grid            { grid-template-columns: 1fr 1fr; }
+  .footer-grid          { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .actualites-grid      { grid-template-columns: 1fr; }
+
+  /* Cartes */
+  .service-card { padding: var(--space-md); }
+  .actu-card-img { height: 200px; }
+
+  /* Horaires table */
+  .horaires-table th,
+  .horaires-table td { padding: 0.4rem 0.6rem; font-size: 0.875rem; }
+
+  /* Contact card */
+  .contact-card { padding: var(--space-lg); }
+
+  /* Ambassador grid */
   .info-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 768px) {
-  :root { --space-4xl: 3.5rem; --space-3xl: 2.5rem; }
-  .top-bar { display: none; }
-  .main-nav { display: none; }
-  .main-nav.is-open { display: flex; position: fixed; inset: 0; top: 70px; background: var(--white); z-index: 999; flex-direction: column; align-items: flex-start; padding: var(--space-lg); box-shadow: var(--shadow-xl); overflow-y: auto; }
-  .main-nav.is-open .nav-list { flex-direction: column; align-items: flex-start; width: 100%; gap: var(--space-xs); }
-  .main-nav.is-open .nav-list a { width: 100%; font-size: 1.0625rem; padding: 0.875rem var(--space-md); border-radius: var(--radius-md); }
-  .menu-toggle { display: flex; }
-  .services-grid { grid-template-columns: 1fr; }
-  .pays-grid { grid-template-columns: 1fr 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
-}
-
+/* ── SM 640px ──────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .hero-actions { flex-direction: column; align-items: flex-start; }
-  .pays-grid { grid-template-columns: 1fr; }
+  :root {
+    --space-3xl: 1.75rem;
+    --space-2xl: 1.5rem;
+  }
+
+  .container { padding-inline: 1rem; }
+
+  /* Services en colonne unique */
+  .services-grid        { grid-template-columns: 1fr; }
+  .pays-grid            { grid-template-columns: 1fr 1fr; }
   .services-detail-grid { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-grid          { grid-template-columns: 1fr; }
+  .footer-bottom        { flex-direction: column; text-align: center; gap: 0.75rem; }
+
+  /* CTA */
   .cta-actions { flex-direction: column; align-items: center; }
-  .footer-bottom { flex-direction: column; text-align: center; }
+  .cta-actions .btn { width: 100%; max-width: 320px; justify-content: center; }
+
+  /* Page header */
+  .page-header { padding: 1.5rem 0 2rem; }
+
+  /* Actualités */
+  .actu-list-item { flex-direction: column; gap: 0.5rem; }
+
+  /* Hero info card (texte) */
+  .hero-info-label { font-size: 0.75rem; }
+  .hero-info-value { font-size: 0.875rem; }
+
+  /* WhatsApp label */
+  .wa-label { font-size: 0.65rem; right: 6.5rem; }
+
+  /* WhatsApp FAB */
+  .whatsapp-fab { width: 72px; height: 72px; font-size: 2rem; bottom: 1.25rem; right: 1.25rem; }
+
+  /* Breadcrumb */
+  .breadcrumb { font-size: 0.75rem; flex-wrap: wrap; }
+
+  /* Accordion */
+  .accordion-trigger { font-size: 0.9rem; padding: 0.875rem; }
+
+  /* Formulaire */
+  .form-card { padding: var(--space-md); }
+  .form-control { font-size: 16px; } /* empêche zoom iOS */
 }
 
+/* ── XS 480px — très petits téléphones ─────────────────────── */
+@media (max-width: 480px) {
+  .pays-grid { grid-template-columns: 1fr 1fr; }
+
+  .service-detail-card .service-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* Header compact */
+  .logo-text strong { font-size: 0.8rem; }
+  .logo-text span   { display: none; }
+  .logo-emblem      { width: 36px; height: 36px; }
+
+  /* Hero padding */
+  .hero { padding: 1.5rem 0 2rem; }
+  .hero h1 { font-size: clamp(1.4rem, 5vw, 1.8rem); }
+
+  /* Service cards 2 colonnes compactes */
+  .services-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .service-card  { padding: 0.875rem; }
+  .service-icon  { width: 44px; height: 44px; font-size: 1.1rem; }
+  .service-card h3 { font-size: 0.875rem; }
+  .service-card p  { font-size: 0.78rem; }
+
+  /* Footer */
+  .footer-socials { gap: 0.4rem; }
+  .footer-social  { width: 32px; height: 32px; font-size: 0.8rem; }
+}
+
+/* ── 320px — très petits écrans ────────────────────────────── */
+@media (max-width: 360px) {
+  .container { padding-inline: 0.75rem; }
+  .pays-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .lang-btn .fi { display: none; }
+}
+
+/* ── Tablette paysage / iPad  768px–1024px ─────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero .container { max-width: 720px; }
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+  .pays-grid     { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid   { grid-template-columns: 1.5fr 1fr 1fr; }
+}
+
+/* ── PRINT ─────────────────────────────────────────────────── */
 @media print {
-  .top-bar, .site-header, .hero-actions, .cta-section, .site-footer, .menu-toggle, .alert-banner { display: none !important; }
+  .top-bar, .site-header, .hero-actions, .cta-section,
+  .site-footer, .menu-toggle, .alert-banner,
+  .whatsapp-fab, .wa-label, .wa-character-wrap { display: none !important; }
   body { font-size: 12pt; color: #000; }
   .container { max-width: 100%; padding: 0; }
+  .hero { background: none !important; color: #000; }
+  a { color: #000; }
 }
 
 /* ============================================================

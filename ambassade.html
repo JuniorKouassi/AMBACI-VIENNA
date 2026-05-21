@@ -10,6 +10,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
+  <script>/* Mobile redirect */
+    (function(){
+      var mob = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+      if(mob && !sessionStorage.getItem('forceDesktop')){
+        window.location.replace('../AMBACI%20VIENNA%20MOBILE/ambassade%20MOBILE.html');
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -25,7 +33,7 @@
       </div>
       <div class="top-bar-right">
         <a href="tel:+43158100761"><span class="top-bar-icon"><i class="fa-solid fa-phone"></i></span>+43 1 581007610</a>
-        <a href="mailto:consulat.vienne@mae.ci"><span class="top-bar-icon"><i class="fa-solid fa-envelope"></i></span>consulat.vienne@mae.ci</a>
+        <a href="mailto:sceconsul.autriche@diplomatie.gouv.ci"><span class="top-bar-icon"><i class="fa-solid fa-envelope"></i></span>sceconsul.autriche@diplomatie.gouv.ci</a>
         <div class="top-bar-socials">
           <a href="https://www.facebook.com/ambaciautriche" target="_blank" rel="noopener" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="https://x.com/AmbaCI_autriche" target="_blank" rel="noopener" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
@@ -82,14 +90,14 @@
           <span aria-current="page">L'Ambassade</span>
         </nav>
         <h1 data-i18n="pamb.h1">L'Ambassade de Côte d'Ivoire</h1>
-        <p data-i18n="pamb.desc">Représentation officielle de la République de Côte d'Ivoire en Autriche depuis Vienne, assurant les relations diplomatiques et les services consulaires pour 8 pays d'Europe centrale.</p>
+        <p data-i18n="pamb.desc">Représentation officielle de la République de Côte d'Ivoire en Autriche depuis Vienne, assurant les relations diplomatiques et les services consulaires pour 9 pays d'Europe centrale.</p>
       </div>
     </div>
 
     <!-- ===== MISSION ===== -->
     <section style="padding:var(--space-3xl) 0;">
       <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:var(--space-3xl);align-items:center;">
 
           <div>
             <span class="badge" data-i18n="pamb.mis.badge">Notre mission</span>
@@ -97,13 +105,13 @@
             <div style="display:flex;flex-direction:column;gap:var(--space-md);color:var(--grey-700);font-size:.9375rem;line-height:1.75;">
               <p data-i18n="pamb.mis.p1">L'Ambassade de la République de Côte d'Ivoire en Autriche est la représentation diplomatique officielle de la Côte d'Ivoire à Vienne. Elle assure la défense des intérêts ivoiriens, le développement des relations bilatérales et la protection de ses ressortissants.</p>
               <p data-i18n="pamb.mis.p2">Établie conformément à la Convention de Vienne sur les relations diplomatiques de 1961, l'Ambassade remplit une double mission : diplomatique (représentation de l'État auprès du pays hôte) et consulaire (assistance aux ressortissants ivoiriens résidant dans sa juridiction).</p>
-              <p data-i18n="pamb.mis.p3">Au titre de sa compétence territoriale, l'Ambassade couvre 8 pays : l'Autriche, la Hongrie, la Slovénie, la Slovaquie, la Croatie, la Serbie, la Roumanie et la Bosnie-Herzégovine.</p>
+              <p data-i18n="pamb.mis.p3">Au titre de sa compétence territoriale, l'Ambassade couvre 9 pays : l'Autriche, la Hongrie, la Slovénie, la Slovaquie, la Croatie, la Serbie, la Roumanie et la Bosnie-Herzégovine.</p>
             </div>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--space-md);">
             <div style="background:var(--orange);color:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);text-align:center;">
-              <p style="font-size:3rem;font-weight:700;line-height:1;">8</p>
+              <p style="font-size:3rem;font-weight:700;line-height:1;">9</p>
               <p style="font-size:.875rem;color:rgba(255,255,255,.85);margin-top:var(--space-xs);" data-i18n="pamb.stat.countries">pays dans la Circonscription diplomatique</p>
             </div>
             <div style="background:var(--green);color:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);text-align:center;">
@@ -161,7 +169,7 @@
               </div>
               <div style="padding:var(--space-md);background:var(--white);border-radius:var(--radius-md);border-left:3px solid var(--green);">
                 <p style="font-size:.8125rem;color:var(--grey-500);margin-bottom:4px;">Pays d'accréditation</p>
-                <p style="font-weight:600;color:var(--dark);">8 pays</p>
+                <p style="font-weight:600;color:var(--dark);">9 pays</p>
               </div>
             </div>
           </div>
@@ -231,7 +239,7 @@
         <div class="section-header" style="margin-bottom:var(--space-2xl);">
           <span class="badge" data-i18n="pays.badge">Juridiction</span>
           <h2 class="section-title" data-i18n="pays.title">Circonscription diplomatique</h2>
-          <p class="section-subtitle">L'Ambassade de Côte d'Ivoire à Vienne est compétente pour les ressortissants résidant dans les 8 pays suivants.</p>
+          <p class="section-subtitle">L'Ambassade de Côte d'Ivoire à Vienne est compétente pour les ressortissants résidant dans les 9 pays suivants.</p>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-lg);">
@@ -325,6 +333,17 @@
             <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">État des Balkans en cours d'intégration européenne, à la croisée des cultures.</p>
           </div>
 
+          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
+            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
+              <img src="img/flag-md.svg" alt="Drapeau Moldavie" style="width:80px;height:53px;object-fit:cover;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.18);flex-shrink:0;">
+              <div>
+                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.md">Moldavie</p>
+                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Chișinău</p>
+              </div>
+            </div>
+            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">État d'Europe orientale en cours de rapprochement avec l'Union européenne.</p>
+          </div>
+
         </div>
       </div>
     </section>
@@ -332,7 +351,7 @@
     <!-- ===== CÔTE D'IVOIRE ===== -->
     <section style="padding:var(--space-3xl) 0;">
       <div class="container">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3xl);align-items:center;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:var(--space-3xl);align-items:center;">
           <div>
             <span class="badge" data-i18n="pamb.ci.badge">La Côte d'Ivoire</span>
             <h2 class="section-title" style="margin-bottom:var(--space-lg);" data-i18n="pamb.ci.title">Découvrir la Côte d'Ivoire</h2>
@@ -342,7 +361,7 @@
             <p style="font-size:.9375rem;color:var(--grey-700);line-height:1.75;margin-bottom:var(--space-xl);">
               Abidjan, capitale économique, est l'une des métropoles les plus dynamiques d'Afrique subsaharienne. Yamoussoukro est la capitale politique et administrative du pays.
             </p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--space-md);">
               <div style="padding:var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);">
                 <p style="font-size:.8125rem;color:var(--grey-500);">Superficie</p>
                 <p style="font-weight:700;color:var(--dark);">322 463 km²</p>
@@ -435,7 +454,7 @@
           <h4 data-i18n="footer.contact">Contact</h4>
           <ul>
             <li><a href="tel:+43158100761"><i class="fa-solid fa-phone"></i> +43 1 581007610</a></li>
-            <li><a href="mailto:consulat.vienne@mae.ci"><i class="fa-solid fa-envelope"></i> consulat.vienne@mae.ci</a></li>
+            <li><a href="mailto:sceconsul.autriche@diplomatie.gouv.ci"><i class="fa-solid fa-envelope"></i> sceconsul.autriche@diplomatie.gouv.ci</a></li>
             <li><a href="#"><i class="fa-solid fa-location-dot"></i> Michael-Neumann-Gasse 2, 1190 Wien</a></li>
           </ul>
         </div>
