@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ambassade — Ambassade CI Vienne</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <div class="m-topbar">
+    <span><i class="fa-solid fa-location-dot"></i> Michael-Neumann-Gasse 2, 1190 Wien</span>
+    <div class="m-topbar-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+    </div>
+  </div>
+
+  <header class="m-header">
+    <a href="index.html" class="m-logo">
+      <img src="img/armoiries-ci.png" alt="Armoiries CI" class="m-logo-emblem">
+      <div class="m-logo-text"><strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong><span data-i18n="logo.sub">Vienne, Autriche</span></div>
+    </a>
+    <div class="m-lang">
+      <button class="m-lang-btn active" data-lang="fr" onclick="setLang('fr')">FR <span class="fi fi-fr"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="de" onclick="setLang('de')">DE <span class="fi fi-at"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="en" onclick="setLang('en')">EN <span class="fi fi-gb"></span></button>
+    </div>
+  </header>
+
+  <div class="m-page-header">
+    <div class="elephant-watermark" aria-hidden="true"></div>
+    <nav class="m-breadcrumb"><a href="index.html" data-i18n="nav.home">Accueil</a> › <span data-i18n="amb.breadcrumb">Ambassade</span></nav>
+    <h1 data-i18n="amb.h1">L'Ambassade de Côte d'Ivoire</h1>
+    <p data-i18n="amb.sub">Représentation officielle en Autriche depuis Vienne</p>
+  </div>
+
+  <!-- STATS -->
+  <section class="m-section m-section-alt">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+      <div style="background:var(--orange);color:white;border-radius:var(--radius-lg);padding:1rem;text-align:center;">
+        <p style="font-size:2rem;font-weight:700;line-height:1;">8</p>
+        <p style="font-size:.72rem;color:rgba(255,255,255,.85);" data-i18n="amb.stat.countries">pays dans la circonscription</p>
+      </div>
+      <div style="background:var(--green);color:white;border-radius:var(--radius-lg);padding:1rem;text-align:center;">
+        <p style="font-size:2rem;font-weight:700;line-height:1;">1961</p>
+        <p style="font-size:.72rem;color:rgba(255,255,255,.85);" data-i18n="amb.stat.conv">Conv. de Vienne</p>
+      </div>
+      <div style="background:linear-gradient(135deg,var(--orange-dark),var(--green-dark));color:white;border-radius:var(--radius-lg);padding:1rem;text-align:center;">
+        <img src="img/flag-ci.svg" alt="CI" style="width:48px;height:32px;margin:0 auto .25rem;border-radius:3px;">
+        <p style="font-size:.72rem;color:rgba(255,255,255,.85);" data-i18n="amb.stat.ci">Côte d'Ivoire</p>
+      </div>
+      <div style="background:var(--grey-100);border-radius:var(--radius-lg);padding:1rem;text-align:center;border:1px solid var(--grey-200);">
+        <img src="img/flag-at.svg" alt="AT" style="width:48px;height:32px;margin:0 auto .25rem;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.15);">
+        <p style="font-size:.72rem;color:var(--grey-700);" data-i18n="amb.stat.host">Pays hôte</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="m-section">
+    <span class="m-badge" data-i18n="badge.mission">Notre mission</span>
+    <h2 class="m-section-title">Mission diplomatique & consulaire</h2>
+    <div style="display:flex;flex-direction:column;gap:.75rem;font-size:.85rem;color:var(--grey-700);line-height:1.7;">
+      <p data-i18n="amb.mission.p1">L'Ambassade de la République de Côte d'Ivoire en Autriche est la représentation diplomatique officielle de la Côte d'Ivoire à Vienne. Elle assure la défense des intérêts ivoiriens, le développement des relations bilatérales et la protection de ses ressortissants.</p>
+      <p data-i18n="amb.mission.p2">Établie conformément à la Convention de Vienne de 1961, l'Ambassade remplit une double mission : diplomatique et consulaire.</p>
+    </div>
+  </section>
+
+  <!-- AMBASSADEUR -->
+  <section class="m-section m-section-alt" id="ambassadeur">
+    <span class="m-badge" data-i18n="badge.direction">Direction</span>
+    <h2 class="m-section-title">S.E.M. Cissé Yacouba</h2>
+    <img src="img/ambassadeur.jpg" alt="S.E.M. Cissé Yacouba" class="m-amb-photo" onerror="this.style.display='none'">
+    <p class="m-amb-title" data-i18n="amb.title">Ambassadeur Extraordinaire et Plénipotentiaire de la République de Côte d'Ivoire en Autriche</p>
+    <div style="font-size:.82rem;color:var(--grey-700);line-height:1.7;display:flex;flex-direction:column;gap:.5rem;">
+      <p data-i18n="amb.p1">Son Excellence Monsieur Cissé Yacouba est accrédité auprès de la République d'Autriche depuis 2023. Il est également accrédité auprès de la Hongrie, la Slovénie, la Slovaquie, la Croatie, la Serbie, la Roumanie et la Bosnie-Herzégovine.</p>
+      <p data-i18n="amb.p2">Fort d'une longue carrière diplomatique, Son Excellence représente les intérêts de la République ivoirienne et coordonne l'ensemble des services de l'Ambassade.</p>
+    </div>
+  </section>
+
+  <!-- RELATIONS -->
+  <section class="m-section">
+    <span class="m-badge" data-i18n="badge.diplomacy">Diplomatie</span>
+    <h2 class="m-section-title" data-i18n="amb.rel.title">Relations CI — Autriche</h2>
+    <div class="m-rel-card orange">
+      <div class="m-rel-icon orange"><i class="fa-solid fa-handshake"></i></div>
+      <div><h3 data-i18n="rel.bilateral.title">Coopération bilatérale</h3><p data-i18n="rel.bilateral.desc">Relations fondées sur le respect mutuel, la coopération économique, culturelle et éducative.</p></div>
+    </div>
+    <div class="m-rel-card green">
+      <div class="m-rel-icon green"><i class="fa-solid fa-chart-line"></i></div>
+      <div><h3 data-i18n="rel.trade.title">Échanges commerciaux</h3><p data-i18n="rel.trade.desc">La CI exporte cacao, café et matières premières. L'Autriche est partenaire dans l'industrie et les services.</p></div>
+    </div>
+    <div class="m-rel-card orange">
+      <div class="m-rel-icon orange"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div><h3 data-i18n="rel.academic.title">Coopération académique</h3><p data-i18n="rel.academic.desc">Échanges universitaires et programmes de bourses pour étudiants ivoiriens.</p></div>
+    </div>
+    <div class="m-rel-card green">
+      <div class="m-rel-icon green"><i class="fa-solid fa-earth-europe"></i></div>
+      <div><h3 data-i18n="rel.intl.title">Organisations internationales</h3><p data-i18n="rel.intl.desc">Vienne abrite ONUDI, AIEA, ONUDC. L'Ambassade coordonne la participation ivoirienne.</p></div>
+    </div>
+  </section>
+
+  <!-- PAYS -->
+  <section class="m-section m-section-alt" id="pays">
+    <span class="m-badge" data-i18n="badge.jurisdiction">Juridiction</span>
+    <h2 class="m-section-title" data-i18n="pays.title">Circonscription diplomatique</h2>
+    <p class="m-section-sub" data-i18n="pays.sub">9 pays d'Europe centrale et des Balkans</p>
+    <div class="m-pays-grid">
+      <div class="m-pays-card"><img src="img/flag-at.svg" alt="AT"><div><p class="m-pays-name" data-i18n="pays.at">Autriche</p><p class="m-pays-capital">Wien (siège)</p></div></div>
+      <div class="m-pays-card"><img src="img/flag-hu.svg" alt="HU"><div><p class="m-pays-name" data-i18n="pays.hu">Hongrie</p><p class="m-pays-capital">Budapest</p></div></div>
+      <div class="m-pays-card"><img src="img/flag-si.svg" alt="SI"><div><p class="m-pays-name" data-i18n="pays.si">Slovénie</p><p class="m-pays-capital">Ljubljana</p></div></div>
+      <div class="m-pays-card"><img src="img/flag-sk.svg" alt="SK"><div><p class="m-pays-name" data-i18n="pays.sk">Slovaquie</p><p class="m-pays-capital">Bratislava</p></div></div>
+      <div class="m-pays-card"><img src="img/flag-hr.svg" alt="HR"><div><p class="m-pays-name" data-i18n="pays.hr">Croatie</p><p class="m-pays-capital">Zagreb</p></div></div>
+      <div class="m-pays-card"><img src="img/flag-rs.svg" alt="RS"><div><p class="m-pays-name" data-i18n="pays.rs">Serbie</p><p class="m-pays-capital">Belgrade</p></div></div>
+      <div class="m-pays-card"><img src="img/flag-ro.svg" alt="RO"><div><p class="m-pays-name" data-i18n="pays.ro">Roumanie</p><p class="m-pays-capital">Bucarest</p></div></div>
+      <div class="m-pays-card"><img src="img/flag-ba.svg" alt="BA"><div><p class="m-pays-name" data-i18n="pays.ba">Bosnie</p><p class="m-pays-capital">Sarajevo</p></div></div>
+          <div class="m-pays-card"><img src="img/flag-md.svg" alt="MD" style="width:44px;height:29px;object-fit:cover;border-radius:3px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15);"><div><p class="m-pays-name">Moldavie</p><p class="m-pays-capital">Chișinău</p></div></div>
+    </div>
+  </section>
+
+  <!-- CÔTE D'IVOIRE -->
+  <section class="m-section">
+    <span class="m-badge" data-i18n="badge.ci">La Côte d'Ivoire</span>
+    <h2 class="m-section-title" data-i18n="ci.title">Découvrir la Côte d'Ivoire</h2>
+    <div style="background:linear-gradient(135deg,var(--orange),var(--orange-dark),var(--green-dark));border-radius:var(--radius-xl);padding:1.25rem;color:white;text-align:center;margin-bottom:.75rem;">
+      <img src="img/flag-ci.svg" alt="Drapeau CI" style="width:72px;height:48px;margin:0 auto .75rem;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+      <p style="font-size:1rem;font-weight:700;margin-bottom:.25rem;">République de Côte d'Ivoire</p>
+      <p style="font-size:.8rem;font-style:italic;color:rgba(255,255,255,.85);">"Union — Discipline — Travail"</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
+      <div style="background:var(--grey-100);border-radius:var(--radius-md);padding:.6rem .75rem;">
+        <p style="font-size:.68rem;color:var(--grey-500);" data-i18n="ci.area">Superficie</p>
+        <p style="font-size:.8rem;font-weight:700;color:var(--dark);">322 463 km²</p>
+      </div>
+      <div style="background:var(--grey-100);border-radius:var(--radius-md);padding:.6rem .75rem;">
+        <p style="font-size:.68rem;color:var(--grey-500);" data-i18n="ci.pop">Population</p>
+        <p style="font-size:.8rem;font-weight:700;color:var(--dark);">~29 millions</p>
+      </div>
+      <div style="background:var(--grey-100);border-radius:var(--radius-md);padding:.6rem .75rem;">
+        <p style="font-size:.68rem;color:var(--grey-500);" data-i18n="ci.indep">Indépendance</p>
+        <p style="font-size:.8rem;font-weight:700;color:var(--dark);">7 août 1960</p>
+      </div>
+      <div style="background:var(--grey-100);border-radius:var(--radius-md);padding:.6rem .75rem;">
+        <p style="font-size:.68rem;color:var(--grey-500);" data-i18n="ci.capital">Capitale</p>
+        <p style="font-size:.8rem;font-weight:700;color:var(--dark);">Yamoussoukro</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="m-cta">
+    <h2 data-i18n="amb.cta.title">Besoin d'un service ?</h2>
+    <p data-i18n="amb.cta.desc">Notre équipe est disponible du lundi au vendredi.</p>
+    <div class="m-cta-btns">
+      <a href="services.html" class="m-btn-cta-white" data-i18n="amb.cta.btn1">Voir les services</a>
+      <a href="contact.html" class="m-btn-cta-ghost" data-i18n="amb.cta.btn2">Nous contacter</a>
+    </div>
+  </div>
+
+  <footer class="m-footer">
+    <div class="m-footer-brand">
+      <img src="img/armoiries-ci.png" alt="Armoiries" class="m-footer-emblem">
+      <div class="m-footer-brand-text"><strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong><span data-i18n="logo.sub">Vienne, Autriche</span></div>
+    </div>
+    <div class="m-footer-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" class="m-footer-social" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" class="m-footer-social" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" class="m-footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" class="m-footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+      <a href="https://wa.me/436765373926" target="_blank" class="m-footer-social" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="m-footer-links">
+      <a href="index.html"><i class="fa-solid fa-house"></i> <span data-i18n="footer.links.home">Accueil</span></a>
+      <a href="services.html"><i class="fa-solid fa-file-lines"></i> <span data-i18n="footer.links.services">Services</span></a>
+      <a href="annonces.html"><i class="fa-solid fa-bell"></i> <span data-i18n="footer.links.annonces">Annonces</span></a>
+      <a href="contact.html"><i class="fa-solid fa-envelope"></i> <span data-i18n="footer.links.contact">Contact</span></a>
+    </div>
+    <p class="m-footer-copy" data-i18n="footer.copy">© 2025 Ambassade de la République de Côte d'Ivoire en Autriche</p>
+  </footer>
+
+  <div class="m-wa-label" aria-hidden="true">💬 CONTACTEZ-NOUS SUR WHATSAPP</div>
+  <a href="https://wa.me/436765373926" class="m-whatsapp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <nav class="m-bottom-nav">
+    <a href="index.html" class="m-nav-item"><i class="fa-solid fa-house"></i><span data-i18n="nav.home">Accueil</span></a>
+    <a href="ambassade MOBILE.html" class="m-nav-item active"><i class="fa-solid fa-building-columns"></i><span data-i18n="nav.embassy">Ambassade</span></a>
+    <a href="services.html" class="m-nav-item"><i class="fa-solid fa-file-lines"></i><span data-i18n="nav.services">Services</span></a>
+    <a href="annonces.html" class="m-nav-item"><i class="fa-solid fa-bell"></i><span data-i18n="nav.annonces">Annonces</span></a>
+    <a href="contact.html" class="m-nav-item"><i class="fa-solid fa-envelope"></i><span data-i18n="nav.contact">Contact</span></a>
+  </nav>
+
+  <script src="js/main.js"></script>
+  <!-- Lien retour desktop -->
+  <div style="text-align:center;padding:.6rem;background:var(--grey-100);font-size:.7rem;color:var(--grey-500);">
+    <a href="#" onclick="sessionStorage.setItem('forceDesktop','1');window.location.replace('../AMBACI%20VIENNA/index.html');return false;" style="color:var(--grey-500);text-decoration:underline;">
+      <i class="fa-solid fa-desktop"></i> Version desktop
+    </a>
+  </div>
+</body>
+</html>

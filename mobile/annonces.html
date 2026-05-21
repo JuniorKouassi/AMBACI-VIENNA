@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Annonces — Ambassade CI Vienne</title>
+  <meta name="description" content="Informations officielles et annonces de l'Ambassade de Côte d'Ivoire à Vienne.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/mobile.css">
+  <style>
+    /* ── ANNONCE CARDS ── */
+    .m-annonce-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 0.75rem;
+      display: flex;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .m-annonce-card:active { transform: scale(.99); }
+    .m-annonce-stripe { width: 4px; flex-shrink: 0; }
+    .stripe-urgent     { background: #e53e3e; }
+    .stripe-admin      { background: var(--orange); }
+    .stripe-event      { background: var(--green); }
+    .stripe-communique { background: var(--dark); }
+
+    .m-annonce-body { flex: 1; padding: 0.9rem 1rem; }
+    .m-annonce-top {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .m-annonce-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+    }
+    .cat-urgent    { background: #fff5f5; color: #e53e3e; border: 1px solid #fed7d7; }
+    .cat-admin     { background: #FFF0E0; color: var(--orange-dark); border: 1px solid #ffd9a0; }
+    .cat-event     { background: #E6F7EE; color: var(--green-dark); border: 1px solid #b2e6cc; }
+    .cat-communique{ background: var(--grey-100); color: var(--dark); border: 1px solid var(--grey-200); }
+
+    .m-annonce-date {
+      font-size: 0.65rem;
+      color: var(--grey-500);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+    .m-annonce-date i { color: var(--orange); font-size: 0.6rem; }
+
+    .m-annonce-title {
+      font-family: var(--font-primary);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+    }
+    .m-annonce-text {
+      font-size: 0.82rem;
+      color: var(--grey-700);
+      line-height: 1.6;
+      margin-bottom: 0.65rem;
+    }
+    .m-annonce-btns {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .m-annonce-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .m-btn-orange { background: var(--orange); color: var(--white); }
+    .m-btn-orange:active { background: var(--orange-dark); }
+    .m-btn-green  { background: #E6F7EE; color: var(--green-dark); border: 1px solid #b2e6cc; }
+    .m-btn-green:active  { background: var(--green); color: var(--white); }
+    .m-btn-grey   { background: var(--grey-100); color: var(--grey-700); border: 1px solid var(--grey-200); }
+    .m-btn-grey:active   { background: var(--grey-200); }
+
+    /* icon box for cards */
+    .m-annonce-icon {
+      flex-shrink: 0;
+      width: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .m-annonce-icon-inner {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--white);
+    }
+    .icon-urgent     { background: linear-gradient(135deg, #f56565, #c53030); }
+    .icon-admin      { background: linear-gradient(135deg, var(--orange-light), var(--orange-dark)); }
+    .icon-event      { background: linear-gradient(135deg, #00B850, var(--green-dark)); }
+    .icon-communique { background: linear-gradient(135deg, #2A5C3A, var(--dark)); }
+
+    /* ── PINNED BLOCK ── */
+    .m-pinned {
+      background: linear-gradient(135deg, #FFF4E0, #FFF8ED);
+      border: 1.5px solid var(--orange);
+      border-radius: var(--radius-lg);
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .m-pinned::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+    }
+    .m-pinned-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      margin-bottom: 0.55rem;
+    }
+    .m-pinned-title {
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .m-pinned-text {
+      font-size: 0.8rem;
+      color: var(--grey-700);
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+    .m-pinned-date {
+      font-size: 0.65rem;
+      color: var(--grey-500);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* ── FILTER CHIPS ── */
+    .m-filter-row {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    .m-filter-row::-webkit-scrollbar { display: none; }
+    .m-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-shrink: 0;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1.5px solid var(--grey-300);
+      background: var(--white);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--grey-700);
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .m-chip.active { background: var(--orange); border-color: var(--orange); color: var(--white); }
+    .m-chip-count {
+      background: rgba(0,0,0,0.12);
+      border-radius: 999px;
+      font-size: 0.6rem;
+      padding: 0 0.35rem;
+      line-height: 1.5;
+    }
+    .m-chip.active .m-chip-count { background: rgba(255,255,255,0.25); }
+
+    /* ── SUBSCRIBE BOX ── */
+    .m-subscribe {
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      border-radius: var(--radius-lg);
+      padding: 1.1rem;
+      color: var(--white);
+      margin-top: 1.5rem;
+    }
+    .m-subscribe h3 {
+      font-family: var(--font-primary);
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .m-subscribe p { font-size: 0.75rem; color: rgba(255,255,255,.85); margin-bottom: 0.75rem; }
+    .m-subscribe-form { display: flex; gap: 0.4rem; }
+    .m-subscribe-input {
+      flex: 1;
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 0.8rem;
+      outline: none;
+    }
+    .m-subscribe-btn {
+      padding: 0.55rem 0.85rem;
+      background: var(--dark);
+      color: var(--white);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      transition: background var(--transition);
+    }
+    .m-subscribe-btn:active { background: #2A5C3A; }
+
+    /* ── SOCIAL LINKS BLOCK ── */
+    .m-socials-block {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      margin-top: 1rem;
+    }
+    .m-socials-block h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--grey-700);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .m-socials-block h3 i { color: var(--orange); }
+    .m-social-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+    }
+    .m-social-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.6rem 0.3rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--grey-200);
+      background: var(--grey-100);
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: var(--grey-700);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .m-social-link i { font-size: 1.15rem; }
+    .m-social-link:active { transform: scale(.95); }
+    .sl-fb  { color: #1877f2; }
+    .sl-x   { color: #000; }
+    .sl-yt  { color: #ff0000; }
+    .sl-lt  { color: var(--orange); }
+    .sl-wa  { color: #25D366; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="m-topbar">
+    <span><i class="fa-solid fa-location-dot"></i> <span data-i18n="topbar.address">Michael-Neumann-Gasse 2, 1190 Wien</span></span>
+    <div class="m-topbar-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="m-header">
+    <a href="index.html" class="m-logo">
+      <img src="img/armoiries-ci.png" alt="Armoiries CI" class="m-logo-emblem">
+      <div class="m-logo-text">
+        <strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong>
+        <span data-i18n="logo.sub">Vienne, Autriche</span>
+      </div>
+    </a>
+    <div class="m-lang">
+      <button class="m-lang-btn active" data-lang="fr" onclick="setLang('fr')">FR <span class="fi fi-fr"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="de" onclick="setLang('de')">DE <span class="fi fi-at"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="en" onclick="setLang('en')">EN <span class="fi fi-gb"></span></button>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <div class="m-page-header">
+    <div class="elephant-watermark" aria-hidden="true"></div>
+    <nav class="m-breadcrumb"><a href="index.html">Accueil</a> › <span data-i18n="nav.annonces">Annonces</span></nav>
+    <h1 data-i18n="annonces.h1">Informations &amp; Annonces</h1>
+    <p data-i18n="annonces.sub">Avis officiels, fermetures, événements et communiqués</p>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <section class="m-section">
+
+    <!-- PINNED -->
+    <div class="m-pinned">
+      <div class="m-pinned-label"><i class="fa-solid fa-bell"></i> <span data-i18n="annonces.pinned">Épinglé — Urgent</span></div>
+      <div class="m-pinned-title" data-i18n="annonces.pin.title">Fermeture — Fête Nationale de Côte d'Ivoire</div>
+      <p class="m-pinned-text" data-i18n-html="annonces.pin.text">L'Ambassade sera <strong>fermée le lundi 7 août 2025</strong> pour la Fête Nationale (65ème anniversaire). Reprise le mardi 8 août à 09h30.</p>
+      <div class="m-pinned-date"><i class="fa-solid fa-calendar-day"></i> Publié le 10 juillet 2025</div>
+    </div>
+
+    <!-- FILTER CHIPS -->
+    <div class="m-filter-row" id="filter-row">
+      <button class="m-chip active" data-filter="all" onclick="filterCards('all',this)">
+        <i class="fa-solid fa-layer-group"></i> <span data-i18n="filter.all">Toutes</span> <span class="m-chip-count">5</span>
+      </button>
+      <button class="m-chip" data-filter="urgent" onclick="filterCards('urgent',this)">
+        <i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="filter.urgent">Urgentes</span> <span class="m-chip-count">1</span>
+      </button>
+      <button class="m-chip" data-filter="admin" onclick="filterCards('admin',this)">
+        <i class="fa-solid fa-briefcase"></i> <span data-i18n="filter.admin">Administratif</span> <span class="m-chip-count">2</span>
+      </button>
+      <button class="m-chip" data-filter="event" onclick="filterCards('event',this)">
+        <i class="fa-solid fa-calendar-days"></i> <span data-i18n="filter.event">Événements</span> <span class="m-chip-count">1</span>
+      </button>
+      <button class="m-chip" data-filter="communique" onclick="filterCards('communique',this)">
+        <i class="fa-solid fa-scroll"></i> <span data-i18n="filter.communique">Communiqués</span> <span class="m-chip-count">1</span>
+      </button>
+    </div>
+
+    <!-- ANNONCE LIST -->
+    <div id="annonces-list">
+
+      <!-- 1 — Urgente -->
+      <div class="m-annonce-card" data-cat="urgent">
+        <div class="m-annonce-stripe stripe-urgent"></div>
+        <div class="m-annonce-icon">
+          <div class="m-annonce-icon-inner icon-urgent"><i class="fa-solid fa-shield-halved"></i></div>
+        </div>
+        <div class="m-annonce-body">
+          <div class="m-annonce-top">
+            <span class="m-annonce-cat cat-urgent"><i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="cat.urgent">Urgent</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann1.date">15 juillet 2025</span></span>
+          </div>
+          <div class="m-annonce-title" data-i18n="ann1.title">Perturbation — Travaux de rénovation</div>
+          <p class="m-annonce-text" data-i18n-html="ann1.text">Services perturbés du <strong>21 au 25 juillet</strong>. Dépôts de dossiers sur RDV uniquement.</p>
+          <div class="m-annonce-btns">
+            <a href="contact.html" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn.rdv.short">Prendre RDV</span></a>
+            <a href="mailto:sceconsul.autriche@diplomatie.gouv.ci" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="btn.write">Écrire</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 — Administrative -->
+      <div class="m-annonce-card" data-cat="admin">
+        <div class="m-annonce-stripe stripe-admin"></div>
+        <div class="m-annonce-icon">
+          <div class="m-annonce-icon-inner icon-admin"><i class="fa-solid fa-scale-balanced"></i></div>
+        </div>
+        <div class="m-annonce-body">
+          <div class="m-annonce-top">
+            <span class="m-annonce-cat cat-admin"><i class="fa-solid fa-briefcase"></i> <span data-i18n="cat.admin">Administratif</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann2.date">1er juillet 2025</span></span>
+          </div>
+          <div class="m-annonce-title" data-i18n="ann2.title">Nouveaux tarifs consulaires — 1er août 2025</div>
+          <p class="m-annonce-text" data-i18n-html="ann2.text">Le nouveau barème des prestations consulaires entre en vigueur le <strong>1er août 2025</strong>.</p>
+          <div class="m-annonce-btns">
+            <a href="#" class="m-annonce-btn m-btn-green"><i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="btn.download">Télécharger PDF</span></a>
+            <a href="services.html" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="btn.services">Services</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — Événement -->
+      <div class="m-annonce-card" data-cat="event">
+        <div class="m-annonce-stripe stripe-event"></div>
+        <div class="m-annonce-icon">
+          <div class="m-annonce-icon-inner icon-event"><i class="fa-solid fa-earth-europe"></i></div>
+        </div>
+        <div class="m-annonce-body">
+          <div class="m-annonce-top">
+            <span class="m-annonce-cat cat-event"><i class="fa-solid fa-calendar-days"></i> <span data-i18n="cat.event">Événement</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann3.date">20 juin 2025</span></span>
+          </div>
+          <div class="m-annonce-title" data-i18n="ann3.title">Journée Consulaire Itinérante — Budapest, 12 sept.</div>
+          <p class="m-annonce-text" data-i18n-html="ann3.text">Démarches administratives sur place à Budapest. Inscription avant le <strong>29 août 2025</strong>.</p>
+          <div class="m-annonce-btns">
+            <a href="contact.html" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-user-check"></i> <span data-i18n="btn.register">S'inscrire</span></a>
+            <a href="#" class="m-annonce-btn m-btn-green"><i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="btn.programme">Programme</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — Administrative -->
+      <div class="m-annonce-card" data-cat="admin">
+        <div class="m-annonce-stripe stripe-admin"></div>
+        <div class="m-annonce-icon">
+          <div class="m-annonce-icon-inner icon-admin"><i class="fa-solid fa-id-card"></i></div>
+        </div>
+        <div class="m-annonce-body">
+          <div class="m-annonce-top">
+            <span class="m-annonce-cat cat-admin"><i class="fa-solid fa-briefcase"></i> <span data-i18n="cat.admin">Administratif</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann4.date">5 juin 2025</span></span>
+          </div>
+          <div class="m-annonce-title" data-i18n="ann4.title">Rappel — Documents requis pour le passeport</div>
+          <p class="m-annonce-text" data-i18n="ann4.text">Ancien passeport, acte de naissance légalisé, 2 photos, justificatif de domicile. Tout dossier incomplet sera retourné.</p>
+          <div class="m-annonce-btns">
+            <a href="services.html#passeport" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-passport"></i> <span data-i18n="btn.procedure">Procédure complète</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 — Communiqué -->
+      <div class="m-annonce-card" data-cat="communique">
+        <div class="m-annonce-stripe stripe-communique"></div>
+        <div class="m-annonce-icon">
+          <div class="m-annonce-icon-inner icon-communique"><i class="fa-solid fa-landmark"></i></div>
+        </div>
+        <div class="m-annonce-body">
+          <div class="m-annonce-top">
+            <span class="m-annonce-cat cat-communique"><i class="fa-solid fa-scroll"></i> <span data-i18n="cat.communique">Communiqué</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann5.date">15 mai 2025</span></span>
+          </div>
+          <div class="m-annonce-title" data-i18n="ann5.title">Présentation de lettres de créance</div>
+          <p class="m-annonce-text" data-i18n="ann5.text">S.E.M. Cissé Yacouba a présenté ses lettres de créance au Président fédéral d'Autriche au Palais de la Hofburg.</p>
+          <div class="m-annonce-btns">
+            <a href="#" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn.read">Lire le communiqué</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div id="empty-state" style="display:none;text-align:center;padding:2rem 0;color:var(--grey-500);">
+        <i class="fa-solid fa-bell-slash" style="font-size:2.5rem;color:var(--grey-300);display:block;margin-bottom:.75rem;"></i>
+        <p style="font-size:.875rem;" data-i18n="annonce.empty">Aucune annonce dans cette catégorie.</p>
+      </div>
+
+    </div><!-- /#annonces-list -->
+
+    <!-- SUBSCRIBE -->
+    <div class="m-subscribe">
+      <h3><i class="fa-solid fa-envelope-open-text"></i> <span data-i18n="annonce.subscribe.title">Recevez les annonces</span></h3>
+      <p data-i18n="annonce.subscribe.desc">Inscrivez-vous pour être notifié des nouvelles informations importantes.</p>
+      <div class="m-subscribe-form">
+        <input class="m-subscribe-input" type="email" data-i18n-ph="annonce.subscribe.placeholder" placeholder="votre@email.com" id="sub-email">
+        <button class="m-subscribe-btn" id="sub-btn" data-i18n="annonce.subscribe.btn">OK →</button>
+      </div>
+    </div>
+
+    <!-- FOLLOW US -->
+    <div class="m-socials-block">
+      <h3><i class="fa-solid fa-share-nodes"></i> <span data-i18n="annonce.follow">Suivez-nous</span></h3>
+      <div class="m-social-grid">
+        <a href="https://www.facebook.com/ambaciautriche" target="_blank" rel="noopener" class="m-social-link sl-fb">
+          <i class="fa-brands fa-facebook-f"></i>
+          <span>Facebook</span>
+        </a>
+        <a href="https://x.com/AmbaCI_autriche" target="_blank" rel="noopener" class="m-social-link sl-x">
+          <i class="fa-brands fa-x-twitter"></i>
+          <span>Twitter</span>
+        </a>
+        <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" rel="noopener" class="m-social-link sl-yt">
+          <i class="fa-brands fa-youtube"></i>
+          <span>YouTube</span>
+        </a>
+        <a href="https://linktr.ee/ambacivienna" target="_blank" rel="noopener" class="m-social-link sl-lt">
+          <svg width="16" height="18" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="display:block;"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg>
+          <span>Linktree</span>
+        </a>
+        <a href="https://wa.me/436765373926" target="_blank" rel="noopener" class="m-social-link sl-wa">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="m-footer">
+    <div class="m-footer-brand">
+      <img src="img/armoiries-ci.png" alt="Armoiries" class="m-footer-emblem">
+      <div class="m-footer-brand-text"><strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong><span data-i18n="logo.sub">Vienne, Autriche</span></div>
+    </div>
+    <div class="m-footer-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" class="m-footer-social" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" class="m-footer-social" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" class="m-footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" class="m-footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+      <a href="https://wa.me/436765373926" target="_blank" class="m-footer-social" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="m-footer-links">
+      <a href="index.html"><i class="fa-solid fa-house"></i> <span data-i18n="footer.links.home">Accueil</span></a>
+      <a href="ambassade MOBILE.html"><i class="fa-solid fa-building-columns"></i> <span data-i18n="footer.links.embassy">Ambassade</span></a>
+      <a href="services.html"><i class="fa-solid fa-file-lines"></i> <span data-i18n="footer.links.services">Services</span></a>
+      <a href="contact.html"><i class="fa-solid fa-envelope"></i> <span data-i18n="footer.links.contact">Contact</span></a>
+    </div>
+    <p class="m-footer-copy" data-i18n="footer.copy">© 2025 Ambassade de la République de Côte d'Ivoire en Autriche</p>
+  </footer>
+
+  <div class="m-wa-label" aria-hidden="true">💬 CONTACTEZ-NOUS SUR WHATSAPP</div>
+  <a href="https://wa.me/436765373926" class="m-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- BOTTOM NAV -->
+  <nav class="m-bottom-nav" aria-label="Navigation principale">
+    <a href="index.html" class="m-nav-item"><i class="fa-solid fa-house"></i><span data-i18n="nav.home">Accueil</span></a>
+    <a href="ambassade MOBILE.html" class="m-nav-item"><i class="fa-solid fa-building-columns"></i><span data-i18n="nav.embassy">Ambassade</span></a>
+    <a href="services.html" class="m-nav-item"><i class="fa-solid fa-file-lines"></i><span data-i18n="nav.services">Services</span></a>
+    <a href="annonces.html" class="m-nav-item active"><i class="fa-solid fa-bell"></i><span data-i18n="nav.annonces">Annonces</span></a>
+    <a href="contact.html" class="m-nav-item"><i class="fa-solid fa-envelope"></i><span data-i18n="nav.contact">Contact</span></a>
+  </nav>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ── FILTER CHIPS ── */
+    function filterCards(cat, btn) {
+      document.querySelectorAll('.m-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      let visible = 0;
+      document.querySelectorAll('#annonces-list .m-annonce-card').forEach(card => {
+        const show = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = show ? 'flex' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    /* ── SUBSCRIBE ── */
+    document.getElementById('sub-btn').addEventListener('click', function () {
+      const input = document.getElementById('sub-email');
+      if (input.value && input.value.includes('@')) {
+        this.textContent = '✓';
+        this.style.background = 'var(--green)';
+        input.value = '';
+        setTimeout(() => { this.textContent = 'OK →'; this.style.background = ''; }, 3000);
+      } else {
+        input.style.outline = '2px solid #e53e3e';
+        setTimeout(() => input.style.outline = '', 2000);
+      }
+    });
+  </script>
+</body>
+</html>
