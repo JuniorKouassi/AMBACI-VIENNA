@@ -816,9 +816,9 @@ img { max-width: 100%; height: auto; }
 .lang-switcher {
   display: flex;
   align-items: center;
-  border: 1px solid rgba(255,255,255,.2);
+  border: 1px solid var(--grey-300);
   border-radius: var(--radius-sm);
-  overflow: hidden;
+  overflow: visible;
   flex-shrink: 0;
 }
 .lang-btn {
@@ -828,7 +828,7 @@ img { max-width: 100%; height: auto; }
   padding: 0.3rem 0.6rem;
   background: none;
   border: none;
-  color: rgba(255,255,255,.65);
+  color: var(--grey-700);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -843,11 +843,11 @@ img { max-width: 100%; height: auto; }
   width: 18px; height: 13px;
   border-radius: 2px;
   flex-shrink: 0;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.12);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1);
 }
-.lang-btn:hover { color: var(--white); background: rgba(255,255,255,.08); }
-.lang-btn.active { color: var(--orange-light); background: rgba(247,127,0,.18); }
-.lang-sep { width: 1px; height: 18px; background: rgba(255,255,255,.2); flex-shrink: 0; }
+.lang-btn:hover { color: var(--dark); background: var(--grey-100); border-radius: 4px; }
+.lang-btn.active { color: var(--orange); background: rgba(247,127,0,.12); border-radius: 4px; }
+.lang-sep { width: 1px; height: 18px; background: var(--grey-300); flex-shrink: 0; }
 
 /* ============================================================
    ÉLÉPHANT WATERMARK
