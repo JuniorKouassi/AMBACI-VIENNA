@@ -100,49 +100,42 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .m-logo-text strong { display: block; font-size: 0.8rem; font-weight: 700; color: var(--dark); line-height: 1.2; }
 .m-logo-text span { font-size: 0.65rem; color: var(--grey-500); }
 
-/* Sélecteur de langue */
+/* Sélecteur de langue — compact, sans drapeaux */
 .m-lang {
   display: flex;
   align-items: center;
-  border: 1px solid var(--grey-300);
+  border: 1.5px solid var(--grey-300);
   border-radius: var(--radius-sm);
-  overflow: visible; /* pas de coupure */
-  flex-shrink: 0;   /* ne rétrécit jamais */
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--white);
 }
 .m-lang-btn {
-  padding: 0.3rem 0.5rem;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: .04em;
+  padding: 0.22rem 0.32rem;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: .05em;
   color: var(--grey-700);
   transition: background var(--transition), color var(--transition);
   display: flex;
   align-items: center;
-  gap: 0.2rem;
-  min-width: 30px;
   justify-content: center;
+  min-width: 22px;
   white-space: nowrap;
+  line-height: 1;
 }
-.m-lang-btn .fi {
-  width: 14px;
-  height: 10px;
-  border-radius: 2px;
-  flex-shrink: 0;
-}
+.m-lang-btn .fi { display: none; } /* drapeaux masqués pour économiser l'espace */
 .m-lang-btn.active {
   background: var(--orange);
   color: var(--white);
-  border-radius: 4px;
 }
-.m-lang-sep { width: 1px; height: 18px; background: var(--grey-300); flex-shrink: 0; }
+.m-lang-sep { width: 1px; height: 16px; background: var(--grey-300); flex-shrink: 0; }
 
-/* Header — s'assure que le logo et la langue cohabitent */
-.m-header {
-  gap: 0.5rem;
-}
+/* Header — logo + langue côte à côte */
+.m-header { gap: 0.4rem; }
 .m-logo {
   flex: 1;
-  min-width: 0; /* permet la troncature du texte */
+  min-width: 0;
 }
 .m-logo-text strong,
 .m-logo-text span {
@@ -150,12 +143,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Sur très petits écrans : masquer les drapeaux, garder les codes */
-@media (max-width: 360px) {
-  .m-lang-btn .fi { display: none; }
-  .m-lang-btn { padding: 0.3rem 0.4rem; font-size: 0.6rem; }
 }
 
 /* Sur 320px : sous-titre du logo masqué */
@@ -521,6 +508,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   position: relative;
 }
 .m-nav-item i { font-size: 1.1rem; }
+.m-nav-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 .m-nav-item.active { color: var(--orange); }
 .m-nav-item.active::before {
   content: '';
