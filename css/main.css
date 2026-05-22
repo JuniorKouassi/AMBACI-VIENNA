@@ -1115,7 +1115,15 @@ img { max-width: 100%; height: auto; }
   }
 
   .bottom-nav-item svg { width: 22px; height: 22px; flex-shrink: 0; }
-  .bottom-nav-item span { line-height: 1; }
+  .bottom-nav-item span {
+    line-height: 1;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 2px;
+  }
   .bottom-nav-item.active { color: var(--orange); }
 
   .bottom-nav-item.active::before {
