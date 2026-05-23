@@ -476,10 +476,10 @@
         <nav class="breadcrumb" aria-label="Fil d'Ariane">
           <a href="index.html" data-i18n="nav.home">Accueil</a>
           <span class="breadcrumb-sep" aria-hidden="true">›</span>
-          <span aria-current="page">Informations &amp; Annonces</span>
+          <span aria-current="page" data-i18n="ann.h1">Informations &amp; Annonces</span>
         </nav>
-        <h1>Informations &amp; Annonces</h1>
-        <p>Retrouvez ici toutes les informations officielles, avis importants et annonces de l'Ambassade de Côte d'Ivoire à Vienne.</p>
+        <h1 data-i18n="ann.h1">Informations &amp; Annonces</h1>
+        <p data-i18n="ann.desc">Retrouvez ici toutes les informations officielles, avis importants et annonces de l'Ambassade de Côte d'Ivoire à Vienne.</p>
       </div>
     </div>
 
@@ -493,16 +493,16 @@
 
             <!-- Annonce épinglée / Urgente -->
             <div class="pinned-block">
-              <div class="pinned-label"><span class="pinned-icon"><i class="fa-solid fa-bell"></i></span> Épinglé — Urgent</div>
-              <h2 style="font-family:var(--font-primary);font-size:1.25rem;color:var(--dark);margin-bottom:var(--space-sm);">
+              <div class="pinned-label"><span class="pinned-icon"><i class="fa-solid fa-bell"></i></span> <span data-i18n="ann.pinned.label">Épinglé — Urgent</span></div>
+              <h2 style="font-family:var(--font-primary);font-size:1.25rem;color:var(--dark);margin-bottom:var(--space-sm);" data-i18n="ann.pinned.title">
                 Fermeture exceptionnelle — Fête Nationale de Côte d'Ivoire
               </h2>
-              <p style="font-size:.9375rem;color:var(--grey-700);line-height:1.7;margin-bottom:var(--space-lg);">
+              <p style="font-size:.9375rem;color:var(--grey-700);line-height:1.7;margin-bottom:var(--space-lg);" data-i18n-html="ann.pinned.desc">
                 L'Ambassade de Côte d'Ivoire à Vienne sera <strong>fermée le lundi 7 août 2025</strong> à l'occasion de la Fête Nationale de la République de Côte d'Ivoire (65ème anniversaire de l'indépendance). Les services reprendront normalement le mardi 8 août 2025 à 09h30.
               </p>
               <div style="display:flex;align-items:center;gap:var(--space-md);flex-wrap:wrap;">
                 <span style="font-size:.8125rem;color:var(--grey-500);display:flex;align-items:center;gap:.35rem;">
-                  <i class="fa-regular fa-calendar"></i> Publié le 10 juillet 2025
+                  <i class="fa-regular fa-calendar"></i> <span data-i18n="ann.pinned.date">Publié le 10 juillet 2025</span>
                 </span>
               </div>
             </div>
@@ -510,19 +510,19 @@
             <!-- Filtres -->
             <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrer les annonces">
               <button class="filter-btn active" data-filter="all" onclick="filterAnnonces('all', this)">
-                <span class="filter-icon-wrap"><i class="fa-solid fa-layer-group"></i></span> Toutes <span class="count" id="count-all">5</span>
+                <span class="filter-icon-wrap"><i class="fa-solid fa-layer-group"></i></span> <span data-i18n="ann.filter.all">Toutes</span> <span class="count" id="count-all">5</span>
               </button>
               <button class="filter-btn" data-filter="urgent" onclick="filterAnnonces('urgent', this)">
-                <span class="filter-icon-wrap"><i class="fa-solid fa-circle-exclamation"></i></span> Urgentes <span class="count" id="count-urgent">1</span>
+                <span class="filter-icon-wrap"><i class="fa-solid fa-circle-exclamation"></i></span> <span data-i18n="ann.filter.urgent">Urgentes</span> <span class="count" id="count-urgent">1</span>
               </button>
               <button class="filter-btn" data-filter="admin" onclick="filterAnnonces('admin', this)">
-                <span class="filter-icon-wrap"><i class="fa-solid fa-briefcase"></i></span> Administratif <span class="count" id="count-admin">2</span>
+                <span class="filter-icon-wrap"><i class="fa-solid fa-briefcase"></i></span> <span data-i18n="ann.filter.admin">Administratif</span> <span class="count" id="count-admin">2</span>
               </button>
               <button class="filter-btn" data-filter="event" onclick="filterAnnonces('event', this)">
-                <span class="filter-icon-wrap"><i class="fa-solid fa-calendar-days"></i></span> Événements <span class="count" id="count-event">1</span>
+                <span class="filter-icon-wrap"><i class="fa-solid fa-calendar-days"></i></span> <span data-i18n="ann.filter.event">Événements</span> <span class="count" id="count-event">1</span>
               </button>
               <button class="filter-btn" data-filter="communique" onclick="filterAnnonces('communique', this)">
-                <span class="filter-icon-wrap"><i class="fa-solid fa-scroll"></i></span> Communiqués <span class="count" id="count-communique">1</span>
+                <span class="filter-icon-wrap"><i class="fa-solid fa-scroll"></i></span> <span data-i18n="ann.filter.communique">Communiqués</span> <span class="count" id="count-communique">1</span>
               </button>
             </div>
 
@@ -535,7 +535,7 @@
                   <div class="annonce-stripe stripe-event"></div>
                   <div class="annonce-body">
                     <div class="annonce-meta">
-                      <span class="annonce-cat cat-event"><i class="fa-solid fa-briefcase"></i> Mission économique</span>
+                      <span class="annonce-cat cat-event"><i class="fa-solid fa-briefcase"></i> <span data-i18n="ann.cat.mission">Mission économique</span></span>
                       <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 10 juin 2025</span>
                     </div>
                     <h3 class="annonce-title">
@@ -554,7 +554,7 @@
                          target="_blank"
                          rel="noopener noreferrer"
                          class="btn-annonce btn-annonce-primary">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire l'article
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i><span data-i18n="ann.btn.read"> Lire l'article</span>
                       </a>
                     </div>
                   </div>
@@ -570,7 +570,7 @@
                   <div class="annonce-stripe stripe-event"></div>
                   <div class="annonce-body">
                     <div class="annonce-meta">
-                      <span class="annonce-cat cat-event"><i class="fa-solid fa-globe"></i> Diplomatie</span>
+                      <span class="annonce-cat cat-event"><i class="fa-solid fa-globe"></i> <span data-i18n="ann.cat.diplo">Diplomatie</span></span>
                       <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 9 juillet 2025</span>
                     </div>
                     <h3 class="annonce-title">
@@ -589,7 +589,7 @@
                          target="_blank"
                          rel="noopener noreferrer"
                          class="btn-annonce btn-annonce-primary">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire l'article
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i><span data-i18n="ann.btn.read"> Lire l'article</span>
                       </a>
                     </div>
                   </div>
@@ -605,7 +605,7 @@
                   <div class="annonce-stripe stripe-event"></div>
                   <div class="annonce-body">
                     <div class="annonce-meta">
-                      <span class="annonce-cat cat-event"><i class="fa-solid fa-newspaper"></i> Actualité</span>
+                      <span class="annonce-cat cat-event"><i class="fa-solid fa-newspaper"></i> <span data-i18n="ann.cat.actu">Actualité</span></span>
                       <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 20 octobre 2023</span>
                     </div>
                     <h3 class="annonce-title">
@@ -624,7 +624,7 @@
                          target="_blank"
                          rel="noopener noreferrer"
                          class="btn-annonce btn-annonce-primary">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire l'article
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i><span data-i18n="ann.btn.read"> Lire l'article</span>
                       </a>
                     </div>
                   </div>
@@ -640,7 +640,7 @@
                   <div class="annonce-stripe stripe-event"></div>
                   <div class="annonce-body">
                     <div class="annonce-meta">
-                      <span class="annonce-cat cat-event"><i class="fa-solid fa-handshake"></i> Diplomatie</span>
+                      <span class="annonce-cat cat-event"><i class="fa-solid fa-handshake"></i> <span data-i18n="ann.cat.diplo">Diplomatie</span></span>
                       <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 21 octobre 2023</span>
                     </div>
                     <h3 class="annonce-title">
@@ -659,7 +659,7 @@
                          target="_blank"
                          rel="noopener noreferrer"
                          class="btn-annonce btn-annonce-primary">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire l'article
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i><span data-i18n="ann.btn.read"> Lire l'article</span>
                       </a>
                     </div>
                   </div>
@@ -675,7 +675,7 @@
                   <div class="annonce-stripe stripe-communique"></div>
                   <div class="annonce-body">
                     <div class="annonce-meta">
-                      <span class="annonce-cat cat-communique"><i class="fa-solid fa-scroll"></i> Communiqué</span>
+                      <span class="annonce-cat cat-communique"><i class="fa-solid fa-scroll"></i> <span data-i18n="ann.cat.communique">Communiqué</span></span>
                       <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 23 juillet 2023</span>
                     </div>
                     <h3 class="annonce-title">
@@ -694,7 +694,7 @@
                          target="_blank"
                          rel="noopener noreferrer"
                          class="btn-annonce btn-annonce-primary">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire le communiqué complet
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i><span data-i18n="ann.btn.readfull"> Lire le communiqué complet</span>
                       </a>
                     </div>
                   </div>
@@ -707,7 +707,7 @@
               <!-- État vide (affiché quand aucun résultat) -->
               <div class="empty-state" id="empty-state" style="display:none;">
                 <i class="fa-solid fa-bell-slash"></i>
-                <p>Aucune annonce dans cette catégorie pour le moment.</p>
+                <p data-i18n="ann.empty">Aucune annonce dans cette catégorie pour le moment.</p>
               </div>
 
             </div><!-- /.annonces-list -->
@@ -729,15 +729,15 @@
             <!-- Liens rapides -->
             <div class="sidebar-widget">
               <div class="sidebar-widget-header">
-                <span class="sidebar-header-icon"><i class="fa-solid fa-compass"></i></span> Liens utiles
+                <span class="sidebar-header-icon"><i class="fa-solid fa-compass"></i></span> <span data-i18n="ann.sidebar.links">Liens utiles</span>
               </div>
               <div class="sidebar-widget-body">
                 <ul class="sidebar-link-list">
-                  <li><a href="services.html#passeport"><i class="fa-solid fa-passport"></i> Renouvellement de passeport</a></li>
-                  <li><a href="services.html#visa"><i class="fa-solid fa-stamp"></i> Demande de visa</a></li>
-                  <li><a href="services.html#etat-civil"><i class="fa-solid fa-file-contract"></i> État civil</a></li>
-                  <li><a href="contact.html"><i class="fa-solid fa-calendar-check"></i> Prendre rendez-vous</a></li>
-                  <li><a href="contact.html#horaires"><i class="fa-solid fa-clock-rotate-left"></i> Horaires d'ouverture</a></li>
+                  <li><a href="services.html#passeport"><i class="fa-solid fa-passport"></i> <span data-i18n="ann.sidebar.passport">Renouvellement de passeport</span></a></li>
+                  <li><a href="services.html#visa"><i class="fa-solid fa-stamp"></i> <span data-i18n="ann.sidebar.visa">Demande de visa</span></a></li>
+                  <li><a href="services.html#etat-civil"><i class="fa-solid fa-file-contract"></i> <span data-i18n="ann.sidebar.civil">État civil</span></a></li>
+                  <li><a href="contact.html"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="ann.sidebar.rdv">Prendre rendez-vous</span></a></li>
+                  <li><a href="contact.html#horaires"><i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="ann.sidebar.hours">Horaires d'ouverture</span></a></li>
                 </ul>
               </div>
             </div>
@@ -745,7 +745,7 @@
             <!-- Contact rapide -->
             <div class="sidebar-widget">
               <div class="sidebar-widget-header">
-                <span class="sidebar-header-icon"><i class="fa-solid fa-headset"></i></span> Contact direct
+                <span class="sidebar-header-icon"><i class="fa-solid fa-headset"></i></span> <span data-i18n="ann.sidebar.contact">Contact direct</span>
               </div>
               <div class="sidebar-widget-body">
                 <ul class="sidebar-link-list">
@@ -762,10 +762,10 @@
 
             <!-- Abonnement aux alertes -->
             <div class="subscribe-box">
-              <h4><i class="fa-solid fa-envelope-open-text" style="margin-right:.4rem;"></i> Recevez les annonces</h4>
-              <p>Inscrivez-vous pour être notifié des nouvelles annonces et informations importantes.</p>
+              <h4><i class="fa-solid fa-envelope-open-text" style="margin-right:.4rem;"></i> <span data-i18n="ann.sub.title">Recevez les annonces</span></h4>
+              <p data-i18n="ann.sub.desc">Inscrivez-vous pour être notifié des nouvelles annonces et informations importantes.</p>
               <input class="subscribe-input" type="email" placeholder="votre@email.com" />
-              <button class="subscribe-btn">S'inscrire aux alertes</button>
+              <button class="subscribe-btn" data-i18n="ann.sub.btn">S'inscrire aux alertes</button>
             </div>
 
           </aside>
@@ -892,6 +892,7 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
 
 
 
