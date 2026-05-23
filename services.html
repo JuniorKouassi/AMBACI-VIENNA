@@ -51,8 +51,8 @@
           <ul class="nav-list" role="list">
             <li><a href="index.html" data-i18n="nav.home">Accueil</a></li>
             <li><a href="ambassade.html" data-i18n="nav.embassy">L'Ambassade</a></li>
-            <li><a href="services.html" aria-current="page">Services consulaires</a></li>
-            <li><a href="annonces.html">Informations &amp; Annonces</a></li>
+            <li><a href="services.html" aria-current="page" data-i18n="nav.services">Services consulaires</a></li>
+            <li><a href="annonces.html" data-i18n="nav.annonces">Informations &amp; Annonces</a></li>
             <li><a href="contact.html" data-i18n="nav.contact">Contact &amp; Horaires</a></li>
           </ul>
         </nav>
@@ -79,7 +79,7 @@
         <nav class="breadcrumb" aria-label="Fil d'Ariane">
           <a href="index.html" data-i18n="nav.home">Accueil</a>
           <span class="breadcrumb-sep" aria-hidden="true">›</span>
-          <span aria-current="page">Services consulaires</span>
+          <span aria-current="page" data-i18n="nav.services">Services consulaires</span>
         </nav>
         <h1 data-i18n="psrv.h1">Services Consulaires</h1>
         <p data-i18n="psrv.desc">Retrouvez l'ensemble des démarches administratives proposées par le service consulaire de l'Ambassade de Côte d'Ivoire à Vienne.</p>
@@ -146,32 +146,32 @@
         <!-- Passeport -->
         <div id="passeport" style="margin-bottom:var(--space-3xl);">
           <span class="badge" data-i18n="srv.badge.passport">Document de voyage</span>
-          <h2 class="section-title" style="margin-bottom:var(--space-xl);">Passeport biométrique</h2>
+          <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="psrv.pass.h2">Passeport biométrique</h2>
           <div class="services-detail-grid">
 
             <a href="https://www.monpasseport.ci/connexion" target="_blank" rel="noopener noreferrer" class="service-detail-card" style="text-decoration:none;display:block;cursor:pointer;">
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-passport"></i></div>
                 <div>
-                  <h3>Première demande</h3>
-                  <p>Pour les personnes n'ayant jamais eu de passeport</p>
+                  <h3 data-i18n="psrv.pass.new.title">Première demande</h3>
+                  <p data-i18n="psrv.pass.new.sub">Pour les personnes n'ayant jamais eu de passeport</p>
                 </div>
               </div>
               <div class="service-detail-body">
-                <p style="font-size:.875rem;color:var(--grey-700);margin-bottom:var(--space-md);">Documents requis :</p>
+                <p style="font-size:.875rem;color:var(--grey-700);margin-bottom:var(--space-md);" data-i18n="psrv.docs.label">Documents requis :</p>
                 <ul class="requirement-list">
-                  <li>Acte de naissance original (moins de 3 mois)</li>
-                  <li>Certificat de nationalité ivoirienne</li>
-                  <li>CNI valide ou extrait de casier judiciaire</li>
-                  <li>2 photos d'identité couleur (fond blanc, 35×45mm)</li>
-                  <li>Justificatif de résidence (moins de 3 mois)</li>
-                  <li>Formulaire de demande rempli et signé</li>
+                  <li data-i18n="psrv.pass.li.birth3">Acte de naissance original (moins de 3 mois)</li>
+                  <li data-i18n="psrv.pass.li.nat">Certificat de nationalité ivoirienne</li>
+                  <li data-i18n="psrv.pass.li.cni.casier">CNI valide ou extrait de casier judiciaire</li>
+                  <li data-i18n="psrv.pass.li.photos">2 photos d'identité couleur (fond blanc, 35×45mm)</li>
+                  <li data-i18n="psrv.pass.li.resid">Justificatif de résidence (moins de 3 mois)</li>
+                  <li data-i18n="psrv.li.form">Formulaire de demande rempli et signé</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais consulaires</span>
+                  <span data-i18n="psrv.fees.consular">Frais consulaires</span>
                   <strong>70 €</strong>
                 </div>
-                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);">Délai : 4 à 8 semaines selon traitement à Abidjan</p>
+                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);" data-i18n="psrv.pass.new.delay">Délai : 4 à 8 semaines selon traitement à Abidjan</p>
               </div>
             </a>
 
@@ -179,25 +179,25 @@
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true">🔄</div>
                 <div>
-                  <h3>Renouvellement</h3>
-                  <p>Passeport expiré ou arrivant à expiration</p>
+                  <h3 data-i18n="psrv.pass.renew.title">Renouvellement</h3>
+                  <p data-i18n="psrv.pass.renew.sub">Passeport expiré ou arrivant à expiration</p>
                 </div>
               </div>
               <div class="service-detail-body">
-                <p style="font-size:.875rem;color:var(--grey-700);margin-bottom:var(--space-md);">Documents requis :</p>
+                <p style="font-size:.875rem;color:var(--grey-700);margin-bottom:var(--space-md);" data-i18n="psrv.docs.label">Documents requis :</p>
                 <ul class="requirement-list">
-                  <li>Ancien passeport original (même expiré)</li>
-                  <li>Acte de naissance original (moins de 3 mois)</li>
-                  <li>CNI valide</li>
-                  <li>2 photos d'identité (35×45mm, fond blanc)</li>
-                  <li>Justificatif de résidence (moins de 3 mois)</li>
-                  <li>Formulaire de demande rempli et signé</li>
+                  <li data-i18n="psrv.pass.li.old">Ancien passeport original (même expiré)</li>
+                  <li data-i18n="psrv.pass.li.birth3">Acte de naissance original (moins de 3 mois)</li>
+                  <li data-i18n="psrv.pass.li.cni">CNI valide</li>
+                  <li data-i18n="psrv.pass.li.photos">2 photos d'identité couleur (fond blanc, 35×45mm)</li>
+                  <li data-i18n="psrv.pass.li.resid">Justificatif de résidence (moins de 3 mois)</li>
+                  <li data-i18n="psrv.li.form">Formulaire de demande rempli et signé</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais consulaires</span>
+                  <span data-i18n="psrv.fees.consular">Frais consulaires</span>
                   <strong>70 €</strong>
                 </div>
-                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);">Délai : 4 à 8 semaines</p>
+                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);" data-i18n="psrv.pass.renew.delay">Délai : 4 à 8 semaines</p>
               </div>
             </a>
 
@@ -205,24 +205,24 @@
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-circle-exclamation"></i></div>
                 <div>
-                  <h3>Passeport d'urgence</h3>
-                  <p>En cas de perte, vol ou urgence avérée</p>
+                  <h3 data-i18n="psrv.pass.urg.title">Passeport d'urgence</h3>
+                  <p data-i18n="psrv.pass.urg.sub">En cas de perte, vol ou urgence avérée</p>
                 </div>
               </div>
               <div class="service-detail-body">
-                <p style="font-size:.875rem;color:var(--grey-700);margin-bottom:var(--space-md);">Documents requis :</p>
+                <p style="font-size:.875rem;color:var(--grey-700);margin-bottom:var(--space-md);" data-i18n="psrv.docs.label">Documents requis :</p>
                 <ul class="requirement-list">
-                  <li>Déclaration de perte/vol (police autrichienne)</li>
-                  <li>Acte de naissance original</li>
-                  <li>Certificat de nationalité</li>
-                  <li>2 photos d'identité récentes</li>
-                  <li>Justification de l'urgence (billet d'avion, etc.)</li>
+                  <li data-i18n="psrv.pass.urg.li1">Déclaration de perte/vol (police autrichienne)</li>
+                  <li data-i18n="psrv.pass.li.birth">Acte de naissance original</li>
+                  <li data-i18n="psrv.pass.li.nat.cert">Certificat de nationalité</li>
+                  <li data-i18n="psrv.pass.li.photos.rec">2 photos d'identité récentes</li>
+                  <li data-i18n="psrv.pass.urg.li5">Justification de l'urgence (billet d'avion, etc.)</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais consulaires</span>
+                  <span data-i18n="psrv.fees.consular">Frais consulaires</span>
                   <strong>100 €</strong>
                 </div>
-                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);">Délai : 24 à 72h selon situation</p>
+                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);" data-i18n="psrv.pass.urg.delay">Délai : 24 à 72h selon situation</p>
               </div>
             </a>
 
@@ -232,32 +232,32 @@
         <!-- Visa -->
         <div id="visa" style="margin-bottom:var(--space-3xl);">
           <span class="badge" data-i18n="srv.badge.visa">Visa d'entrée</span>
-          <h2 class="section-title" style="margin-bottom:var(--space-xl);">Visa pour la Côte d'Ivoire</h2>
+          <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="psrv.visa.h2">Visa pour la Côte d'Ivoire</h2>
           <div class="services-detail-grid">
 
             <a href="https://snedai.com/visaenambassade/" target="_blank" rel="noopener noreferrer" class="service-detail-card" style="text-decoration:none;display:block;cursor:pointer;">
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true">🏖️</div>
                 <div>
-                  <h3>Visa touristique</h3>
-                  <p>Séjour jusqu'à 90 jours</p>
+                  <h3 data-i18n="psrv.visa.tour.title">Visa touristique</h3>
+                  <p data-i18n="psrv.visa.tour.sub">Séjour jusqu'à 90 jours</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul class="requirement-list">
-                  <li>Passeport valide (min. 6 mois au-delà du séjour)</li>
-                  <li>Formulaire de demande de visa rempli</li>
-                  <li>2 photos d'identité récentes</li>
-                  <li>Justificatif d'hébergement en Côte d'Ivoire</li>
-                  <li>Billet d'avion aller-retour</li>
-                  <li>Relevés bancaires (3 derniers mois)</li>
-                  <li>Assurance voyage valide</li>
+                  <li data-i18n="psrv.visa.li.pass6m">Passeport valide (min. 6 mois au-delà du séjour)</li>
+                  <li data-i18n="psrv.visa.li.form">Formulaire de demande de visa rempli</li>
+                  <li data-i18n="psrv.pass.li.photos.rec">2 photos d'identité récentes</li>
+                  <li data-i18n="psrv.visa.li.lodging">Justificatif d'hébergement en Côte d'Ivoire</li>
+                  <li data-i18n="psrv.visa.li.ticket">Billet d'avion aller-retour</li>
+                  <li data-i18n="psrv.visa.li.bank">Relevés bancaires (3 derniers mois)</li>
+                  <li data-i18n="psrv.visa.li.insurance">Assurance voyage valide</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais de visa</span>
+                  <span data-i18n="psrv.fees.visa">Frais de visa</span>
                   <strong>75 €</strong>
                 </div>
-                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);">Délai : 5 à 10 jours ouvrés</p>
+                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);" data-i18n="psrv.visa.delay10">Délai : 5 à 10 jours ouvrés</p>
               </div>
             </a>
 
@@ -265,25 +265,25 @@
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true">💼</div>
                 <div>
-                  <h3>Visa d'affaires</h3>
-                  <p>Activités professionnelles et commerciales</p>
+                  <h3 data-i18n="psrv.visa.biz.title">Visa d'affaires</h3>
+                  <p data-i18n="psrv.visa.biz.sub">Activités professionnelles et commerciales</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul class="requirement-list">
-                  <li>Passeport valide (min. 6 mois)</li>
-                  <li>Lettre d'invitation d'une entreprise ivoirienne</li>
-                  <li>Formulaire de demande rempli</li>
-                  <li>2 photos d'identité récentes</li>
-                  <li>Extrait Kbis ou registre de commerce</li>
-                  <li>Billet aller-retour</li>
-                  <li>Assurance voyage</li>
+                  <li data-i18n="psrv.visa.li.pass6">Passeport valide (min. 6 mois)</li>
+                  <li data-i18n="psrv.visa.li.invite">Lettre d'invitation d'une entreprise ivoirienne</li>
+                  <li data-i18n="psrv.li.form">Formulaire de demande rempli et signé</li>
+                  <li data-i18n="psrv.pass.li.photos.rec">2 photos d'identité récentes</li>
+                  <li data-i18n="psrv.visa.li.kbis">Extrait Kbis ou registre de commerce</li>
+                  <li data-i18n="psrv.visa.li.ticket.rt">Billet aller-retour</li>
+                  <li data-i18n="psrv.visa.li.insur">Assurance voyage</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais de visa</span>
+                  <span data-i18n="psrv.fees.visa">Frais de visa</span>
                   <strong>100 €</strong>
                 </div>
-                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);">Délai : 5 à 10 jours ouvrés</p>
+                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);" data-i18n="psrv.visa.delay10">Délai : 5 à 10 jours ouvrés</p>
               </div>
             </a>
 
@@ -291,23 +291,23 @@
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true">🔁</div>
                 <div>
-                  <h3>Visa de transit</h3>
-                  <p>Escale sur le territoire ivoirien</p>
+                  <h3 data-i18n="psrv.visa.trans.title">Visa de transit</h3>
+                  <p data-i18n="psrv.visa.trans.sub">Escale sur le territoire ivoirien</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul class="requirement-list">
-                  <li>Passeport valide</li>
-                  <li>Billet d'avion avec escale en Côte d'Ivoire</li>
-                  <li>Visa du pays de destination finale</li>
-                  <li>Formulaire de demande de transit</li>
-                  <li>2 photos d'identité</li>
+                  <li data-i18n="psrv.visa.li.pass">Passeport valide</li>
+                  <li data-i18n="psrv.visa.trans.li2">Billet d'avion avec escale en Côte d'Ivoire</li>
+                  <li data-i18n="psrv.visa.trans.li3">Visa du pays de destination finale</li>
+                  <li data-i18n="psrv.visa.trans.li4">Formulaire de demande de transit</li>
+                  <li data-i18n="psrv.pass.li.photos.rec">2 photos d'identité récentes</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais de visa</span>
+                  <span data-i18n="psrv.fees.visa">Frais de visa</span>
                   <strong>35 €</strong>
                 </div>
-                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);">Délai : 3 à 5 jours ouvrés</p>
+                <p style="font-size:.8125rem;color:var(--grey-500);margin-top:var(--space-sm);" data-i18n="psrv.visa.delay5">Délai : 3 à 5 jours ouvrés</p>
               </div>
             </a>
 
@@ -317,87 +317,86 @@
         <!-- État civil -->
         <div id="etat-civil" style="margin-bottom:var(--space-3xl);">
           <span class="badge" data-i18n="srv.civil">État civil</span>
-          <h2 class="section-title" style="margin-bottom:var(--space-xl);">Actes d'état civil</h2>
+          <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="psrv.civil.h2">Actes d'état civil</h2>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);">
 
             <a href="https://www.ci-embassyepay.org/en" target="_blank" rel="noopener noreferrer" class="service-detail-card" style="text-decoration:none;display:block;cursor:pointer;">
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></div>
                 <div>
-                  <h3>Actes disponibles</h3>
-                  <p>Tarifs des actes d'état civil consulaires</p>
+                  <h3 data-i18n="psrv.civil.card.title">Actes disponibles</h3>
+                  <p data-i18n="psrv.civil.card.sub">Tarifs des actes d'état civil consulaires</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul style="display:flex;flex-direction:column;gap:var(--space-sm);">
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Acte de décès</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.deces">Acte de décès</span>
                     <strong style="color:var(--dark);">20 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Acte de mariage</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.mariage">Acte de mariage</span>
                     <strong style="color:var(--dark);">20 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Attestation Administrative</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.admin">Attestation Administrative</span>
                     <strong style="color:var(--dark);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Attestation de renonciation à la nationalité</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.renon">Attestation de renonciation à la nationalité</span>
                     <strong style="color:var(--dark);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Carte d'identité consulaire</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.cic">Carte d'identité consulaire</span>
                     <strong style="color:var(--dark);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Célébration de mariage</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.celeb">Célébration de mariage</span>
                     <strong style="color:var(--dark);">100 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Certificat de vie</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.vie">Certificat de vie</span>
                     <strong style="color:var(--dark);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Extrait de naissance</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.naiss">Extrait de naissance</span>
                     <strong style="color:var(--dark);">20 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Laissez-passer pour départ volontaire</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.lp">Laissez-passer pour départ volontaire</span>
                     <strong style="color:var(--dark);">50 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Légalisation de documents administratifs</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.legal.adm">Légalisation de documents administratifs</span>
                     <strong style="color:var(--dark);">20 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Légalisation de documents pour Entreprises</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.legal.ent">Légalisation de documents pour Entreprises</span>
                     <strong style="color:var(--dark);">100 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="font-size:.9375rem;">Transcription actes d'État Civil</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.trans">Transcription actes d'État Civil</span>
                     <strong style="color:var(--dark);">25 €</strong>
                   </li>
                 </ul>
               </div>
             </a>
 
-
             <a href="https://www.ci-embassyepay.org/en" target="_blank" rel="noopener noreferrer" style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);overflow:hidden;display:block;text-decoration:none;color:inherit;transition:transform .25s,box-shadow .25s,border-color .25s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(10,31,16,.14)';this.style.borderColor='var(--orange)'" onmouseout="this.style.transform='';this.style.boxShadow=''';this.style.borderColor='var(--grey-200)'">
               <div style="padding:var(--space-lg);background:var(--grey-100);border-bottom:1px solid var(--grey-200);">
-                <h3 style="font-size:1.0625rem;font-weight:700;color:var(--dark);">📋 Documents communs requis</h3>
+                <h3 style="font-size:1.0625rem;font-weight:700;color:var(--dark);" data-i18n="psrv.civil.docs.title">📋 Documents communs requis</h3>
               </div>
               <div style="padding:var(--space-lg);">
                 <ul class="requirement-list">
-                  <li>Pièce d'identité valide (CNI ou passeport)</li>
-                  <li>Justificatif de lien de parenté ou d'état (selon acte)</li>
-                  <li>Documents originaux à transcrir/corriger</li>
-                  <li>Formulaire de demande rempli et signé</li>
-                  <li>2 photos d'identité récentes</li>
+                  <li data-i18n="psrv.civil.docs.li1">Pièce d'identité valide (CNI ou passeport)</li>
+                  <li data-i18n="psrv.civil.docs.li2">Justificatif de lien de parenté ou d'état (selon acte)</li>
+                  <li data-i18n="psrv.civil.docs.li3">Documents originaux à transcrir/corriger</li>
+                  <li data-i18n="psrv.li.form">Formulaire de demande rempli et signé</li>
+                  <li data-i18n="psrv.pass.li.photos.rec">2 photos d'identité récentes</li>
                 </ul>
                 <div style="margin-top:var(--space-lg);padding:var(--space-md);background:#FFF8F0;border-radius:var(--radius-md);border-left:3px solid var(--orange);">
                   <p style="font-size:.875rem;color:var(--grey-700);">
-                    <strong style="color:var(--dark);">Note :</strong> Les actes établis à l'étranger nécessitent une traduction certifiée conforme en français par un traducteur assermenté.
+                    <strong style="color:var(--dark);" data-i18n="psrv.civil.note">Note :</strong> <span data-i18n="psrv.civil.note.text">Les actes établis à l'étranger nécessitent une traduction certifiée conforme en français par un traducteur assermenté.</span>
                   </p>
                 </div>
               </div>
@@ -408,8 +407,8 @@
         <!-- Légalisation -->
         <div id="legalisation" style="margin-bottom:var(--space-3xl);">
           <span class="badge" data-i18n="srv.legal">Légalisation</span>
-          <h2 class="section-title" style="margin-bottom:var(--space-md);">Légalisation de documents</h2>
-          <p class="section-subtitle" style="margin-bottom:var(--space-xl);">La légalisation est l'acte par lequel l'ambassade atteste de l'authenticité d'un document officiel.</p>
+          <h2 class="section-title" style="margin-bottom:var(--space-md);" data-i18n="psrv.legal.h2">Légalisation de documents</h2>
+          <p class="section-subtitle" style="margin-bottom:var(--space-xl);" data-i18n="psrv.legal.sub">La légalisation est l'acte par lequel l'ambassade atteste de l'authenticité d'un document officiel.</p>
 
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-lg);">
 
@@ -417,18 +416,18 @@
               <div class="service-detail-header">
                 <div class="service-detail-icon"><i class="fa-solid fa-file-signature"></i></div>
                 <div>
-                  <h3>Documents ivoiriens</h3>
-                  <p>Légalisation pour usage en Europe</p>
+                  <h3 data-i18n="psrv.legal.ivo.title">Documents ivoiriens</h3>
+                  <p data-i18n="psrv.legal.ivo.sub">Légalisation pour usage en Europe</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul class="requirement-list" style="margin-bottom:var(--space-md);">
-                  <li>Document original ivoirien avec signature officielle</li>
-                  <li>Pièce d'identité du demandeur</li>
-                  <li>Formulaire de légalisation rempli</li>
+                  <li data-i18n="psrv.legal.ivo.li1">Document original ivoirien avec signature officielle</li>
+                  <li data-i18n="psrv.legal.li.id">Pièce d'identité du demandeur</li>
+                  <li data-i18n="psrv.legal.li.form">Formulaire de légalisation rempli</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais</span><strong>15 € / document</strong>
+                  <span data-i18n="psrv.fees.generic">Frais</span><strong>15 € / <span data-i18n="psrv.legal.per.doc">document</span></strong>
                 </div>
               </div>
             </div>
@@ -437,18 +436,18 @@
               <div class="service-detail-header">
                 <div class="service-detail-icon"><i class="fa-solid fa-pen-nib"></i></div>
                 <div>
-                  <h3>Authentification de signature</h3>
-                  <p>Certification de l'authenticité d'une signature</p>
+                  <h3 data-i18n="psrv.legal.sig.title">Authentification de signature</h3>
+                  <p data-i18n="psrv.legal.sig.sub">Certification de l'authenticité d'une signature</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul class="requirement-list" style="margin-bottom:var(--space-md);">
-                  <li>Document original à authentifier</li>
-                  <li>Présence obligatoire du signataire</li>
-                  <li>Pièce d'identité valide</li>
+                  <li data-i18n="psrv.legal.sig.li1">Document original à authentifier</li>
+                  <li data-i18n="psrv.legal.sig.li2">Présence obligatoire du signataire</li>
+                  <li data-i18n="psrv.legal.li.id.valid">Pièce d'identité valide</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais</span><strong>20 € / signature</strong>
+                  <span data-i18n="psrv.fees.generic">Frais</span><strong>20 € / <span data-i18n="psrv.legal.per.sig">signature</span></strong>
                 </div>
               </div>
             </div>
@@ -457,18 +456,18 @@
               <div class="service-detail-header">
                 <div class="service-detail-icon"><i class="fa-solid fa-copy"></i></div>
                 <div>
-                  <h3>Copie certifiée conforme</h3>
-                  <p>Certification qu'une copie est conforme à l'original</p>
+                  <h3 data-i18n="psrv.legal.copy.title">Copie certifiée conforme</h3>
+                  <p data-i18n="psrv.legal.copy.sub">Certification qu'une copie est conforme à l'original</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul class="requirement-list" style="margin-bottom:var(--space-md);">
-                  <li>Document original à certifier</li>
-                  <li>Pièce d'identité valide</li>
-                  <li>Photocopie à certifier</li>
+                  <li data-i18n="psrv.legal.copy.li1">Document original à certifier</li>
+                  <li data-i18n="psrv.legal.li.id.valid">Pièce d'identité valide</li>
+                  <li data-i18n="psrv.legal.copy.li3">Photocopie à certifier</li>
                 </ul>
                 <div class="service-tarif">
-                  <span>Frais</span><strong>10 € / copie</strong>
+                  <span data-i18n="psrv.fees.generic">Frais</span><strong>10 € / <span data-i18n="psrv.legal.per.copy">copie</span></strong>
                 </div>
               </div>
             </div>
@@ -479,41 +478,41 @@
         <!-- Certificats -->
         <div id="certificats">
           <span class="badge" data-i18n="srv.cert">Certificats</span>
-          <h2 class="section-title" style="margin-bottom:var(--space-xl);">Certificats &amp; Attestations</h2>
+          <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="psrv.cert.h2">Certificats &amp; Attestations</h2>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);">
 
             <a href="https://www.ci-embassyepay.org/en" target="_blank" rel="noopener noreferrer" class="service-detail-card" style="text-decoration:none;display:block;cursor:pointer;">
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-certificate"></i></div>
                 <div>
-                  <h3>Certificats &amp; Attestations</h3>
-                  <p>Tarifs des certificats et attestations consulaires</p>
+                  <h3 data-i18n="psrv.cert.h2">Certificats &amp; Attestations</h3>
+                  <p data-i18n="psrv.cert.card.sub">Tarifs des certificats et attestations consulaires</p>
                 </div>
               </div>
               <div class="service-detail-body">
                 <ul style="display:flex;flex-direction:column;gap:var(--space-sm);">
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Certificat de vie</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.civil.li.vie">Certificat de vie</span>
                     <strong style="color:var(--orange);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Certificat de célibat</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.cert.li.celib">Certificat de célibat</span>
                     <strong style="color:var(--orange);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Certificat de résidence</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.cert.li.res">Certificat de résidence</span>
                     <strong style="color:var(--orange);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Certificat de nationalité</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.pass.li.nat.cert">Certificat de nationalité</span>
                     <strong style="color:var(--orange);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;padding-bottom:var(--space-sm);border-bottom:1px solid var(--grey-200);">
-                    <span style="font-size:.9375rem;">Certificat de coutume</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.cert.li.cout">Certificat de coutume</span>
                     <strong style="color:var(--orange);">25 €</strong>
                   </li>
                   <li style="display:flex;justify-content:space-between;align-items:center;">
-                    <span style="font-size:.9375rem;">Procuration</span>
+                    <span style="font-size:.9375rem;" data-i18n="psrv.cert.li.proc">Procuration</span>
                     <strong style="color:var(--orange);">25 €</strong>
                   </li>
                 </ul>
@@ -538,50 +537,50 @@
 
           <div class="accordion-item" role="listitem">
             <button class="accordion-trigger" aria-expanded="false" aria-controls="faq1">
-              Faut-il absolument un rendez-vous ?
+              <span data-i18n="psrv.faq.q1">Faut-il absolument un rendez-vous ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
-            <div class="accordion-panel" id="faq1">
+            <div class="accordion-panel" id="faq1" data-i18n="psrv.faq.a1">
               Oui, la prise de rendez-vous est obligatoire pour tout dépôt de dossier. Aucun dossier ne sera accepté sans rendez-vous préalable. Vous pouvez prendre rendez-vous par téléphone ou par email.
             </div>
           </div>
 
           <div class="accordion-item" role="listitem">
             <button class="accordion-trigger" aria-expanded="false" aria-controls="faq2">
-              Combien de temps dure le traitement d'un passeport ?
+              <span data-i18n="psrv.faq.q2">Combien de temps dure le traitement d'un passeport ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
-            <div class="accordion-panel" id="faq2">
+            <div class="accordion-panel" id="faq2" data-i18n="psrv.faq.a2">
               Le délai moyen de traitement d'un passeport biométrique est de 4 à 8 semaines. Ce délai dépend des conditions de traitement à Abidjan. En cas d'urgence dûment justifiée, un passeport d'urgence peut être délivré sous 24 à 72 heures.
             </div>
           </div>
 
           <div class="accordion-item" role="listitem">
             <button class="accordion-trigger" aria-expanded="false" aria-controls="faq3">
-              Les frais sont-ils remboursables en cas de refus ?
+              <span data-i18n="psrv.faq.q3">Les frais sont-ils remboursables en cas de refus ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
-            <div class="accordion-panel" id="faq3">
+            <div class="accordion-panel" id="faq3" data-i18n="psrv.faq.a3">
               Non, les frais consulaires sont non remboursables, y compris en cas de refus de la demande. Il est donc important de s'assurer que votre dossier est complet avant de le déposer.
             </div>
           </div>
 
           <div class="accordion-item" role="listitem">
             <button class="accordion-trigger" aria-expanded="false" aria-controls="faq4">
-              Puis-je envoyer mon dossier par courrier postal ?
+              <span data-i18n="psrv.faq.q4">Puis-je envoyer mon dossier par courrier postal ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
-            <div class="accordion-panel" id="faq4">
+            <div class="accordion-panel" id="faq4" data-i18n="psrv.faq.a4">
               Pour certaines demandes simples (légalisation de copies, certains certificats), l'envoi par courrier recommandé est possible. Pour les demandes de passeport et de CNI, la présence physique du demandeur est obligatoire pour la prise d'empreintes biométriques.
             </div>
           </div>
 
           <div class="accordion-item" role="listitem">
             <button class="accordion-trigger" aria-expanded="false" aria-controls="faq5">
-              Je réside en Hongrie, puis-je effectuer mes démarches à Vienne ?
+              <span data-i18n="psrv.faq.q5">Je réside en Hongrie, puis-je effectuer mes démarches à Vienne ?</span>
               <span class="accordion-icon" aria-hidden="true">+</span>
             </button>
-            <div class="accordion-panel" id="faq5">
+            <div class="accordion-panel" id="faq5" data-i18n="psrv.faq.a5">
               Oui, l'Ambassade de Côte d'Ivoire à Vienne est compétente pour tous les ressortissants ivoiriens résidant en Autriche, Hongrie, Slovénie, Slovaquie, Croatie, Serbie, Roumanie et Bosnie-Herzégovine. Vous devez vous déplacer à Vienne pour effectuer vos démarches.
             </div>
           </div>
@@ -593,7 +592,7 @@
     <!-- CTA -->
     <section class="cta-section">
       <div class="container">
-        <h2>Prêt à démarrer votre démarche ?</h2>
+        <h2 data-i18n="psrv.cta.title">Prêt à démarrer votre démarche ?</h2>
         <p data-i18n="psrv.cta.desc">Contactez-nous pour prendre rendez-vous ou obtenir des informations complémentaires sur votre dossier.</p>
         <div class="cta-actions">
           <a href="contact.html" class="btn btn-white" data-i18n="psrv.cta.btn1">Prendre rendez-vous</a>
@@ -667,7 +666,7 @@
     <a href="index.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="nav.home">Accueil</span></a>
     <a href="ambassade.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
     <a href="services.html" class="bottom-nav-item active"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.services">Services</span></a>
-    <a href="annonces.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Annonces</span></a>
+    <a href="annonces.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span data-i18n="nav.annonces">Annonces</span></a>
     <a href="contact.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
   </nav>
   <script src="js/main.js"></script>
