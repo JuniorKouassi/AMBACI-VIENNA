@@ -196,6 +196,14 @@
       justify-content: center;
       font-size: 3rem;
       border-left: 1px solid var(--grey-200);
+      overflow: hidden;
+    }
+    .annonce-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     @media (max-width: 640px) { .annonce-thumb { display: none; } }
 
@@ -612,27 +620,37 @@
                 </div>
               </article>
 
-              <!-- ANNONCE 4 — Administrative -->
-              <article class="annonce-card" data-cat="admin">
+              <!-- ANNONCE 4 — Actualité diplomatique -->
+              <article class="annonce-card" data-cat="actu">
                 <div class="annonce-card-top">
-                  <div class="annonce-stripe stripe-admin"></div>
+                  <div class="annonce-stripe stripe-event"></div>
                   <div class="annonce-body">
                     <div class="annonce-meta">
-                      <span class="annonce-cat cat-admin"><i class="fa-solid fa-briefcase"></i> Administratif</span>
-                      <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 5 juin 2025</span>
+                      <span class="annonce-cat cat-event"><i class="fa-solid fa-handshake"></i> Diplomatie</span>
+                      <span class="annonce-date"><i class="fa-solid fa-calendar-day"></i> 21 octobre 2023</span>
                     </div>
-                    <h3 class="annonce-title">Rappel — Documents requis pour le renouvellement de passeport</h3>
+                    <h3 class="annonce-title">
+                      <a href="https://news.abidjan.net/articles/725067/diplomatie-ivoirienne-en-autriche-lambassadeur-cisse-yacouba-echange-avec-le-gouverneur-de-vorarlberg-en-autriche"
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         style="color:inherit;text-decoration:none;">
+                        Diplomatie ivoirienne en Autriche : l'ambassadeur Cissé Yacouba échange avec le gouverneur de Vorarlberg en Autriche
+                      </a>
+                    </h3>
                     <p class="annonce-text">
-                      L'Ambassade rappelle à tous les ressortissants ivoiriens les documents obligatoires pour le renouvellement de passeport biométrique : ancien passeport, extrait d'acte de naissance légalisé, 2 photos d'identité récentes, justificatif de domicile en Autriche. Tout dossier incomplet sera retourné.
+                      Son Excellence Monsieur Cissé Yacouba, Ambassadeur de Côte d'Ivoire en Autriche, a rencontré le gouverneur du Land de Vorarlberg dans le cadre du renforcement des relations bilatérales entre la Côte d'Ivoire et l'Autriche.
                     </p>
                     <div class="annonce-footer">
-                      <a href="services.html#passeport" class="btn-annonce btn-annonce-primary">
-                        <i class="fa-solid fa-passport"></i> Voir la procédure complète
+                      <a href="https://news.abidjan.net/articles/725067/diplomatie-ivoirienne-en-autriche-lambassadeur-cisse-yacouba-echange-avec-le-gouverneur-de-vorarlberg-en-autriche"
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         class="btn-annonce btn-annonce-primary">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire l'article
                       </a>
                     </div>
                   </div>
-                  <div class="annonce-icon-box">
-                    <div class="annonce-icon-inner icon-admin"><i class="fa-solid fa-id-card"></i></div>
+                  <div class="annonce-thumb">
+                    <img src="img/amb-vorarlberg.jpg" alt="Ambassadeur Cissé Yacouba avec le gouverneur de Vorarlberg">
                   </div>
                 </div>
               </article>
