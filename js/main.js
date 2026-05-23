@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 /* ============================================================
    TRADUCTIONS — FR / DE / EN
@@ -75,7 +75,7 @@ const translations = {
     'ann.desc':            "Retrouvez ici toutes les informations officielles, avis importants et annonces de l'Ambassade de Côte d'Ivoire à Vienne.",
     'ann.pinned.label':    'Épinglé — Urgent',
     'ann.pinned.title':    'Fermeture exceptionnelle — Fête Nationale de Côte d\'Ivoire',
-    'ann.pinned.desc':     "L'Ambassade de Côte d'Ivoire à Vienne sera <strong>fermée le lundi 7 août 2025</strong> à l'occasion de la Fête Nationale de la République de Côte d'Ivoire (65ème anniversaire de l'indépendance). Les services reprendront normalement le mardi 8 août 2025 à 09h30.",
+    'ann.pinned.desc':     "L'Ambassade de Côte d'Ivoire à Vienne sera <strong>fermée le vendredi 7 août 2026</strong> à l'occasion de la Fête Nationale de la République de Côte d'Ivoire (65ème anniversaire de l'indépendance). Les services reprendront normalement le mardi 8 août 2025 à 09h30.",
     'ann.pinned.date':     'Publié le 10 juillet 2025',
     'ann.filter.all':      'Toutes',
     'ann.filter.urgent':   'Urgentes',
@@ -239,7 +239,7 @@ const translations = {
     'ann.desc':            'Hier finden Sie alle offiziellen Informationen, wichtigen Mitteilungen und Ankündigungen der Botschaft der Elfenbeinküste in Wien.',
     'ann.pinned.label':    'Angeheftet — Dringend',
     'ann.pinned.title':    'Außerordentliche Schließung — Nationalfeiertag der Elfenbeinküste',
-    'ann.pinned.desc':     'Die Botschaft der Elfenbeinküste in Wien ist am <strong>Montag, 7. August 2025</strong> anlässlich des Nationalfeiertags der Republik Côte d\'Ivoire (65. Jahrestag der Unabhängigkeit) geschlossen. Die Dienste werden am Dienstag, 8. August 2025 um 09:30 Uhr wieder normal aufgenommen.',
+    'ann.pinned.desc':     'Die Botschaft der Elfenbeinküste in Wien ist am <strong>Freitag, 7. August 2026</strong> anlässlich des Nationalfeiertags der Republik Côte d\'Ivoire (65. Jahrestag der Unabhängigkeit) geschlossen. Die Dienste werden am Montag, 10. August 2026 um 09:30 Uhr wieder normal aufgenommen.',
     'ann.pinned.date':     'Veröffentlicht am 10. Juli 2025',
     'ann.filter.all':      'Alle',
     'ann.filter.urgent':   'Dringend',
@@ -467,7 +467,7 @@ const translations = {
     'ann.desc':            'Find here all official information, important notices and announcements from the Embassy of Côte d\'Ivoire in Vienna.',
     'ann.pinned.label':    'Pinned — Urgent',
     'ann.pinned.title':    'Exceptional Closure — National Day of Côte d\'Ivoire',
-    'ann.pinned.desc':     'The Embassy of Côte d\'Ivoire in Vienna will be <strong>closed on Monday, August 7, 2025</strong> on the occasion of the National Day of the Republic of Côte d\'Ivoire (65th anniversary of independence). Services will resume normally on Tuesday, August 8, 2025 at 09:30.',
+    'ann.pinned.desc':     'The Embassy of Côte d\'Ivoire in Vienna will be <strong>closed on Friday, August 7, 2026</strong> on the occasion of the National Day of the Republic of Côte d\'Ivoire (65th anniversary of independence). Services will resume normally on Monday, August 10, 2026 at 09:30.',
     'ann.pinned.date':     'Published on July 10, 2025',
     'ann.filter.all':      'All',
     'ann.filter.urgent':   'Urgent',
@@ -659,3 +659,4 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }
   });
 });
+
