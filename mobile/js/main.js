@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 /* ============================================================
    TRADUCTIONS FR / DE / EN — Version complète
@@ -26,9 +26,9 @@ const T = {
     /* ── Hero (index) ── */
     'hero.tag':'Service Consulaire',
     'hero.h1':"Bienvenue à l'Ambassade de<br><em>Côte d'Ivoire</em>",
-    'hero.desc':"Vos démarches consulaires depuis Vienne, pour 8 pays d'Europe centrale.",
+    'hero.desc':"Vos démarches consulaires depuis Vienne, pour 9 pays d'Europe centrale.",
     'hero.btn1':'Nos services','hero.btn2':'Prendre RDV',
-    'hero.countries':'8 pays desservis',
+    'hero.countries':'9 pays desservis',
     'hero.floor':'1190 Wien, 3ème Etage',
 
     /* ── Index — Services grid ── */
@@ -53,7 +53,7 @@ const T = {
     /* ── Index — Pays ── */
     'badge.jurisdiction':'Juridiction',
     'pays.title':'Circonscription diplomatique',
-    'pays.sub':"8 pays d'Europe centrale et des Balkans",
+    'pays.sub':"9 pays d'Europe centrale et des Balkans",
     'pays.at':'Autriche','pays.hu':'Hongrie','pays.si':'Slovénie',
     'pays.sk':'Slovaquie','pays.hr':'Croatie','pays.rs':'Serbie',
     'pays.ro':'Roumanie','pays.ba':'Bosnie',
@@ -151,7 +151,7 @@ const T = {
     'faq2.q':'Délai passeport ?',
     'faq2.a':'4 à 8 semaines en général. En urgence : 24 à 72 heures selon situation.',
     'faq3.q':'Je réside en Hongrie, puis-je venir à Vienne ?',
-    'faq3.a':"Oui. L'Ambassade couvre 8 pays : Autriche, Hongrie, Slovénie, Slovaquie, Croatie, Serbie, Roumanie et Bosnie-Herzégovine.",
+    'faq3.a':"Oui. L'Ambassade couvre 9 pays : Autriche, Hongrie, Slovénie, Slovaquie, Croatie, Serbie, Roumanie et Bosnie-Herzégovine.",
     'srv.cta.title':'Prêt à commencer ?',
     'srv.cta.desc':'Prenez rendez-vous ou payez vos frais consulaires en ligne.',
     'btn.rdv':'Prendre rendez-vous','btn.call':'Appeler',
@@ -304,9 +304,9 @@ const T = {
     /* ── Hero ── */
     'hero.tag':'Konsulardienst',
     'hero.h1':'Willkommen bei der Botschaft der<br><em>Elfenbeinküste</em>',
-    'hero.desc':'Ihre konsularischen Angelegenheiten von Wien aus, für 8 mitteleuropäische Länder.',
+    'hero.desc':'Ihre konsularischen Angelegenheiten von Wien aus, für 9 mitteleuropäische Länder.',
     'hero.btn1':'Unsere Dienste','hero.btn2':'Termin buchen',
-    'hero.countries':'8 Länder betreut',
+    'hero.countries':'9 Länder betreut',
     'hero.floor':'1190 Wien, 3. Etage',
 
     /* ── Index — Services grid ── */
@@ -331,7 +331,7 @@ const T = {
     /* ── Index — Pays ── */
     'badge.jurisdiction':'Zuständigkeit',
     'pays.title':'Diplomatischer Amtsbereich',
-    'pays.sub':'8 Länder in Mitteleuropa und dem Balkan',
+    'pays.sub':'9 Länder in Mitteleuropa und dem Balkan',
     'pays.at':'Österreich','pays.hu':'Ungarn','pays.si':'Slowenien',
     'pays.sk':'Slowakei','pays.hr':'Kroatien','pays.rs':'Serbien',
     'pays.ro':'Rumänien','pays.ba':'Bosnien',
@@ -429,7 +429,7 @@ const T = {
     'faq2.q':'Wie lange dauert der Reisepass?',
     'faq2.a':'Im Allgemeinen 4 bis 8 Wochen. Im Notfall: 24 bis 72 Stunden.',
     'faq3.q':'Ich wohne in Ungarn, kann ich nach Wien kommen?',
-    'faq3.a':'Ja. Die Botschaft ist für 8 Länder zuständig: Österreich, Ungarn, Slowenien, Slowakei, Kroatien, Serbien, Rumänien und Bosnien-Herzegowina.',
+    'faq3.a':'Ja. Die Botschaft ist für 9 Länder zuständig: Österreich, Ungarn, Slowenien, Slowakei, Kroatien, Serbien, Rumänien und Bosnien-Herzegowina.',
     'srv.cta.title':'Bereit anzufangen?',
     'srv.cta.desc':'Vereinbaren Sie einen Termin oder zahlen Sie Ihre Konsulargebühren online.',
     'btn.rdv':'Termin vereinbaren','btn.call':'Anrufen',
@@ -584,7 +584,7 @@ const T = {
     'hero.h1':"Welcome to the Embassy of<br><em>Côte d'Ivoire</em>",
     'hero.desc':"Your consular services from Vienna, covering 8 Central European countries.",
     'hero.btn1':'Our Services','hero.btn2':'Book Appointment',
-    'hero.countries':'8 countries served',
+    'hero.countries':'9 countries served',
     'hero.floor':'1190 Vienna, 3rd Floor',
 
     /* ── Index — Services grid ── */
@@ -609,7 +609,7 @@ const T = {
     /* ── Index — Pays ── */
     'badge.jurisdiction':'Jurisdiction',
     'pays.title':'Diplomatic Constituency',
-    'pays.sub':'8 countries in Central Europe and the Balkans',
+    'pays.sub':'9 countries in Central Europe and the Balkans',
     'pays.at':'Austria','pays.hu':'Hungary','pays.si':'Slovenia',
     'pays.sk':'Slovakia','pays.hr':'Croatia','pays.rs':'Serbia',
     'pays.ro':'Romania','pays.ba':'Bosnia',
@@ -707,7 +707,7 @@ const T = {
     'faq2.q':'Passport processing time?',
     'faq2.a':'Generally 4 to 8 weeks. Emergency: 24 to 72 hours depending on the situation.',
     'faq3.q':'I live in Hungary, can I come to Vienna?',
-    'faq3.a':'Yes. The Embassy covers 8 countries: Austria, Hungary, Slovenia, Slovakia, Croatia, Serbia, Romania and Bosnia-Herzegovina.',
+    'faq3.a':'Yes. The Embassy covers 9 countries: Austria, Hungary, Slovenia, Slovakia, Croatia, Serbia, Romania and Bosnia-Herzegovina.',
     'srv.cta.title':'Ready to get started?',
     'srv.cta.desc':'Book an appointment or pay your consular fees online.',
     'btn.rdv':'Book an appointment','btn.call':'Call',
@@ -908,3 +908,4 @@ function setLang(lang) {
     });
   }
 })();
+
