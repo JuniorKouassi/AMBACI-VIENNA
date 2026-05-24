@@ -788,15 +788,33 @@ img { max-width: 100%; height: auto; }
   .service-icon  { flex-shrink: 0; }
 }
 
-/* ── Mobile paysage — téléphone horizontal (h ≤ 500px) ───────── */
-/* Cible les téléphones en landscape : largeur > 768px mais hauteur ≤ 500px */
-/* Les tablettes en landscape ont une hauteur > 700px → non ciblées */
+/* ═══════════════════════════════════════════════════════════════
+   PAYSAGE HORIZONTAL — téléphones & tablettes
+   ═══════════════════════════════════════════════════════════════
+
+   Téléphones (h ≤ 500px) :
+     iPhone SE landscape        : 667 × 375
+     iPhone 12/13/14 landscape  : 844 × 390
+     iPhone 14 Pro Max landscape: 932 × 430
+     Samsung S25 landscape      : 900 × 412
+     Samsung S25 Ultra landscape: 915 × 412
+     Samsung S26 Ultra landscape: 932 × 412
+
+   Tablettes (h 501–1050px, w ≤ 1400px) :
+     iPad standard landscape    : 1024 × 768
+     iPad Air landscape         : 1180 × 820
+     iPad Pro 11" landscape     : 1194 × 834
+     Samsung Tab S8 landscape   : 1280 × 800
+     Samsung Tab S9 landscape   : 1280 × 800
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Téléphones — paysage (hauteur ≤ 500px) ─────────────── */
 @media (orientation: landscape) and (max-height: 500px) {
 
-  /* Padding latéral réduit → texte utilise toute la largeur */
+  /* Padding latéral réduit → texte plein écran */
   .container { padding-inline: 0.875rem; }
 
-  /* Espacement vertical serré */
+  /* Espacement vertical comprimé */
   :root {
     --space-4xl: 1.75rem;
     --space-3xl: 1.25rem;
@@ -804,48 +822,72 @@ img { max-width: 100%; height: auto; }
     --space-xl:  0.875rem;
   }
 
-  /* Hero : 2 colonnes pour profiter de la largeur */
-  .hero { padding: 1rem 0 1.25rem; }
+  /* Hero : 2 colonnes pour exploiter la largeur */
+  .hero                 { padding: 1rem 0 1.25rem; }
   .hero .container      { grid-template-columns: 1fr 1fr; gap: var(--space-lg); align-items: center; }
   .hero-content         { max-width: 100%; }
-  .hero h1              { font-size: clamp(1.25rem, 3vw, 1.75rem); margin-bottom: var(--space-md); }
+  .hero h1              { font-size: clamp(1.2rem, 2.8vw, 1.6rem); margin-bottom: var(--space-md); }
   .hero-desc            { font-size: 0.875rem; margin-bottom: var(--space-md); }
   .hero-actions         { flex-wrap: nowrap; gap: var(--space-sm); }
   .hero-actions .btn    { min-height: 40px; font-size: 0.875rem; padding: 0 var(--space-md); }
 
-  /* Header compact */
-  .header-inner         { padding-block: 0.45rem; }
+  /* Header ultra-compact */
+  .header-inner         { padding-block: 0.4rem; }
   .logo-text span       { display: none; }
 
-  /* Grilles : 2 colonnes pour remplir la largeur */
+  /* Grilles : 2–3 colonnes */
+  .services-grid        { grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
   .info-grid            { grid-template-columns: 1fr 1fr; }
   .actualites-grid      { grid-template-columns: 1fr 1fr; }
-  .services-grid        { grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
   .footer-grid          { grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
   .contact-layout       { grid-template-columns: 1fr 1fr; }
+  .pays-grid            { grid-template-columns: repeat(4, 1fr); }
+  .form-grid            { grid-template-columns: 1fr 1fr; }
 
-  /* Sections : espacement vertical réduit */
-  .page-header          { padding: 0.875rem 0 1.25rem; }
-  .page-header h1       { font-size: clamp(1.1rem, 3vw, 1.6rem); }
-  .section-title        { font-size: clamp(1rem, 2.5vw, 1.5rem); }
-  .cta-section          { padding: 1.25rem 0; }
+  /* Titres & sections */
+  .page-header          { padding: 0.75rem 0 1rem; }
+  .page-header h1       { font-size: clamp(1rem, 2.8vw, 1.5rem); }
+  .section-title        { font-size: clamp(1rem, 2.5vw, 1.4rem); }
+  .cta-section          { padding: 1rem 0; }
   .cta-actions          { flex-direction: row; justify-content: center; }
   .cta-actions .btn     { width: auto; }
 
-  /* CI discover : revenir en 2 colonnes en paysage */
+  /* CI discover homepage : 2 colonnes */
   .ci-discover-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "head video" "body video";
   }
 
-  /* Bottom nav : masquer en paysage (occupe trop de hauteur) */
+  /* Bottom nav : masquée (trop haute en paysage) */
   .bottom-nav           { display: none !important; }
   body                  { padding-bottom: 0; }
   .whatsapp-fab         { bottom: 1rem !important; }
   .wa-label             { bottom: 2rem !important; }
+}
 
-  /* Formulaire */
-  .form-grid            { grid-template-columns: 1fr 1fr; }
+/* ── 2. Tablettes — paysage (h 501–1050px, w ≤ 1400px) ─────── */
+@media (orientation: landscape) and (min-height: 501px) and (max-width: 1400px) {
+
+  /* Hero : 2 colonnes + carte restaurée */
+  .hero .container      { grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: center; }
+  .hero-content         { max-width: 100%; }
+  .hero-card            { display: flex; }
+  .hero h1              { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+
+  /* Grilles tablette */
+  .services-grid        { grid-template-columns: repeat(3, 1fr); }
+  .services-detail-grid { grid-template-columns: repeat(2, 1fr); }
+  .info-grid            { grid-template-columns: 1fr 1fr; }
+  .actualites-grid      { grid-template-columns: 1fr 1fr; }
+  .footer-grid          { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: var(--space-xl); }
+  .contact-layout       { grid-template-columns: 1fr 1fr; }
+  .pays-grid            { grid-template-columns: repeat(4, 1fr); }
+
+  /* CI discover homepage : 2 colonnes */
+  .ci-discover-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "head video" "body video";
+  }
 }
 
 /* ── PRINT ─────────────────────────────────────────────────── */
