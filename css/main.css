@@ -809,12 +809,19 @@ img { max-width: 100%; height: auto; }
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── 1. Téléphones — paysage (hauteur ≤ 500px) ─────────────── */
+/* Référence : Samsung S25 Ultra 915×412, iPhone 14 Pro Max 932×430  */
 @media (orientation: landscape) and (max-height: 500px) {
 
-  /* Padding latéral réduit → texte plein écran */
+  /* ── Barres cachées → récupère ~85px de hauteur ── */
+  .top-bar      { display: none !important; }
+  .alert-banner { display: none !important; }
+  .bottom-nav   { display: none !important; }
+  body          { padding-bottom: 0 !important; }
+
+  /* ── Container : padding réduit → contenu plein écran ── */
   .container { padding-inline: 0.875rem; }
 
-  /* Espacement vertical comprimé */
+  /* ── Espacements verticaux comprimés ── */
   :root {
     --space-4xl: 1.75rem;
     --space-3xl: 1.25rem;
@@ -822,86 +829,93 @@ img { max-width: 100%; height: auto; }
     --space-xl:  0.875rem;
   }
 
-  /* ── Barre supérieure & alerte : masquées (gain de hauteur) ── */
-  .top-bar      { display: none !important; }
-  .alert-banner { display: none !important; }
+  /* ══ HEADER — tout sur une ligne à 915px ══════════════════════
+     Budget 887px (915 − 2×14px) :
+       Logo emblème   : 30px
+       Logo texte     : ~145px  (0.72rem, nowrap)
+       Nav 5 items    : ~510px  (0.66rem, 0.28rem×0.38rem padding)
+       Lang switcher  : ~80px
+       Gaps           : ~20px
+       Total estimé   : ~785px < 887px ✓
+  ════════════════════════════════════════════════════════════════ */
+  .header-inner     { padding-block: 0.32rem; gap: 0.5rem; flex-wrap: nowrap; align-items: center; }
 
-  /* ── Header compact — nav tient sur une ligne ──────────────── */
-  .header-inner   { padding-block: 0.35rem; gap: var(--space-sm); flex-wrap: nowrap; }
-  .logo-emblem    { width: 30px; height: 30px; }
-  .logo-text strong { font-size: 0.75rem; white-space: nowrap; }
+  /* Logo : emblème réduit + nom compact sur une ligne */
+  .site-logo        { flex-shrink: 0; gap: 0.4rem; }
+  .logo-emblem      { width: 28px; height: 28px; }
+  .logo-text        { gap: 0; }
+  .logo-text strong { font-size: 0.72rem; white-space: nowrap; line-height: 1.2; }
   .logo-text span   { display: none; }
 
-  /* Nav : police réduite + padding compact → 5 items sur 1 ligne */
-  .main-nav       { flex: 1; overflow: hidden; }
-  .nav-list       { gap: 0; flex-wrap: nowrap; }
-  .nav-list a     {
-    font-size: 0.68rem;
-    padding: 0.28rem 0.4rem;
+  /* Nav : 5 items sur 1 ligne sans retour à la ligne */
+  .main-nav         { flex: 1; min-width: 0; }
+  .nav-list         { gap: 0; flex-wrap: nowrap; justify-content: center; }
+  .nav-list a       {
+    font-size: 0.66rem;
+    padding: 0.28rem 0.38rem;
     white-space: nowrap;
-    border-radius: var(--radius-sm);
+    border-radius: 4px;
+    line-height: 1.2;
   }
 
-  /* Sélecteur de langue : ne pas rétrécir */
-  .lang-switcher  { flex-shrink: 0; }
-  .lang-btn       { padding: 0.2rem 0.25rem !important; font-size: 0.54rem !important; gap: 0.15rem !important; }
-  .lang-btn .fi   { width: 12px !important; height: 8px !important; }
+  /* Langue : taille minimale, ne rétrécit pas */
+  .lang-switcher    { flex-shrink: 0; }
+  .lang-btn         { padding: 0.2rem 0.24rem !important; font-size: 0.52rem !important;
+                      gap: 0.12rem !important; min-width: 0 !important; }
+  .lang-btn .fi     { width: 11px !important; height: 8px !important; }
+  .lang-sep         { width: 1px !important; }
 
-  /* Hero : 2 colonnes + carte restaurée (assez de largeur à ≥800px) */
-  .hero                 { padding: 1rem 0 1.25rem; }
-  .hero .container      { grid-template-columns: 1fr 1fr; gap: var(--space-lg); align-items: center; }
-  .hero-content         { max-width: 100%; }
-  .hero-card            { display: flex; padding: var(--space-md); gap: var(--space-md); }
-  .hero-card-title      { font-size: 0.72rem; margin-bottom: var(--space-xs, 0.25rem); }
-  .hero-info-item       { padding-bottom: var(--space-sm); }
-  .hero-info-icon       { width: 32px; height: 32px; font-size: 0.875rem; }
-  .hero-info-label      { font-size: 0.72rem; }
-  .hero-info-value      { font-size: 0.82rem; }
-  .hero h1              { font-size: clamp(1.1rem, 2.5vw, 1.5rem); margin-bottom: var(--space-sm); }
-  .hero-eyebrow         { font-size: 0.72rem; margin-bottom: var(--space-sm); }
-  .hero-desc            { font-size: 0.82rem; margin-bottom: var(--space-sm); }
-  .hero-actions         { flex-wrap: nowrap; gap: var(--space-sm); }
-  .hero-actions .btn    { min-height: 38px; font-size: 0.82rem; padding: 0 0.875rem; }
+  /* ══ HERO — 2 colonnes, hauteur ~340px disponible ════════════ */
+  .hero             { padding: 0.875rem 0 1rem; }
+  .hero .container  { grid-template-columns: 1fr 1fr; gap: 1rem; align-items: center; }
+  .hero-content     { max-width: 100%; }
+  .hero-eyebrow     { font-size: 0.68rem; margin-bottom: 0.4rem; }
+  .hero h1          { font-size: clamp(1rem, 2.3vw, 1.4rem); margin-bottom: 0.4rem; line-height: 1.15; }
+  .hero-desc        { font-size: 0.78rem; line-height: 1.5; margin-bottom: 0.5rem; }
+  .hero-actions     { flex-wrap: nowrap; gap: 0.5rem; }
+  .hero-actions .btn{ min-height: 36px; font-size: 0.78rem; padding: 0 0.75rem; }
 
-  /* Header ultra-compact */
-  .header-inner         { padding-block: 0.4rem; }
-  .logo-text span       { display: none; }
+  /* Carte hero : infos pratiques compactes */
+  .hero-card        { display: flex; padding: 0.75rem; gap: 0.5rem; }
+  .hero-card-title  { font-size: 0.65rem; margin-bottom: 0.25rem; letter-spacing: .05em; }
+  .hero-info-item   { padding-bottom: 0.35rem; gap: 0.5rem; }
+  .hero-info-icon   { width: 28px; height: 28px; font-size: 0.75rem; flex-shrink: 0; }
+  .hero-info-label  { font-size: 0.65rem; }
+  .hero-info-value  { font-size: 0.75rem; }
 
-  /* Grilles : 2–4 colonnes selon contenu */
-  .services-grid        { grid-template-columns: repeat(3, 1fr) !important; gap: var(--space-sm); }
+  /* ══ GRILLES — 2–4 colonnes ═══════════════════════════════════ */
+  .services-grid        { grid-template-columns: repeat(3, 1fr) !important; gap: 0.6rem; }
   .services-detail-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .info-grid            { grid-template-columns: 1fr 1fr !important; }
   .actualites-grid      { grid-template-columns: 1fr 1fr !important; }
-  .footer-grid          { grid-template-columns: repeat(4, 1fr) !important; gap: var(--space-md); }
+  .footer-grid          { grid-template-columns: repeat(4, 1fr) !important; gap: 0.75rem; }
   .contact-layout       { grid-template-columns: 1fr 1fr !important; }
   .pays-grid            { grid-template-columns: repeat(4, 1fr) !important; }
 
-  /* Ambassadeur : photo réduite pour viewport 412px de hauteur */
-  .amb-grid             { grid-template-columns: auto 1fr; gap: var(--space-lg); }
-  .amb-photo-wrap       { width: 140px; }
-  .amb-bio p            { font-size: 0.875rem; line-height: 1.6; }
+  /* ══ AMBASSADEUR — photo réduite ══════════════════════════════ */
+  .amb-grid             { grid-template-columns: auto 1fr; gap: 1rem; }
+  .amb-photo-wrap       { width: 130px; }
+  .amb-bio p            { font-size: 0.85rem; line-height: 1.55; }
 
-  /* Titres & sections */
-  .page-header          { padding: 0.75rem 0 1rem; }
-  .page-header h1       { font-size: clamp(1rem, 2.5vw, 1.4rem); }
-  .section-title        { font-size: clamp(0.95rem, 2.2vw, 1.3rem); }
-  .cta-section          { padding: 1rem 0; }
-  .cta-actions          { flex-direction: row; justify-content: center; }
-  .cta-actions .btn     { width: auto; }
+  /* ══ TITRES & SECTIONS ════════════════════════════════════════ */
+  .page-header      { padding: 0.625rem 0 0.875rem; }
+  .page-header h1   { font-size: clamp(0.95rem, 2.3vw, 1.35rem); }
+  .section-title    { font-size: clamp(0.9rem, 2vw, 1.25rem); }
+  .cta-section      { padding: 0.875rem 0; }
+  .cta-actions      { flex-direction: row; justify-content: center; gap: 0.75rem; }
+  .cta-actions .btn { width: auto; }
 
-  /* CI discover homepage : 2 colonnes */
+  /* ══ CI DISCOVER — 2 colonnes ═════════════════════════════════ */
   .ci-discover-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "head video" "body video";
   }
 
-  /* Bottom nav : masquée (trop haute en paysage) */
-  .bottom-nav           { display: none !important; }
-  body                  { padding-bottom: 0 !important; }
-  .whatsapp-fab         { bottom: 1rem !important; right: 1rem !important;
-                          width: 52px !important; height: 52px !important;
-                          font-size: 1.6rem !important; }
-  .wa-label             { display: none !important; }
+  /* ══ WHATSAPP — compact ═══════════════════════════════════════ */
+  .whatsapp-fab { bottom: 0.75rem !important; right: 0.75rem !important;
+                  width: 48px !important; height: 48px !important;
+                  font-size: 1.5rem !important; }
+  .wa-label     { display: none !important; }
 }
 
 /* ── 2. Tablettes — paysage (h 501px+, w ≤ 1400px) ────────────
