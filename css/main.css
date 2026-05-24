@@ -788,6 +788,66 @@ img { max-width: 100%; height: auto; }
   .service-icon  { flex-shrink: 0; }
 }
 
+/* ── Mobile paysage — téléphone horizontal (h ≤ 500px) ───────── */
+/* Cible les téléphones en landscape : largeur > 768px mais hauteur ≤ 500px */
+/* Les tablettes en landscape ont une hauteur > 700px → non ciblées */
+@media (orientation: landscape) and (max-height: 500px) {
+
+  /* Padding latéral réduit → texte utilise toute la largeur */
+  .container { padding-inline: 0.875rem; }
+
+  /* Espacement vertical serré */
+  :root {
+    --space-4xl: 1.75rem;
+    --space-3xl: 1.25rem;
+    --space-2xl: 1rem;
+    --space-xl:  0.875rem;
+  }
+
+  /* Hero : 2 colonnes pour profiter de la largeur */
+  .hero { padding: 1rem 0 1.25rem; }
+  .hero .container      { grid-template-columns: 1fr 1fr; gap: var(--space-lg); align-items: center; }
+  .hero-content         { max-width: 100%; }
+  .hero h1              { font-size: clamp(1.25rem, 3vw, 1.75rem); margin-bottom: var(--space-md); }
+  .hero-desc            { font-size: 0.875rem; margin-bottom: var(--space-md); }
+  .hero-actions         { flex-wrap: nowrap; gap: var(--space-sm); }
+  .hero-actions .btn    { min-height: 40px; font-size: 0.875rem; padding: 0 var(--space-md); }
+
+  /* Header compact */
+  .header-inner         { padding-block: 0.45rem; }
+  .logo-text span       { display: none; }
+
+  /* Grilles : 2 colonnes pour remplir la largeur */
+  .info-grid            { grid-template-columns: 1fr 1fr; }
+  .actualites-grid      { grid-template-columns: 1fr 1fr; }
+  .services-grid        { grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
+  .footer-grid          { grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+  .contact-layout       { grid-template-columns: 1fr 1fr; }
+
+  /* Sections : espacement vertical réduit */
+  .page-header          { padding: 0.875rem 0 1.25rem; }
+  .page-header h1       { font-size: clamp(1.1rem, 3vw, 1.6rem); }
+  .section-title        { font-size: clamp(1rem, 2.5vw, 1.5rem); }
+  .cta-section          { padding: 1.25rem 0; }
+  .cta-actions          { flex-direction: row; justify-content: center; }
+  .cta-actions .btn     { width: auto; }
+
+  /* CI discover : revenir en 2 colonnes en paysage */
+  .ci-discover-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "head video" "body video";
+  }
+
+  /* Bottom nav : masquer en paysage (occupe trop de hauteur) */
+  .bottom-nav           { display: none !important; }
+  body                  { padding-bottom: 0; }
+  .whatsapp-fab         { bottom: 1rem !important; }
+  .wa-label             { bottom: 2rem !important; }
+
+  /* Formulaire */
+  .form-grid            { grid-template-columns: 1fr 1fr; }
+}
+
 /* ── PRINT ─────────────────────────────────────────────────── */
 @media print {
   .top-bar, .site-header, .hero-actions, .cta-section,
