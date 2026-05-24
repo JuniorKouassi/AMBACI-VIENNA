@@ -604,8 +604,9 @@ img { max-width: 100%; height: auto; }
   html { overflow-x: hidden; }
   body { padding-bottom: 68px; } /* espace bottom nav */
 
-  /* Top bar cachée */
-  .top-bar { display: none; }
+  /* Top bar & alerte cachées */
+  .top-bar    { display: none; }
+  .alert-banner { display: none; }
 
   /* Navigation desktop remplacée par bottom nav */
   .main-nav    { display: none !important; }
