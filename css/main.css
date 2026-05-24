@@ -793,12 +793,15 @@ img { max-width: 100%; height: auto; }
    ═══════════════════════════════════════════════════════════════
 
    Téléphones (h ≤ 500px) :
-     iPhone SE landscape        : 667 × 375
-     iPhone 12/13/14 landscape  : 844 × 390
-     iPhone 14 Pro Max landscape: 932 × 430
-     Samsung S25 landscape      : 900 × 412
-     Samsung S25 Ultra landscape: 915 × 412
-     Samsung S26 Ultra landscape: 932 × 412
+     iPhone SE landscape         : 667 × 375
+     iPhone 12/13/14 landscape   : 844 × 390
+     iPhone 14 Pro Max landscape : 932 × 430
+     iPhone 15 Plus landscape    : 932 × 430  ← même viewport que 14 Pro Max
+     Samsung S20 Ultra landscape : 915 × 412
+     Samsung S25 landscape       : 900 × 412
+     Samsung S25 Ultra landscape : 891 × 412  ou  915 × 412
+     Samsung S25+ landscape      : 926 × 428
+     Samsung S26 Ultra landscape : 932 × 412
 
    Tablettes (h 501–1050px, w ≤ 1400px) :
      iPad standard landscape    : 1024 × 768
