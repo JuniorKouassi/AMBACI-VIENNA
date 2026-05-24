@@ -568,6 +568,18 @@ select.form-control { cursor: pointer; }
 /* Images responsives globales */
 img { max-width: 100%; height: auto; }
 
+/* ── CI Discover section (index.html) — grid layout ── */
+.ci-discover-grid {
+  display: grid;
+  gap: var(--space-3xl);
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "head video" "body video";
+  align-items: start;
+}
+.ci-discover-head  { grid-area: head; }
+.ci-discover-body  { grid-area: body; }
+.ci-discover-video { grid-area: video; align-self: center; }
+
 /* ============================================================
    RESPONSIVE — breakpoints complets
    ============================================================ */
@@ -607,6 +619,12 @@ img { max-width: 100%; height: auto; }
   /* Top bar & alerte cachées */
   .top-bar    { display: none; }
   .alert-banner { display: none; }
+
+  /* CI Discover — mobile : titre → vidéo → texte */
+  .ci-discover-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "head" "video" "body";
+  }
 
   /* Navigation desktop remplacée par bottom nav */
   .main-nav    { display: none !important; }

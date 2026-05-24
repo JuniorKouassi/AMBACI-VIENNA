@@ -141,10 +141,34 @@
     <!-- CÔTE D'IVOIRE -->
     <section style="padding:var(--space-3xl) 0;">
       <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:var(--space-3xl);align-items:center;">
-          <div>
+        <div class="ci-discover-grid">
+          <!-- 1. Titre (toujours en premier) -->
+          <div class="ci-discover-head">
             <span class="badge" data-i18n="pamb.ci.badge">La Côte d'Ivoire</span>
-            <h2 class="section-title" style="margin-bottom:var(--space-lg);" data-i18n="pamb.ci.title">Découvrir la Côte d'Ivoire</h2>
+            <h2 class="section-title" style="margin-bottom:0;" data-i18n="pamb.ci.title">Découvrir la Côte d'Ivoire</h2>
+          </div>
+          <!-- 2. Vidéo (à droite sur desktop, sous le titre sur mobile) -->
+          <div class="ci-discover-video" style="border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);background:var(--dark);">
+            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+              <iframe
+                src="https://www.youtube.com/embed/vH4YqVJnxOY"
+                title="Découvrir la Côte d'Ivoire"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
+              </iframe>
+            </div>
+            <div style="padding:var(--space-lg);background:linear-gradient(135deg,var(--orange),var(--green-dark));display:flex;align-items:center;gap:var(--space-md);">
+              <img src="img/armoiries-ci.png" alt="Armoiries de la République de Côte d'Ivoire" style="width:40px;height:40px;object-fit:contain;flex-shrink:0;">
+              <div>
+                <p style="font-family:var(--font-primary);font-size:1rem;font-weight:700;color:var(--white);margin:0;" data-i18n="pamb.ci.republic">République de Côte d'Ivoire</p>
+                <p style="font-size:.8125rem;color:rgba(255,255,255,.8);font-style:italic;margin:0;">« Union — Discipline — Travail »</p>
+              </div>
+            </div>
+          </div>
+          <!-- 3. Texte + stats (sous le titre sur desktop, après la vidéo sur mobile) -->
+          <div class="ci-discover-body">
             <p style="font-size:.9375rem;color:var(--grey-700);line-height:1.75;margin-bottom:var(--space-md);" data-i18n="pamb.ci.p1">
               La République de Côte d'Ivoire est un pays d'Afrique de l'Ouest, bordé au sud par le Golfe de Guinée. Première économie de l'Union Économique et Monétaire Ouest-Africaine (UEMOA), elle est le premier producteur mondial de cacao.
             </p>
@@ -175,25 +199,6 @@
               <div style="padding:var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);">
                 <p style="font-size:.8125rem;color:var(--grey-500);" data-i18n="pamb.ci.stat.capital">Capitale polit.</p>
                 <p style="font-weight:700;color:var(--dark);">Yamoussoukro</p>
-              </div>
-            </div>
-          </div>
-          <div style="border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-lg);position:relative;background:var(--dark);">
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-              <iframe
-                src="https://www.youtube.com/embed/vH4YqVJnxOY"
-                title="Découvrir la Côte d'Ivoire"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
-              </iframe>
-            </div>
-            <div style="padding:var(--space-lg);background:linear-gradient(135deg,var(--orange),var(--green-dark));display:flex;align-items:center;gap:var(--space-md);">
-              <img src="img/armoiries-ci.png" alt="Armoiries de la République de Côte d'Ivoire" style="width:40px;height:40px;object-fit:contain;flex-shrink:0;">
-              <div>
-                <p style="font-family:var(--font-primary);font-size:1rem;font-weight:700;color:var(--white);margin:0;" data-i18n="pamb.ci.republic">République de Côte d'Ivoire</p>
-                <p style="font-size:.8125rem;color:rgba(255,255,255,.8);font-style:italic;margin:0;">« Union — Discipline — Travail »</p>
               </div>
             </div>
           </div>
