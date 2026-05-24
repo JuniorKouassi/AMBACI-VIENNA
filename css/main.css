@@ -822,32 +822,44 @@ img { max-width: 100%; height: auto; }
     --space-xl:  0.875rem;
   }
 
-  /* Hero : 2 colonnes pour exploiter la largeur */
+  /* Hero : 2 colonnes + carte restaurée (assez de largeur à ≥800px) */
   .hero                 { padding: 1rem 0 1.25rem; }
   .hero .container      { grid-template-columns: 1fr 1fr; gap: var(--space-lg); align-items: center; }
   .hero-content         { max-width: 100%; }
-  .hero h1              { font-size: clamp(1.2rem, 2.8vw, 1.6rem); margin-bottom: var(--space-md); }
-  .hero-desc            { font-size: 0.875rem; margin-bottom: var(--space-md); }
+  .hero-card            { display: flex; padding: var(--space-md); gap: var(--space-md); }
+  .hero-card-title      { font-size: 0.72rem; margin-bottom: var(--space-xs, 0.25rem); }
+  .hero-info-item       { padding-bottom: var(--space-sm); }
+  .hero-info-icon       { width: 32px; height: 32px; font-size: 0.875rem; }
+  .hero-info-label      { font-size: 0.72rem; }
+  .hero-info-value      { font-size: 0.82rem; }
+  .hero h1              { font-size: clamp(1.1rem, 2.5vw, 1.5rem); margin-bottom: var(--space-sm); }
+  .hero-eyebrow         { font-size: 0.72rem; margin-bottom: var(--space-sm); }
+  .hero-desc            { font-size: 0.82rem; margin-bottom: var(--space-sm); }
   .hero-actions         { flex-wrap: nowrap; gap: var(--space-sm); }
-  .hero-actions .btn    { min-height: 40px; font-size: 0.875rem; padding: 0 var(--space-md); }
+  .hero-actions .btn    { min-height: 38px; font-size: 0.82rem; padding: 0 0.875rem; }
 
   /* Header ultra-compact */
   .header-inner         { padding-block: 0.4rem; }
   .logo-text span       { display: none; }
 
-  /* Grilles : 2–3 colonnes */
-  .services-grid        { grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
-  .info-grid            { grid-template-columns: 1fr 1fr; }
-  .actualites-grid      { grid-template-columns: 1fr 1fr; }
-  .footer-grid          { grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
-  .contact-layout       { grid-template-columns: 1fr 1fr; }
-  .pays-grid            { grid-template-columns: repeat(4, 1fr); }
-  .form-grid            { grid-template-columns: 1fr 1fr; }
+  /* Grilles : 2–4 colonnes selon contenu */
+  .services-grid        { grid-template-columns: repeat(3, 1fr) !important; gap: var(--space-sm); }
+  .services-detail-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .info-grid            { grid-template-columns: 1fr 1fr !important; }
+  .actualites-grid      { grid-template-columns: 1fr 1fr !important; }
+  .footer-grid          { grid-template-columns: repeat(4, 1fr) !important; gap: var(--space-md); }
+  .contact-layout       { grid-template-columns: 1fr 1fr !important; }
+  .pays-grid            { grid-template-columns: repeat(4, 1fr) !important; }
+
+  /* Ambassadeur : photo réduite pour viewport 412px de hauteur */
+  .amb-grid             { grid-template-columns: auto 1fr; gap: var(--space-lg); }
+  .amb-photo-wrap       { width: 140px; }
+  .amb-bio p            { font-size: 0.875rem; line-height: 1.6; }
 
   /* Titres & sections */
   .page-header          { padding: 0.75rem 0 1rem; }
-  .page-header h1       { font-size: clamp(1rem, 2.8vw, 1.5rem); }
-  .section-title        { font-size: clamp(1rem, 2.5vw, 1.4rem); }
+  .page-header h1       { font-size: clamp(1rem, 2.5vw, 1.4rem); }
+  .section-title        { font-size: clamp(0.95rem, 2.2vw, 1.3rem); }
   .cta-section          { padding: 1rem 0; }
   .cta-actions          { flex-direction: row; justify-content: center; }
   .cta-actions .btn     { width: auto; }
@@ -860,34 +872,48 @@ img { max-width: 100%; height: auto; }
 
   /* Bottom nav : masquée (trop haute en paysage) */
   .bottom-nav           { display: none !important; }
-  body                  { padding-bottom: 0; }
-  .whatsapp-fab         { bottom: 1rem !important; }
-  .wa-label             { bottom: 2rem !important; }
+  body                  { padding-bottom: 0 !important; }
+  .whatsapp-fab         { bottom: 1rem !important; right: 1rem !important;
+                          width: 52px !important; height: 52px !important;
+                          font-size: 1.6rem !important; }
+  .wa-label             { display: none !important; }
 }
 
-/* ── 2. Tablettes — paysage (h 501–1050px, w ≤ 1400px) ─────── */
+/* ── 2. Tablettes — paysage (h 501px+, w ≤ 1400px) ────────────
+   iPad standard (1024×768), iPad Air (1180×820), iPad Pro 11 (1194×834)
+   Samsung Tab S8/S9 (1280×800)
+   ──────────────────────────────────────────────────────────── */
 @media (orientation: landscape) and (min-height: 501px) and (max-width: 1400px) {
 
-  /* Hero : 2 colonnes + carte restaurée */
+  /* Hero : 2 colonnes complètes + carte info restaurée */
   .hero .container      { grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: center; }
   .hero-content         { max-width: 100%; }
   .hero-card            { display: flex; }
   .hero h1              { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+  .hero-desc            { font-size: 1rem; }
 
-  /* Grilles tablette */
-  .services-grid        { grid-template-columns: repeat(3, 1fr); }
-  .services-detail-grid { grid-template-columns: repeat(2, 1fr); }
-  .info-grid            { grid-template-columns: 1fr 1fr; }
-  .actualites-grid      { grid-template-columns: 1fr 1fr; }
-  .footer-grid          { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: var(--space-xl); }
-  .contact-layout       { grid-template-columns: 1fr 1fr; }
-  .pays-grid            { grid-template-columns: repeat(4, 1fr); }
+  /* Grilles tablette : 2–4 colonnes */
+  .services-grid        { grid-template-columns: repeat(3, 1fr) !important; }
+  .services-detail-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .info-grid            { grid-template-columns: 1fr 1fr !important; }
+  .actualites-grid      { grid-template-columns: 1fr 1fr !important; }
+  .footer-grid          { grid-template-columns: 1.5fr 1fr 1fr 1fr !important; gap: var(--space-xl); }
+  .contact-layout       { grid-template-columns: 1fr 1fr !important; }
+  .pays-grid            { grid-template-columns: repeat(4, 1fr) !important; }
+
+  /* Ambassadeur : photo standard */
+  .amb-grid             { grid-template-columns: auto 1fr; }
+  .amb-photo-wrap       { width: 200px; }
 
   /* CI discover homepage : 2 colonnes */
   .ci-discover-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "head video" "body video";
   }
+
+  /* Titres ajustés tablette */
+  .section-title        { font-size: clamp(1.2rem, 2.8vw, 2rem); }
+  .page-header h1       { font-size: clamp(1.3rem, 3vw, 2.2rem); }
 }
 
 /* ── PRINT ─────────────────────────────────────────────────── */
