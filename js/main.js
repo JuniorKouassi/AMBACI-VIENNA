@@ -1098,23 +1098,24 @@ function setLang(lang) {
   localStorage.setItem('ambaci-lang', lang);
 }
 
-(function initLang() {
-  /* 1. Préférence enregistrée par l'utilisateur → priorité absolue */
+// Priority: 1) saved user choice  2) browser/phone language  3) French default
+try {
   const saved = localStorage.getItem('ambaci-lang');
-  if (saved && translations[saved]) { setLang(saved); return; }
-
-  /* 2. Langue du navigateur/téléphone (ex: "fr-FR", "de-AT", "en-US") */
-  const browserLangs = navigator.languages && navigator.languages.length
-    ? navigator.languages
-    : [navigator.language || 'fr'];
-
-  let detected = 'fr'; // fallback
-  for (const lang of browserLangs) {
-    const code = lang.slice(0, 2).toLowerCase();
-    if (translations[code]) { detected = code; break; }
+  if (saved && ['fr', 'en', 'de'].includes(saved)) {
+    setLang(saved);
+  } else {
+    const supported = ['fr', 'en', 'de'];
+    const detected = (navigator.languages && navigator.languages.length
+      ? Array.from(navigator.languages)
+      : [navigator.language || '']
+    )
+      .map(l => l.slice(0, 2).toLowerCase())
+      .find(l => supported.includes(l));
+    setLang(detected || 'fr');
   }
-  setLang(detected);
-})();
+} catch(e) {
+  setLang('fr');
+}
 
 /* ============================================================
    Navigation mobile — hamburger menu
