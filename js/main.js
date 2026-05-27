@@ -1099,8 +1099,21 @@ function setLang(lang) {
 }
 
 (function initLang() {
-  const saved = localStorage.getItem('ambaci-lang') || 'fr';
-  setLang(saved);
+  /* 1. Préférence enregistrée par l'utilisateur → priorité absolue */
+  const saved = localStorage.getItem('ambaci-lang');
+  if (saved && translations[saved]) { setLang(saved); return; }
+
+  /* 2. Langue du navigateur/téléphone (ex: "fr-FR", "de-AT", "en-US") */
+  const browserLangs = navigator.languages && navigator.languages.length
+    ? navigator.languages
+    : [navigator.language || 'fr'];
+
+  let detected = 'fr'; // fallback
+  for (const lang of browserLangs) {
+    const code = lang.slice(0, 2).toLowerCase();
+    if (translations[code]) { detected = code; break; }
+  }
+  setLang(detected);
 })();
 
 /* ============================================================
