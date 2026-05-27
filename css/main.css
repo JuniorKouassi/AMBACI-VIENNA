@@ -502,6 +502,7 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
    CARDS SERVICES (page services)
    ============================================================ */
 .services-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-xl); }
+#visa .services-detail-grid { grid-template-columns: repeat(3, 1fr); }
 .service-detail-card { border: 1px solid var(--grey-200); border-radius: var(--radius-xl); overflow: hidden; background: var(--white); }
 .service-detail-header {
   padding: var(--space-xl);
@@ -671,7 +672,8 @@ img { max-width: 100%; height: auto; }
 
   /* Grilles */
   .services-grid        { grid-template-columns: 1fr 1fr; gap: var(--space-md); }
-  .services-detail-grid { grid-template-columns: 1fr; }
+  .services-detail-grid,
+  #visa .services-detail-grid { grid-template-columns: 1fr; }
   .pays-grid            { grid-template-columns: 1fr 1fr; }
   .footer-grid          { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
   .actualites-grid      { grid-template-columns: 1fr; }
