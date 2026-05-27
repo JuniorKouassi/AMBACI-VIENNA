@@ -503,6 +503,13 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
    ============================================================ */
 .services-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-xl); }
 #visa .services-detail-grid { grid-template-columns: repeat(3, 1fr); }
+
+/* Aligne les prix à la même hauteur sur desktop */
+@media (min-width: 769px) {
+  #visa .service-detail-card  { display: flex; flex-direction: column; }
+  #visa .service-detail-body  { display: flex; flex-direction: column; flex: 1; }
+  #visa .requirement-list     { flex: 1; }
+}
 .service-detail-card { border: 1px solid var(--grey-200); border-radius: var(--radius-xl); overflow: hidden; background: var(--white); }
 .service-detail-header {
   padding: var(--space-xl);
