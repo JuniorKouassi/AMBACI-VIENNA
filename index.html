@@ -453,15 +453,21 @@
   <script src="js/main.js"></script>
   <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
   <script>
-    new MutationObserver(function(m, obs) {
-      var el = document.querySelector('[id*="fastbot"], [class*="fastbot"], [data-bot-id]');
-      if (!el) return;
-      var wrap = el.closest('[style*="fixed"]') || el;
-      var mobile = window.innerWidth <= 768;
-      wrap.style.setProperty('bottom', mobile ? 'calc(68px + 0.75rem + 58px + 0.75rem)' : 'calc(2rem + 90px + 0.75rem)', 'important');
-      wrap.style.setProperty('right', mobile ? '1rem' : '2rem', 'important');
-      obs.disconnect();
-    }).observe(document.body, { childList: true, subtree: true });
+    (function() {
+      var skip = ['whatsapp-fab','wa-label','bottom-nav','site-header','alert-banner','top-bar'];
+      function place(el) {
+        setTimeout(function() {
+          if (skip.some(function(c){return el.classList&&el.classList.contains(c);})) return;
+          if (window.getComputedStyle(el).position !== 'fixed') return;
+          var m = window.innerWidth <= 768;
+          el.style.setProperty('bottom', m ? 'calc(68px + 0.75rem + 58px + 1rem)' : 'calc(2rem + 90px + 1rem)', 'important');
+          el.style.setProperty('right', m ? '1rem' : '2rem', 'important');
+        }, 300);
+      }
+      new MutationObserver(function(ms) {
+        ms.forEach(function(m) { m.addedNodes.forEach(function(n) { if (n.nodeType===1) place(n); }); });
+      }).observe(document.body, { childList: true });
+    })();
   </script>
 </body>
 </html>
