@@ -1171,6 +1171,16 @@ fastbots-widget,
     bottom: calc(68px + 0.75rem + 58px + 0.75rem) !important;
     right: 1rem !important;
   }
+  /* Fenêtre de chat — réduite sur mobile */
+  [id^="fastbots"] iframe,
+  [class*="fastbot"] iframe,
+  [id^="fastbots"] > div + div,
+  [id^="fastbots"] > div:last-child {
+    width:      min(calc(100vw - 2rem), 340px) !important;
+    height:     min(60vh, 480px)               !important;
+    max-width:  340px                          !important;
+    max-height: 480px                          !important;
+  }
 }
 
 /* ============================================================

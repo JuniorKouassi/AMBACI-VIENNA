@@ -510,6 +510,21 @@
           setTimeout(function() { Array.from(document.body.children).forEach(pos); }, t);
         });
       });
+      if (window.innerWidth <= 768) {
+        new MutationObserver(function(ms) {
+          ms.forEach(function(m) {
+            m.addedNodes.forEach(function(n) {
+              if (n.nodeType !== 1) return;
+              var iframe = n.tagName === 'IFRAME' ? n : n.querySelector('iframe');
+              if (!iframe) return;
+              iframe.style.setProperty('width',      'min(calc(100vw - 2rem), 340px)', 'important');
+              iframe.style.setProperty('height',     'min(60vh, 480px)',                'important');
+              iframe.style.setProperty('max-width',  '340px',                           'important');
+              iframe.style.setProperty('max-height', '480px',                           'important');
+            });
+          });
+        }).observe(document.body, { childList: true, subtree: true });
+      }
     })();
   </script>
 </body>
