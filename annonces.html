@@ -890,6 +890,18 @@
     <a href="contact.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
   </nav>
   <script src="js/main.js"></script>
+  <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
+  <script>
+    new MutationObserver(function(m, obs) {
+      var el = document.querySelector('[id*="fastbot"], [class*="fastbot"], [data-bot-id]');
+      if (!el) return;
+      var wrap = el.closest('[style*="fixed"]') || el;
+      var mobile = window.innerWidth <= 768;
+      wrap.style.setProperty('bottom', mobile ? 'calc(68px + 0.75rem + 58px + 0.75rem)' : 'calc(2rem + 90px + 0.75rem)', 'important');
+      wrap.style.setProperty('right', mobile ? '1rem' : '2rem', 'important');
+      obs.disconnect();
+    }).observe(document.body, { childList: true, subtree: true });
+  </script>
 </body>
 </html>
 

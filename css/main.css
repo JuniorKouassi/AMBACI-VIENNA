@@ -1154,6 +1154,26 @@ img { max-width: 100%; height: auto; }
   border-left-color: #25D366;
 }
 /* ============================================================
+   FASTBOTS CHATBOT — au-dessus du bouton WhatsApp
+   ============================================================ */
+#fastbots-widget,
+#fastbots-chatbot,
+fastbots-widget,
+[id^="fastbots"] {
+  bottom: calc(2rem + 90px + 0.75rem) !important;
+  right: 2rem !important;
+}
+@media (max-width: 768px) {
+  #fastbots-widget,
+  #fastbots-chatbot,
+  fastbots-widget,
+  [id^="fastbots"] {
+    bottom: calc(68px + 0.75rem + 58px + 0.75rem) !important;
+    right: 1rem !important;
+  }
+}
+
+/* ============================================================
    BOUTON WHATSAPP FLOTTANT
    ============================================================ */
 .whatsapp-fab {
