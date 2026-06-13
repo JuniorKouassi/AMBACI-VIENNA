@@ -597,6 +597,9 @@ img { max-width: 100%; height: auto; }
   .services-grid { grid-template-columns: repeat(3, 1fr); }
   .pays-grid     { grid-template-columns: repeat(3, 1fr); }
   .footer-grid   { grid-template-columns: 1.5fr 1fr 1fr; }
+  /* 6 liens de nav : resserrer pour éviter le débordement */
+  .nav-list   { gap: 0; }
+  .nav-list a { padding: 0.5rem 0.55rem; font-size: 0.825rem; }
 }
 
 /* ── LG ≤ 1024px ─────────────────────────────────────────────── */
