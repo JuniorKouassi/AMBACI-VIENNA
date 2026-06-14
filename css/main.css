@@ -688,8 +688,8 @@ img { max-width: 100%; height: auto; }
     min-width: 0 !important;
   }
   .lang-btn .fi {
-    width: 13px !important;
-    height: 9px !important;
+    width: 10px !important;
+    height: 7px !important;
     display: inline-block !important;
     border-radius: 1px !important;
   }
@@ -901,7 +901,7 @@ img { max-width: 100%; height: auto; }
   .lang-switcher    { flex-shrink: 0; }
   .lang-btn         { padding: 0.2rem 0.26rem !important; font-size: 0.55rem !important;
                       gap: 0.14rem !important; min-width: 0 !important; }
-  .lang-btn .fi     { width: 12px !important; height: 9px !important; }
+  .lang-btn .fi     { width: 10px !important; height: 7px !important; }
   .lang-sep         { width: 1px !important; }
 
   /* ══ HERO — 2 colonnes, hauteur ~340px disponible ════════════ */
