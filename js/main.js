@@ -445,7 +445,7 @@ const translations = {
     'pdec.food.viennese.title': 'Spécialités viennoises à goûter',
     'pdec.food.viennese.desc': 'Wiener Schnitzel, Sachertorte, Apfelstrudel — et faites un tour au marché du Naschmarkt pour découvrir les saveurs locales.',
     'pdec.sights.badge': 'Visiter',
-    'pdec.sights.title': 'Incontournables de Vienne',
+    'pdec.sights.title': 'Lieux Incontournables de Vienne',
     'pdec.sights.desc': 'Quelques sites emblématiques à découvrir lors de votre séjour.',
     'pdec.sights.schoenbrunn.title': 'Château de Schönbrunn',
     'pdec.sights.schoenbrunn.desc': "Ancienne résidence d'été impériale et ses jardins classés à l'UNESCO.",
