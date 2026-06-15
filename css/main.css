@@ -1392,3 +1392,32 @@ fastbots-widget,
     border-radius: 0 0 4px 4px;
   }
 }
+
+/* ===== CIRCONSCRIPTION - CARTE INTERACTIVE ===== */
+.cd-map .cc {
+  cursor: pointer;
+  outline: none;
+  stroke: #0e0e10;
+  stroke-width: 1;
+  transition: fill .2s, filter .2s, stroke .2s, stroke-width .2s;
+}
+.cd-map .cc[data-role="juris"] { fill: #009E60; }
+.cd-map .cc[data-role="seat"]  { fill: #F77F00; }
+.cd-map .cc[data-active="true"] {
+  stroke: #f4f1ea;
+  stroke-width: 1.6;
+  filter: drop-shadow(0 0 8px rgba(247,127,0,.85));
+}
+.cd-map .cc[data-role="juris"][data-active="true"] { fill: #00b46d; }
+.cd-map .cc[data-role="seat"][data-active="true"]  { fill: #FF991F; }
+
+.cd-flag {
+  width: 60px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: .8rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.12);
+}

@@ -235,99 +235,34 @@
           <p class="section-subtitle">L'Ambassade de Côte d'Ivoire à Vienne est compétente pour les ressortissants résidant dans les 9 pays suivants.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-lg);">
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:2px solid var(--orange);position:relative;">
-            <div style="position:absolute;top:var(--space-md);right:var(--space-md);background:var(--orange);color:var(--white);font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:999px;">Siège</div>
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.at">Autriche</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Wien (Vienne)</p>
-              </div>
+        <div id="cd-card" style="background:#0e0e10;color:#f4f1ea;font-family:var(--font-ui);padding:clamp(28px,5vw,56px) clamp(18px,4vw,48px);border:1px solid #1f1f24;border-radius:var(--radius-xl);box-shadow:0 24px 60px rgba(0,0,0,.45);box-sizing:border-box;width:100%;">
+          <div style="display:flex;gap:clamp(18px,3vw,36px);align-items:flex-start;flex-wrap:wrap;">
+            <div style="flex:2 1 460px;min-width:0;position:relative;">
+              <svg id="cd-map-svg" viewBox="0 0 1000 720" role="img" aria-label="Carte de la circonscription diplomatique de l'Ambassade de Côte d'Ivoire à Vienne" style="width:100%;height:auto;display:block;border-radius:10px;background:#a8cdde;">
+                <g class="cd-ctx" aria-hidden="true"></g>
+                <g class="cd-map"></g>
+                <g class="cd-pins" aria-hidden="true"></g>
+                <g class="cd-labels" aria-hidden="true"></g>
+              </svg>
+              <div id="cd-map-status" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.2rem;color:#9a978f;font-size:.85rem;letter-spacing:.04em;pointer-events:none;" data-i18n="pays.map.loading">Chargement de la carte…</div>
             </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">Pays hôte de l'Ambassade. Vienne est également siège de nombreuses organisations internationales.</p>
-          </div>
 
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.hu">Hongrie</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Budapest</p>
+            <aside id="cd-aside" style="flex:1 1 250px;background:#16161a;border:1px solid #1f1f24;border-radius:12px;padding:1.4rem 1.4rem 1.5rem;min-height:230px;position:sticky;top:18px;box-sizing:border-box;">
+              <p id="cd-empty" style="color:#9a978f;font-size:.9rem;line-height:1.6;margin:0;" data-i18n="pays.map.empty">Sélectionnez un pays sur la carte pour afficher sa capitale et un court portrait.</p>
+              <div id="cd-selected" style="display:none;">
+                <img id="cd-flag" class="cd-flag" alt="">
+                <h3 id="cd-name" style="font-family:var(--font-primary);font-size:1.5rem;font-weight:600;margin:0 0 .15rem;color:#f4f1ea;"></h3>
+                <p style="font-size:.82rem;color:#F77F00;letter-spacing:.04em;text-transform:uppercase;font-weight:600;margin:0 0 .9rem;"><span style="color:#9a978f;margin-right:.4rem;letter-spacing:.12em;" data-i18n="pays.map.capital">Capitale</span><span id="cd-cap"></span></p>
+                <p id="cd-blurb" style="color:#cfccc4;font-size:.94rem;line-height:1.62;margin:0;"></p>
+                <span id="cd-seat-tag" style="display:none;margin-top:1rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#F77F00;border:1px solid rgba(247,127,0,.4);border-radius:999px;padding:.28rem .7rem;" data-i18n="pays.map.seatTag">Siège de l'Ambassade</span>
               </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">État membre de l'Union européenne, situé au cœur de l'Europe centrale.</p>
-          </div>
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.si">Slovénie</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Ljubljana</p>
+              <div style="display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid #1f1f24;font-size:.76rem;color:#9a978f;">
+                <span style="display:inline-flex;align-items:center;gap:.4rem;"><i style="width:13px;height:13px;border-radius:3px;background:#F77F00;display:inline-block;"></i><span data-i18n="pays.map.legSeat">Siège</span></span>
+                <span style="display:inline-flex;align-items:center;gap:.4rem;"><i style="width:13px;height:13px;border-radius:3px;background:#009E60;display:inline-block;"></i><span data-i18n="pays.map.legJuris">Circonscription</span></span>
+                <span style="display:inline-flex;align-items:center;gap:.4rem;"><i style="width:13px;height:13px;border-radius:3px;background:#34343c;display:inline-block;"></i><span data-i18n="pays.map.legCtx">Autres pays</span></span>
               </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">Pays alpin au carrefour de l'Europe centrale, membre de l'Union européenne.</p>
+            </aside>
           </div>
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.sk">Slovaquie</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Bratislava</p>
-              </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">Jeune République d'Europe centrale, membre de l'Union européenne et de la zone euro.</p>
-          </div>
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.hr">Croatie</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Zagreb</p>
-              </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">Pays côtier de la mer Adriatique, dernier pays intégré à l'Union européenne (2013).</p>
-          </div>
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.rs">Serbie</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Belgrade</p>
-              </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">Pays candidat à l'adhésion à l'Union européenne, situé au cœur des Balkans.</p>
-          </div>
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.ro">Roumanie</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Bucarest</p>
-              </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">Grand pays d'Europe du Sud-Est, membre de l'Union européenne depuis 2007.</p>
-          </div>
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.ba">Bosnie-Herzégovine</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Sarajevo</p>
-              </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">État des Balkans en cours d'intégration européenne, à la croisée des cultures.</p>
-          </div>
-
-          <div style="background:var(--white);border-radius:var(--radius-xl);padding:var(--space-xl);box-shadow:var(--shadow-sm);border:1px solid var(--grey-200);">
-            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
-              <div>
-                <p style="font-size:1.125rem;font-weight:700;color:var(--dark);" data-i18n="pays.md">Moldavie</p>
-                <p style="font-size:.875rem;color:var(--grey-500);">Capitale : Chișinău</p>
-              </div>
-            </div>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.6;">État d'Europe orientale en cours de rapprochement avec l'Union européenne.</p>
-          </div>
-
         </div>
       </div>
     </section>
@@ -478,6 +413,9 @@
     <a href="decouvrir-autriche.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Découvrir</span></a>
   </nav>
   <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script src="js/circonscription-map.js"></script>
   <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
   <script>
     (function() {
