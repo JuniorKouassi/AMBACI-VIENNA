@@ -237,7 +237,7 @@
 
         <div id="cd-card" style="background:#0e0e10;color:#f4f1ea;font-family:var(--font-ui);padding:clamp(28px,5vw,56px) clamp(18px,4vw,48px);border:1px solid #1f1f24;border-radius:var(--radius-xl);box-shadow:0 24px 60px rgba(0,0,0,.45);box-sizing:border-box;width:100%;">
           <div style="display:flex;gap:clamp(18px,3vw,36px);align-items:flex-start;flex-wrap:wrap;">
-            <div style="flex:3 1 560px;min-width:0;position:relative;">
+            <div class="cd-map-col" style="flex:2 1 460px;min-width:0;position:relative;">
               <svg id="cd-map-svg" viewBox="0 0 1000 720" role="img" aria-label="Carte de la circonscription diplomatique de l'Ambassade de Côte d'Ivoire à Vienne" style="width:100%;height:auto;display:block;border-radius:10px;background:#a8cdde;">
                 <g class="cd-ctx" aria-hidden="true"></g>
                 <g class="cd-map"></g>
@@ -247,7 +247,7 @@
               <div id="cd-map-status" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.2rem;color:#9a978f;font-size:.85rem;letter-spacing:.04em;pointer-events:none;" data-i18n="pays.map.loading">Chargement de la carte…</div>
             </div>
 
-            <aside id="cd-aside" style="flex:1 1 220px;max-width:260px;background:#16161a;border:1px solid #1f1f24;border-radius:12px;padding:1.4rem 1.4rem 1.5rem;min-height:230px;position:sticky;top:18px;box-sizing:border-box;">
+            <aside id="cd-aside" style="flex:1 1 250px;background:#16161a;border:1px solid #1f1f24;border-radius:12px;padding:1.4rem 1.4rem 1.5rem;min-height:230px;position:sticky;top:18px;box-sizing:border-box;">
               <p id="cd-empty" style="color:#9a978f;font-size:.9rem;line-height:1.6;margin:0;" data-i18n="pays.map.empty">Sélectionnez un pays sur la carte pour afficher sa capitale et un court portrait.</p>
               <div id="cd-selected" style="display:none;">
                 <img id="cd-flag" class="cd-flag" alt="">

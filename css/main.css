@@ -1421,3 +1421,8 @@ fastbots-widget,
   box-shadow: 0 2px 6px rgba(0,0,0,.45);
   border: 1px solid rgba(255,255,255,.12);
 }
+
+@media (min-width: 769px) {
+  .cd-map-col { flex: 3 1 560px; }
+  #cd-aside   { flex: 1 1 220px; max-width: 260px; }
+}
