@@ -12,7 +12,7 @@
     { key: 'hr', id: 191, role: 'juris', capital: [15.9819, 45.8150], lab: [16.95, 45.5], capOffset: { dx: 8, anchor: 'start' } },
     { key: 'rs', id: 688, role: 'juris', capital: [20.4489, 44.7866] },
     { key: 'ro', id: 642, role: 'juris', capital: [26.1025, 44.4268] },
-    { key: 'ba', id: 70,  role: 'juris', capital: [18.4131, 43.8563] },
+    { key: 'ba', id: 70,  role: 'juris', capital: [18.4131, 43.8563], capOffset: { dy: 16 } },
     { key: 'md', id: 498, role: 'juris', capital: [28.8638, 47.0105], capOffset: { dy: 16 } }
   ];
 
