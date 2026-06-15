@@ -32,13 +32,18 @@
   var selected = null;
   var hovered = null;
 
+  function allTranslations() {
+    return (typeof translations !== 'undefined') ? translations : {};
+  }
+
   function currentLang() {
     var lang = (document.documentElement.lang || 'fr').toLowerCase();
-    return (window.translations && window.translations[lang]) ? lang : 'fr';
+    var dicts = allTranslations();
+    return dicts[lang] ? lang : 'fr';
   }
 
   function tr(key) {
-    var dict = (window.translations && window.translations[currentLang()]) || {};
+    var dict = allTranslations()[currentLang()] || {};
     return dict[key] || '';
   }
 
@@ -168,10 +173,10 @@
       path.setAttribute('aria-pressed', selected === c.key ? 'true' : 'false');
       path.setAttribute('aria-label', tr('pays.' + c.key));
       path.addEventListener('click', function () { selectCountry(c.key); });
-      path.addEventListener('mouseenter', function () { hovered = c.key; updateActiveStates(); });
-      path.addEventListener('mouseleave', function () { if (hovered === c.key) { hovered = null; updateActiveStates(); } });
-      path.addEventListener('focus', function () { hovered = c.key; updateActiveStates(); });
-      path.addEventListener('blur', function () { if (hovered === c.key) { hovered = null; updateActiveStates(); } });
+      path.addEventListener('mouseenter', function () { hovered = c.key; updateActiveStates(); refreshDisplay(); });
+      path.addEventListener('mouseleave', function () { if (hovered === c.key) { hovered = null; updateActiveStates(); refreshDisplay(); } });
+      path.addEventListener('focus', function () { hovered = c.key; updateActiveStates(); refreshDisplay(); });
+      path.addEventListener('blur', function () { if (hovered === c.key) { hovered = null; updateActiveStates(); refreshDisplay(); } });
       path.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
           e.preventDefault();
@@ -250,10 +255,11 @@
       });
     });
 
-    if (selected) {
-      var sgd = geo.byKey[selected];
+    var activeKey = hovered || selected;
+    if (activeKey) {
+      var sgd = geo.byKey[activeKey];
       if (sgd && sgd.pinX != null) {
-        var capFull = tr('pays.cap.' + selected);
+        var capFull = tr('pays.cap.' + activeKey);
         var capLabel = capFull.split('(')[0].trim();
         g.appendChild(makeText(sgd.pinX, sgd.pinY - 11, capLabel, {
           fontFamily: 'Inter, sans-serif', fontWeight: '700', fontSize: '12.5px',
@@ -267,36 +273,40 @@
     var empty = document.getElementById('cd-empty');
     var sel = document.getElementById('cd-selected');
     var seatTag = document.getElementById('cd-seat-tag');
-    if (!selected) {
+    var activeKey = hovered || selected;
+    if (!activeKey) {
       empty.style.display = '';
       sel.style.display = 'none';
       return;
     }
-    var c = COUNTRIES.filter(function (x) { return x.key === selected; })[0];
-    var name = tr('pays.' + selected);
+    var c = COUNTRIES.filter(function (x) { return x.key === activeKey; })[0];
+    var name = tr('pays.' + activeKey);
     empty.style.display = 'none';
     sel.style.display = '';
-    document.getElementById('cd-flag').src = 'https://flagcdn.com/' + selected + '.svg';
+    document.getElementById('cd-flag').src = 'https://flagcdn.com/' + activeKey + '.svg';
     document.getElementById('cd-flag').alt = name;
     document.getElementById('cd-name').textContent = name;
-    document.getElementById('cd-cap').textContent = tr('pays.cap.' + selected);
-    document.getElementById('cd-blurb').textContent = tr('pays.blurb.' + selected);
+    document.getElementById('cd-cap').textContent = tr('pays.cap.' + activeKey);
+    document.getElementById('cd-blurb').textContent = tr('pays.blurb.' + activeKey);
     seatTag.style.display = (c && c.role === 'seat') ? 'inline-block' : 'none';
+  }
+
+  function refreshDisplay() {
+    renderLabels();
+    updateAside();
   }
 
   function selectCountry(key) {
     selected = key;
     updateActiveStates();
-    renderLabels();
-    updateAside();
+    refreshDisplay();
   }
 
   function render() {
     renderContext();
     renderCountries();
     renderPins();
-    renderLabels();
-    updateAside();
+    refreshDisplay();
   }
 
   function init() {
@@ -336,8 +346,7 @@
         var k = paths[i].getAttribute('data-key');
         paths[i].setAttribute('aria-label', tr('pays.' + k));
       }
-      renderLabels();
-      updateAside();
+      refreshDisplay();
     });
   }
 
