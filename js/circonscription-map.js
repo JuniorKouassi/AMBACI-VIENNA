@@ -13,7 +13,7 @@
     { key: 'rs', id: 688, role: 'juris', capital: [20.4489, 44.7866] },
     { key: 'ro', id: 642, role: 'juris', capital: [26.1025, 44.4268] },
     { key: 'ba', id: 70,  role: 'juris', capital: [18.4131, 43.8563] },
-    { key: 'md', id: 498, role: 'juris', capital: [28.8638, 47.0105] }
+    { key: 'md', id: 498, role: 'juris', capital: [28.8638, 47.0105], capOffset: { dy: 16 } }
   ];
 
   var NEIGHBORS = [
@@ -263,7 +263,8 @@
         var capLabel = capFull.split('(')[0].trim();
         var ac = COUNTRIES.filter(function (x) { return x.key === activeKey; })[0];
         var offset = (ac && ac.capOffset) || {};
-        var capText = makeText(sgd.pinX + (offset.dx || 0), sgd.pinY - 11, capLabel, {
+        var dy = (offset.dy !== undefined) ? offset.dy : -11;
+        var capText = makeText(sgd.pinX + (offset.dx || 0), sgd.pinY + dy, capLabel, {
           fontFamily: 'Inter, sans-serif', fontWeight: '700', fontSize: '12.5px',
           fill: '#F77F00', paintOrder: 'stroke', stroke: '#0e0e10', strokeWidth: '3.2px', letterSpacing: '.02em'
         });
