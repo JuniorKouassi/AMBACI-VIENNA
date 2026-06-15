@@ -9,7 +9,7 @@
     { key: 'hu', id: 348, role: 'juris', capital: [19.0402, 47.4979] },
     { key: 'si', id: 705, role: 'juris', capital: [14.5058, 46.0569] },
     { key: 'sk', id: 703, role: 'juris', capital: [17.1077, 48.1486] },
-    { key: 'hr', id: 191, role: 'juris', capital: [15.9819, 45.8150], lab: [16.95, 45.5] },
+    { key: 'hr', id: 191, role: 'juris', capital: [15.9819, 45.8150], lab: [16.95, 45.5], capOffset: { dx: 8, anchor: 'start' } },
     { key: 'rs', id: 688, role: 'juris', capital: [20.4489, 44.7866] },
     { key: 'ro', id: 642, role: 'juris', capital: [26.1025, 44.4268] },
     { key: 'ba', id: 70,  role: 'juris', capital: [18.4131, 43.8563] },
@@ -261,10 +261,14 @@
       if (sgd && sgd.pinX != null) {
         var capFull = tr('pays.cap.' + activeKey);
         var capLabel = capFull.split('(')[0].trim();
-        g.appendChild(makeText(sgd.pinX, sgd.pinY - 11, capLabel, {
+        var ac = COUNTRIES.filter(function (x) { return x.key === activeKey; })[0];
+        var offset = (ac && ac.capOffset) || {};
+        var capText = makeText(sgd.pinX + (offset.dx || 0), sgd.pinY - 11, capLabel, {
           fontFamily: 'Inter, sans-serif', fontWeight: '700', fontSize: '12.5px',
           fill: '#F77F00', paintOrder: 'stroke', stroke: '#0e0e10', strokeWidth: '3.2px', letterSpacing: '.02em'
-        }));
+        });
+        capText.setAttribute('text-anchor', offset.anchor || 'middle');
+        g.appendChild(capText);
       }
     }
   }
