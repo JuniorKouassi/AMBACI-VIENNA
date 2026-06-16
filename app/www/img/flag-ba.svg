@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#002395"/>
+  <!-- Yellow triangle -->
+  <polygon points="200,0 900,600 900,0" fill="#FFCD00"/>
+  <!-- White stars along diagonal -->
+  <g fill="#FFFFFF" font-size="38" font-family="sans-serif" text-anchor="middle">
+    <text x="248" y="58">★</text>
+    <text x="308" y="118">★</text>
+    <text x="368" y="178">★</text>
+    <text x="428" y="238">★</text>
+    <text x="488" y="298">★</text>
+    <text x="548" y="358">★</text>
+    <text x="608" y="418">★</text>
+    <text x="668" y="478">★</text>
+    <text x="728" y="538">★</text>
+    <!-- Half star top -->
+    <text x="188" y="28" opacity="0.7">★</text>
+    <!-- Half star bottom -->
+    <text x="788" y="598" opacity="0.7">★</text>
+  </g>
+</svg>

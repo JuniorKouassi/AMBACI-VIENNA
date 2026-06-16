@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Contact — Ambassade CI Vienne</title>
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="vendor/flag-icons/css/flag-icons.min.css">
+  <meta name="theme-color" content="#0A1F10">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <div class="m-topbar">
+    <span><i class="fa-regular fa-clock"></i> <span data-i18n="topbar.hours">Lun–Ven : 09h30 – 16h00</span></span>
+    <div class="m-topbar-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+    </div>
+  </div>
+
+  <header class="m-header">
+    <a href="index.html" class="m-logo">
+      <img src="img/armoiries-ci.png" alt="Armoiries CI" class="m-logo-emblem">
+      <div class="m-logo-text"><strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong><span data-i18n="logo.sub">Vienne, Autriche</span></div>
+    </a>
+    <div class="m-lang">
+      <button class="m-lang-btn active" data-lang="fr" onclick="setLang('fr')">FR <span class="fi fi-fr"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="de" onclick="setLang('de')">DE <span class="fi fi-at"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="en" onclick="setLang('en')">EN <span class="fi fi-gb"></span></button>
+    </div>
+  </header>
+
+  <div class="m-page-header">
+    <div class="elephant-watermark" aria-hidden="true"></div>
+    <nav class="m-breadcrumb"><a href="index.html" data-i18n="nav.home">Accueil</a> › <span data-i18n="contact.breadcrumb">Contact</span></nav>
+    <h1>Contact & Horaires</h1>
+    <p data-i18n="contact.sub">Coordonnées et horaires du service consulaire</p>
+  </div>
+
+  <!-- QUICK CONTACTS -->
+  <section class="m-section m-section-alt">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
+      <a href="tel:+43158100761" style="background:var(--white);border-radius:var(--radius-lg);padding:1rem;text-align:center;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:block;">
+        <i class="fa-solid fa-phone" style="font-size:1.5rem;color:var(--orange);margin-bottom:.4rem;display:block;"></i>
+        <p style="font-size:.7rem;color:var(--grey-500);margin-bottom:.2rem;" data-i18n="contact.phone.label">Téléphone</p>
+        <p style="font-size:.8rem;font-weight:700;color:var(--dark);">+43 1 581007610</p>
+      </a>
+      <a href="mailto:sceconsul.autriche@diplomatie.gouv.ci" style="background:var(--white);border-radius:var(--radius-lg);padding:1rem;text-align:center;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:block;">
+        <i class="fa-solid fa-envelope" style="font-size:1.5rem;color:var(--green);margin-bottom:.4rem;display:block;"></i>
+        <p style="font-size:.7rem;color:var(--grey-500);margin-bottom:.2rem;" data-i18n="contact.email.label">Email</p>
+        <p style="font-size:.72rem;font-weight:700;color:var(--dark);">sceconsul.autriche@diplomatie.gouv.ci</p>
+      </a>
+      <a href="https://maps.google.com/?q=Michael-Neumann-Gasse+2,+1190+Wien" target="_blank" style="background:var(--white);border-radius:var(--radius-lg);padding:1rem;text-align:center;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:block;">
+        <i class="fa-solid fa-location-dot" style="font-size:1.5rem;color:var(--orange);margin-bottom:.4rem;display:block;"></i>
+        <p style="font-size:.7rem;color:var(--grey-500);margin-bottom:.2rem;" data-i18n="contact.address.label">Adresse</p>
+        <p style="font-size:.72rem;font-weight:700;color:var(--dark);" data-i18n="contact.address.val">1190 Wien, 3ème Etage</p>
+      </a>
+      <a href="https://wa.me/436765373926" target="_blank" style="background:#25D366;border-radius:var(--radius-lg);padding:1rem;text-align:center;box-shadow:var(--shadow);text-decoration:none;color:white;display:block;">
+        <i class="fa-brands fa-whatsapp" style="font-size:1.5rem;margin-bottom:.4rem;display:block;"></i>
+        <p style="font-size:.7rem;color:rgba(255,255,255,.8);margin-bottom:.2rem;" data-i18n="contact.emergency.label">Urgences</p>
+        <p style="font-size:.8rem;font-weight:700;">+43 676 537 39 26</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- HORAIRES -->
+  <section class="m-section">
+    <span class="m-badge" data-i18n="badge.hours">Horaires consulaires</span>
+    <h2 class="m-section-title" data-i18n="contact.hours.title">Heures d'ouverture</h2>
+    <p class="m-section-sub" data-i18n="contact.hours.sub">Sur rendez-vous uniquement</p>
+
+    <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem;">
+
+      <!-- Dépôt de dossiers -->
+      <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border-left:4px solid var(--orange);">
+        <div style="padding:.7rem 1rem;background:#FFF0E0;border-bottom:1px solid rgba(247,127,0,.15);display:flex;align-items:center;gap:.4rem;">
+          <i class="fa-solid fa-folder-arrow-up" style="color:var(--orange);font-size:.85rem;"></i>
+          <p style="font-size:.78rem;font-weight:700;color:var(--orange-dark);" data-i18n="hours.depot">Dépôt de dossiers</p>
+        </div>
+        <div style="padding:.8rem 1rem;display:flex;flex-direction:column;gap:.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:.82rem;font-weight:600;color:var(--grey-700);" data-i18n="hours.days">Mardi – Vendredi</span>
+            <span style="font-size:.8rem;font-weight:700;color:var(--orange-dark);background:#FFF0E0;padding:.18rem .6rem;border-radius:999px;" data-i18n="hours.depot.time">09:00 – 14:00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:.4rem;border-top:1px solid var(--grey-100);">
+            <span style="font-size:.75rem;color:var(--grey-500);" data-i18n="hours.closed.days">Lundi · Sam. · Dim.</span>
+            <span style="font-size:.75rem;font-weight:700;color:#e53e3e;" data-i18n="day.closed">Fermé</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Retraits de dossiers -->
+      <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border-left:4px solid var(--green);">
+        <div style="padding:.7rem 1rem;background:var(--green-pale);border-bottom:1px solid rgba(0,154,68,.15);display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;">
+          <i class="fa-solid fa-folder-open" style="color:var(--green);font-size:.85rem;"></i>
+          <p style="font-size:.78rem;font-weight:700;color:var(--green-dark);" data-i18n="hours.retrait">Retraits de dossiers</p>
+          <span style="font-size:.68rem;color:var(--green-dark);font-style:italic;" data-i18n="hours.rdv">(sur rendez-vous)</span>
+        </div>
+        <div style="padding:.8rem 1rem;display:flex;flex-direction:column;gap:.4rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:.82rem;font-weight:600;color:var(--grey-700);" data-i18n="hours.days">Mardi – Vendredi</span>
+            <span style="font-size:.8rem;font-weight:700;color:var(--green-dark);background:var(--green-pale);padding:.18rem .6rem;border-radius:999px;" data-i18n="hours.retrait.time">14:00 – 16:00</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:.4rem;border-top:1px solid var(--grey-100);">
+            <span style="font-size:.75rem;color:var(--grey-500);" data-i18n="hours.closed.days">Lundi · Sam. · Dim.</span>
+            <span style="font-size:.75rem;font-weight:700;color:#e53e3e;" data-i18n="day.closed">Fermé</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="m-gap"></div>
+    <h3 style="font-size:.875rem;font-weight:700;color:var(--dark);margin-bottom:.6rem;" data-i18n="contact.holidays">Quelques jours fériés</h3>
+    <div style="display:flex;flex-direction:column;gap:.4rem;">
+      <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
+        <span style="font-weight:600;color:var(--dark);">1er janvier</span><span style="color:var(--grey-700);" data-i18n="holiday.newyear">Nouvel An</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
+        <span style="font-weight:600;color:var(--dark);">1er mai</span><span style="color:var(--grey-700);" data-i18n="holiday.labor">Fête du Travail</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
+        <span style="font-weight:600;color:var(--dark);">7 août</span><span style="color:var(--grey-700);" data-i18n="holiday.ci">Fête Nationale CI</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
+        <span style="font-weight:600;color:var(--dark);">26 octobre</span><span style="color:var(--grey-700);" data-i18n="holiday.at">Fête Nationale AT</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCÈS -->
+  <section class="m-section m-section-alt">
+    <span class="m-badge" data-i18n="badge.access">Accès</span>
+    <h2 class="m-section-title" data-i18n="contact.addr.title">Adresse géographique</h2>
+    <div class="m-contact-card" style="margin-bottom:.75rem;">
+      <h3><i class="fa-solid fa-location-dot"></i> Michael-Neumann-Gasse 2</h3>
+      <p style="color:rgba(255,255,255,.75);font-size:.85rem;" data-i18n="contact.floor">3ème Etage — 1190 Wien, Autriche</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:.75rem;">
+      <div style="background:var(--white);border-radius:var(--radius-md);padding:.75rem;box-shadow:var(--shadow);font-size:.8rem;">
+        <p style="font-weight:700;color:var(--dark);margin-bottom:.2rem;"><i class="fa-solid fa-train-subway" style="color:var(--orange);" data-i18n="contact.metro">></i> Métro</p>
+        <p style="color:var(--grey-700);" data-i18n="contact.metro.val">U4 — Station Heiligenstadt</p>
+      </div>
+      <div style="background:var(--white);border-radius:var(--radius-md);padding:.75rem;box-shadow:var(--shadow);font-size:.8rem;">
+        <p style="font-weight:700;color:var(--dark);margin-bottom:.2rem;"><i class="fa-solid fa-bus" style="color:var(--green);" data-i18n="contact.bus">></i> Bus</p>
+        <p style="color:var(--grey-700);" data-i18n="contact.bus.val">Ligne 35A — Arrêt Michael-Neumann-Gasse</p>
+      </div>
+    </div>
+    <div class="m-map">
+      <i class="fa-solid fa-map-location-dot"></i>
+      <p style="font-weight:600;">Michael-Neumann-Gasse 2, 1190 Wien</p>
+      <a href="https://maps.google.com/?q=Michael-Neumann-Gasse+2,+1190+Wien" target="_blank" style="background:var(--orange);color:white;padding:.5rem 1rem;border-radius:var(--radius-md);font-size:.8rem;font-weight:600;margin-top:.5rem;display:inline-block;" data-i18n="contact.maps">Ouvrir dans Google Maps →</a>
+    </div>
+  </section>
+
+  <!-- FORMULAIRE -->
+  <section class="m-section">
+    <span class="m-badge" data-i18n="badge.form">Nous écrire</span>
+    <h2 class="m-section-title" data-i18n="contact.form.title">Formulaire de contact</h2>
+    <form id="m-contact-form">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+        <div class="m-form-group">
+          <label class="m-label"><span data-i18n="form.firstname">Prénom</span> <span class="req">*</span></label>
+          <input type="text" class="m-input" required>
+        </div>
+        <div class="m-form-group">
+          <label class="m-label"><span data-i18n="form.lastname">Nom</span> <span class="req">*</span></label>
+          <input type="text" class="m-input" required>
+        </div>
+      </div>
+      <div class="m-form-group">
+        <label class="m-label"><span data-i18n="form.email">Email</span> <span class="req">*</span></label>
+        <input type="email" class="m-input" required>
+      </div>
+      <div class="m-form-group">
+        <label class="m-label" data-i18n="contact.phone.label">Téléphone</label>
+        <input type="tel" class="m-input">
+      </div>
+      <div class="m-form-group">
+        <label class="m-label"><span data-i18n="form.country">Pays de résidence</span> <span class="req">*</span></label>
+        <select class="m-input" required>
+          <option value="" disabled selected data-i18n="form.country.select">— Sélectionner —</option>
+          <option>Autriche</option><option>Hongrie</option><option>Slovénie</option>
+          <option>Slovaquie</option><option>Croatie</option><option>Serbie</option>
+          <option>Roumanie</option><option>Bosnie-Herzégovine</option>
+        </select>
+      </div>
+      <div class="m-form-group">
+        <label class="m-label"><span data-i18n="form.subject">Objet</span> <span class="req">*</span></label>
+        <select class="m-input" required>
+          <option value="" disabled selected data-i18n="form.subject.select">— Type de demande —</option>
+          <option data-i18n="form.rdv">Prise de rendez-vous</option><option data-i18n="form.passport">Passeport</option>
+          <option data-i18n="form.visa">Visa</option><option data-i18n="form.civil">État civil</option><option data-i18n="form.emergency">Urgence consulaire</option>
+        </select>
+      </div>
+      <div class="m-form-group">
+        <label class="m-label"><span data-i18n="form.message">Message</span> <span class="req">*</span></label>
+        <textarea class="m-input" rows="4" data-i18n-ph="form.placeholder" placeholder="Décrivez votre demande..." required></textarea>
+      </div>
+      <button type="submit" class="m-btn-submit" data-i18n="form.submit">Envoyer →</button>
+    </form>
+  </section>
+
+  <!-- URGENCES -->
+  <section class="m-section m-section-alt">
+    <div class="m-urgence">
+      <h3><i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="contact.urgency.title">Urgences consulaires</span></h3>
+      <p data-i18n="contact.urgency.text">En cas d'urgence hors horaires (perte de passeport, décès, hospitalisation, arrestation), notre permanence est disponible 24h/24.</p>
+      <a href="tel:+436765373926"><i class="fa-solid fa-phone"></i> +43 676 537 39 26</a>
+    </div>
+  </section>
+
+  <footer class="m-footer">
+    <div class="m-footer-brand">
+      <img src="img/armoiries-ci.png" alt="Armoiries" class="m-footer-emblem">
+      <div class="m-footer-brand-text"><strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong><span data-i18n="logo.sub">Vienne, Autriche</span></div>
+    </div>
+    <div class="m-footer-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" class="m-footer-social" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" class="m-footer-social" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" class="m-footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" class="m-footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+      <a href="https://wa.me/436765373926" target="_blank" class="m-footer-social" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="m-footer-links">
+      <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> <span data-i18n="footer.links.home">Accueil</span></a>
+      <a href="ambassade.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg> <span data-i18n="footer.links.embassy">Ambassade</span></a>
+      <a href="annonces.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> <span data-i18n="footer.links.annonces">Annonces</span></a>
+      <a href="services.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> <span data-i18n="footer.links.services">Services</span></a>
+    </div>
+    <p class="m-footer-copy"><a href="https://www.webdesignmindset.com/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">© 2026 Web Design Mindset. All rights reserved</a></p>
+  </footer>
+
+  <div class="m-wa-label" aria-hidden="true">💬 CONTACTEZ-NOUS SUR WHATSAPP</div>
+  <a href="https://wa.me/436765373926" class="m-whatsapp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <nav class="m-bottom-nav">
+    <a href="index.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="nav.home">Accueil</span></a>
+    <a href="ambassade.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
+    <a href="services.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.services">Services</span></a>
+    <a href="annonces.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span data-i18n="nav.annonces">Annonces</span></a>
+    <a href="contact.html" class="m-nav-item active"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
+  </nav>
+
+  <script src="js/main.js"></script>
+  <script src="js/native.js"></script>
+  <!-- Lien retour desktop -->
+  <div style="text-align:center;padding:.6rem;background:var(--grey-100);font-size:.7rem;color:var(--grey-500);">
+    <a href="#" onclick="sessionStorage.setItem('forceDesktop','1');window.location.replace('../AMBACI%20VIENNA/index.html');return false;" style="color:var(--grey-500);text-decoration:underline;">
+      <i class="fa-solid fa-desktop"></i> Version desktop
+    </a>
+  </div>
+</body>
+</html>
+
+

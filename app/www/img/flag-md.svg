@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="300" height="600" fill="#003DA5"/>
+  <rect x="300" width="300" height="600" fill="#FFD100"/>
+  <rect x="600" width="300" height="600" fill="#CC0000"/>
+  <!-- Armoiries simplifiées : aigle et bouclier -->
+  <g transform="translate(450,300)">
+    <!-- Aigle -->
+    <ellipse cx="0" cy="-30" rx="22" ry="25" fill="#8B4513"/>
+    <path d="M-22,-20 Q-40,-10 -45,10" stroke="#8B4513" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M22,-20 Q40,-10 45,10" stroke="#8B4513" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <rect x="-8" y="-5" width="16" height="35" fill="#8B4513"/>
+    <!-- Bouclier sur l'aigle -->
+    <path d="M-12,-18 L12,-18 L12,5 Q12,16 0,22 Q-12,16 -12,5 Z" fill="#003DA5"/>
+    <path d="M-12,-18 L12,-18 L12,-5 L-12,-5 Z" fill="#FFD100"/>
+    <path d="M-12,-5 L12,-5 L12,5 Q12,16 0,22 Q-12,16 -12,5 Z" fill="#CC0000"/>
+    <!-- Tête d'aigle -->
+    <circle cx="0" cy="-52" r="12" fill="#8B4513"/>
+    <polygon points="8,-48 18,-42 10,-38" fill="#FFD100"/>
+    <circle cx="-4" cy="-54" r="2" fill="#1A0A00"/>
+  </g>
+</svg>

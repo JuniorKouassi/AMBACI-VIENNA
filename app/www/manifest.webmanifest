@@ -1,0 +1,17 @@
+{
+  "name": "Ambassade CI — Vienne",
+  "short_name": "AMBACI",
+  "description": "Service consulaire de l'Ambassade de Côte d'Ivoire à Vienne. Services officiels pour 9 pays d'Europe centrale.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F5F0",
+  "theme_color": "#0A1F10",
+  "lang": "fr",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "appId": "ci.ambaci.vienna",
+  "appName": "Ambassade CI — Vienne",
+  "webDir": "app/www",
+  "plugins": {
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#0A1F10",
+      "overlaysWebView": true
+    },
+    "SplashScreen": {
+      "launchShowDuration": 1800,
+      "launchAutoHide": true,
+      "fadeInDuration": 300,
+      "fadeOutDuration": 400,
+      "backgroundColor": "#F7F5F0",
+      "showSpinner": false
+    }
+  }
+}
