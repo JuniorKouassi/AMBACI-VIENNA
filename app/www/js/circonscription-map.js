@@ -219,17 +219,18 @@
     var g = document.querySelector('#cd-map-svg .cd-labels');
     g.innerHTML = '';
 
+    var mob = window.innerWidth < 768;
     NEIGHBORS.forEach(function (n) {
       var ng = geo.nbGeo[n.key];
       if (!ng) return;
       var name = tr('pays.nb.' + n.key) || n.key;
       var lines = wrapName(name);
-      var fs = 10.5, lh = fs * 1.02;
+      var fs = mob ? 19 : 10.5, lh = fs * 1.02;
       lines.forEach(function (ln, i) {
         var y = ng.y + (i - (lines.length - 1) / 2) * lh + fs * 0.34;
         g.appendChild(makeText(ng.x, y, ln, {
           fontFamily: 'Inter, sans-serif', fontWeight: '500', fontSize: fs + 'px',
-          fill: '#9aa1ac', paintOrder: 'stroke', stroke: '#16161a', strokeWidth: '2.4px', letterSpacing: '.03em'
+          fill: '#9aa1ac', paintOrder: 'stroke', stroke: '#16161a', strokeWidth: mob ? '4px' : '2.4px', letterSpacing: '.03em'
         }));
       });
     });
@@ -243,14 +244,16 @@
       var wFit = (gd.bboxW * 0.74) / (0.56 * Math.max(maxLen, 1));
       var hFit = (gd.bboxH * 0.6) / lines.length;
       var fs = Math.min(wFit, hFit);
-      fs = Math.max(6.5, Math.min(fs, 12.5));
+      var fsMin = mob ? 22 : 6.5;
+      var fsMax = mob ? 32 : 12.5;
+      fs = Math.max(fsMin, Math.min(fs, fsMax));
       var lh = fs * 1.02;
       lines.forEach(function (ln, i) {
         var y = gd.labY + (i - (lines.length - 1) / 2) * lh + fs * 0.34;
         g.appendChild(makeText(gd.labX, y, ln, {
           fontFamily: 'Inter, sans-serif', fontWeight: '600', fontSize: fs.toFixed(2) + 'px',
           fill: '#ffffff', paintOrder: 'stroke', stroke: '#0e0e10',
-          strokeWidth: (fs > 10 ? 2.6 : 2) + 'px', letterSpacing: '.01em'
+          strokeWidth: (fs > 10 ? (mob ? 4.5 : 2.6) : (mob ? 3.5 : 2)) + 'px', letterSpacing: '.01em'
         }));
       });
     });
