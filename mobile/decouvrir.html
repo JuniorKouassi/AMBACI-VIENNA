@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -485,6 +485,16 @@
   </nav>
 
   <script src="js/main.js"></script>
+  <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
+  <script>
+    (function(){
+      var skip=['m-whatsapp','m-wa-label','m-bottom-nav','m-header','m-alert','m-drawer','m-drawer-overlay','m-hamburger'];
+      function pos(el){if(!el||el.nodeType!==1)return;if(skip.some(function(c){return el.classList&&el.classList.contains(c);}))return;var s=window.getComputedStyle(el);if(s.position!=='fixed')return;el.style.setProperty('bottom','calc(60px + 0.75rem + 58px + 1rem)','important');el.style.setProperty('right','1rem','important');}
+      new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){setTimeout(function(){pos(n);},400);});});}).observe(document.body,{childList:true});
+      window.addEventListener('load',function(){[500,1500].forEach(function(t){setTimeout(function(){Array.from(document.body.children).forEach(pos);},t);});});
+      new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;var f=n.tagName==='IFRAME'?n:n.querySelector('iframe');if(!f)return;f.style.setProperty('width','min(calc(100vw - 2rem), 340px)','important');f.style.setProperty('height','min(60vh, 480px)','important');f.style.setProperty('max-width','340px','important');f.style.setProperty('max-height','480px','important');});});}).observe(document.body,{childList:true,subtree:true});
+    })();
+  </script>
   <div style="text-align:center;padding:.6rem;background:var(--grey-100);font-size:.7rem;color:var(--grey-500);">
     <a href="#" onclick="sessionStorage.setItem('forceDesktop','1');window.location.replace('../AMBACI%20VIENNA/decouvrir-autriche.html');return false;" style="color:var(--grey-500);text-decoration:underline;">
       <i class="fa-solid fa-desktop"></i> Version desktop

@@ -388,7 +388,7 @@
           <div class="m-annonce-title" data-i18n="ann1.title">Perturbation — Travaux de rénovation</div>
           <p class="m-annonce-text" data-i18n-html="ann1.text">Services perturbés du <strong>21 au 25 juillet</strong>. Dépôts de dossiers sur RDV uniquement.</p>
           <div class="m-annonce-btns">
-            <a href="contact.html" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn.rdv.short">Prendre RDV</span></a>
+            <a href="https://calendly.com/j-kouassi-diplomatie/30min" target="_blank" rel="noopener" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn.rdv.short">Prendre RDV</span></a>
             <a href="mailto:sceconsul.autriche@diplomatie.gouv.ci" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="btn.write">Écrire</span></a>
           </div>
         </div>
@@ -579,6 +579,16 @@
   </nav>
 
   <script src="js/main.js"></script>
+  <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
+  <script>
+    (function(){
+      var skip=['m-whatsapp','m-wa-label','m-bottom-nav','m-header','m-alert','m-drawer','m-drawer-overlay','m-hamburger'];
+      function pos(el){if(!el||el.nodeType!==1)return;if(skip.some(function(c){return el.classList&&el.classList.contains(c);}))return;var s=window.getComputedStyle(el);if(s.position!=='fixed')return;el.style.setProperty('bottom','calc(60px + 0.75rem + 58px + 1rem)','important');el.style.setProperty('right','1rem','important');}
+      new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){setTimeout(function(){pos(n);},400);});});}).observe(document.body,{childList:true});
+      window.addEventListener('load',function(){[500,1500].forEach(function(t){setTimeout(function(){Array.from(document.body.children).forEach(pos);},t);});});
+      new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;var f=n.tagName==='IFRAME'?n:n.querySelector('iframe');if(!f)return;f.style.setProperty('width','min(calc(100vw - 2rem), 340px)','important');f.style.setProperty('height','min(60vh, 480px)','important');f.style.setProperty('max-width','340px','important');f.style.setProperty('max-height','480px','important');});});}).observe(document.body,{childList:true,subtree:true});
+    })();
+  </script>
   <script>
     /* ── FILTER CHIPS ── */
     function filterCards(cat, btn) {

@@ -126,6 +126,44 @@
       <div class="m-pays-card"><img src="img/flag-ba.svg" alt="BA"><div><p class="m-pays-name" data-i18n="pays.ba">Bosnie</p><p class="m-pays-capital">Sarajevo</p></div></div>
           <div class="m-pays-card"><img src="img/flag-md.svg" alt="MD" style="width:44px;height:29px;object-fit:cover;border-radius:3px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.15);"><div><p class="m-pays-name">Moldavie</p><p class="m-pays-capital">Chișinău</p></div></div>
     </div>
+
+    <!-- Carte interactive -->
+    <style>
+      .cd-map .cc{cursor:pointer;outline:none;stroke:#0e0e10;stroke-width:1;transition:fill .2s,filter .2s,stroke .2s,stroke-width .2s;}
+      .cd-map .cc[data-role="juris"]{fill:#009E60;}
+      .cd-map .cc[data-role="seat"]{fill:#F77F00;}
+      .cd-map .cc[data-active="true"]{stroke:#f4f1ea;stroke-width:1.6;filter:drop-shadow(0 0 8px rgba(247,127,0,.85));}
+      .cd-map .cc[data-role="juris"][data-active="true"]{fill:#00b46d;}
+      .cd-map .cc[data-role="seat"][data-active="true"]{fill:#FF991F;}
+    </style>
+    <div style="background:#0e0e10;border-radius:var(--radius-lg);overflow:hidden;margin-top:.75rem;">
+      <div style="position:relative;">
+        <svg id="cd-map-svg" viewBox="0 0 1000 720" role="img" aria-label="Carte de la circonscription diplomatique" style="width:100%;height:auto;display:block;background:#a8cdde;">
+          <g class="cd-ctx" aria-hidden="true"></g>
+          <g class="cd-map"></g>
+          <g class="cd-pins" aria-hidden="true"></g>
+          <g class="cd-labels" aria-hidden="true"></g>
+        </svg>
+        <div id="cd-map-status" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;color:#9a978f;font-size:.82rem;pointer-events:none;" data-i18n="pays.map.loading">Chargement de la carte…</div>
+      </div>
+      <div style="padding:.75rem 1rem;border-top:1px solid #1f1f24;">
+        <p id="cd-empty" style="color:#9a978f;font-size:.82rem;line-height:1.6;margin:0;" data-i18n="pays.map.empty">Appuyez sur un pays pour afficher ses informations.</p>
+        <div id="cd-selected" style="display:none;">
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.4rem;">
+            <img id="cd-flag" alt="" style="width:32px;height:21px;border-radius:2px;object-fit:cover;flex-shrink:0;">
+            <h3 id="cd-name" style="font-size:.9rem;font-weight:700;color:#f4f1ea;margin:0;"></h3>
+            <span id="cd-seat-tag" style="display:none;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#F77F00;border:1px solid rgba(247,127,0,.4);border-radius:999px;padding:.15rem .5rem;margin-left:auto;" data-i18n="pays.map.seatTag">Siège</span>
+          </div>
+          <p style="font-size:.7rem;color:#F77F00;font-weight:600;letter-spacing:.04em;margin:0 0 .3rem;"><span style="color:#9a978f;margin-right:.3rem;" data-i18n="pays.map.capital">Capitale</span><span id="cd-cap"></span></p>
+          <p id="cd-blurb" style="color:#cfccc4;font-size:.75rem;line-height:1.55;margin:0;"></p>
+        </div>
+        <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.6rem;padding-top:.6rem;border-top:1px solid #1f1f24;font-size:.65rem;color:#9a978f;">
+          <span style="display:inline-flex;align-items:center;gap:.3rem;"><i style="width:10px;height:10px;border-radius:2px;background:#F77F00;display:inline-block;"></i><span data-i18n="pays.map.legSeat">Siège</span></span>
+          <span style="display:inline-flex;align-items:center;gap:.3rem;"><i style="width:10px;height:10px;border-radius:2px;background:#009E60;display:inline-block;"></i><span data-i18n="pays.map.legJuris">Circonscription</span></span>
+          <span style="display:inline-flex;align-items:center;gap:.3rem;"><i style="width:10px;height:10px;border-radius:2px;background:#34343c;display:inline-block;"></i><span data-i18n="pays.map.legCtx">Autres pays</span></span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- CÔTE D'IVOIRE -->
@@ -223,6 +261,19 @@
 
   <script src="js/main.js"></script>
   <script src="js/native.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script src="js/circonscription-map.js"></script>
+  <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
+  <script>
+    (function(){
+      var skip=['m-whatsapp','m-wa-label','m-bottom-nav','m-header','m-alert','m-drawer','m-drawer-overlay','m-hamburger'];
+      function pos(el){if(!el||el.nodeType!==1)return;if(skip.some(function(c){return el.classList&&el.classList.contains(c);}))return;var s=window.getComputedStyle(el);if(s.position!=='fixed')return;el.style.setProperty('bottom','calc(60px + 0.75rem + 58px + 1rem)','important');el.style.setProperty('right','1rem','important');}
+      new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){setTimeout(function(){pos(n);},400);});});}).observe(document.body,{childList:true});
+      window.addEventListener('load',function(){[500,1500].forEach(function(t){setTimeout(function(){Array.from(document.body.children).forEach(pos);},t);});});
+      new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;var f=n.tagName==='IFRAME'?n:n.querySelector('iframe');if(!f)return;f.style.setProperty('width','min(calc(100vw - 2rem), 340px)','important');f.style.setProperty('height','min(60vh, 480px)','important');f.style.setProperty('max-width','340px','important');f.style.setProperty('max-height','480px','important');});});}).observe(document.body,{childList:true,subtree:true});
+    })();
+  </script>
   <!-- Lien retour desktop -->
   <div style="text-align:center;padding:.6rem;background:var(--grey-100);font-size:.7rem;color:var(--grey-500);">
     <a href="#" onclick="sessionStorage.setItem('forceDesktop','1');window.location.replace('../AMBACI%20VIENNA/index.html');return false;" style="color:var(--grey-500);text-decoration:underline;">
