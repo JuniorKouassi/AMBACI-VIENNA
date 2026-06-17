@@ -9,11 +9,9 @@
       "overlaysWebView": true
     },
     "SplashScreen": {
-      "launchShowDuration": 1800,
+      "launchShowDuration": 0,
       "launchAutoHide": true,
-      "fadeInDuration": 300,
-      "fadeOutDuration": 400,
-      "backgroundColor": "#F7F5F0",
+      "backgroundColor": "#F77F00",
       "showSpinner": false
     }
   }
