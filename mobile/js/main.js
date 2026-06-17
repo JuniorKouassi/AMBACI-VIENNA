@@ -1154,6 +1154,9 @@ const T = {
   }
 };
 
+/* Alias for circonscription-map.js which looks for window.translations */
+var translations = T;
+
 /* ── i18n placeholders ── */
 function setLang(lang) {
   if (!T[lang]) return;
