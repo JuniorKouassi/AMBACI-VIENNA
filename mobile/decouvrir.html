@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0A1F10">
+  <title data-i18n="pdec.h1">Découvrir l'Autriche — Ambassade CI Vienne</title>
+  <meta name="description" content="Guide pratique pour découvrir l'Autriche et Vienne.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="m-topbar">
+    <span><i class="fa-solid fa-location-dot"></i> <span data-i18n="topbar.address">Michael-Neumann-Gasse 2 - 3ème Etage, 1190 Wien</span></span>
+    <div class="m-topbar-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="m-header">
+    <a href="index.html" class="m-logo">
+      <img src="img/armoiries-ci.png" alt="Armoiries CI" class="m-logo-emblem">
+      <div class="m-logo-text">
+        <strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong>
+        <span data-i18n="logo.sub">Vienne, Autriche</span>
+      </div>
+    </a>
+    <div class="m-lang">
+      <button class="m-lang-btn active" data-lang="fr" onclick="setLang('fr')">FR <span class="fi fi-fr"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="de" onclick="setLang('de')">DE <span class="fi fi-at"></span></button>
+      <div class="m-lang-sep"></div>
+      <button class="m-lang-btn" data-lang="en" onclick="setLang('en')">EN <span class="fi fi-gb"></span></button>
+    </div>
+    <button class="m-hamburger" id="m-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <div class="m-page-header">
+    <div class="m-breadcrumb">
+      <a href="index.html" data-i18n="nav.home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="nav.discover">Découvrir</span>
+    </div>
+    <span class="m-badge" data-i18n="pdec.badge">Guide pratique</span>
+    <h1 data-i18n="pdec.h1">Découvrir l'Autriche</h1>
+    <p data-i18n="pdec.desc">Que vous soyez de passage pour quelques jours ou installé durablement en Autriche, ce guide pratique vous accompagne pour ne manquer de rien à Vienne.</p>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div style="padding:0 1rem;margin-top:-0.5rem;margin-bottom:0.25rem;">
+    <img src="img/vienne-kunsthistorisches-museum.jpg" alt="Le Kunsthistorisches Museum, Vienne"
+         style="width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:var(--radius-xl);box-shadow:var(--shadow-md);" loading="lazy">
+  </div>
+
+  <!-- ===== SECTION 1 : AÉROPORT ===== -->
+  <section id="aeroport" class="m-section m-section-alt">
+    <span class="m-badge" data-i18n="pdec.airport.badge">Arrivée à Vienne</span>
+    <h2 class="m-section-title" data-i18n="pdec.airport.title">Arrivée à l'aéroport de Vienne-Schwechat (VIE)</h2>
+    <p class="m-section-sub" data-i18n="pdec.airport.intro">L'aéroport se situe à environ 18–20 km du centre-ville, soit 20–30 min selon l'option choisie.</p>
+
+    <!-- Taxi -->
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <div style="width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-taxi" style="color:var(--white);font-size:1.1rem;"></i>
+        </div>
+        <strong style="font-size:0.9rem;color:var(--dark);" data-i18n="pdec.airport.taxi.title">Taxi / Transfert privé</strong>
+      </div>
+      <p style="font-size:0.82rem;color:var(--grey-700);margin-bottom:0.5rem;" data-i18n="pdec.airport.taxi.desc">File de taxis officiels devant les arrivées (plaques « TX », signe lumineux sur le toit).</p>
+      <ul class="m-dec-list">
+        <li><a href="https://www.40100.at/" target="_blank" rel="noopener" data-i18n="pdec.airport.taxi.li1">Taxi 40100 — forfait aéroport ~42 €</a></li>
+        <li><a href="https://www.31300.at/" target="_blank" rel="noopener" data-i18n="pdec.airport.taxi.li2">Taxi 31300 — forfait ~37 € via l'application</a></li>
+        <li data-i18n="pdec.airport.taxi.li3">Bolt, Uber, FREE NOW (~19 à 57 €)</li>
+      </ul>
+      <p style="font-size:0.75rem;color:var(--grey-500);margin:0.25rem 0;" data-i18n="pdec.airport.taxi.for">Idéal avec bagages ou en groupe</p>
+      <div class="m-dec-tarif">
+        <span data-i18n="pdec.price.lbl">Tarif indicatif</span>
+        <strong data-i18n="pdec.airport.taxi.price">~35 à 50 € au compteur</strong>
+      </div>
+    </div>
+
+    <!-- CAT -->
+    <a href="https://www.cityairporttrain.com/" target="_blank" rel="noopener"
+       style="display:block;background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;">
+      <img src="img/cat-nonstop-airport.jpg" alt="City Airport Train (CAT)" style="width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:var(--radius-md);margin-bottom:0.5rem;" loading="lazy">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <div style="width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-train" style="color:var(--white);font-size:1.1rem;"></i>
+        </div>
+        <strong style="font-size:0.9rem;color:var(--dark);" data-i18n="pdec.airport.cat.title">City Airport Train (CAT)</strong>
+      </div>
+      <p style="font-size:0.82rem;color:var(--grey-700);margin-bottom:0.25rem;" data-i18n="pdec.airport.cat.desc">Train direct sans arrêt entre l'aéroport et Wien Mitte.</p>
+      <p style="font-size:0.75rem;color:var(--grey-500);margin-bottom:0.25rem;" data-i18n="pdec.airport.cat.for">Idéal pour un trajet rapide et confortable</p>
+      <div class="m-dec-tarif">
+        <span data-i18n="pdec.price.lbl">Tarif indicatif</span>
+        <strong data-i18n="pdec.airport.cat.price">16 min — ~11 à 14,90 €</strong>
+      </div>
+    </a>
+
+    <!-- S7 ÖBB -->
+    <a href="https://www.oebb.at/" target="_blank" rel="noopener"
+       style="display:block;background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <img src="img/oebb-logo.jpg" alt="ÖBB" style="width:44px;height:44px;border-radius:var(--radius-md);object-fit:cover;flex-shrink:0;">
+        <strong style="font-size:0.9rem;color:var(--dark);" data-i18n="pdec.airport.train.title">Train S7 (ÖBB)</strong>
+      </div>
+      <p style="font-size:0.82rem;color:var(--grey-700);margin-bottom:0.25rem;" data-i18n="pdec.airport.train.desc">Train régional reliant l'aéroport au centre-ville, avec plusieurs arrêts.</p>
+      <p style="font-size:0.75rem;color:var(--grey-500);margin-bottom:0.25rem;" data-i18n="pdec.airport.train.for">L'option la plus économique</p>
+      <div class="m-dec-tarif">
+        <span data-i18n="pdec.price.lbl">Tarif indicatif</span>
+        <strong data-i18n="pdec.airport.train.price">~25 min — ~4,50 €</strong>
+      </div>
+    </a>
+
+    <!-- Bus -->
+    <a href="https://www.viennaairportlines.at/" target="_blank" rel="noopener"
+       style="display:block;background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;">
+      <img src="img/vienna-airport-lines-bus.jpg" alt="Bus Vienna Airport Lines" style="width:100%;aspect-ratio:16/7;object-fit:cover;border-radius:var(--radius-md);margin-bottom:0.5rem;" loading="lazy">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <div style="width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-bus" style="color:var(--white);font-size:1.1rem;"></i>
+        </div>
+        <strong style="font-size:0.9rem;color:var(--dark);" data-i18n="pdec.airport.bus.title">Bus Vienna Airport Lines</strong>
+      </div>
+      <p style="font-size:0.82rem;color:var(--grey-700);margin-bottom:0.25rem;" data-i18n="pdec.airport.bus.desc">Liaisons directes vers plusieurs points du centre-ville.</p>
+      <p style="font-size:0.75rem;color:var(--grey-500);margin-bottom:0.25rem;" data-i18n="pdec.airport.bus.for">Pratique si votre hôtel est proche d'un arrêt</p>
+      <div class="m-dec-tarif">
+        <span data-i18n="pdec.price.lbl">Tarif indicatif</span>
+        <strong data-i18n="pdec.airport.bus.price">~20 à 30 min — ~8 à 10,50 €</strong>
+      </div>
+    </a>
+
+    <!-- Tip -->
+    <div style="background:var(--orange-pale);border-left:3px solid var(--orange);border-radius:var(--radius-md);padding:0.875rem;font-size:0.82rem;color:var(--grey-700);">
+      <strong style="display:block;color:var(--dark);margin-bottom:0.25rem;"><i class="fa-solid fa-circle-info"></i> <span data-i18n="pdec.airport.tip.badge">À savoir</span></strong>
+      <span data-i18n="pdec.airport.tip">En cas d'arrivée après 23h, privilégiez un taxi : les transports en commun sont limités la nuit.</span>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 : MOBILITÉ ===== -->
+  <section id="mobilite" class="m-section">
+    <span class="m-badge" data-i18n="pdec.mob.badge">Se déplacer</span>
+    <h2 class="m-section-title" data-i18n="pdec.mob.title">Se déplacer dans Vienne</h2>
+
+    <!-- Tarifs -->
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.5rem;">
+        <a href="https://www.wienmobil.at/en/monitor/PT" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" data-i18n="pdec.mob.tickets.title">Acheter son ticket</a>
+      </h3>
+      <p style="font-size:0.82rem;color:var(--grey-700);margin-bottom:0.5rem;" data-i18n="pdec.mob.tickets.desc">Tickets en ligne sur le WienMobil Ticketshop ou aux distributeurs des stations.</p>
+      <table class="m-dec-table" aria-label="Tarifs transports Vienne">
+        <thead><tr><th data-i18n="pdec.mob.table.ticket">Ticket</th><th data-i18n="pdec.mob.table.price">Tarif (2026)</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="pdec.mob.table.single">Trajet simple</td><td data-i18n="pdec.mob.table.single.val">3,20 € papier / 3,00 € appli</td></tr>
+          <tr><td data-i18n="pdec.mob.table.day">Pass 24h</td><td data-i18n="pdec.mob.table.day.val">10,20 €</td></tr>
+          <tr><td data-i18n="pdec.mob.table.week">7 jours numérique</td><td data-i18n="pdec.mob.table.week.val">25,20 €</td></tr>
+          <tr><td data-i18n="pdec.mob.table.citycard">Vienna City Card (24h)</td><td data-i18n="pdec.mob.table.citycard.val">à partir de ~19 €</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.72rem;color:var(--grey-500);margin-top:0.4rem;">
+        <span data-i18n="pdec.fees.note">Tarifs indicatifs (2026) — vérifiez sur</span> <a href="https://shop.wienerlinien.at/" target="_blank" rel="noopener">wienerlinien.at →</a>
+      </p>
+      <div class="m-dec-tarif" style="flex-direction:column;align-items:flex-start;gap:0.35rem;">
+        <strong style="font-size:0.82rem;color:var(--dark);"><i class="fa-solid fa-star"></i> <span data-i18n="pdec.mob.rule.badge">Règle d'or</span></strong>
+        <span style="font-size:0.78rem;color:var(--grey-700);" data-i18n="pdec.mob.rule.text">Validez votre ticket papier dans les boîtiers bleus avant de monter à bord. Amende sans ticket valide : 135 €.</span>
+      </div>
+      <p style="font-size:0.78rem;color:var(--grey-700);background:var(--grey-100);border-radius:var(--radius-md);padding:0.65rem;margin-top:0.5rem;" data-i18n="pdec.mob.airport.note">⚠️ L'aéroport est hors zone centrale : un ticket de ville ne suffit pas, il faut un supplément (~2,20 €).</p>
+    </div>
+
+    <!-- WienMobil App -->
+    <div style="background:linear-gradient(135deg,var(--green),var(--green-dark));border-radius:var(--radius-xl);padding:1rem;color:var(--white);margin-bottom:0.75rem;box-shadow:var(--shadow-md);">
+      <span class="m-badge" style="background:rgba(255,255,255,.2);color:var(--white);" data-i18n="pdec.mob.app.badge">Application recommandée</span>
+      <h3 style="font-size:0.95rem;font-weight:700;color:var(--white);margin:0.4rem 0;" data-i18n="pdec.mob.app.title">Téléchargez l'application WienMobil</h3>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,.9);margin-bottom:0.75rem;" data-i18n="pdec.mob.app.desc">Achetez vos tickets, planifiez vos trajets en temps réel et réservez les vélos en libre-service.</p>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <a href="https://apps.apple.com/at/app/wienmobil/id1107918142" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,.2);color:var(--white);padding:0.45rem 0.85rem;border-radius:var(--radius-md);font-size:0.8rem;font-weight:600;text-decoration:none;">
+          <i class="fa-brands fa-apple"></i> <span data-i18n="pdec.mob.app.appstore">App Store</span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=at.wienerlinien.wienmobillab" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,.15);color:var(--white);border:1px solid rgba(255,255,255,.4);padding:0.45rem 0.85rem;border-radius:var(--radius-md);font-size:0.8rem;font-weight:600;text-decoration:none;">
+          <i class="fa-brands fa-google-play"></i> <span data-i18n="pdec.mob.app.googleplay">Google Play</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Autres mobilités -->
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;" data-i18n="pdec.mob.other.title">Autres mobilités</h3>
+      <ul class="m-dec-list">
+        <li data-i18n="pdec.mob.other.li1">Vélos en libre-service WienMobil Rad</li>
+        <li data-i18n="pdec.mob.other.li2">5 lignes de métro (U-Bahn), tramways, bus et S-Bahn</li>
+        <li data-i18n="pdec.mob.other.li3">Bus de nuit le week-end</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 : HÉBERGEMENT ===== -->
+  <section id="logement" class="m-section m-section-alt">
+    <span class="m-badge" data-i18n="pdec.hotels.badge">Se loger</span>
+    <h2 class="m-section-title" data-i18n="pdec.hotels.title">Où séjourner à Vienne</h2>
+    <p class="m-section-sub" data-i18n="pdec.hotels.desc">Une sélection indicative d'hébergements répartis par budget.</p>
+
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="background:var(--white);border-radius:var(--radius-xl);padding:1rem;box-shadow:var(--shadow-sm);border-left:4px solid var(--orange);">
+        <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;" data-i18n="pdec.hotels.budget.title">Économique / Auberges</h3>
+        <ul class="m-dec-list"><li>Wombat's City Hostel Vienna</li><li>MEININGER Hotel Wien</li><li>ibis / Motel One Wien</li></ul>
+      </div>
+      <div style="background:var(--white);border-radius:var(--radius-xl);padding:1rem;box-shadow:var(--shadow-sm);border-left:4px solid var(--green);">
+        <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;" data-i18n="pdec.hotels.mid.title">Milieu / Supérieur</h3>
+        <ul class="m-dec-list"><li>Hotel Beethoven Wien</li><li>The Harmonie Vienna</li><li>Hotel Kaiserhof Wien</li></ul>
+      </div>
+      <div style="background:var(--white);border-radius:var(--radius-xl);padding:1rem;box-shadow:var(--shadow-sm);border-left:4px solid var(--dark);">
+        <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;" data-i18n="pdec.hotels.top.title">Haut de gamme</h3>
+        <ul class="m-dec-list"><li>Hotel Sans Souci Wien</li><li>Hotel Altstadt Vienna</li></ul>
+      </div>
+    </div>
+
+    <a href="https://www.booking.com/city/at/vienna.html" target="_blank" rel="noopener"
+       style="display:block;text-align:center;background:var(--orange);color:var(--white);padding:0.875rem;border-radius:var(--radius-md);font-weight:700;font-size:0.875rem;text-decoration:none;margin-bottom:0.75rem;" data-i18n="pdec.hotels.more">Voir plus d'hôtels à Vienne →</a>
+    <p style="font-size:0.7rem;color:var(--grey-500);text-align:center;" data-i18n="pdec.disclaimer">Les établissements cités sont fournis à titre informatif. L'Ambassade ne recommande ni ne garantit aucun prestataire privé.</p>
+  </section>
+
+  <!-- ===== SECTION 4 : RESTAURATION ===== -->
+  <section id="restauration" class="m-section">
+    <span class="m-badge" data-i18n="pdec.food.badge">Se restaurer</span>
+    <h2 class="m-section-title" data-i18n="pdec.food.title">Manger à Vienne</h2>
+
+    <!-- Livraison -->
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <div style="width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-motorcycle" style="color:var(--white);font-size:1.1rem;"></i>
+        </div>
+        <strong style="font-size:0.9rem;color:var(--dark);" data-i18n="pdec.food.delivery.title">Commander en ligne</strong>
+      </div>
+      <p style="font-size:0.82rem;color:var(--grey-700);margin-bottom:0.4rem;" data-i18n="pdec.food.delivery.desc">Plusieurs plateformes de livraison disponibles à Vienne :</p>
+      <ul class="m-dec-list">
+        <li><a href="https://www.lieferando.at/" target="_blank" rel="noopener">Lieferando</a></li>
+        <li><a href="https://wolt.com/en/aut" target="_blank" rel="noopener">Wolt</a></li>
+        <li><a href="https://www.mjam.net/" target="_blank" rel="noopener">Mjam</a></li>
+      </ul>
+    </div>
+
+    <!-- Africain -->
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <div style="width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-bowl-food" style="color:var(--white);font-size:1.1rem;"></i>
+        </div>
+        <strong style="font-size:0.9rem;color:var(--dark);" data-i18n="pdec.food.african.title">Cuisine africaine &amp; ouest-africaine</strong>
+      </div>
+      <p style="font-size:0.82rem;color:var(--grey-700);margin-bottom:0.4rem;" data-i18n="pdec.food.african.desc">Pour retrouver les saveurs du pays — jollof rice, mafé, attiéké :</p>
+      <ul class="m-dec-list">
+        <li>Mama's African Grill-Bar (10ème district)</li>
+        <li><a href="https://ochei.at/" target="_blank" rel="noopener">Ochei Restaurant</a></li>
+        <li>Pat Kitchen</li>
+        <li>Moyome</li>
+      </ul>
+    </div>
+
+    <!-- Viennois -->
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <div style="width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange),var(--orange-dark));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-mug-saucer" style="color:var(--white);font-size:1.1rem;"></i>
+        </div>
+        <strong style="font-size:0.9rem;color:var(--dark);" data-i18n="pdec.food.viennese.title">Spécialités viennoises à goûter</strong>
+      </div>
+      <p style="font-size:0.82rem;color:var(--grey-700);" data-i18n="pdec.food.viennese.desc">Wiener Schnitzel, Sachertorte, Apfelstrudel — et faites un tour au marché du Naschmarkt.</p>
+    </div>
+
+    <p style="font-size:0.7rem;color:var(--grey-500);text-align:center;" data-i18n="pdec.disclaimer">Les établissements cités sont fournis à titre informatif. L'Ambassade ne recommande ni ne garantit aucun prestataire privé.</p>
+  </section>
+
+  <!-- ===== SECTION 5 : VISITES ===== -->
+  <section id="sites" class="m-section m-section-alt">
+    <span class="m-badge" data-i18n="pdec.sights.badge">Visiter</span>
+    <h2 class="m-section-title" data-i18n="pdec.sights.title">Lieux Incontournables de Vienne</h2>
+    <p class="m-section-sub" data-i18n="pdec.sights.desc">Quelques sites emblématiques à découvrir lors de votre séjour.</p>
+
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:0.75rem;">
+
+      <a href="https://www.schoenbrunn.at/" target="_blank" rel="noopener"
+         style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;display:flex;gap:0.75rem;align-items:center;padding:0.75rem;">
+        <img src="img/schoenbrunn-palace.jpg" alt="Château de Schönbrunn" style="width:80px;height:70px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+        <div><h3 style="font-size:0.875rem;font-weight:700;color:var(--dark);margin-bottom:0.2rem;" data-i18n="pdec.sights.schoenbrunn.title">Château de Schönbrunn</h3>
+        <p style="font-size:0.75rem;color:var(--grey-700);" data-i18n="pdec.sights.schoenbrunn.desc">Ancienne résidence d'été impériale, classée à l'UNESCO.</p></div>
+      </a>
+
+      <a href="https://www.hofburg-wien.at/" target="_blank" rel="noopener"
+         style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;display:flex;gap:0.75rem;align-items:center;padding:0.75rem;">
+        <img src="img/Hofburg.jpg" alt="Palais de la Hofburg" style="width:80px;height:70px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+        <div><h3 style="font-size:0.875rem;font-weight:700;color:var(--dark);margin-bottom:0.2rem;" data-i18n="pdec.sights.hofburg.title">Palais de la Hofburg</h3>
+        <p style="font-size:0.75rem;color:var(--grey-700);" data-i18n="pdec.sights.hofburg.desc">Ancien siège des Habsbourg, en plein cœur de Vienne.</p></div>
+      </a>
+
+      <a href="https://www.wien.info/" target="_blank" rel="noopener"
+         style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;display:flex;gap:0.75rem;align-items:center;padding:0.75rem;">
+        <img src="img/Stephansdom.jpg" alt="Cathédrale Saint-Étienne" style="width:80px;height:70px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+        <div><h3 style="font-size:0.875rem;font-weight:700;color:var(--dark);margin-bottom:0.2rem;" data-i18n="pdec.sights.stephansdom.title">Cathédrale Saint-Étienne</h3>
+        <p style="font-size:0.75rem;color:var(--grey-700);" data-i18n="pdec.sights.stephansdom.desc">Symbole emblématique de Vienne, flèche gothique et tour panoramique.</p></div>
+      </a>
+
+      <a href="https://www.belvedere.at/" target="_blank" rel="noopener"
+         style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;display:flex;gap:0.75rem;align-items:center;padding:0.75rem;">
+        <img src="img/belvedere-palace.jpg" alt="Palais du Belvédère" style="width:80px;height:70px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+        <div><h3 style="font-size:0.875rem;font-weight:700;color:var(--dark);margin-bottom:0.2rem;" data-i18n="pdec.sights.belvedere.title">Palais &amp; Musée du Belvédère</h3>
+        <p style="font-size:0.75rem;color:var(--grey-700);" data-i18n="pdec.sights.belvedere.desc">« Le Baiser » de Klimt et de superbes jardins.</p></div>
+      </a>
+
+      <a href="https://www.wien.info/" target="_blank" rel="noopener"
+         style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;display:flex;gap:0.75rem;align-items:center;padding:0.75rem;">
+        <img src="img/Prater.jpg" alt="Le Prater" style="width:80px;height:70px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+        <div><h3 style="font-size:0.875rem;font-weight:700;color:var(--dark);margin-bottom:0.2rem;" data-i18n="pdec.sights.prater.title">Le Prater</h3>
+        <p style="font-size:0.75rem;color:var(--grey-700);" data-i18n="pdec.sights.prater.desc">Célèbre parc d'attractions et sa grande roue historique.</p></div>
+      </a>
+
+      <a href="https://www.wien.info/" target="_blank" rel="noopener"
+         style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;display:flex;gap:0.75rem;align-items:center;padding:0.75rem;">
+        <img src="img/Ringstrasse.jpg" alt="La Ringstrasse" style="width:80px;height:70px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+        <div><h3 style="font-size:0.875rem;font-weight:700;color:var(--dark);margin-bottom:0.2rem;" data-i18n="pdec.sights.ring.title">Ringstrasse</h3>
+        <p style="font-size:0.75rem;color:var(--grey-700);" data-i18n="pdec.sights.ring.desc">Le grand boulevard desservant l'Opéra, le Parlement et l'Hôtel de Ville.</p></div>
+      </a>
+
+      <a href="https://www.wien.info/" target="_blank" rel="noopener"
+         style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;display:flex;gap:0.75rem;align-items:center;padding:0.75rem;">
+        <img src="img/museumsquartier.webp" alt="MuseumsQuartier" style="width:80px;height:70px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+        <div><h3 style="font-size:0.875rem;font-weight:700;color:var(--dark);margin-bottom:0.2rem;" data-i18n="pdec.sights.museumsquartier.title">MuseumsQuartier</h3>
+        <p style="font-size:0.75rem;color:var(--grey-700);" data-i18n="pdec.sights.museumsquartier.desc">Un des plus grands quartiers culturels du monde.</p></div>
+      </a>
+    </div>
+
+    <a href="https://www.wien.info/" target="_blank" rel="noopener"
+       style="display:block;text-align:center;background:var(--green);color:var(--white);padding:0.875rem;border-radius:var(--radius-md);font-weight:700;font-size:0.875rem;text-decoration:none;" data-i18n="pdec.sights.more">Office de tourisme officiel — vienna.info →</a>
+  </section>
+
+  <!-- ===== SECTION 6 : INFOS PRATIQUES ===== -->
+  <section id="pratique" class="m-section">
+    <span class="m-badge" data-i18n="pdec.practical.badge">Pour ne rien oublier</span>
+    <h2 class="m-section-title" data-i18n="pdec.practical.title">Informations pratiques</h2>
+
+    <!-- Urgences -->
+    <div style="background:var(--orange-pale);border-left:4px solid var(--orange);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="pdec.practical.emergency.title">Numéros d'urgence</span></h3>
+      <ul class="m-dec-list">
+        <li><span data-i18n="pdec.practical.emergency.eu">Urgence européenne</span> : <strong>112</strong></li>
+        <li><span data-i18n="pdec.practical.emergency.police">Police</span> : <strong>133</strong></li>
+        <li><span data-i18n="pdec.practical.emergency.fire">Pompiers</span> : <strong>122</strong></li>
+        <li><span data-i18n="pdec.practical.emergency.ambulance">Ambulance</span> : <strong>144</strong></li>
+      </ul>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-suitcase-medical"></i> <span data-i18n="pdec.practical.health.title">Santé</span></h3>
+      <p style="font-size:0.82rem;color:var(--grey-700);" data-i18n="pdec.practical.health.desc">Pharmacies (Apotheke, croix verte) ; la garde est affichée sur la porte. Pensez à votre carte européenne d'assurance maladie.</p>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-coins"></i> <span data-i18n="pdec.practical.money.title">Argent</span></h3>
+      <p style="font-size:0.82rem;color:var(--grey-700);" data-i18n="pdec.practical.money.desc">Distributeurs (Bankomat) largement disponibles, paiement sans contact très répandu. Pourboire usuel : 5 à 10 %.</p>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-wifi"></i> <span data-i18n="pdec.practical.conn.title">Connectivité</span></h3>
+      <p style="font-size:0.82rem;color:var(--grey-700);" data-i18n="pdec.practical.conn.desc">Cartes SIM locales chez A1, Magenta, Drei ou HoT. WiFi public dans de nombreux lieux.</p>
+    </div>
+
+    <a href="https://www.google.com/search?q=weather+vienna+austria" target="_blank" rel="noopener"
+       style="display:block;background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-cloud-sun"></i> <span data-i18n="pdec.practical.weather.title">Météo &amp; quand venir</span></h3>
+      <p style="font-size:0.82rem;color:var(--grey-700);" data-i18n="pdec.practical.weather.desc">Le printemps et l'automne sont les plus agréables. L'hiver est froid (marchés de Noël), l'été chaud.</p>
+    </a>
+
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-comments"></i> <span data-i18n="pdec.practical.german.title">Quelques mots d'allemand utiles</span></h3>
+      <ul class="m-dec-list">
+        <li data-i18n="pdec.practical.german.li1">Grüß Gott — Bonjour</li>
+        <li data-i18n="pdec.practical.german.li2">Danke — Merci</li>
+        <li data-i18n="pdec.practical.german.li3">Bitte — S'il vous plaît / De rien</li>
+        <li data-i18n="pdec.practical.german.li4">Entschuldigung — Pardon</li>
+        <li data-i18n="pdec.practical.german.li5">Wie viel? — Combien ?</li>
+      </ul>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-handshake"></i> <span data-i18n="pdec.practical.etiquette.title">Étiquette &amp; vie pratique</span></h3>
+      <p style="font-size:0.82rem;color:var(--grey-700);" data-i18n="pdec.practical.etiquette.desc">La ponctualité est très appréciée. Magasins fermés le dimanche. Tri des déchets rigoureux.</p>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:1rem;margin-bottom:0.75rem;box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:0.4rem;"><i class="fa-solid fa-route"></i> <span data-i18n="pdec.practical.excursions.title">Excursions depuis Vienne</span></h3>
+      <p style="font-size:0.82rem;color:var(--grey-700);" data-i18n="pdec.practical.excursions.desc">Bratislava (~1h), la vallée du Wachau, Salzbourg ou Graz sont accessibles en train via les <a href="https://www.oebb.at/" target="_blank" rel="noopener">ÖBB</a>.</p>
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--orange),var(--green-dark));border-radius:var(--radius-xl);padding:1rem;color:var(--white);">
+      <h3 style="font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;"><i class="fa-solid fa-people-group"></i> <span data-i18n="pdec.practical.diaspora.title">Communauté ivoirienne &amp; diaspora</span></h3>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,.9);" data-i18n="pdec.practical.diaspora.desc">Contactez l'Ambassade ou suivez nos réseaux sociaux pour les événements de la communauté ivoirienne en Autriche.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="m-section" style="background:var(--dark);color:var(--white);">
+    <h2 style="font-family:var(--font-primary);font-size:1.25rem;font-weight:700;color:var(--white);margin-bottom:0.4rem;" data-i18n="pdec.cta.title">Une question sur votre séjour ?</h2>
+    <p style="font-size:0.82rem;color:rgba(255,255,255,.8);margin-bottom:1rem;" data-i18n="pdec.cta.desc">Notre équipe reste à votre disposition avant et pendant votre séjour en Autriche.</p>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+      <a href="https://wa.me/436765373926" target="_blank" rel="noopener"
+         style="display:flex;align-items:center;justify-content:center;gap:0.5rem;background:#25D366;color:var(--white);padding:0.875rem;border-radius:var(--radius-md);font-weight:700;font-size:0.875rem;text-decoration:none;">
+        <i class="fa-brands fa-whatsapp" style="font-size:1.1rem;"></i> <span data-i18n="pdec.cta.btn.whatsapp">Contacter sur WhatsApp</span>
+      </a>
+      <a href="contact.html"
+         style="display:flex;align-items:center;justify-content:center;gap:0.5rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:var(--white);padding:0.875rem;border-radius:var(--radius-md);font-weight:700;font-size:0.875rem;text-decoration:none;">
+        <span data-i18n="pdec.cta.btn.contact">Page Contact</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="m-footer">
+    <div class="m-footer-brand">
+      <img src="img/armoiries-ci.png" alt="Armoiries" class="m-footer-emblem">
+      <div class="m-footer-brand-text"><strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong><span data-i18n="logo.sub">Vienne, Autriche</span></div>
+    </div>
+    <div class="m-footer-socials">
+      <a href="https://www.facebook.com/ambaciautriche" target="_blank" class="m-footer-social" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://x.com/AmbaCI_autriche" target="_blank" class="m-footer-social" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" class="m-footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://linktr.ee/ambacivienna" target="_blank" class="m-footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
+      <a href="https://wa.me/436765373926" target="_blank" class="m-footer-social" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="m-footer-links">
+      <a href="index.html"><span data-i18n="footer.links.home">Accueil</span></a>
+      <a href="ambassade MOBILE.html"><span data-i18n="footer.links.embassy">Ambassade</span></a>
+      <a href="annonces.html"><span data-i18n="footer.links.annonces">Annonces</span></a>
+      <a href="services.html"><span data-i18n="footer.links.services">Services</span></a>
+      <a href="contact.html"><span data-i18n="footer.links.contact">Contact</span></a>
+    </div>
+    <p class="m-footer-copy"><a href="https://www.webdesignmindset.com/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">© 2026 Web Design Mindset. All rights reserved</a></p>
+  </footer>
+
+  <div class="m-wa-label" aria-hidden="true">💬 CONTACTEZ-NOUS SUR WHATSAPP</div>
+  <a href="https://wa.me/436765373926" class="m-whatsapp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+
+  <!-- DRAWER -->
+  <div class="m-drawer-overlay" id="m-drawer-overlay"></div>
+  <div class="m-drawer" id="m-drawer" role="dialog" aria-modal="true">
+    <div class="m-drawer-head">
+      <div class="m-logo-text">
+        <strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong>
+        <span data-i18n="logo.sub">Vienne, Autriche</span>
+      </div>
+      <button class="m-drawer-close" id="m-drawer-close" aria-label="Fermer">×</button>
+    </div>
+    <nav class="m-drawer-nav">
+      <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="nav.home">Accueil</span></a>
+      <a href="ambassade MOBILE.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
+      <a href="services.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.services">Services</span></a>
+      <a href="annonces.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span data-i18n="nav.annonces">Annonces</span></a>
+      <a href="decouvrir.html" class="active"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-i18n="nav.discover">Découvrir</span></a>
+      <a href="contact.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
+    </nav>
+    <div class="m-drawer-footer">© 2026 Ambassade CI — Vienne</div>
+  </div>
+
+  <nav class="m-bottom-nav m-nav-6">
+    <a href="index.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="nav.home">Accueil</span></a>
+    <a href="ambassade MOBILE.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
+    <a href="services.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.services">Services</span></a>
+    <a href="annonces.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span data-i18n="nav.annonces">Annonces</span></a>
+    <a href="decouvrir.html" class="m-nav-item active"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-i18n="nav.discover">Découvrir</span></a>
+    <a href="contact.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
+  </nav>
+
+  <script src="js/main.js"></script>
+  <div style="text-align:center;padding:.6rem;background:var(--grey-100);font-size:.7rem;color:var(--grey-500);">
+    <a href="#" onclick="sessionStorage.setItem('forceDesktop','1');window.location.replace('../AMBACI%20VIENNA/decouvrir-autriche.html');return false;" style="color:var(--grey-500);text-decoration:underline;">
+      <i class="fa-solid fa-desktop"></i> Version desktop
+    </a>
+  </div>
+
+</body>
+</html>

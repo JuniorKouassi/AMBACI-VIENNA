@@ -6,8 +6,6 @@
   <title>Services — Ambassade CI Vienne</title>
   <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="vendor/flag-icons/css/flag-icons.min.css">
-  <meta name="theme-color" content="#0A1F10">
-  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
@@ -37,6 +35,9 @@
       <div class="m-lang-sep"></div>
       <button class="m-lang-btn" data-lang="en" onclick="setLang('en')">EN <span class="fi fi-gb"></span></button>
     </div>
+    <button class="m-hamburger" id="m-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <!-- PAGE HEADER -->
@@ -251,6 +252,7 @@
       <a href="ambassade.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg> <span data-i18n="footer.links.embassy">Ambassade</span></a>
       <a href="annonces.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> <span data-i18n="footer.links.annonces">Annonces</span></a>
       <a href="contact.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg> <span data-i18n="footer.links.contact">Contact</span></a>
+      <a href="decouvrir.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> <span data-i18n="nav.discover">Découvrir</span></a>
     </div>
     <p class="m-footer-copy"><a href="https://www.webdesignmindset.com/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">© 2026 Web Design Mindset. All rights reserved</a></p>
   </footer>
@@ -258,11 +260,33 @@
   <div class="m-wa-label" aria-hidden="true">💬 CONTACTEZ-NOUS SUR WHATSAPP</div>
   <a href="https://wa.me/436765373926" class="m-whatsapp" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
 
-  <nav class="m-bottom-nav">
+  <!-- DRAWER -->
+  <div class="m-drawer-overlay" id="m-drawer-overlay"></div>
+  <div class="m-drawer" id="m-drawer" role="dialog" aria-modal="true">
+    <div class="m-drawer-head">
+      <div class="m-logo-text">
+        <strong data-i18n="logo.name">Ambassade de Côte d'Ivoire</strong>
+        <span data-i18n="logo.sub">Vienne, Autriche</span>
+      </div>
+      <button class="m-drawer-close" id="m-drawer-close" aria-label="Fermer">×</button>
+    </div>
+    <nav class="m-drawer-nav">
+      <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="nav.home">Accueil</span></a>
+      <a href="ambassade.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
+      <a href="services.html" class="active"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.services">Services</span></a>
+      <a href="annonces.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span data-i18n="nav.annonces">Annonces</span></a>
+      <a href="decouvrir.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-i18n="nav.discover">Découvrir</span></a>
+      <a href="contact.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
+    </nav>
+    <div class="m-drawer-footer">© 2026 Ambassade CI — Vienne</div>
+  </div>
+
+  <nav class="m-bottom-nav m-nav-6">
     <a href="index.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="nav.home">Accueil</span></a>
     <a href="ambassade.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
     <a href="services.html" class="m-nav-item active"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.services">Services</span></a>
     <a href="annonces.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span data-i18n="nav.annonces">Annonces</span></a>
+    <a href="decouvrir.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-i18n="nav.discover">Découvrir</span></a>
     <a href="contact.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
   </nav>
 
