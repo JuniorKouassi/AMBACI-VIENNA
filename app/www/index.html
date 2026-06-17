@@ -11,8 +11,26 @@
   <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="vendor/flag-icons/css/flag-icons.min.css">
   <link rel="stylesheet" href="css/mobile.css">
+  <style>
+    #m-splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#F77F00 0%,#D45F00 38%,#0A7A38 100%);overflow:hidden;transition:opacity 0.55s ease;}
+    #m-splash.out{opacity:0;pointer-events:none;}
+    @keyframes m-spl-logo{from{transform:scale(0.55);opacity:0;}to{transform:scale(1);opacity:1;}}
+    @keyframes m-spl-text{from{transform:translateY(14px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+    .m-spl-logo{width:140px;height:auto;filter:drop-shadow(0 8px 32px rgba(0,0,0,.35));animation:m-spl-logo 0.75s cubic-bezier(0.34,1.56,0.64,1) 0.15s both;}
+    .m-spl-name{font-family:Georgia,"Times New Roman",serif;font-size:1.15rem;font-weight:700;color:#fff;margin:.25rem 0 0;letter-spacing:.01em;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.3);animation:m-spl-text 0.6s ease 0.5s both;}
+    .m-spl-sub{font-size:.8rem;color:rgba(255,255,255,.82);margin:.15rem 0 0;letter-spacing:.06em;text-transform:uppercase;text-align:center;animation:m-spl-text 0.6s ease 0.65s both;}
+    .m-spl-elephant{position:absolute;pointer-events:none;inset:0;background:url('img/elephant.jpg') no-repeat center 15%/contain;mix-blend-mode:screen;opacity:0.38;animation:elephant-float 6s ease-in-out infinite;}
+  </style>
 </head>
 <body>
+
+  <!-- SPLASH SCREEN -->
+  <div id="m-splash" role="presentation" aria-hidden="true">
+    <div class="m-spl-elephant"></div>
+    <img src="img/armoiries-ci.png" alt="" class="m-spl-logo">
+    <p class="m-spl-name">Ambassade de Côte d'Ivoire</p>
+    <p class="m-spl-sub">Vienne &nbsp;·&nbsp; Autriche</p>
+  </div>
 
   <!-- TOP BAR -->
   <div class="m-topbar">
@@ -361,6 +379,19 @@
 
   <script src="js/main.js"></script>
   <script src="js/native.js"></script>
+  <script>
+    (function(){
+      var s=document.getElementById('m-splash');
+      if(!s)return;
+      var delay=sessionStorage.getItem('m-splash-done')?0:1600;
+      sessionStorage.setItem('m-splash-done','1');
+      if(delay===0){s.style.display='none';return;}
+      setTimeout(function(){
+        s.classList.add('out');
+        setTimeout(function(){s.style.display='none';},600);
+      },delay);
+    })();
+  </script>
   <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
   <script>
     (function(){
