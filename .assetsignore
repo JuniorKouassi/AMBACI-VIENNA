@@ -1,0 +1,13 @@
+node_modules
+android
+app
+ios
+mobile
+.git
+*.apk
+*.jks
+keystore.properties
+package.json
+package-lock.json
+capacitor.config.json
+*.mp4
