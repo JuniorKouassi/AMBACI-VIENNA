@@ -111,25 +111,25 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   background: var(--white);
 }
 .m-lang-btn {
-  padding: 0.22rem 0.32rem;
-  font-size: 0.58rem;
+  padding: 0.16rem 0.22rem;
+  font-size: 0.48rem;
   font-weight: 800;
-  letter-spacing: .05em;
+  letter-spacing: .04em;
   color: var(--grey-700);
   transition: background var(--transition), color var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
+  min-width: 16px;
   white-space: nowrap;
   line-height: 1;
 }
-.m-lang-btn .fi { display: none; } /* drapeaux masqués pour économiser l'espace */
+.m-lang-btn .fi { display: inline-block; width: 10px; height: 7px; margin-left: 2px; border-radius: 1px; vertical-align: middle; flex-shrink: 0; }
 .m-lang-btn.active {
   background: var(--orange);
   color: var(--white);
 }
-.m-lang-sep { width: 1px; height: 16px; background: var(--grey-300); flex-shrink: 0; }
+.m-lang-sep { width: 1px; height: 12px; background: var(--grey-300); flex-shrink: 0; }
 
 /* Header — logo + langue côte à côte */
 .m-header { gap: 0.4rem; }

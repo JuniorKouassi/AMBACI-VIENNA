@@ -40,7 +40,7 @@
   <div class="m-page-header">
     <div class="elephant-watermark" aria-hidden="true"></div>
     <nav class="m-breadcrumb"><a href="index.html" data-i18n="nav.home">Accueil</a> › <span data-i18n="contact.breadcrumb">Contact</span></nav>
-    <h1>Contact & Horaires</h1>
+    <h1 data-i18n="contact.h1">Contact & Horaires</h1>
     <p data-i18n="contact.sub">Coordonnées et horaires du service consulaire</p>
   </div>
 
@@ -120,16 +120,16 @@
     <h3 style="font-size:.875rem;font-weight:700;color:var(--dark);margin-bottom:.6rem;" data-i18n="contact.holidays">Quelques jours fériés</h3>
     <div style="display:flex;flex-direction:column;gap:.4rem;">
       <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
-        <span style="font-weight:600;color:var(--dark);">1er janvier</span><span style="color:var(--grey-700);" data-i18n="holiday.newyear">Nouvel An</span>
+        <span style="font-weight:600;color:var(--dark);" data-i18n="holiday.newyear.date">1er janvier</span><span style="color:var(--grey-700);" data-i18n="holiday.newyear">Nouvel An</span>
       </div>
       <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
-        <span style="font-weight:600;color:var(--dark);">1er mai</span><span style="color:var(--grey-700);" data-i18n="holiday.labor">Fête du Travail</span>
+        <span style="font-weight:600;color:var(--dark);" data-i18n="holiday.labor.date">1er mai</span><span style="color:var(--grey-700);" data-i18n="holiday.labor">Fête du Travail</span>
       </div>
       <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
-        <span style="font-weight:600;color:var(--dark);">7 août</span><span style="color:var(--grey-700);" data-i18n="holiday.ci">Fête Nationale CI</span>
+        <span style="font-weight:600;color:var(--dark);" data-i18n="holiday.ci.date">7 août</span><span style="color:var(--grey-700);" data-i18n="holiday.ci">Fête Nationale CI</span>
       </div>
       <div style="display:flex;justify-content:space-between;padding:.5rem .75rem;background:var(--grey-100);border-radius:var(--radius-sm);font-size:.8rem;">
-        <span style="font-weight:600;color:var(--dark);">26 octobre</span><span style="color:var(--grey-700);" data-i18n="holiday.at">Fête Nationale AT</span>
+        <span style="font-weight:600;color:var(--dark);" data-i18n="holiday.at.date">26 octobre</span><span style="color:var(--grey-700);" data-i18n="holiday.at">Fête Nationale AT</span>
       </div>
     </div>
   </section>
@@ -144,11 +144,11 @@
     </div>
     <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:.75rem;">
       <div style="background:var(--white);border-radius:var(--radius-md);padding:.75rem;box-shadow:var(--shadow);font-size:.8rem;">
-        <p style="font-weight:700;color:var(--dark);margin-bottom:.2rem;"><i class="fa-solid fa-train-subway" style="color:var(--orange);" data-i18n="contact.metro">></i> Métro</p>
+        <p style="font-weight:700;color:var(--dark);margin-bottom:.2rem;"><i class="fa-solid fa-train-subway" style="color:var(--orange);"></i> <span data-i18n="contact.metro">Métro</span></p>
         <p style="color:var(--grey-700);" data-i18n="contact.metro.val">U4 — Station Heiligenstadt</p>
       </div>
       <div style="background:var(--white);border-radius:var(--radius-md);padding:.75rem;box-shadow:var(--shadow);font-size:.8rem;">
-        <p style="font-weight:700;color:var(--dark);margin-bottom:.2rem;"><i class="fa-solid fa-bus" style="color:var(--green);" data-i18n="contact.bus">></i> Bus</p>
+        <p style="font-weight:700;color:var(--dark);margin-bottom:.2rem;"><i class="fa-solid fa-bus" style="color:var(--green);"></i> <span data-i18n="contact.bus">Bus</span></p>
         <p style="color:var(--grey-700);" data-i18n="contact.bus.val">Ligne 35A — Arrêt Michael-Neumann-Gasse</p>
       </div>
     </div>
@@ -186,9 +186,9 @@
         <label class="m-label"><span data-i18n="form.country">Pays de résidence</span> <span class="req">*</span></label>
         <select class="m-input" required>
           <option value="" disabled selected data-i18n="form.country.select">— Sélectionner —</option>
-          <option>Autriche</option><option>Hongrie</option><option>Slovénie</option>
-          <option>Slovaquie</option><option>Croatie</option><option>Serbie</option>
-          <option>Roumanie</option><option>Bosnie-Herzégovine</option>
+          <option data-i18n="pays.at">Autriche</option><option data-i18n="pays.hu">Hongrie</option><option data-i18n="pays.si">Slovénie</option>
+          <option data-i18n="pays.sk">Slovaquie</option><option data-i18n="pays.hr">Croatie</option><option data-i18n="pays.rs">Serbie</option>
+          <option data-i18n="pays.ro">Roumanie</option><option data-i18n="pays.ba">Bosnie</option><option data-i18n="pays.md">Moldavie</option>
         </select>
       </div>
       <div class="m-form-group">
@@ -227,13 +227,6 @@
       <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" class="m-footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://linktr.ee/ambacivienna" target="_blank" class="m-footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
       <a href="https://wa.me/436765373926" target="_blank" class="m-footer-social" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-    <div class="m-footer-links">
-      <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> <span data-i18n="footer.links.home">Accueil</span></a>
-      <a href="ambassade.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg> <span data-i18n="footer.links.embassy">Ambassade</span></a>
-      <a href="annonces.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> <span data-i18n="footer.links.annonces">Annonces</span></a>
-      <a href="services.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> <span data-i18n="footer.links.services">Services</span></a>
-      <a href="decouvrir.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> <span data-i18n="nav.discover">Découvrir</span></a>
     </div>
     <p class="m-footer-copy"><a href="https://www.webdesignmindset.com/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">© 2026 Web Design Mindset. All rights reserved</a></p>
   </footer>

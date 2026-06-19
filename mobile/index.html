@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="m-splashing">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -12,21 +12,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/mobile.css">
   <style>
-    #m-splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#F77F00 0%,#D45F00 38%,#0A7A38 100%);overflow:hidden;transition:opacity 0.55s ease;}
-    #m-splash.out{opacity:0;pointer-events:none;}
+    html.m-splashing,html.m-splashing body{background:#F77F00;}
+    /* Backdrop: same gradient, stays behind while splash slides away, then fades out */
+    #m-splash-back{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483646;background:linear-gradient(160deg,#F77F00 0%,#D45F00 38%,#0A7A38 100%);pointer-events:none;transition:opacity 0.35s ease;}
+    /* Main splash: slides up then is removed. top/right/bottom/left:0 (not width/height:100%)
+       so sizing is purely viewport-relative — never depends on a JS-measured value that can
+       race with WebView layout on cold start and collapse the box to near-zero height. */
+    #m-splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483647;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#F77F00 0%,#D45F00 38%,#0A7A38 100%);overflow:hidden;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);will-change:transform;}
+    #m-splash.out{transform:translateY(-100%);}
     @keyframes m-spl-logo{from{transform:scale(0.55);opacity:0;}to{transform:scale(1);opacity:1;}}
     @keyframes m-spl-text{from{transform:translateY(14px);opacity:0;}to{transform:translateY(0);opacity:1;}}
     .m-spl-logo{width:140px;height:auto;filter:drop-shadow(0 8px 32px rgba(0,0,0,.35));animation:m-spl-logo 0.75s cubic-bezier(0.34,1.56,0.64,1) 0.15s both;}
     .m-spl-name{font-family:Georgia,"Times New Roman",serif;font-size:1.15rem;font-weight:700;color:#fff;margin:.25rem 0 0;letter-spacing:.01em;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.3);animation:m-spl-text 0.6s ease 0.5s both;}
     .m-spl-sub{font-size:.8rem;color:rgba(255,255,255,.82);margin:.15rem 0 0;letter-spacing:.06em;text-transform:uppercase;text-align:center;animation:m-spl-text 0.6s ease 0.65s both;}
-    .m-spl-elephant{position:absolute;pointer-events:none;inset:0;background:url('img/elephant.jpg') no-repeat center 15%/contain;mix-blend-mode:screen;opacity:0.38;animation:elephant-float 6s ease-in-out infinite;}
   </style>
 </head>
 <body>
 
   <!-- SPLASH SCREEN -->
+  <div id="m-splash-back" aria-hidden="true"></div>
   <div id="m-splash" role="presentation" aria-hidden="true">
-    <div class="m-spl-elephant"></div>
     <img src="img/armoiries-ci.png" alt="" class="m-spl-logo">
     <p class="m-spl-name">Ambassade de Côte d'Ivoire</p>
     <p class="m-spl-sub">Vienne &nbsp;·&nbsp; Autriche</p>
@@ -103,148 +108,6 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section class="m-section m-section-alt">
-    <span class="m-badge" data-i18n="badge.services">Nos services</span>
-    <h2 class="m-section-title" data-i18n="srv.title">Services consulaires</h2>
-    <div class="m-services-grid">
-      <a href="services.html#passeport" class="m-service-card">
-        <div class="m-service-icon"><i class="fa-solid fa-passport"></i></div>
-        <h3 data-i18n="srv.passport">Passeport</h3>
-        <p data-i18n="srv.passport.sub">Demande & renouvellement</p>
-        <span class="m-service-arrow" data-i18n="srv.more">Voir →</span>
-      </a>
-      <a href="services.html#visa" class="m-service-card">
-        <div class="m-service-icon"><i class="fa-solid fa-stamp"></i></div>
-        <h3 data-i18n="srv.visa">Visa</h3>
-        <p data-i18n="srv.visa.sub">Touristique, affaires, transit</p>
-        <span class="m-service-arrow" data-i18n="srv.more">Voir →</span>
-      </a>
-      <a href="services.html#etat-civil" class="m-service-card">
-        <div class="m-service-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-        <h3 data-i18n="srv.civil">État civil</h3>
-        <p data-i18n="srv.civil.sub">Actes & transcriptions</p>
-        <span class="m-service-arrow" data-i18n="srv.more">Voir →</span>
-      </a>
-      <a href="services.html#legalisation" class="m-service-card">
-        <div class="m-service-icon"><i class="fa-solid fa-file-signature"></i></div>
-        <h3 data-i18n="srv.legal">Légalisation</h3>
-        <p data-i18n="srv.legal.sub">Documents officiels</p>
-        <span class="m-service-arrow" data-i18n="srv.more">Voir →</span>
-      </a>
-      <a href="services.html#certificats" class="m-service-card">
-        <div class="m-service-icon"><i class="fa-solid fa-certificate"></i></div>
-        <h3 data-i18n="srv.cert">Certificats</h3>
-        <p data-i18n="srv.cert.sub">Vie, résidence, nationalité</p>
-        <span class="m-service-arrow" data-i18n="srv.more">Voir →</span>
-      </a>
-      <a href="contact.html" class="m-service-card">
-        <div class="m-service-icon" style="background:linear-gradient(135deg,#25D366,#128C7E)"><i class="fa-brands fa-whatsapp"></i></div>
-        <h3 data-i18n="srv.wa">WhatsApp</h3>
-        <p data-i18n="srv.wa.sub">Contact direct</p>
-        <span class="m-service-arrow">Chat →</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- INFOS PRATIQUES -->
-  <section class="m-section">
-    <span class="m-badge" data-i18n="badge.contact">Contact</span>
-    <h2 class="m-section-title" data-i18n="info.practical">Informations pratiques</h2>
-    <div class="m-contact-card">
-      <h3><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg> <span data-i18n="info.contact.title">Nous contacter</span></h3>
-      <div class="m-contact-item">
-        <div class="m-contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-        <div>
-          <p class="m-contact-label" data-i18n="info.address.label">Adresse géographique</p>
-          <p class="m-contact-value" data-i18n="topbar.address">Michael-Neumann-Gasse 2 - 3ème Etage, 1190 Wien</p>
-        </div>
-      </div>
-      <div class="m-contact-item">
-        <div class="m-contact-icon"><i class="fa-solid fa-phone"></i></div>
-        <div>
-          <p class="m-contact-label" data-i18n="info.phone.label">Téléphone</p>
-          <p class="m-contact-value"><a href="tel:+43158100761">+43 1 581007610</a></p>
-        </div>
-      </div>
-      <div class="m-contact-item">
-        <div class="m-contact-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <div>
-          <p class="m-contact-label" data-i18n="info.email.label">Email</p>
-          <p class="m-contact-value"><a href="mailto:sceconsul.autriche@diplomatie.gouv.ci">sceconsul.autriche@diplomatie.gouv.ci</a></p>
-        </div>
-      </div>
-      <div class="m-contact-item">
-        <div class="m-contact-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-        <div>
-          <p class="m-contact-label" data-i18n="info.emergency.label">Urgences 24h/24</p>
-          <p class="m-contact-value"><a href="tel:+436765373926">+43 676 537 39 26</a></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Horaires consulaires -->
-    <h3 style="font-family:var(--font-primary);font-size:1rem;font-weight:700;color:var(--dark);margin-top:1.25rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem;">
-      <i class="fa-solid fa-clock" style="color:var(--orange);font-size:.9rem;"></i>
-      <span data-i18n="badge.hours">Horaires consulaires</span>
-    </h3>
-    <div style="margin-top:0;display:flex;flex-direction:column;gap:.6rem;">
-
-      <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border-left:4px solid var(--orange);">
-        <div style="padding:.6rem 1rem;background:#FFF0E0;border-bottom:1px solid rgba(247,127,0,.15);display:flex;align-items:center;gap:.4rem;">
-          <i class="fa-solid fa-folder-arrow-up" style="color:var(--orange);font-size:.82rem;"></i>
-          <p style="font-size:.75rem;font-weight:700;color:var(--orange-dark);" data-i18n="hours.depot">Dépôt de dossiers</p>
-        </div>
-        <div style="padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:.8rem;font-weight:600;color:var(--grey-700);" data-i18n="hours.days">Mardi – Vendredi</span>
-          <span style="font-size:.78rem;font-weight:700;color:var(--orange-dark);background:#FFF0E0;padding:.15rem .55rem;border-radius:999px;" data-i18n="hours.depot.time">09:00 – 14:00</span>
-        </div>
-      </div>
-
-      <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border-left:4px solid var(--green);">
-        <div style="padding:.6rem 1rem;background:var(--green-pale);border-bottom:1px solid rgba(0,154,68,.15);display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;">
-          <i class="fa-solid fa-folder-open" style="color:var(--green);font-size:.82rem;"></i>
-          <p style="font-size:.75rem;font-weight:700;color:var(--green-dark);" data-i18n="hours.retrait">Retraits de dossiers</p>
-          <span style="font-size:.68rem;color:var(--green-dark);font-style:italic;" data-i18n="hours.rdv">(sur rendez-vous)</span>
-        </div>
-        <div style="padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:.8rem;font-weight:600;color:var(--grey-700);" data-i18n="hours.days">Mardi – Vendredi</span>
-          <span style="font-size:.78rem;font-weight:700;color:var(--green-dark);background:var(--green-pale);padding:.15rem .55rem;border-radius:999px;" data-i18n="hours.retrait.time">14:00 – 16:00</span>
-        </div>
-      </div>
-
-      <a href="contact.html" style="display:block;text-align:center;padding:.55rem;background:var(--dark);color:rgba(255,255,255,.7);border-radius:var(--radius-md);font-size:.72rem;font-weight:600;letter-spacing:.04em;" data-i18n="contact.hours.sub">Sur rendez-vous uniquement</a>
-
-    </div>
-  </section>
-
-  <!-- ACTUALITÉS -->
-  <section class="m-section">
-    <span class="m-badge" data-i18n="badge.news">Actualités</span>
-    <h2 class="m-section-title" data-i18n="actu.title">Informations & Annonces</h2>
-    <div class="m-actu-card">
-      <div class="m-actu-img">
-        <img src="img/mission-economique.jpg" alt="Mission économique" onerror="this.style.display='none'">
-      </div>
-      <div class="m-actu-body">
-        <span class="m-actu-tag" data-i18n="actu.tag1">Mission économique</span>
-        <h3 data-i18n="actu.h3">Visite du Président du Conseil Économique, Social, Environnemental et Culturel</h3>
-        <p data-i18n="actu.p1">Mission économique visant à renforcer les liens entre la Côte d'Ivoire et l'Europe centrale.</p>
-        <p class="m-actu-date" data-i18n="actu.date1">02 juin 2025</p>
-      </div>
-    </div>
-    <div class="m-news-list">
-      <div class="m-news-item">
-        <div class="m-news-date"><span class="day">10</span><span data-i18n="actu.month1">Mai</span></div>
-        <div><h4 data-i18n="news1.title">Nouveau formulaire de demande de passeport</h4><p data-i18n="news1.desc">Mise à jour du formulaire biométrique.</p></div>
-      </div>
-      <div class="m-news-item">
-        <div class="m-news-date"><span class="day">02</span><span data-i18n="actu.month1">Mai</span></div>
-        <div><h4 data-i18n="news2.title">Fermeture — Fête du Travail</h4><p data-i18n="news2.desc">Fermé le 1er mai 2025.</p></div>
-      </div>
-    </div>
-  </section>
-
   <!-- CÔTE D'IVOIRE -->
   <section class="m-section m-section-alt">
     <span class="m-badge" data-i18n="badge.ci">La Côte d'Ivoire</span>
@@ -285,6 +148,32 @@
     </div>
   </section>
 
+  <!-- HORAIRES AMBASSADE -->
+  <section class="m-section">
+    <span class="m-badge" data-i18n="badge.hours.amb">Horaires Ambassade</span>
+    <h2 class="m-section-title" data-i18n="contact.hours.title">Heures d'ouverture</h2>
+    <p class="m-section-sub" data-i18n="hours.amb.sub">Le service consulaire reçoit sur rendez-vous uniquement.</p>
+    <table class="m-table" aria-label="Horaires d'ouverture du service consulaire">
+      <thead>
+        <tr>
+          <th data-i18n="table.day">Jour</th>
+          <th data-i18n="table.hours">Horaires</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-i18n="day.mon">Lundi</td><td data-i18n="hours.val">09h30 – 16h00</td></tr>
+        <tr><td data-i18n="day.tue">Mardi</td><td data-i18n="hours.val">09h30 – 16h00</td></tr>
+        <tr><td data-i18n="day.wed">Mercredi</td><td data-i18n="hours.val">09h30 – 16h00</td></tr>
+        <tr><td data-i18n="day.thu">Jeudi</td><td data-i18n="hours.val">09h30 – 16h00</td></tr>
+        <tr><td data-i18n="day.fri">Vendredi</td><td data-i18n="hours.val">09h30 – 16h00</td></tr>
+        <tr><td data-i18n="day.sat">Samedi</td><td class="closed" data-i18n="day.closed">Fermé</td></tr>
+        <tr><td data-i18n="day.sun">Dimanche</td><td class="closed" data-i18n="day.closed">Fermé</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.8rem;color:var(--grey-700);margin-top:.75rem;">⚠️ <span data-i18n="info.note">Fermé les jours fériés autrichiens et ivoiriens.</span></p>
+    <a href="https://calendly.com/j-kouassi-diplomatie/30min" target="_blank" rel="noopener" class="m-btn-submit" style="display:block;text-align:center;text-decoration:none;margin-top:.75rem;" data-i18n="hours.amb.btn">Prendre rendez-vous →</a>
+  </section>
+
   <!-- CTA -->
   <div class="m-cta">
     <h2 data-i18n="cta.title">Besoin d'aide consulaire ?</h2>
@@ -292,6 +181,36 @@
     <div class="m-cta-btns">
       <a href="https://calendly.com/j-kouassi-diplomatie/30min" target="_blank" rel="noopener" class="m-btn-cta-white" data-i18n="cta.btn">Prendre rendez-vous</a>
       <a href="tel:+43158100761" class="m-btn-cta-ghost"><i class="fa-solid fa-phone"></i> +43 1 581007610</a>
+    </div>
+    <!-- SERVICE ICONS -->
+    <div style="margin-top:1.4rem;width:100%;">
+      <p style="font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.65rem;" data-i18n="badge.services">Nos services</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;">
+        <a href="services.html#passeport" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.7rem .25rem;background:rgba(255,255,255,.12);border-radius:11px;text-decoration:none;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);">
+          <i class="fa-solid fa-passport" style="font-size:1.2rem;"></i>
+          <span style="font-size:.6rem;font-weight:600;text-align:center;line-height:1.2;" data-i18n="srv.passport">Passeport</span>
+        </a>
+        <a href="services.html#visa" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.7rem .25rem;background:rgba(255,255,255,.12);border-radius:11px;text-decoration:none;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);">
+          <i class="fa-solid fa-stamp" style="font-size:1.2rem;"></i>
+          <span style="font-size:.6rem;font-weight:600;text-align:center;line-height:1.2;" data-i18n="srv.visa">Visa</span>
+        </a>
+        <a href="services.html#etat-civil" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.7rem .25rem;background:rgba(255,255,255,.12);border-radius:11px;text-decoration:none;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span style="font-size:.6rem;font-weight:600;text-align:center;line-height:1.2;" data-i18n="srv.civil">État civil</span>
+        </a>
+        <a href="services.html#legalisation" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.7rem .25rem;background:rgba(255,255,255,.12);border-radius:11px;text-decoration:none;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);">
+          <i class="fa-solid fa-file-signature" style="font-size:1.2rem;"></i>
+          <span style="font-size:.6rem;font-weight:600;text-align:center;line-height:1.2;" data-i18n="srv.legal">Légalisation</span>
+        </a>
+        <a href="services.html#certificats" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.7rem .25rem;background:rgba(255,255,255,.12);border-radius:11px;text-decoration:none;color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.18);">
+          <i class="fa-solid fa-certificate" style="font-size:1.2rem;"></i>
+          <span style="font-size:.6rem;font-weight:600;text-align:center;line-height:1.2;" data-i18n="srv.cert">Certificats</span>
+        </a>
+        <a href="https://wa.me/436765373926" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.7rem .25rem;background:rgba(37,211,102,.16);border-radius:11px;text-decoration:none;color:rgba(255,255,255,.9);border:1px solid rgba(37,211,102,.32);">
+          <i class="fa-brands fa-whatsapp" style="font-size:1.2rem;color:#4ade80;"></i>
+          <span style="font-size:.6rem;font-weight:600;text-align:center;line-height:1.2;" data-i18n="srv.wa">WhatsApp</span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -310,14 +229,6 @@
       <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" class="m-footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://linktr.ee/ambacivienna" target="_blank" class="m-footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
       <a href="https://wa.me/436765373926" target="_blank" class="m-footer-social" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-    <div class="m-footer-links">
-      <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> <span data-i18n="footer.links.home">Accueil</span></a>
-      <a href="ambassade MOBILE.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg> <span data-i18n="footer.links.embassy">Ambassade</span></a>
-      <a href="services.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> <span data-i18n="footer.links.services">Services</span></a>
-      <a href="annonces.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> <span data-i18n="footer.links.annonces">Annonces</span></a>
-      <a href="contact.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg> <span data-i18n="footer.links.contact">Contact</span></a>
-      <a href="decouvrir.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> <span data-i18n="nav.discover">Découvrir</span></a>
     </div>
     <p class="m-footer-copy"><a href="https://www.webdesignmindset.com/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">© 2026 Web Design Mindset. All rights reserved</a></p>
   </footer>
@@ -363,13 +274,37 @@
   <script>
     (function(){
       var s=document.getElementById('m-splash');
+      var b=document.getElementById('m-splash-back');
+      /* Gate used by the chatbot-positioning script below: any fixed widget (the
+         FastBots bubble) added before this is true gets hidden until it fires. */
+      window.__chatReady=!s;
+      window.__chatPending=[];
+      function revealChat(){
+        window.__chatReady=true;
+        window.__chatPending.forEach(function(el){
+          el.style.removeProperty('opacity');
+          el.style.removeProperty('pointer-events');
+        });
+        window.__chatPending=[];
+      }
       if(!s)return;
-      var delay=sessionStorage.getItem('m-splash-done')?0:1600;
-      sessionStorage.setItem('m-splash-done','1');
-      if(delay===0){s.style.display='none';return;}
+      var delay=3000; /* always shown in full on every app launch */
       setTimeout(function(){
-        s.classList.add('out');
-        setTimeout(function(){s.style.display='none';},600);
+        s.classList.add('out'); /* slide up 450ms */
+        setTimeout(function(){
+          s.style.display='none';
+          if(b){
+            b.style.opacity='0'; /* 350ms fade */
+            setTimeout(function(){
+              b.style.display='none';
+              document.documentElement.classList.remove('m-splashing');
+              setTimeout(revealChat,3000); /* chatbot appears 3s after splash ends */
+            },360);
+          } else {
+            document.documentElement.classList.remove('m-splashing');
+            setTimeout(revealChat,3000);
+          }
+        },460);
       },delay);
     })();
   </script>
@@ -382,6 +317,11 @@
         if(skip.some(function(c){return el.classList&&el.classList.contains(c);}))return;
         var s=window.getComputedStyle(el);
         if(s.position!=='fixed')return;
+        if(window.__chatReady===false){
+          el.style.setProperty('opacity','0','important');
+          el.style.setProperty('pointer-events','none','important');
+          window.__chatPending.push(el);
+        }
         el.style.setProperty('bottom','calc(60px + 0.75rem + 58px + 1rem)','important');
         el.style.setProperty('right','1rem','important');
       }

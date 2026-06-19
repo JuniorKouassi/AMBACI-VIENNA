@@ -4,3 +4,5 @@ Thumbs.db
 node_modules/
 app/www/vendor/node_modules/
 package-lock.json
+ambaci-release.jks
+keystore.properties

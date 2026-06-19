@@ -27,6 +27,7 @@
     .stripe-admin      { background: var(--orange); }
     .stripe-event      { background: var(--green); }
     .stripe-communique { background: var(--dark); }
+    .stripe-actu       { background: #4A5568; }
 
     .m-annonce-body { flex: 1; padding: 0.9rem 1rem; }
     .m-annonce-top {
@@ -51,6 +52,7 @@
     .cat-admin     { background: #FFF0E0; color: var(--orange-dark); border: 1px solid #ffd9a0; }
     .cat-event     { background: #E6F7EE; color: var(--green-dark); border: 1px solid #b2e6cc; }
     .cat-communique{ background: var(--grey-100); color: var(--dark); border: 1px solid var(--grey-200); }
+    .cat-actu      { background: #EDF2F7; color: #4A5568; border: 1px solid #CBD5E0; }
 
     .m-annonce-date {
       font-size: 0.65rem;
@@ -120,6 +122,7 @@
     .icon-admin      { background: linear-gradient(135deg, var(--orange-light), var(--orange-dark)); }
     .icon-event      { background: linear-gradient(135deg, #00B850, var(--green-dark)); }
     .icon-communique { background: linear-gradient(135deg, #2A5C3A, var(--dark)); }
+    .icon-actu       { background: linear-gradient(135deg, #718096, #4A5568); }
 
     /* ── PINNED BLOCK ── */
     .m-pinned {
@@ -347,9 +350,9 @@
     <!-- PINNED -->
     <div class="m-pinned">
       <div class="m-pinned-label"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> <span data-i18n="annonces.pinned">Épinglé — Urgent</span></div>
-      <div class="m-pinned-title" data-i18n="annonces.pin.title">Fermeture — Fête Nationale de Côte d'Ivoire</div>
-      <p class="m-pinned-text" data-i18n-html="annonces.pin.text">L'Ambassade sera <strong>fermée le lundi 7 août 2025</strong> pour la Fête Nationale (65ème anniversaire). Reprise le mardi 8 août à 09h30.</p>
-      <div class="m-pinned-date"><i class="fa-solid fa-calendar-day"></i> Publié le 10 juillet 2025</div>
+      <div class="m-pinned-title" data-i18n="annonces.pin.title">Fermeture exceptionnelle — Fête Nationale de Côte d'Ivoire</div>
+      <p class="m-pinned-text" data-i18n-html="annonces.pin.text">L'Ambassade de Côte d'Ivoire à Vienne sera <strong>fermée le vendredi 7 août 2025</strong> à l'occasion de la Fête Nationale de la République de Côte d'Ivoire (65ème anniversaire de l'indépendance). Les services reprendront normalement le <strong>mardi 8 août 2025 à 09h30</strong>.</p>
+      <div class="m-pinned-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="annonces.pin.date">Publié le 10 juillet 2025</span></div>
     </div>
 
     <!-- FILTER CHIPS -->
@@ -357,14 +360,14 @@
       <button class="m-chip active" data-filter="all" onclick="filterCards('all',this)">
         <i class="fa-solid fa-layer-group"></i> <span data-i18n="filter.all">Toutes</span> <span class="m-chip-count">5</span>
       </button>
-      <button class="m-chip" data-filter="urgent" onclick="filterCards('urgent',this)">
-        <i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="filter.urgent">Urgentes</span> <span class="m-chip-count">1</span>
+      <button class="m-chip" data-filter="eco" onclick="filterCards('eco',this)">
+        <i class="fa-solid fa-handshake"></i> <span data-i18n="filter.eco">Mission économique</span> <span class="m-chip-count">1</span>
       </button>
-      <button class="m-chip" data-filter="admin" onclick="filterCards('admin',this)">
-        <i class="fa-solid fa-briefcase"></i> <span data-i18n="filter.admin">Administratif</span> <span class="m-chip-count">2</span>
+      <button class="m-chip" data-filter="diplomatie" onclick="filterCards('diplomatie',this)">
+        <i class="fa-solid fa-earth-europe"></i> <span data-i18n="filter.diplomatie">Diplomatie</span> <span class="m-chip-count">2</span>
       </button>
-      <button class="m-chip" data-filter="event" onclick="filterCards('event',this)">
-        <i class="fa-solid fa-calendar-days"></i> <span data-i18n="filter.event">Événements</span> <span class="m-chip-count">1</span>
+      <button class="m-chip" data-filter="actu" onclick="filterCards('actu',this)">
+        <i class="fa-solid fa-newspaper"></i> <span data-i18n="filter.actu">Actualité</span> <span class="m-chip-count">1</span>
       </button>
       <button class="m-chip" data-filter="communique" onclick="filterCards('communique',this)">
         <i class="fa-solid fa-scroll"></i> <span data-i18n="filter.communique">Communiqués</span> <span class="m-chip-count">1</span>
@@ -374,81 +377,78 @@
     <!-- ANNONCE LIST -->
     <div id="annonces-list">
 
-      <!-- 1 — Urgente -->
-      <div class="m-annonce-card" data-cat="urgent">
-        <div class="m-annonce-stripe stripe-urgent"></div>
-        <div class="m-annonce-icon">
-          <div class="m-annonce-icon-inner icon-urgent"><i class="fa-solid fa-shield-halved"></i></div>
-        </div>
-        <div class="m-annonce-body">
-          <div class="m-annonce-top">
-            <span class="m-annonce-cat cat-urgent"><i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="cat.urgent">Urgent</span></span>
-            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann1.date">15 juillet 2025</span></span>
-          </div>
-          <div class="m-annonce-title" data-i18n="ann1.title">Perturbation — Travaux de rénovation</div>
-          <p class="m-annonce-text" data-i18n-html="ann1.text">Services perturbés du <strong>21 au 25 juillet</strong>. Dépôts de dossiers sur RDV uniquement.</p>
-          <div class="m-annonce-btns">
-            <a href="https://calendly.com/j-kouassi-diplomatie/30min" target="_blank" rel="noopener" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn.rdv.short">Prendre RDV</span></a>
-            <a href="mailto:sceconsul.autriche@diplomatie.gouv.ci" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="btn.write">Écrire</span></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2 — Administrative -->
-      <div class="m-annonce-card" data-cat="admin">
-        <div class="m-annonce-stripe stripe-admin"></div>
-        <div class="m-annonce-icon">
-          <div class="m-annonce-icon-inner icon-admin"><i class="fa-solid fa-scale-balanced"></i></div>
-        </div>
-        <div class="m-annonce-body">
-          <div class="m-annonce-top">
-            <span class="m-annonce-cat cat-admin"><i class="fa-solid fa-briefcase"></i> <span data-i18n="cat.admin">Administratif</span></span>
-            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann2.date">1er juillet 2025</span></span>
-          </div>
-          <div class="m-annonce-title" data-i18n="ann2.title">Nouveaux tarifs consulaires — 1er août 2025</div>
-          <p class="m-annonce-text" data-i18n-html="ann2.text">Le nouveau barème des prestations consulaires entre en vigueur le <strong>1er août 2025</strong>.</p>
-          <div class="m-annonce-btns">
-            <a href="#" class="m-annonce-btn m-btn-green"><i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="btn.download">Télécharger PDF</span></a>
-            <a href="services.html" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-chevron-right"></i> <span data-i18n="btn.services">Services</span></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 — Événement -->
-      <div class="m-annonce-card" data-cat="event">
+      <!-- 1 — Mission économique -->
+      <div class="m-annonce-card" data-cat="eco">
         <div class="m-annonce-stripe stripe-event"></div>
         <div class="m-annonce-icon">
-          <div class="m-annonce-icon-inner icon-event"><i class="fa-solid fa-earth-europe"></i></div>
+          <div class="m-annonce-icon-inner icon-event"><i class="fa-solid fa-handshake"></i></div>
         </div>
         <div class="m-annonce-body">
           <div class="m-annonce-top">
-            <span class="m-annonce-cat cat-event"><i class="fa-solid fa-calendar-days"></i> <span data-i18n="cat.event">Événement</span></span>
-            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann3.date">20 juin 2025</span></span>
+            <span class="m-annonce-cat cat-event"><i class="fa-solid fa-handshake"></i> <span data-i18n="cat.eco">Mission économique</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann1.date">10 juin 2025</span></span>
           </div>
-          <div class="m-annonce-title" data-i18n="ann3.title">Journée Consulaire Itinérante — Budapest, 12 sept.</div>
-          <p class="m-annonce-text" data-i18n-html="ann3.text">Démarches administratives sur place à Budapest. Inscription avant le <strong>29 août 2025</strong>.</p>
+          <div class="m-annonce-title" data-i18n="ann1.title">Mission économique : Aka Aouélé conduit une délégation du Conseil Économique, Social, Environnemental et Culturel</div>
+          <p class="m-annonce-text" data-i18n="ann1.text">Le Président du CESEC, Aka Aouélé, a conduit une délégation ivoirienne en Autriche dans le cadre d'une mission économique visant à renforcer les échanges et la coopération entre la Côte d'Ivoire et ses partenaires européens.</p>
           <div class="m-annonce-btns">
-            <a href="contact.html" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-user-check"></i> <span data-i18n="btn.register">S'inscrire</span></a>
-            <a href="#" class="m-annonce-btn m-btn-green"><i class="fa-solid fa-file-arrow-down"></i> <span data-i18n="btn.programme">Programme</span></a>
+            <a href="https://ambacivienna.kouassij019.workers.dev/annonces" target="_blank" rel="noopener" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn.readsite">Lire sur le site</span></a>
           </div>
         </div>
       </div>
 
-      <!-- 4 — Administrative -->
-      <div class="m-annonce-card" data-cat="admin">
+      <!-- 2 — Diplomatie -->
+      <div class="m-annonce-card" data-cat="diplomatie">
         <div class="m-annonce-stripe stripe-admin"></div>
         <div class="m-annonce-icon">
-          <div class="m-annonce-icon-inner icon-admin"><i class="fa-solid fa-id-card"></i></div>
+          <div class="m-annonce-icon-inner icon-admin"><i class="fa-solid fa-earth-europe"></i></div>
         </div>
         <div class="m-annonce-body">
           <div class="m-annonce-top">
-            <span class="m-annonce-cat cat-admin"><i class="fa-solid fa-briefcase"></i> <span data-i18n="cat.admin">Administratif</span></span>
-            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann4.date">5 juin 2025</span></span>
+            <span class="m-annonce-cat cat-admin"><i class="fa-solid fa-earth-europe"></i> <span data-i18n="cat.diplomatie">Diplomatie</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann2.date">9 juillet 2025</span></span>
           </div>
-          <div class="m-annonce-title" data-i18n="ann4.title">Rappel — Documents requis pour le passeport</div>
-          <p class="m-annonce-text" data-i18n="ann4.text">Ancien passeport, acte de naissance légalisé, 2 photos, justificatif de domicile. Tout dossier incomplet sera retourné.</p>
+          <div class="m-annonce-title" data-i18n="ann2.title">La diplomatie ivoirienne à l'honneur à Vienne : la Côte d'Ivoire assure la présidence de la Commission Préparatoire de l'OTICE</div>
+          <p class="m-annonce-text" data-i18n="ann2.text">La Côte d'Ivoire a pris la présidence de la Commission Préparatoire de l'Organisation du Traité d'Interdiction Complète des Essais Nucléaires (CTBTO), marquant une étape majeure de la diplomatie ivoirienne sur la scène internationale à Vienne.</p>
           <div class="m-annonce-btns">
-            <a href="services.html#passeport" class="m-annonce-btn m-btn-orange"><i class="fa-solid fa-passport"></i> <span data-i18n="btn.procedure">Procédure complète</span></a>
+            <a href="https://ambacivienna.kouassij019.workers.dev/annonces" target="_blank" rel="noopener" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn.readsite">Lire sur le site</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — Actualité -->
+      <div class="m-annonce-card" data-cat="actu">
+        <div class="m-annonce-stripe stripe-actu"></div>
+        <div class="m-annonce-icon">
+          <div class="m-annonce-icon-inner icon-actu"><i class="fa-solid fa-atom"></i></div>
+        </div>
+        <div class="m-annonce-body">
+          <div class="m-annonce-top">
+            <span class="m-annonce-cat cat-actu"><i class="fa-solid fa-newspaper"></i> <span data-i18n="cat.actu">Actualité</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann3.date">20 octobre 2023</span></span>
+          </div>
+          <div class="m-annonce-title" data-i18n="ann3.title">Nucléaire civil : la Côte d'Ivoire plaide pour un soutien appuyé de l'AIEA</div>
+          <p class="m-annonce-text" data-i18n="ann3.text">La Côte d'Ivoire a exprimé à Vienne, lors des travaux de l'AIEA, sa volonté de bénéficier d'un accompagnement renforcé dans le cadre du développement de son programme nucléaire civil.</p>
+          <div class="m-annonce-btns">
+            <a href="https://ambacivienna.kouassij019.workers.dev/annonces" target="_blank" rel="noopener" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn.readsite">Lire sur le site</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — Diplomatie -->
+      <div class="m-annonce-card" data-cat="diplomatie">
+        <div class="m-annonce-stripe stripe-admin"></div>
+        <div class="m-annonce-icon">
+          <div class="m-annonce-icon-inner icon-admin"><i class="fa-solid fa-people-arrows"></i></div>
+        </div>
+        <div class="m-annonce-body">
+          <div class="m-annonce-top">
+            <span class="m-annonce-cat cat-admin"><i class="fa-solid fa-earth-europe"></i> <span data-i18n="cat.diplomatie">Diplomatie</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann4.date">21 octobre 2023</span></span>
+          </div>
+          <div class="m-annonce-title" data-i18n="ann4.title">Diplomatie ivoirienne en Autriche : l'Ambassadeur Cissé Yacouba échange avec le gouverneur du Vorarlberg</div>
+          <p class="m-annonce-text" data-i18n="ann4.text">Son Excellence Monsieur Cissé Yacouba, Ambassadeur de Côte d'Ivoire en Autriche, a rencontré le gouverneur du Land de Vorarlberg dans le cadre du renforcement des relations bilatérales entre la Côte d'Ivoire et l'Autriche.</p>
+          <div class="m-annonce-btns">
+            <a href="https://ambacivienna.kouassij019.workers.dev/annonces" target="_blank" rel="noopener" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn.readsite">Lire sur le site</span></a>
           </div>
         </div>
       </div>
@@ -462,12 +462,12 @@
         <div class="m-annonce-body">
           <div class="m-annonce-top">
             <span class="m-annonce-cat cat-communique"><i class="fa-solid fa-scroll"></i> <span data-i18n="cat.communique">Communiqué</span></span>
-            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann5.date">15 mai 2025</span></span>
+            <span class="m-annonce-date"><i class="fa-solid fa-calendar-day"></i> <span data-i18n="ann5.date">23 juillet 2023</span></span>
           </div>
-          <div class="m-annonce-title" data-i18n="ann5.title">Présentation de lettres de créance</div>
-          <p class="m-annonce-text" data-i18n="ann5.text">S.E.M. Cissé Yacouba a présenté ses lettres de créance au Président fédéral d'Autriche au Palais de la Hofburg.</p>
+          <div class="m-annonce-title" data-i18n="ann5.title">Communiqué officiel — Présentation de lettres de créance</div>
+          <p class="m-annonce-text" data-i18n="ann5.text">Son Excellence Monsieur Cissé Yacouba, Ambassadeur Extraordinaire et Plénipotentiaire de la République de Côte d'Ivoire, a présenté ses lettres de créance au Président fédéral de la République d'Autriche lors d'une cérémonie officielle au Palais de la Hofburg à Vienne.</p>
           <div class="m-annonce-btns">
-            <a href="#" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn.read">Lire le communiqué</span></a>
+            <a href="https://ambacivienna.kouassij019.workers.dev/annonces" target="_blank" rel="noopener" class="m-annonce-btn m-btn-grey"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="btn.readsite">Lire sur le site</span></a>
           </div>
         </div>
       </div>
@@ -531,13 +531,6 @@
       <a href="https://www.youtube.com/@AMBACIVIENNA" target="_blank" class="m-footer-social" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://linktr.ee/ambacivienna" target="_blank" class="m-footer-social" title="Linktree"><svg width="13" height="15" viewBox="0 0 100 118" fill="currentColor" aria-hidden="true" style="vertical-align:middle"><g transform="translate(50,50)"><rect x="-9" y="-44" width="18" height="44" rx="6"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(45)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(90)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(135)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(180)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(225)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(270)"/><rect x="-9" y="-44" width="18" height="44" rx="6" transform="rotate(315)"/></g><rect x="41" y="80" width="18" height="28" rx="6"/></svg></a>
       <a href="https://wa.me/436765373926" target="_blank" class="m-footer-social" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-    <div class="m-footer-links">
-      <a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> <span data-i18n="footer.links.home">Accueil</span></a>
-      <a href="ambassade.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg> <span data-i18n="footer.links.embassy">Ambassade</span></a>
-      <a href="services.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> <span data-i18n="footer.links.services">Services</span></a>
-      <a href="contact.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg> <span data-i18n="footer.links.contact">Contact</span></a>
-      <a href="decouvrir.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg> <span data-i18n="nav.discover">Découvrir</span></a>
     </div>
     <p class="m-footer-copy"><a href="https://www.webdesignmindset.com/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">© 2026 Web Design Mindset. All rights reserved</a></p>
   </footer>
