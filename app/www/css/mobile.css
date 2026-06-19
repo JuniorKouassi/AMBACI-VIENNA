@@ -1014,24 +1014,26 @@ select.m-input { cursor: pointer; }
   position: fixed; inset: 0; z-index: 9999;
   background: rgba(10,31,16,.6);
   display: none; align-items: flex-end; justify-content: center;
+  padding-top: env(safe-area-inset-top); /* keep modal clear of the status bar */
+  box-sizing: border-box;
 }
 .m-cc-overlay.open { display: flex; }
 .m-cc-modal {
   background: var(--white);
   border-radius: 1.25rem 1.25rem 0 0;
-  width: 100%; max-height: 92vh; overflow-y: auto;
+  width: 100%; max-height: 100%; overflow: hidden;
+  display: flex; flex-direction: column; /* header stays fixed, only body scrolls */
   position: relative;
   box-shadow: var(--shadow-lg);
   animation: m-cc-up .25s ease;
 }
 @keyframes m-cc-up { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 .m-cc-modal-header {
+  flex-shrink: 0;
   padding: 1.1rem;
   background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 50%, var(--green-dark) 100%);
   color: var(--white);
   display: flex; align-items: center; gap: 0.6rem;
-  border-radius: 1.25rem 1.25rem 0 0;
-  position: sticky; top: 0; z-index: 1;
 }
 .m-cc-modal-header h2 { font-size: 1.05rem; margin: 0; font-family: var(--font-primary); }
 .m-cc-close {
@@ -1041,7 +1043,7 @@ select.m-input { cursor: pointer; }
   border: none; font-size: 1.1rem; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
-.m-cc-modal-body { padding: 1.1rem; }
+.m-cc-modal-body { padding: 1.1rem; overflow-y: auto; flex: 1; }
 .m-cc-modal-body h3 {
   font-size: .72rem; font-weight: 700; letter-spacing: .04em;
   color: var(--orange-dark); text-transform: uppercase;
