@@ -279,6 +279,34 @@ const translations = {
     'psrv.cert.li.res':      'Certificat de résidence',
     'psrv.cert.li.cout':     'Certificat de coutume',
     'psrv.cert.li.proc':     'Procuration',
+    /* Carte consulaire */
+    'srv.badge.cc': "Carte d'identité consulaire",
+    'cc.h2': 'Carte consulaire',
+    'cc.card.title': 'Demande de carte consulaire',
+    'cc.card.sub': 'Constituer et envoyer votre dossier en ligne',
+    'cc.card.desc': 'Vérifiez votre éligibilité et envoyez votre dossier complet (formulaire + pièces jointes) directement depuis cette page.',
+    'cc.fees': 'Frais',
+    'cc.title': 'Carte consulaire',
+    'cc.eligibility.title': "Conditions d'éligibilité",
+    'cc.eligibility.text': "Être ivoirien vivant dans la circonscription diplomatique de l'ambassade (Autriche, Hongrie, Croatie, Serbie, Slovaquie, Slovénie, Roumanie, Bosnie-Herzégovine, Moldavie).",
+    'cc.docs.title': 'Dossier à fournir',
+    'cc.docs.li1': '1 photo passeport couleur fond blanc',
+    'cc.docs.li2': 'Photocopie des 3 premières pages du passeport',
+    'cc.docs.li3': "Copie pièce d'identité (CNI, certificat de nationalité)",
+    'cc.docs.li4': 'Titre de séjour',
+    'cc.docs.li5': "Photocopie de l'Extrait d'Acte de Naissance",
+    'cc.docs.li6': "1 preuve d'adresse (attestation d'hébergement, photocopie d'une facture ou photocopie de l'ID avec l'adresse inscrite)",
+    'cc.docs.li7': 'Reçu de paiement de 25 € sur le site : www.ci-embassyepay.org/embassy',
+    'cc.f.nom': 'Nom',
+    'cc.f.prenom': 'Prénom',
+    'cc.f.naissance': 'Date de naissance',
+    'cc.f.adresse': 'Adresse',
+    'cc.f.email': 'Email',
+    'cc.docs.email.note': "Une fois ce formulaire envoyé, merci d'envoyer une copie de toutes les pièces ci-dessus par email à <strong>j.kouassi@diplomatie.gouv.ci</strong>, en indiquant votre nom et prénom en objet.",
+    'cc.f.submit': 'Envoyer la demande →',
+    'cc.status.sending': 'Envoi en cours…',
+    'cc.status.success': '✓ Demande envoyée avec succès !',
+    'cc.status.error': "Erreur lors de l'envoi. Veuillez réessayer ou nous contacter directement.",
     'psrv.faq.q1': 'Faut-il absolument un rendez-vous ?',
     'psrv.faq.a1': "Oui, la prise de rendez-vous est obligatoire pour tout dépôt de dossier. Aucun dossier ne sera accepté sans rendez-vous préalable. Vous pouvez prendre rendez-vous par téléphone ou par email.",
     'psrv.faq.q2': "Combien de temps dure le traitement d'un passeport ?",
@@ -787,6 +815,34 @@ const translations = {
     'psrv.cert.li.res':      'Wohnsitzbescheinigung',
     'psrv.cert.li.cout':     'Brauchtumsbescheinigung',
     'psrv.cert.li.proc':     'Vollmacht',
+    /* Carte consulaire */
+    'srv.badge.cc': 'Konsularischer Ausweis',
+    'cc.h2': 'Konsularkarte',
+    'cc.card.title': 'Antrag auf Konsularkarte',
+    'cc.card.sub': 'Stellen Sie Ihren Antrag online zusammen und senden Sie ihn ab',
+    'cc.card.desc': 'Prüfen Sie Ihre Berechtigung und senden Sie Ihre vollständigen Unterlagen (Formular + Anhänge) direkt über diese Seite.',
+    'cc.fees': 'Gebühr',
+    'cc.title': 'Konsularkarte',
+    'cc.eligibility.title': 'Zulassungsvoraussetzungen',
+    'cc.eligibility.text': 'Ivorische Staatsangehörigkeit und Wohnsitz im konsularischen Amtsbereich der Botschaft (Österreich, Ungarn, Kroatien, Serbien, Slowakei, Slowenien, Rumänien, Bosnien und Herzegowina, Moldawien).',
+    'cc.docs.title': 'Erforderliche Unterlagen',
+    'cc.docs.li1': '1 Farbpassfoto auf weißem Hintergrund',
+    'cc.docs.li2': 'Fotokopie der ersten 3 Seiten des Reisepasses',
+    'cc.docs.li3': 'Kopie des Ausweisdokuments (CNI, Staatsangehörigkeitsbescheinigung)',
+    'cc.docs.li4': 'Aufenthaltstitel',
+    'cc.docs.li5': 'Fotokopie der Geburtsurkunde',
+    'cc.docs.li6': 'Ein Adressnachweis (Unterbringungsbescheinigung, Fotokopie einer Rechnung oder Fotokopie des Ausweises mit eingetragener Adresse)',
+    'cc.docs.li7': 'Zahlungsbeleg über 25 € auf der Website: www.ci-embassyepay.org/embassy',
+    'cc.f.nom': 'Name',
+    'cc.f.prenom': 'Vorname',
+    'cc.f.naissance': 'Geburtsdatum',
+    'cc.f.adresse': 'Adresse',
+    'cc.f.email': 'E-Mail',
+    'cc.docs.email.note': 'Bitte senden Sie nach dem Absenden dieses Formulars eine Kopie aller oben genannten Unterlagen per E-Mail an <strong>j.kouassi@diplomatie.gouv.ci</strong> und geben Sie Ihren Namen und Vornamen als Betreff an.',
+    'cc.f.submit': 'Antrag senden →',
+    'cc.status.sending': 'Wird gesendet…',
+    'cc.status.success': '✓ Antrag erfolgreich gesendet!',
+    'cc.status.error': 'Fehler beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.',
     'psrv.faq.q1': 'Ist ein Termin zwingend erforderlich?',
     'psrv.faq.a1': 'Ja, die Terminvereinbarung ist für die Einreichung von Unterlagen obligatorisch. Es werden keine Unterlagen ohne vorherigen Termin angenommen. Termine können telefonisch oder per E-Mail vereinbart werden.',
     'psrv.faq.q2': 'Wie lange dauert die Bearbeitung eines Reisepasses?',
@@ -1254,6 +1310,34 @@ const translations = {
     'psrv.cert.li.res':      'Residence certificate',
     'psrv.cert.li.cout':     'Customary law certificate',
     'psrv.cert.li.proc':     'Power of attorney',
+    /* Carte consulaire */
+    'srv.badge.cc': 'Consular ID card',
+    'cc.h2': 'Consular card',
+    'cc.card.title': 'Consular card request',
+    'cc.card.sub': 'Build and submit your application online',
+    'cc.card.desc': 'Check your eligibility and send your complete application (form + attachments) directly from this page.',
+    'cc.fees': 'Fee',
+    'cc.title': 'Consular card',
+    'cc.eligibility.title': 'Eligibility requirements',
+    'cc.eligibility.text': "Be an Ivorian national residing within the embassy's consular district (Austria, Hungary, Croatia, Serbia, Slovakia, Slovenia, Romania, Bosnia and Herzegovina, Moldova).",
+    'cc.docs.title': 'Required documents',
+    'cc.docs.li1': '1 colour passport photo, white background',
+    'cc.docs.li2': 'Photocopy of the first 3 pages of the passport',
+    'cc.docs.li3': 'Copy of ID document (national ID card, certificate of nationality)',
+    'cc.docs.li4': 'Residence permit',
+    'cc.docs.li5': 'Photocopy of the birth certificate',
+    'cc.docs.li6': 'One proof of address (accommodation certificate, photocopy of a utility bill, or photocopy of ID showing the address)',
+    'cc.docs.li7': 'Proof of payment of €25 on the website: www.ci-embassyepay.org/embassy',
+    'cc.f.nom': 'Last name',
+    'cc.f.prenom': 'First name',
+    'cc.f.naissance': 'Date of birth',
+    'cc.f.adresse': 'Address',
+    'cc.f.email': 'Email',
+    'cc.docs.email.note': 'After submitting this form, please email a copy of all the documents listed above to <strong>j.kouassi@diplomatie.gouv.ci</strong>, stating your first and last name as the subject.',
+    'cc.f.submit': 'Submit request →',
+    'cc.status.sending': 'Sending…',
+    'cc.status.success': '✓ Request sent successfully!',
+    'cc.status.error': 'Error sending. Please try again or contact us directly.',
     'psrv.faq.q1': 'Is an appointment absolutely required?',
     'psrv.faq.a1': 'Yes, booking an appointment is mandatory for all file submissions. No file will be accepted without a prior appointment. You can book by phone or email.',
     'psrv.faq.q2': 'How long does passport processing take?',
@@ -1688,6 +1772,74 @@ if (contactForm) {
     field.addEventListener('input', () => { field.style.borderColor = ''; field.removeAttribute('aria-invalid'); });
   });
 }
+
+/* ============================================================
+   Carte consulaire — modal + form submission (Web3Forms)
+   ============================================================ */
+(function carteConsulaire() {
+  const overlay = document.getElementById('cc-overlay');
+  const openBtn = document.getElementById('cc-open-btn');
+  const closeBtn = document.getElementById('cc-close-btn');
+  if (!overlay || !openBtn) return;
+
+  function curLang() {
+    const l = localStorage.getItem('ambaci-lang');
+    return (l && translations[l]) ? l : 'fr';
+  }
+  function t(key) { return (translations[curLang()] || translations.fr)[key] || key; }
+
+  function openModal() {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  openBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
+  const form = document.getElementById('cc-form');
+  const status = document.getElementById('cc-status');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('[type="submit"]');
+      const origHTML = btn.innerHTML;
+      btn.disabled = true;
+      status.className = '';
+      status.textContent = t('cc.status.sending');
+
+      const formData = new FormData(form);
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            status.textContent = t('cc.status.success');
+            status.className = 'success';
+            form.reset();
+            setTimeout(closeModal, 2500);
+          } else {
+            status.textContent = t('cc.status.error');
+            status.className = 'error';
+          }
+        })
+        .catch(() => {
+          status.textContent = t('cc.status.error');
+          status.className = 'error';
+        })
+        .finally(() => { btn.disabled = false; btn.innerHTML = origHTML; });
+    });
+  }
+})();
 
 /* ============================================================
    Sticky header

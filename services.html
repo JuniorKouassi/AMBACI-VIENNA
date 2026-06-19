@@ -498,8 +498,97 @@
           </div>
         </div>
 
+        <!-- Carte consulaire -->
+        <div id="carte-consulaire">
+          <span class="badge" data-i18n="srv.badge.cc">Carte d'identité consulaire</span>
+          <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="cc.h2">Carte consulaire</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);">
+            <button type="button" id="cc-open-btn" class="service-detail-card" style="text-align:left;border:1px solid var(--grey-200);cursor:pointer;font:inherit;width:100%;">
+              <div class="service-detail-header">
+                <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-id-card"></i></div>
+                <div>
+                  <h3 data-i18n="cc.card.title">Demande de carte consulaire</h3>
+                  <p data-i18n="cc.card.sub">Constituer et envoyer votre dossier en ligne</p>
+                </div>
+              </div>
+              <div class="service-detail-body">
+                <p style="font-size:.875rem;color:var(--grey-700);" data-i18n="cc.card.desc">Vérifiez votre éligibilité et envoyez votre dossier complet (formulaire + pièces jointes) directement depuis cette page.</p>
+                <div class="service-tarif">
+                  <span data-i18n="cc.fees">Frais</span>
+                  <strong>25 €</strong>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
+
+    <!-- Carte consulaire — Modal -->
+    <div class="cc-overlay" id="cc-overlay" aria-hidden="true">
+      <div class="cc-modal" role="dialog" aria-modal="true" aria-labelledby="cc-title">
+        <button type="button" class="cc-close" id="cc-close-btn" aria-label="Fermer">×</button>
+        <div class="cc-modal-header">
+          <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-id-card"></i></div>
+          <h2 id="cc-title" data-i18n="cc.title">Carte consulaire</h2>
+        </div>
+        <div class="cc-modal-body">
+          <h3 data-i18n="cc.eligibility.title">Conditions d'éligibilité</h3>
+          <p class="cc-eligibility" data-i18n="cc.eligibility.text">Être ivoirien vivant dans la circonscription diplomatique de l'ambassade (Autriche, Hongrie, Croatie, Serbie, Slovaquie, Slovénie, Roumanie, Bosnie-Herzégovine, Moldavie).</p>
+
+          <h3 data-i18n="cc.docs.title">Dossier à fournir</h3>
+          <ul class="requirement-list">
+            <li data-i18n="cc.docs.li1">1 photo passeport couleur fond blanc</li>
+            <li data-i18n="cc.docs.li2">Photocopie des 3 premières pages du passeport</li>
+            <li data-i18n="cc.docs.li3">Copie pièce d'identité (CNI, certificat de nationalité)</li>
+            <li data-i18n="cc.docs.li4">Titre de séjour</li>
+            <li data-i18n="cc.docs.li5">Photocopie de l'Extrait d'Acte de Naissance</li>
+            <li data-i18n="cc.docs.li6">1 preuve d'adresse (attestation d'hébergement, photocopie d'une facture ou photocopie de l'ID avec l'adresse inscrite)</li>
+            <li data-i18n="cc.docs.li7">Reçu de paiement de 25 € sur le site : www.ci-embassyepay.org/embassy</li>
+          </ul>
+
+          <p class="cc-eligibility" style="background:var(--green-pale);border-left-color:var(--green);" data-i18n-html="cc.docs.email.note">Une fois ce formulaire envoyé, merci d'envoyer une copie de toutes les pièces ci-dessus par email à <strong>j.kouassi@diplomatie.gouv.ci</strong>, en indiquant votre nom et prénom en objet.</p>
+
+          <form id="cc-form" novalidate aria-label="Formulaire de demande de carte consulaire">
+            <input type="hidden" name="access_key" value="REMPLACER_PAR_VOTRE_CLE_WEB3FORMS">
+            <input type="hidden" name="subject" value="Nouvelle demande de carte consulaire — AMBACI Vienne">
+            <input type="hidden" name="from_name" value="Site AMBACI Vienne — Carte consulaire">
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-md);">
+              <div class="form-group">
+                <label class="form-label" for="cc-nom"><span data-i18n="cc.f.nom">Nom</span> <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="cc-nom" name="Nom" class="form-control" required aria-required="true">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cc-prenom"><span data-i18n="cc.f.prenom">Prénom</span> <span class="required" aria-hidden="true">*</span></label>
+                <input type="text" id="cc-prenom" name="Prénom" class="form-control" required aria-required="true">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cc-naissance"><span data-i18n="cc.f.naissance">Date de naissance</span> <span class="required" aria-hidden="true">*</span></label>
+              <input type="date" id="cc-naissance" name="Date de naissance" class="form-control" required aria-required="true">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cc-adresse"><span data-i18n="cc.f.adresse">Adresse</span> <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="cc-adresse" name="Adresse" class="form-control" required aria-required="true">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cc-email"><span data-i18n="cc.f.email">Email</span> <span class="required" aria-hidden="true">*</span></label>
+              <input type="email" id="cc-email" name="Email" class="form-control" required aria-required="true">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:1rem;">
+              <span data-i18n="cc.f.submit">Envoyer la demande →</span>
+            </button>
+            <p id="cc-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- FAQ -->
     <section style="padding:var(--space-3xl) 0;background:var(--grey-100);">

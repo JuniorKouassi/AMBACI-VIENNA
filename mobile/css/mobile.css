@@ -1006,3 +1006,58 @@ select.m-input { cursor: pointer; }
   letter-spacing: 0.02em;
   padding: 0.3rem 0.1rem;
 }
+
+/* ============================================================
+   CARTE CONSULAIRE — modal
+   ============================================================ */
+.m-cc-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(10,31,16,.6);
+  display: none; align-items: flex-end; justify-content: center;
+}
+.m-cc-overlay.open { display: flex; }
+.m-cc-modal {
+  background: var(--white);
+  border-radius: 1.25rem 1.25rem 0 0;
+  width: 100%; max-height: 92vh; overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  animation: m-cc-up .25s ease;
+}
+@keyframes m-cc-up { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.m-cc-modal-header {
+  padding: 1.1rem;
+  background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 50%, var(--green-dark) 100%);
+  color: var(--white);
+  display: flex; align-items: center; gap: 0.6rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  position: sticky; top: 0; z-index: 1;
+}
+.m-cc-modal-header h2 { font-size: 1.05rem; margin: 0; font-family: var(--font-primary); }
+.m-cc-close {
+  position: absolute; top: 0.7rem; right: 0.7rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,.25); color: var(--white);
+  border: none; font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.m-cc-modal-body { padding: 1.1rem; }
+.m-cc-modal-body h3 {
+  font-size: .72rem; font-weight: 700; letter-spacing: .04em;
+  color: var(--orange-dark); text-transform: uppercase;
+  margin: 1rem 0 .5rem;
+}
+.m-cc-modal-body h3:first-child { margin-top: 0; }
+.m-cc-eligibility {
+  background: #FFF0E0; border-left: 3px solid var(--orange);
+  border-radius: var(--radius-md); padding: .7rem;
+  font-size: .82rem; color: var(--grey-700);
+}
+.m-cc-file-input {
+  border: 2px dashed var(--grey-300); border-radius: var(--radius-md);
+  padding: 1rem; text-align: center; cursor: pointer; display: block;
+}
+#m-cc-file-count { font-size: .72rem; color: var(--grey-500); margin-top: .4rem; }
+#m-cc-status { font-size: .8rem; text-align: center; margin-top: .7rem; min-height: 1.2em; }
+#m-cc-status.success { color: var(--green-dark); font-weight: 600; }
+#m-cc-status.error { color: #DC2626; font-weight: 600; }

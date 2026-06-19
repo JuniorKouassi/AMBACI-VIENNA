@@ -206,6 +206,22 @@
     </a>
   </section>
 
+  <!-- CARTE CONSULAIRE -->
+  <section class="m-section">
+    <span class="m-badge" data-i18n="srv.badge.cc">Carte d'identité consulaire</span>
+    <h2 class="m-section-title" data-i18n="cc.h2">Carte consulaire</h2>
+    <button type="button" id="m-cc-open-btn" class="m-srv-card" style="display:block;width:100%;text-align:left;border:none;cursor:pointer;font:inherit;color:inherit;background:var(--white);">
+      <div class="m-srv-card-header">
+        <div class="m-srv-card-icon"><i class="fa-solid fa-id-card"></i></div>
+        <div><h3 data-i18n="cc.card.title">Demande de carte consulaire</h3><p data-i18n="cc.card.sub">Envoyez votre dossier en ligne</p></div>
+      </div>
+      <div class="m-srv-card-body">
+        <p style="font-size:.8rem;color:var(--grey-700);" data-i18n="cc.card.desc">Vérifiez votre éligibilité et envoyez votre dossier complet directement depuis votre téléphone.</p>
+        <div class="m-tarif"><span data-i18n="cc.fees">Frais</span><strong>25 €</strong></div>
+      </div>
+    </button>
+  </section>
+
   <!-- FAQ -->
   <section class="m-section">
     <span class="m-badge" data-i18n="badge.faq">FAQ</span>
@@ -270,6 +286,7 @@
       <a href="annonces.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span data-i18n="nav.annonces">Annonces</span></a>
       <a href="decouvrir.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-i18n="nav.discover">Découvrir</span></a>
       <a href="contact.html"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
+      <a href="#" onclick="event.preventDefault();document.getElementById('m-drawer').classList.remove('open');document.getElementById('m-drawer-overlay').classList.remove('open');document.getElementById('m-hamburger').classList.remove('open');document.body.style.overflow='';if(window.openCarteConsulaire)window.openCarteConsulaire();"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="11" r="2"/><line x1="14" y1="9" x2="19" y2="9"/><line x1="14" y1="13" x2="19" y2="13"/><line x1="6" y1="16" x2="10" y2="16"/></svg><span data-i18n="cc.h2">Carte consulaire</span></a>
     </nav>
     <div class="m-drawer-footer">© 2026 Ambassade CI — Vienne</div>
   </div>
@@ -282,6 +299,63 @@
     <a href="decouvrir.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-i18n="nav.discover">Découvrir</span></a>
     <a href="contact.html" class="m-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="nav.contact">Contact</span></a>
   </nav>
+
+  <!-- CARTE CONSULAIRE — Modal -->
+  <div class="m-cc-overlay" id="m-cc-overlay" aria-hidden="true">
+    <div class="m-cc-modal" role="dialog" aria-modal="true" aria-labelledby="m-cc-title">
+      <div class="m-cc-modal-header">
+        <i class="fa-solid fa-id-card"></i>
+        <h2 id="m-cc-title" data-i18n="cc.title">Carte consulaire</h2>
+        <button type="button" class="m-cc-close" id="m-cc-close-btn" aria-label="Fermer">×</button>
+      </div>
+      <div class="m-cc-modal-body">
+        <h3 data-i18n="cc.eligibility.title">Conditions d'éligibilité</h3>
+        <p class="m-cc-eligibility" data-i18n="cc.eligibility.text">Être ivoirien vivant dans la circonscription diplomatique de l'ambassade (Autriche, Hongrie, Croatie, Serbie, Slovaquie, Slovénie, Roumanie, Bosnie-Herzégovine, Moldavie).</p>
+
+        <h3 data-i18n="cc.docs.title">Dossier à fournir</h3>
+        <ul class="m-req-list">
+          <li data-i18n="cc.docs.li1">1 photo passeport couleur fond blanc</li>
+          <li data-i18n="cc.docs.li2">Photocopie des 3 premières pages du passeport</li>
+          <li data-i18n="cc.docs.li3">Copie pièce d'identité (CNI, certificat de nationalité)</li>
+          <li data-i18n="cc.docs.li4">Titre de séjour</li>
+          <li data-i18n="cc.docs.li5">Photocopie de l'Extrait d'Acte de Naissance</li>
+          <li data-i18n="cc.docs.li6">1 preuve d'adresse (attestation d'hébergement, photocopie d'une facture ou photocopie de l'ID avec l'adresse inscrite)</li>
+          <li data-i18n="cc.docs.li7">Reçu de paiement de 25 € sur le site : www.ci-embassyepay.org/embassy</li>
+        </ul>
+
+        <p class="m-cc-eligibility" style="background:var(--green-pale);border-left-color:var(--green);" data-i18n-html="cc.docs.email.note">Une fois ce formulaire envoyé, merci d'envoyer une copie de toutes les pièces ci-dessus par email à <strong>j.kouassi@diplomatie.gouv.ci</strong>, en indiquant votre nom et prénom en objet.</p>
+
+        <form id="m-cc-form">
+          <input type="hidden" name="access_key" value="REMPLACER_PAR_VOTRE_CLE_WEB3FORMS">
+          <input type="hidden" name="subject" value="Nouvelle demande de carte consulaire — AMBACI Vienne (App)">
+          <input type="hidden" name="from_name" value="App AMBACI Vienne — Carte consulaire">
+
+          <div class="m-form-group">
+            <label class="m-label"><span data-i18n="cc.f.nom">Nom</span> <span class="req">*</span></label>
+            <input type="text" name="Nom" class="m-input" required>
+          </div>
+          <div class="m-form-group">
+            <label class="m-label"><span data-i18n="cc.f.prenom">Prénom</span> <span class="req">*</span></label>
+            <input type="text" name="Prénom" class="m-input" required>
+          </div>
+          <div class="m-form-group">
+            <label class="m-label"><span data-i18n="cc.f.naissance">Date de naissance</span> <span class="req">*</span></label>
+            <input type="date" name="Date de naissance" class="m-input" required>
+          </div>
+          <div class="m-form-group">
+            <label class="m-label"><span data-i18n="cc.f.adresse">Adresse</span> <span class="req">*</span></label>
+            <input type="text" name="Adresse" class="m-input" required>
+          </div>
+          <div class="m-form-group">
+            <label class="m-label"><span data-i18n="cc.f.email">Email</span> <span class="req">*</span></label>
+            <input type="email" name="Email" class="m-input" required>
+          </div>
+          <button type="submit" class="m-btn-submit"><span data-i18n="cc.f.submit">Envoyer la demande →</span></button>
+          <p id="m-cc-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
   <script src="js/native.js"></script>
