@@ -314,12 +314,6 @@
       new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;var f=n.tagName==='IFRAME'?n:n.querySelector('iframe');if(!f)return;f.style.setProperty('width','min(calc(100vw - 2rem), 340px)','important');f.style.setProperty('height','min(60vh, 480px)','important');f.style.setProperty('max-width','340px','important');f.style.setProperty('max-height','480px','important');});});}).observe(document.body,{childList:true,subtree:true});
     })();
   </script>
-  <!-- Lien retour desktop -->
-  <div style="text-align:center;padding:.6rem;background:var(--grey-100);font-size:.7rem;color:var(--grey-500);">
-    <a href="#" onclick="sessionStorage.setItem('forceDesktop','1');window.location.replace('../AMBACI%20VIENNA/index.html');return false;" style="color:var(--grey-500);text-decoration:underline;">
-      <i class="fa-solid fa-desktop"></i> Version desktop
-    </a>
-  </div>
 </body>
 </html>
 
