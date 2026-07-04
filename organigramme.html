@@ -52,7 +52,7 @@
     }
     .org-doc-rules span { display: block; height: 2px; border-radius: 1px; }
 
-    /* ===== TREE — center-spine with independent branches ===== */
+    /* ===== TREE — center spine, independent branches ===== */
     .oc {
       display: flex;
       flex-direction: column;
@@ -62,7 +62,7 @@
       padding-bottom: .5rem;
     }
 
-    /* --- Base box --- */
+    /* Box base */
     .oc-box {
       border-radius: 9px;
       padding: .8rem 1.25rem;
@@ -85,7 +85,7 @@
       line-height: 1.3;
     }
 
-    /* --- Colors --- */
+    /* Colors */
     .oc-orange  { background: #F77F00; }
     .oc-gold    { background: #B08500; }
     .oc-olive3  { background: #8C7E00; }
@@ -93,55 +93,46 @@
     .oc-green   { background: #009A44; }
     .oc-dkgreen { background: #006B2E; }
 
-    /* --- Centered rows (L1, L2, L6) --- */
+    /* Centered rows (L1, L2, L6) */
     .oc-r { width: 100%; }
     .oc-r-c { display: flex; justify-content: center; }
     .oc-r-c .oc-box { width: 52%; min-width: 200px; }
     .oc-wide { width: 68%; min-width: 250px; }
     .oc-wide strong { font-size: 1rem; }
 
-    /* --- Center spine segment (vertical 2px line, centered) --- */
+    /* ── LINES: brighter (#a0a0a0) and wider (3px) ── */
+
+    /* Center vertical spine segment */
     .oc-vc-seg {
-      width: 2px;
+      width: 3px;
       height: 36px;
-      background: #bfbfbf;
+      background: #a0a0a0;
       flex-shrink: 0;
     }
 
-    /* --- Branch row: box ←arm— SPINE —arm→ box --- */
-    /* Each of L3 (Ministres) and L4 (ONUDI/Payeur) is its own independent branch */
+    /* Branch row: [box]←[arm]—[SPINE]—[arm]→[box] */
     .oc-branch {
       width: 100%;
       display: flex;
       align-items: center;
     }
-    /* Left half: [box][arm→center] */
-    .oc-bh-l {
+    .oc-bh-l, .oc-bh-r {
       flex: 1;
       display: flex;
       align-items: center;
     }
-    /* Right half: [center←arm][box] */
-    .oc-bh-r {
-      flex: 1;
-      display: flex;
-      align-items: center;
-    }
-    /* Horizontal arm fills space between box and center spine */
     .oc-h-arm {
       flex: 1;
-      height: 2px;
-      background: #bfbfbf;
+      height: 3px;
+      background: #a0a0a0;
       min-width: 8px;
     }
-    /* Center spine 2px, stretches to full branch-row height */
     .oc-bspine {
-      width: 2px;
-      background: #bfbfbf;
+      width: 3px;
+      background: #a0a0a0;
       flex-shrink: 0;
       align-self: stretch;
     }
-    /* Branch boxes: fixed shrink, reasonable width */
     .oc-bh-l .oc-box,
     .oc-bh-r .oc-box {
       flex-shrink: 0;
@@ -149,63 +140,90 @@
       max-width: 240px;
     }
 
-    /* --- Short vertical drop (from L5 bar to each box top) --- */
+    /* Short vertical drop (L5 bar → box top) */
     .oc-vdrop {
-      width: 2px;
+      width: 3px;
       height: 16px;
-      background: #bfbfbf;
+      background: #a0a0a0;
       flex-shrink: 0;
     }
 
-    /* --- L5 horizontal bar --- */
+    /* ── L5 SECTION: wrapper so center spine overlays bar + quad + connects to PAT ── */
+    .oc-l5-section {
+      position: relative;
+      width: 100%;
+      flex-shrink: 0;
+    }
+    /* Continuous center spine from bar top through quad all the way to PAT */
+    .oc-l5-section::after {
+      content: '';
+      position: absolute;
+      left: calc(50% - 1.5px);
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #a0a0a0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* L5 horizontal bar */
     .oc-l5-bar {
       position: relative;
       width: 100%;
-      height: 2px;
-      flex-shrink: 0;
+      height: 3px;
+      z-index: 1;
     }
     .oc-l5-bar::before {
       content: '';
       position: absolute;
-      left: 12.5%;
-      right: 12.5%;
+      left: 11.5%;
+      right: 11.5%;
       top: 0;
-      height: 2px;
-      background: #bfbfbf;
+      height: 3px;
+      background: #a0a0a0;
     }
 
-    /* --- L5 quad grid (4 equal boxes, same size) --- */
+    /* L5 five-column grid: [Cons][Cons][spacer=spine][SAE][SAE]
+       Wider gap between the Conseiller pair and SAE pair */
     .oc-quad {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      grid-template-columns: 1fr 1fr 28px 1fr 1fr;
+      gap: 8px;
       width: 100%;
+      position: relative;
+      z-index: 1;
     }
+    /* Center spacer: the spine (::after on oc-l5-section) shows through */
+    .oc-q-gap { /* intentionally empty */ }
+
     .oc-q4 {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+    /* All 4 L5 boxes: same padding + font → same size */
     .oc-q4 .oc-box {
       width: 100%;
       padding: .7rem .5rem;
     }
-    /* All L5 labels same font size so boxes appear equal */
     .oc-q4 .oc-box strong { font-size: .78rem; }
 
-    /* --- Responsive --- */
+    /* Responsive */
     @media (max-width: 620px) {
       .oc-box { padding: .65rem .9rem; }
       .oc-r-c .oc-box { width: 82%; }
       .oc-wide { width: 92%; }
       .oc-bh-l .oc-box, .oc-bh-r .oc-box { min-width: 90px; max-width: 160px; }
-      .oc-quad { gap: 5px; }
+      .oc-quad { grid-template-columns: 1fr 1fr 16px 1fr 1fr; gap: 5px; }
+      .oc-l5-bar::before { left: 7%; right: 7%; }
       .oc-q4 .oc-box strong { font-size: .68rem; }
-      .oc-l5-bar::before { left: 6%; right: 6%; }
     }
     @media (max-width: 420px) {
-      .oc-quad { grid-template-columns: repeat(2, 1fr); }
+      .oc-quad { grid-template-columns: 1fr 1fr; gap: 5px; }
+      .oc-q-gap { display: none; }
       .oc-l5-bar { display: none; }
+      .oc-l5-section::after { display: none; }
       .oc-q4 .oc-vdrop { display: none; }
     }
   </style>
@@ -376,38 +394,45 @@
           <!-- Center spine L4→L5 bar -->
           <div class="oc-vc-seg"></div>
 
-          <!-- L5 horizontal bar (spans all 4 columns, center spine passes through) -->
-          <div class="oc-l5-bar"></div>
+          <!-- L5 section: center spine (::after) runs continuously from bar top through quad to PAT -->
+          <div class="oc-l5-section">
 
-          <!-- L5: 4 equal-size boxes hanging from the bar -->
-          <div class="oc-quad">
-            <div class="oc-q4">
-              <div class="oc-vdrop"></div>
-              <div class="oc-box oc-green">
-                <strong data-i18n="porg.role.conseiller">Conseiller</strong>
-              </div>
-            </div>
-            <div class="oc-q4">
-              <div class="oc-vdrop"></div>
-              <div class="oc-box oc-green">
-                <strong data-i18n="porg.role.conseiller">Conseiller</strong>
-              </div>
-            </div>
-            <div class="oc-q4">
-              <div class="oc-vdrop"></div>
-              <div class="oc-box oc-green">
-                <strong data-i18n="porg.role.sae">Secrétaire des Affaires Étrangères</strong>
-              </div>
-            </div>
-            <div class="oc-q4">
-              <div class="oc-vdrop"></div>
-              <div class="oc-box oc-green">
-                <strong data-i18n="porg.role.sae">Secrétaire des Affaires Étrangères</strong>
-              </div>
-            </div>
-          </div>
+            <!-- Horizontal bar spanning all 4 positions -->
+            <div class="oc-l5-bar"></div>
 
-          <!-- Center spine L5→L6 (PAT connects to this center spine from above) -->
+            <!-- 5-col grid: [Cons][Cons][spacer=spine][SAE][SAE]
+                 Wider gap between Conseiller pair and SAE pair -->
+            <div class="oc-quad">
+              <div class="oc-q4">
+                <div class="oc-vdrop"></div>
+                <div class="oc-box oc-green">
+                  <strong data-i18n="porg.role.conseiller">Conseiller</strong>
+                </div>
+              </div>
+              <div class="oc-q4">
+                <div class="oc-vdrop"></div>
+                <div class="oc-box oc-green">
+                  <strong data-i18n="porg.role.conseiller">Conseiller</strong>
+                </div>
+              </div>
+              <div class="oc-q-gap"></div>
+              <div class="oc-q4">
+                <div class="oc-vdrop"></div>
+                <div class="oc-box oc-green">
+                  <strong data-i18n="porg.role.sae">Secrétaire des Affaires Étrangères</strong>
+                </div>
+              </div>
+              <div class="oc-q4">
+                <div class="oc-vdrop"></div>
+                <div class="oc-box oc-green">
+                  <strong data-i18n="porg.role.sae">Secrétaire des Affaires Étrangères</strong>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /oc-l5-section -->
+
+          <!-- Center spine clearly connecting L5 section to PAT -->
           <div class="oc-vc-seg"></div>
 
           <!-- L6: Personnel Administratif et Technique -->
