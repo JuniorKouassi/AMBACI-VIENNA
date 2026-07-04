@@ -52,7 +52,7 @@
     }
     .org-doc-rules span { display: block; height: 2px; border-radius: 1px; }
 
-    /* ===== TREE (new center-spine structure) ===== */
+    /* ===== TREE — center-spine with independent branches ===== */
     .oc {
       display: flex;
       flex-direction: column;
@@ -65,9 +65,10 @@
     /* --- Base box --- */
     .oc-box {
       border-radius: 9px;
-      padding: .875rem 1.4rem;
+      padding: .8rem 1.25rem;
       text-align: center;
       color: #fff;
+      flex-shrink: 0;
     }
     .oc-box sup {
       display: block;
@@ -79,12 +80,12 @@
     }
     .oc-box strong {
       display: block;
-      font-size: .975rem;
+      font-size: .95rem;
       font-weight: 700;
       line-height: 1.3;
     }
 
-    /* Box colors matching PDF */
+    /* --- Colors --- */
     .oc-orange  { background: #F77F00; }
     .oc-gold    { background: #B08500; }
     .oc-olive3  { background: #8C7E00; }
@@ -95,73 +96,60 @@
     /* --- Centered rows (L1, L2, L6) --- */
     .oc-r { width: 100%; }
     .oc-r-c { display: flex; justify-content: center; }
-    .oc-r-c .oc-box { width: 55%; min-width: 210px; }
-    .oc-wide { width: 70%; min-width: 260px; }
-    .oc-wide strong { font-size: 1.05rem; }
+    .oc-r-c .oc-box { width: 52%; min-width: 200px; }
+    .oc-wide { width: 68%; min-width: 250px; }
+    .oc-wide strong { font-size: 1rem; }
 
-    /* --- Single center vertical connector --- */
-    .oc-vc {
+    /* --- Center spine segment (vertical 2px line, centered) --- */
+    .oc-vc-seg {
       width: 2px;
       height: 36px;
       background: #bfbfbf;
       flex-shrink: 0;
     }
 
-    /* --- T-junction (center spine + horizontal arm to L3 cols) --- */
-    .oc-tee {
-      position: relative;
+    /* --- Branch row: box ←arm— SPINE —arm→ box --- */
+    /* Each of L3 (Ministres) and L4 (ONUDI/Payeur) is its own independent branch */
+    .oc-branch {
       width: 100%;
-      height: 40px;
-      flex-shrink: 0;
-    }
-    /* Vertical spine (continues through) */
-    .oc-tee::after {
-      content: '';
-      position: absolute;
-      left: calc(50% - 1px);
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: #bfbfbf;
-    }
-    /* Horizontal arm at bottom: from center of left col (25%) to center of right col (75%) */
-    .oc-tee::before {
-      content: '';
-      position: absolute;
-      left: 25%;
-      right: 25%;
-      bottom: 0;
-      height: 2px;
-      background: #bfbfbf;
-    }
-
-    /* --- Split row (L3 and L4) --- */
-    .oc-split {
       display: flex;
-      align-items: stretch;
-      width: 100%;
-    }
-    /* Left/right columns (flex:1 each) */
-    .oc-scol {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
       align-items: center;
     }
-    /* 2px center spine running through split rows */
-    .oc-sc {
+    /* Left half: [box][arm→center] */
+    .oc-bh-l {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    /* Right half: [center←arm][box] */
+    .oc-bh-r {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    /* Horizontal arm fills space between box and center spine */
+    .oc-h-arm {
+      flex: 1;
+      height: 2px;
+      background: #bfbfbf;
+      min-width: 8px;
+    }
+    /* Center spine 2px, stretches to full branch-row height */
+    .oc-bspine {
       width: 2px;
       background: #bfbfbf;
       flex-shrink: 0;
       align-self: stretch;
     }
-    /* Box within split columns */
-    .oc-scol .oc-box {
-      width: calc(100% - 24px);
-      max-width: 238px;
+    /* Branch boxes: fixed shrink, reasonable width */
+    .oc-bh-l .oc-box,
+    .oc-bh-r .oc-box {
+      flex-shrink: 0;
+      min-width: 130px;
+      max-width: 240px;
     }
 
-    /* --- Short vertical drop (from horizontal bar to box top) --- */
+    /* --- Short vertical drop (from L5 bar to each box top) --- */
     .oc-vdrop {
       width: 2px;
       height: 16px;
@@ -169,23 +157,14 @@
       flex-shrink: 0;
     }
 
-    /* --- L3→L4 vertical connector row --- */
-    .oc-vconn { height: 36px; }
-    .oc-vconn .oc-scol { justify-content: center; }
-    .oc-side-v {
-      width: 2px;
-      height: 100%;
-      background: #bfbfbf;
-    }
-
     /* --- L5 horizontal bar --- */
-    .oc-hbar5 {
+    .oc-l5-bar {
       position: relative;
       width: 100%;
       height: 2px;
       flex-shrink: 0;
     }
-    .oc-hbar5::before {
+    .oc-l5-bar::before {
       content: '';
       position: absolute;
       left: 12.5%;
@@ -195,7 +174,7 @@
       background: #bfbfbf;
     }
 
-    /* --- L5 quad grid (4 boxes) --- */
+    /* --- L5 quad grid (4 equal boxes, same size) --- */
     .oc-quad {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -207,23 +186,26 @@
       flex-direction: column;
       align-items: center;
     }
-    .oc-q4 .oc-box { width: 100%; }
-    .oc-q4 .oc-box strong { font-size: .85rem; }
+    .oc-q4 .oc-box {
+      width: 100%;
+      padding: .7rem .5rem;
+    }
+    /* All L5 labels same font size so boxes appear equal */
+    .oc-q4 .oc-box strong { font-size: .78rem; }
 
     /* --- Responsive --- */
     @media (max-width: 620px) {
-      .oc-box { padding: .7rem .9rem; }
+      .oc-box { padding: .65rem .9rem; }
       .oc-r-c .oc-box { width: 82%; }
       .oc-wide { width: 92%; }
-      .oc-scol .oc-box { max-width: 100%; width: calc(100% - 10px); }
+      .oc-bh-l .oc-box, .oc-bh-r .oc-box { min-width: 90px; max-width: 160px; }
       .oc-quad { gap: 5px; }
-      .oc-q4 .oc-box strong { font-size: .75rem; }
-      .oc-tee::before { left: 18%; right: 18%; }
-      .oc-hbar5::before { left: 6%; right: 6%; }
+      .oc-q4 .oc-box strong { font-size: .68rem; }
+      .oc-l5-bar::before { left: 6%; right: 6%; }
     }
-    @media (max-width: 400px) {
+    @media (max-width: 420px) {
       .oc-quad { grid-template-columns: repeat(2, 1fr); }
-      .oc-hbar5 { display: none; }
+      .oc-l5-bar { display: none; }
       .oc-q4 .oc-vdrop { display: none; }
     }
   </style>
@@ -325,6 +307,11 @@
         </div>
 
         <!-- ===== TREE ===== -->
+        <!--
+          Structure: continuous CENTER SPINE (vertical) with independent horizontal
+          branches at each level. ONUDI and Payeur connect to the center spine
+          directly — NOT to the Ministres. PAT connects to the center spine from above.
+        -->
         <div class="oc" role="img" aria-label="Organigramme de l'Ambassade">
 
           <!-- L1: Représentant Permanent -->
@@ -335,8 +322,8 @@
             </div>
           </div>
 
-          <!-- Vertical connector L1→L2 -->
-          <div class="oc-vc"></div>
+          <!-- Center spine L1→L2 -->
+          <div class="oc-vc-seg"></div>
 
           <!-- L2: Représentant Permanent Adjoint -->
           <div class="oc-r oc-r-c">
@@ -346,55 +333,53 @@
             </div>
           </div>
 
-          <!-- T-junction: center spine continues + horizontal arm to L3 boxes -->
-          <div class="oc-tee"></div>
+          <!-- Center spine L2→L3 -->
+          <div class="oc-vc-seg"></div>
 
-          <!-- L3: Ministre Conseiller / Ministre Conseillère (center spine runs between) -->
-          <div class="oc-split">
-            <div class="oc-scol">
-              <div class="oc-vdrop"></div>
+          <!-- L3: Ministre Conseiller ←arm— SPINE —arm→ Ministre Conseillère -->
+          <div class="oc-branch">
+            <div class="oc-bh-l">
               <div class="oc-box oc-olive3">
                 <strong data-i18n="porg.role.mc">Ministre Conseiller</strong>
               </div>
+              <div class="oc-h-arm"></div>
             </div>
-            <div class="oc-sc"></div>
-            <div class="oc-scol">
-              <div class="oc-vdrop"></div>
+            <div class="oc-bspine"></div>
+            <div class="oc-bh-r">
+              <div class="oc-h-arm"></div>
               <div class="oc-box oc-olive3">
                 <strong data-i18n="porg.role.mcf">Ministre Conseillère</strong>
               </div>
             </div>
           </div>
 
-          <!-- L3→L4: vertical connectors both sides, center spine continues -->
-          <div class="oc-split oc-vconn">
-            <div class="oc-scol"><div class="oc-side-v"></div></div>
-            <div class="oc-sc"></div>
-            <div class="oc-scol"><div class="oc-side-v"></div></div>
-          </div>
+          <!-- Center spine L3→L4 (ONUDI and Payeur connect directly to spine, not to Ministres) -->
+          <div class="oc-vc-seg"></div>
 
-          <!-- L4: Directrice ONUDI / Payeur -->
-          <div class="oc-split">
-            <div class="oc-scol">
+          <!-- L4: Directrice ONUDI ←arm— SPINE —arm→ Payeur -->
+          <div class="oc-branch">
+            <div class="oc-bh-l">
               <div class="oc-box oc-olive4">
                 <strong data-i18n="porg.role.onudi">Directrice ONUDI</strong>
               </div>
+              <div class="oc-h-arm"></div>
             </div>
-            <div class="oc-sc"></div>
-            <div class="oc-scol">
+            <div class="oc-bspine"></div>
+            <div class="oc-bh-r">
+              <div class="oc-h-arm"></div>
               <div class="oc-box oc-olive4">
                 <strong data-i18n="porg.role.payeur">Payeur</strong>
               </div>
             </div>
           </div>
 
-          <!-- Center spine L4→L5 horizontal bar -->
-          <div class="oc-vc"></div>
+          <!-- Center spine L4→L5 bar -->
+          <div class="oc-vc-seg"></div>
 
-          <!-- L5 horizontal bar (connects all 4 boxes) -->
-          <div class="oc-hbar5"></div>
+          <!-- L5 horizontal bar (spans all 4 columns, center spine passes through) -->
+          <div class="oc-l5-bar"></div>
 
-          <!-- L5: 4 boxes (Conseillers + Secrétaires) -->
+          <!-- L5: 4 equal-size boxes hanging from the bar -->
           <div class="oc-quad">
             <div class="oc-q4">
               <div class="oc-vdrop"></div>
@@ -422,8 +407,8 @@
             </div>
           </div>
 
-          <!-- Center spine L5→L6 -->
-          <div class="oc-vc"></div>
+          <!-- Center spine L5→L6 (PAT connects to this center spine from above) -->
+          <div class="oc-vc-seg"></div>
 
           <!-- L6: Personnel Administratif et Technique -->
           <div class="oc-r oc-r-c">
