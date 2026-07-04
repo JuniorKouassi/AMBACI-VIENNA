@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organigramme — Ambassade de Côte d'Ivoire à Vienne</title>
-  <meta name="description" content="Structure organisationnelle de l'Ambassade de Côte d'Ivoire en Autriche à Vienne.">
+  <meta name="description" content="Organigramme de l'Ambassade et Représentation Permanente de la Côte d'Ivoire à Vienne.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ambaci-vienne.ci/organigramme.html">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
@@ -13,143 +13,212 @@
   <style>
     /* ===== ORG CHART ===== */
     .org-wrap { padding: var(--space-3xl) 0; }
-    .org-tree { display: flex; flex-direction: column; align-items: center; gap: 0; }
 
-    /* Level connector */
-    .org-vline { width: 2px; height: 40px; background: var(--grey-300); }
-    .org-hline-row { display: flex; align-items: flex-start; justify-content: center; gap: 0; position: relative; }
-    .org-hline-row::before {
-      content: ''; position: absolute; top: 0; left: 50%; right: 50%;
-      height: 2px; background: var(--grey-300);
-      transform: translateX(-50%);
+    /* PDF-style doc header */
+    .org-doc-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
     }
-    .org-dept-group { display: flex; gap: clamp(12px, 2vw, 28px); align-items: flex-start; position: relative; }
-    .org-dept-group::before {
-      content: ''; position: absolute; top: 0;
-      left: calc(var(--left-offset, 50%)); right: calc(var(--right-offset, 50%));
-      height: 2px; background: var(--grey-300);
+    .org-doc-header img { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; }
+    .org-doc-motto {
+      font-size: .6875rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+      margin-bottom: .35rem;
     }
-    .org-dept-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
-    .org-dept-vline { width: 2px; height: 28px; background: var(--grey-300); }
+    .org-doc-title {
+      font-family: var(--font-primary);
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: .35rem;
+    }
+    .org-doc-sub {
+      font-size: .75rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    .org-doc-rules {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 2.5rem;
+    }
+    .org-doc-rules span { display: block; height: 2px; border-radius: 1px; }
 
-    /* Ambassador card */
-    .org-card-ambassador {
-      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-      color: var(--white);
-      border-radius: var(--radius-xl);
-      padding: var(--space-xl) var(--space-2xl);
+    /* Tree wrapper */
+    .org-tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: .5rem;
+    }
+
+    /* Vertical connector */
+    .org-vc {
+      width: 2px;
+      height: 32px;
+      background: var(--grey-300);
+      flex-shrink: 0;
+    }
+    .org-vc--sm { height: 20px; }
+
+    /* Single-box level */
+    .org-level {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* Base box */
+    .org-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      box-shadow: 0 12px 40px rgba(247,127,0,.35);
-      min-width: 320px;
-      max-width: 440px;
-      position: relative;
-      overflow: hidden;
+      padding: .875rem 1.5rem;
+      border-radius: 10px;
+      color: #fff;
+      min-width: 260px;
+      max-width: 480px;
     }
-    .org-card-ambassador::before {
-      content: ''; position: absolute; top: -40px; right: -40px;
-      width: 120px; height: 120px; border-radius: 50%;
-      background: rgba(255,255,255,.08);
-    }
-    .org-card-ambassador .amb-photo-badge {
-      width: 80px; height: 80px; border-radius: 50%;
-      border: 3px solid rgba(255,255,255,.5);
-      object-fit: cover; object-position: center top;
-      margin: 0 auto var(--space-md);
+    .org-box sup {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      opacity: .75;
+      margin-bottom: .2rem;
       display: block;
     }
-    .org-card-ambassador .amb-role {
-      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
-      color: rgba(255,255,255,.8); margin-bottom: var(--space-xs);
-    }
-    .org-card-ambassador .amb-name {
-      font-family: var(--font-primary); font-size: 1.25rem; font-weight: 700;
-      color: var(--white); margin-bottom: var(--space-xs);
-    }
-    .org-card-ambassador .amb-title {
-      font-size: .8rem; color: rgba(255,255,255,.85); line-height: 1.5;
-    }
-
-    /* Department card */
-    .org-card-dept {
-      background: var(--white);
-      border: 1px solid var(--grey-200);
-      border-radius: var(--radius-xl);
-      padding: var(--space-lg);
-      text-align: center;
-      min-width: 200px;
-      max-width: 240px;
-      box-shadow: 0 4px 16px rgba(0,0,0,.06);
-      transition: transform .25s, box-shadow .25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .org-card-dept:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
-    .org-card-dept .dept-bar {
-      position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    }
-    .org-card-dept .dept-icon {
-      width: 48px; height: 48px; border-radius: var(--radius-md);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto var(--space-sm);
-      font-size: 1.1rem; color: var(--white);
-    }
-    .org-card-dept .dept-title {
-      font-size: .9rem; font-weight: 700; color: var(--dark);
-      margin-bottom: var(--space-xs); line-height: 1.3;
-    }
-    .org-card-dept .dept-sub {
-      font-size: .75rem; color: var(--grey-500); line-height: 1.5;
-    }
-
-    /* Sub-unit card */
-    .org-card-sub {
-      background: var(--grey-50, #fafafa);
-      border: 1px solid var(--grey-200);
-      border-radius: var(--radius-md);
-      padding: var(--space-sm) var(--space-md);
-      text-align: center;
-      min-width: 170px;
-      max-width: 210px;
-    }
-    .org-card-sub .sub-title {
-      font-size: .78rem; font-weight: 600; color: var(--dark);
-    }
-
-    /* Horizontal branch lines */
-    .org-branch { display: flex; align-items: flex-start; justify-content: center; }
-    .org-branch-line { height: 2px; background: var(--grey-300); align-self: flex-start; margin-top: 0; }
-
-    /* Responsive fallback */
-    @media (max-width: 900px) {
-      .org-dept-group { flex-wrap: wrap; justify-content: center; }
-      .org-card-dept { min-width: 160px; max-width: 200px; padding: var(--space-md); }
-    }
-    @media (max-width: 600px) {
-      .org-dept-group { flex-direction: column; align-items: center; }
-      .org-dept-group::before { display: none; }
-      .org-card-ambassador { min-width: 280px; }
+    .org-box strong {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
     /* Color variants */
-    .orange-bar  { background: linear-gradient(90deg, var(--orange), var(--orange-dark)); }
-    .green-bar   { background: linear-gradient(90deg, var(--green), var(--green-dark)); }
-    .mixed-bar   { background: linear-gradient(90deg, var(--orange), var(--green)); }
-    .mixed2-bar  { background: linear-gradient(90deg, var(--green-dark), var(--orange)); }
+    .ob-orange    { background: #F77F00; }
+    .ob-gold      { background: #A07000; }
+    .ob-olive     { background: #6B7A30; }
+    .ob-green     { background: #009A44; }
+    .ob-dkgreen   { background: #006B2E; }
 
-    .icon-orange { background: linear-gradient(135deg, var(--orange-light), var(--orange)); }
-    .icon-green  { background: linear-gradient(135deg, var(--green-light), var(--green)); }
-    .icon-mixed  { background: linear-gradient(135deg, var(--orange), var(--green-dark)); }
-    .icon-mixed2 { background: linear-gradient(135deg, var(--green), var(--orange-dark)); }
+    /* Wide box (last level) */
+    .org-box--wide { min-width: min(520px, 90vw); max-width: 640px; }
 
-    /* Legend */
-    .org-legend {
-      display: flex; gap: var(--space-xl); flex-wrap: wrap;
-      justify-content: center; margin-top: var(--space-2xl);
-      padding: var(--space-lg);
-      background: var(--grey-100); border-radius: var(--radius-xl);
+    /* ---- Two-column branch (Ministres + ONUDI/Payeur) ---- */
+    .org-branch-two-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
-    .org-legend-item { display: flex; align-items: center; gap: var(--space-sm); font-size: .8rem; color: var(--grey-600); }
-    .org-legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .org-branch-hbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+    /* Horizontal bar between the two col tops */
+    .org-branch-hbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 25%;
+      right: 25%;
+      height: 2px;
+      background: var(--grey-300);
+    }
+    .org-branch-two {
+      display: flex;
+      gap: clamp(20px, 4vw, 60px);
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .org-bcol {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ---- Four-column branch (Conseillers / Secrétaires) ---- */
+    .org-branch-four-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .org-branch-four-hbar {
+      position: relative;
+      width: 100%;
+      height: 32px;
+    }
+    /* Vertical down from vc above */
+    .org-branch-four-hbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: var(--grey-300);
+    }
+    /* Horizontal bar across the four cols */
+    .org-branch-four-hbar::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: var(--grey-300);
+    }
+    .org-branch-four {
+      display: flex;
+      gap: clamp(8px, 2vw, 24px);
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .org-bcol4 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      position: relative;
+    }
+    .org-bcol4::before {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 16px;
+      background: var(--grey-300);
+    }
+
+    /* Responsive: stack tree vertically on small screens */
+    @media (max-width: 640px) {
+      .org-box { min-width: 200px; padding: .75rem 1rem; }
+      .org-box strong { font-size: .875rem; }
+      .org-branch-hbar::before { left: 22%; right: 22%; }
+      .org-branch-four-hbar::after { left: 10%; right: 10%; }
+      .org-branch-four { gap: 6px; }
+      .org-bcol4 .org-box { min-width: 120px; font-size: .75rem; padding: .6rem .75rem; }
+    }
+    @media (max-width: 480px) {
+      .org-branch-four { flex-wrap: wrap; }
+      .org-branch-hbar::before { left: 15%; right: 15%; }
+    }
   </style>
 </head>
 <body>
@@ -226,7 +295,7 @@
           <span aria-current="page" data-i18n="porg.breadcrumb">Organigramme</span>
         </nav>
         <h1 data-i18n="porg.h1">Organigramme</h1>
-        <p data-i18n="porg.desc">Structure organisationnelle de l'Ambassade de Côte d'Ivoire en Autriche.</p>
+        <p data-i18n="porg.desc">Structure organisationnelle de l'Ambassade et Représentation Permanente de la Côte d'Ivoire à Vienne.</p>
       </div>
     </div>
 
@@ -234,157 +303,122 @@
     <section class="org-wrap">
       <div class="container">
 
-        <div style="text-align:center;margin-bottom:var(--space-2xl);">
-          <span class="badge" data-i18n="porg.badge">Structure interne</span>
-          <h2 class="section-title" style="margin-top:var(--space-sm);margin-bottom:var(--space-sm);" data-i18n="porg.section.title">Ambassade de Côte d'Ivoire — Vienne</h2>
-          <p class="section-subtitle" data-i18n="porg.section.sub">Organisation des services diplomatiques et consulaires</p>
+        <!-- PDF-style document header -->
+        <div class="org-doc-header">
+          <img src="img/armoiries-ci.png" alt="Armoiries de la République de Côte d'Ivoire">
+          <div>
+            <p class="org-doc-motto" data-i18n="porg.motto">RÉPUBLIQUE DE CÔTE D'IVOIRE — UNION · DISCIPLINE · TRAVAIL</p>
+            <p class="org-doc-title" data-i18n="porg.doc.title">Ambassade &amp; Représentation Permanente<br>de la Côte d'Ivoire à Vienne</p>
+            <p class="org-doc-sub" data-i18n="porg.doc.sub">Organigramme</p>
+          </div>
+        </div>
+        <div class="org-doc-rules">
+          <span style="background:var(--orange);"></span>
+          <span style="background:var(--green);"></span>
         </div>
 
-        <!-- ORG TREE -->
+        <!-- ===== TREE ===== -->
         <div class="org-tree" role="img" aria-label="Organigramme de l'Ambassade">
 
-          <!-- LEVEL 1 — Ambassadeur -->
-          <div class="org-card-ambassador">
-            <img src="img/ambassadeur.jpg" alt="S.E.M. Cissé Yacouba" class="amb-photo-badge" onerror="this.style.display='none'">
-            <p class="amb-role" data-i18n="porg.lvl.ambassador">Ambassadeur Extraordinaire et Plénipotentiaire</p>
-            <p class="amb-name">S.E.M. Cissé Yacouba</p>
-            <p class="amb-title" data-i18n="porg.amb.accred">Accrédité en Autriche, Hongrie, Slovénie, Slovaquie, Croatie, Serbie, Roumanie &amp; Bosnie-Herzégovine</p>
+          <!-- L1: Représentant Permanent -->
+          <div class="org-level">
+            <div class="org-box ob-orange">
+              <sup data-i18n="porg.sup">S.E.M. L'AMBASSADEUR</sup>
+              <strong data-i18n="porg.role.rp">Représentant Permanent</strong>
+            </div>
           </div>
 
-          <!-- Connector -->
-          <div class="org-vline"></div>
+          <div class="org-vc"></div>
 
-          <!-- Horizontal branch spanning all 4 departments -->
-          <div style="display:flex;align-items:flex-start;position:relative;width:100%;max-width:1100px;justify-content:center;">
-            <!-- Top horizontal bar -->
-            <div style="position:absolute;top:0;left:12.5%;right:12.5%;height:2px;background:var(--grey-300);"></div>
+          <!-- L2: Représentant Permanent Adjoint -->
+          <div class="org-level">
+            <div class="org-box ob-gold">
+              <sup data-i18n="porg.sup">S.E.M. L'AMBASSADEUR</sup>
+              <strong data-i18n="porg.role.rpa">Représentant Permanent Adjoint</strong>
+            </div>
+          </div>
 
-            <!-- LEVEL 2 — 4 Departments -->
-            <div class="org-dept-group" style="width:100%;max-width:1100px;justify-content:center;">
+          <div class="org-vc"></div>
 
-              <!-- Chancellerie Diplomatique -->
-              <div class="org-dept-col">
-                <div class="org-dept-vline"></div>
-                <div class="org-card-dept">
-                  <div class="dept-bar orange-bar"></div>
-                  <div class="dept-icon icon-orange"><i class="fa-solid fa-landmark"></i></div>
-                  <p class="dept-title" data-i18n="porg.dept.chanc">Chancellerie Diplomatique</p>
-                  <p class="dept-sub" data-i18n="porg.dept.chanc.sub">Relations bilatérales &amp; multilatérales</p>
+          <!-- L3-L4: Two-column branch -->
+          <div class="org-branch-two-wrap">
+            <div class="org-branch-hbar">
+              <div class="org-branch-two">
+
+                <!-- Left column: Ministre Conseiller → Directrice ONUDI -->
+                <div class="org-bcol">
+                  <div class="org-vc org-vc--sm"></div>
+                  <div class="org-box ob-olive">
+                    <strong data-i18n="porg.role.mc">Ministre Conseiller</strong>
+                  </div>
+                  <div class="org-vc org-vc--sm"></div>
+                  <div class="org-box ob-olive">
+                    <strong data-i18n="porg.role.onudi">Directrice ONUDI</strong>
+                  </div>
                 </div>
-                <!-- Sub-units -->
-                <div class="org-dept-vline"></div>
-                <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.protocol">Protocole &amp; Accréditations</p>
+
+                <!-- Right column: Ministre Conseillère → Payeur -->
+                <div class="org-bcol">
+                  <div class="org-vc org-vc--sm"></div>
+                  <div class="org-box ob-olive">
+                    <strong data-i18n="porg.role.mcf">Ministre Conseillère</strong>
                   </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.bilateral">Relations bilatérales</p>
+                  <div class="org-vc org-vc--sm"></div>
+                  <div class="org-box ob-olive">
+                    <strong data-i18n="porg.role.payeur">Payeur</strong>
                   </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.multil">Organisations internationales</p>
-                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="org-vc"></div>
+
+          <!-- L5: Four boxes -->
+          <div class="org-branch-four-wrap">
+            <div class="org-branch-four-hbar"></div>
+            <div class="org-branch-four">
+              <div class="org-bcol4">
+                <div class="org-box ob-green">
+                  <strong data-i18n="porg.role.conseiller">Conseiller</strong>
                 </div>
               </div>
-
-              <!-- Service Consulaire -->
-              <div class="org-dept-col">
-                <div class="org-dept-vline"></div>
-                <div class="org-card-dept">
-                  <div class="dept-bar green-bar"></div>
-                  <div class="dept-icon icon-green"><i class="fa-solid fa-passport"></i></div>
-                  <p class="dept-title" data-i18n="porg.dept.consular">Service Consulaire</p>
-                  <p class="dept-sub" data-i18n="porg.dept.consular.sub">Assistance aux ressortissants</p>
-                </div>
-                <div class="org-dept-vline"></div>
-                <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.passport">Passeports &amp; Visas</p>
-                  </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.civil">État Civil &amp; Légalisation</p>
-                  </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.cc">Carte Consulaire</p>
-                  </div>
+              <div class="org-bcol4">
+                <div class="org-box ob-green">
+                  <strong data-i18n="porg.role.conseiller">Conseiller</strong>
                 </div>
               </div>
-
-              <!-- Service Économique -->
-              <div class="org-dept-col">
-                <div class="org-dept-vline"></div>
-                <div class="org-card-dept">
-                  <div class="dept-bar mixed-bar"></div>
-                  <div class="dept-icon icon-mixed"><i class="fa-solid fa-chart-line"></i></div>
-                  <p class="dept-title" data-i18n="porg.dept.eco">Service Économique</p>
-                  <p class="dept-sub" data-i18n="porg.dept.eco.sub">Coopération &amp; investissement</p>
-                </div>
-                <div class="org-dept-vline"></div>
-                <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.trade">Commerce &amp; Investissement</p>
-                  </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.coop">Coopération bilatérale</p>
-                  </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.academic">Bourses &amp; Académique</p>
-                  </div>
+              <div class="org-bcol4">
+                <div class="org-box ob-green" style="min-width:160px;">
+                  <strong data-i18n="porg.role.sae">Secrétaire des Affaires Étrangères</strong>
                 </div>
               </div>
-
-              <!-- Administration & Communication -->
-              <div class="org-dept-col">
-                <div class="org-dept-vline"></div>
-                <div class="org-card-dept">
-                  <div class="dept-bar mixed2-bar"></div>
-                  <div class="dept-icon icon-mixed2"><i class="fa-solid fa-gear"></i></div>
-                  <p class="dept-title" data-i18n="porg.dept.admin">Administration</p>
-                  <p class="dept-sub" data-i18n="porg.dept.admin.sub">Gestion &amp; communication</p>
-                </div>
-                <div class="org-dept-vline"></div>
-                <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.secrétariat">Secrétariat</p>
-                  </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.comms">Communication &amp; Réseaux</p>
-                  </div>
-                  <div class="org-card-sub">
-                    <p class="sub-title" data-i18n="porg.sub.logistic">Logistique</p>
-                  </div>
+              <div class="org-bcol4">
+                <div class="org-box ob-green" style="min-width:160px;">
+                  <strong data-i18n="porg.role.sae">Secrétaire des Affaires Étrangères</strong>
                 </div>
               </div>
+            </div>
+          </div>
 
+          <div class="org-vc"></div>
+
+          <!-- L6: Personnel Administratif et Technique -->
+          <div class="org-level">
+            <div class="org-box ob-dkgreen org-box--wide">
+              <strong data-i18n="porg.role.pat">Personnel Administratif et Technique</strong>
             </div>
           </div>
 
         </div>
+        <!-- /tree -->
 
-        <!-- Legend -->
-        <div class="org-legend" aria-label="Légende de l'organigramme">
-          <div class="org-legend-item">
-            <div class="org-legend-dot" style="background:linear-gradient(135deg,var(--orange),var(--orange-dark))"></div>
-            <span data-i18n="porg.legend.ambassador">Direction (Ambassadeur)</span>
-          </div>
-          <div class="org-legend-item">
-            <div class="org-legend-dot" style="background:var(--orange)"></div>
-            <span data-i18n="porg.legend.dept">Services principaux</span>
-          </div>
-          <div class="org-legend-item">
-            <div class="org-legend-dot" style="background:var(--grey-300)"></div>
-            <span data-i18n="porg.legend.sub">Sections &amp; unités</span>
-          </div>
-        </div>
-
-        <!-- Info note -->
-        <div style="margin-top:var(--space-2xl);background:var(--grey-100);border-radius:var(--radius-xl);padding:var(--space-xl);display:flex;gap:var(--space-md);align-items:flex-start;">
-          <div style="flex-shrink:0;width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange),var(--green));display:flex;align-items:center;justify-content:center;">
-            <i class="fa-solid fa-circle-info" style="color:var(--white);font-size:1.1rem;"></i>
-          </div>
-          <div>
-            <p style="font-size:.875rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-xs);" data-i18n="porg.note.title">Note</p>
-            <p style="font-size:.875rem;color:var(--grey-700);line-height:1.7;" data-i18n="porg.note.text">Cet organigramme présente la structure fonctionnelle de l'Ambassade. Pour toute question relative à un service spécifique, contactez directement le service consulaire.</p>
-          </div>
+        <!-- Bottom PDF-style footer label -->
+        <p style="margin-top:2.5rem;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-400);text-align:center;" data-i18n="porg.footer.label">Ambassade de la Côte d'Ivoire — Vienne, Autriche</p>
+        <div style="display:flex;justify-content:center;gap:4px;margin-top:.5rem;">
+          <span style="display:block;width:48px;height:3px;background:var(--orange);border-radius:2px;"></span>
+          <span style="display:block;width:48px;height:3px;background:var(--green);border-radius:2px;"></span>
         </div>
 
       </div>
@@ -393,8 +427,8 @@
     <!-- CTA -->
     <section class="cta-section">
       <div class="container">
-        <h2 data-i18n="porg.cta.title">Besoin d'un service consulaire ?</h2>
-        <p data-i18n="porg.cta.desc">Notre équipe est prête à vous accompagner dans toutes vos démarches administratives.</p>
+        <h2 data-i18n="cta.title">Besoin d'un service consulaire ?</h2>
+        <p data-i18n="cta.desc">Notre équipe est prête à vous accompagner dans toutes vos démarches administratives. Prenez rendez-vous dès maintenant.</p>
         <div class="cta-actions">
           <a href="services.html" class="btn btn-white" data-i18n="cta.btn1">Voir tous les services</a>
           <a href="contact.html" class="btn btn-ghost" data-i18n="cta.btn2">Prendre rendez-vous</a>
@@ -432,8 +466,8 @@
           <h4 data-i18n="nav.embassy">L'Ambassade</h4>
           <ul>
             <li><a href="ambassade.html#ambassadeur">→ <span data-i18n="footer.nav.ambassador">L'Ambassadeur</span></a></li>
-            <li><a href="organigramme.html">→ <span data-i18n="nav.org">Organigramme</span></a></li>
             <li><a href="ambassade.html#pays">→ <span data-i18n="footer.nav.circonscrip">Circonscription diplomatique</span></a></li>
+            <li><a href="organigramme.html">→ <span data-i18n="porg.breadcrumb">Organigramme</span></a></li>
             <li><a href="contact.html">→ <span data-i18n="footer.nav.contact">Contact</span></a></li>
           </ul>
         </div>
@@ -465,7 +499,7 @@
 
   <nav class="bottom-nav" aria-label="Navigation">
     <a href="index.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="nav.home">Accueil</span></a>
-    <a href="ambassade.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
+    <a href="ambassade.html" class="bottom-nav-item active"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg><span data-i18n="nav.embassy">Ambassade</span></a>
     <a href="services.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.services">Services</span></a>
     <a href="annonces.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Annonces</span></a>
     <a href="decouvrir-autriche.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Découvrir</span></a>
