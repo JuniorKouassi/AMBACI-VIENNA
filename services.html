@@ -144,6 +144,30 @@
     <section style="padding:var(--space-3xl) 0;">
       <div class="container">
 
+        <!-- Carte consulaire -->
+        <div id="carte-consulaire" style="margin-bottom:var(--space-3xl);">
+          <span class="badge" data-i18n="srv.badge.cc">Carte d'identité consulaire</span>
+          <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="cc.h2">Carte consulaire</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);">
+            <button type="button" id="cc-open-btn" class="service-detail-card" style="text-align:left;border:1px solid var(--grey-200);cursor:pointer;font:inherit;width:100%;">
+              <div class="service-detail-header">
+                <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-id-card"></i></div>
+                <div>
+                  <h3 data-i18n="cc.card.title">Demande de carte consulaire</h3>
+                  <p data-i18n="cc.card.sub">Constituer et envoyer votre dossier en ligne</p>
+                </div>
+              </div>
+              <div class="service-detail-body">
+                <p style="font-size:.875rem;color:var(--grey-700);" data-i18n="cc.card.desc">Vérifiez votre éligibilité et envoyez votre dossier complet (formulaire + pièces jointes) directement depuis cette page.</p>
+                <div class="service-tarif">
+                  <span data-i18n="cc.fees">Frais</span>
+                  <strong>25 €</strong>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
         <!-- Passeport -->
         <div id="passeport" style="margin-bottom:var(--space-3xl);">
           <span class="badge" data-i18n="srv.badge.passport">Document de voyage</span>
@@ -498,29 +522,6 @@
           </div>
         </div>
 
-        <!-- Carte consulaire -->
-        <div id="carte-consulaire">
-          <span class="badge" data-i18n="srv.badge.cc">Carte d'identité consulaire</span>
-          <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="cc.h2">Carte consulaire</h2>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);">
-            <button type="button" id="cc-open-btn" class="service-detail-card" style="text-align:left;border:1px solid var(--grey-200);cursor:pointer;font:inherit;width:100%;">
-              <div class="service-detail-header">
-                <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-id-card"></i></div>
-                <div>
-                  <h3 data-i18n="cc.card.title">Demande de carte consulaire</h3>
-                  <p data-i18n="cc.card.sub">Constituer et envoyer votre dossier en ligne</p>
-                </div>
-              </div>
-              <div class="service-detail-body">
-                <p style="font-size:.875rem;color:var(--grey-700);" data-i18n="cc.card.desc">Vérifiez votre éligibilité et envoyez votre dossier complet (formulaire + pièces jointes) directement depuis cette page.</p>
-                <div class="service-tarif">
-                  <span data-i18n="cc.fees">Frais</span>
-                  <strong>25 €</strong>
-                </div>
-              </div>
-            </button>
-          </div>
-        </div>
 
       </div>
     </section>
