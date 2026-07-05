@@ -189,7 +189,7 @@
     /* annonce image thumbnail */
     .annonce-thumb {
       flex-shrink: 0;
-      width: 180px;
+      width: 300px;
       background: var(--grey-100);
       display: flex;
       align-items: center;
@@ -205,18 +205,12 @@
       object-position: center top;
       display: block;
     }
-    @media (max-width: 640px) { .annonce-thumb { display: none; } }
+    @media (max-width: 780px) { .annonce-thumb { width: 220px; } }
+    @media (max-width: 560px) { .annonce-thumb { display: none; } }
 
-    /* ── SIDEBAR ── */
+    /* ── LAYOUT (single column, no sidebar) ── */
     .annonces-layout {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: var(--space-2xl);
-      align-items: start;
-    }
-    @media (max-width: 900px) {
-      .annonces-layout { grid-template-columns: 1fr; }
-      .annonces-sidebar { display: none; }
+      display: block;
     }
     .sidebar-widget {
       background: var(--white);
@@ -759,52 +753,6 @@
 
           </div><!-- /.left column -->
 
-          <!-- ── RIGHT COLUMN : sidebar ── -->
-          <aside class="annonces-sidebar">
-
-            <!-- Liens rapides -->
-            <div class="sidebar-widget">
-              <div class="sidebar-widget-header">
-                <span class="sidebar-header-icon"><i class="fa-solid fa-compass"></i></span> <span data-i18n="ann.sidebar.links">Liens utiles</span>
-              </div>
-              <div class="sidebar-widget-body">
-                <ul class="sidebar-link-list">
-                  <li><a href="services.html#passeport"><i class="fa-solid fa-passport"></i> <span data-i18n="ann.sidebar.passport">Renouvellement de passeport</span></a></li>
-                  <li><a href="services.html#visa"><i class="fa-solid fa-stamp"></i> <span data-i18n="ann.sidebar.visa">Demande de visa</span></a></li>
-                  <li><a href="services.html#etat-civil"><i class="fa-solid fa-file-contract"></i> <span data-i18n="ann.sidebar.civil">État civil</span></a></li>
-                  <li><a href="https://calendly.com/j-kouassi-diplomatie/30min" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="ann.sidebar.rdv">Prendre rendez-vous</span></a></li>
-                  <li><a href="contact.html#horaires"><i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="ann.sidebar.hours">Horaires d'ouverture</span></a></li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Contact rapide -->
-            <div class="sidebar-widget">
-              <div class="sidebar-widget-header">
-                <span class="sidebar-header-icon"><i class="fa-solid fa-headset"></i></span> <span data-i18n="ann.sidebar.contact">Contact direct</span>
-              </div>
-              <div class="sidebar-widget-body">
-                <ul class="sidebar-link-list">
-                  <li><a href="tel:+43158100761"><i class="fa-solid fa-phone-volume"></i> +43 1 581007610</a></li>
-                  <li><a href="mailto:sceconsul.autriche@diplomatie.gouv.ci"><i class="fa-solid fa-paper-plane"></i> sceconsul.autriche@diplomatie.gouv.ci</a></li>
-                  <li><a href="https://wa.me/436765373926" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
-                </ul>
-                <div style="margin-top:var(--space-md);padding:var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-700);">
-                  <i class="fa-solid fa-clock-rotate-left" style="color:var(--orange);margin-right:.3rem;"></i>
-                  <strong>Lun–Ven :</strong> 09h30 – 16h00
-                </div>
-              </div>
-            </div>
-
-            <!-- Abonnement aux alertes -->
-            <div class="subscribe-box">
-              <h4><i class="fa-solid fa-envelope-open-text" style="margin-right:.4rem;"></i> <span data-i18n="ann.sub.title">Recevez les annonces</span></h4>
-              <p data-i18n="ann.sub.desc">Inscrivez-vous pour être notifié des nouvelles annonces et informations importantes.</p>
-              <input class="subscribe-input" type="email" placeholder="votre@email.com" />
-              <button class="subscribe-btn" data-i18n="ann.sub.btn">S'inscrire aux alertes</button>
-            </div>
-
-          </aside>
 
         </div><!-- /.annonces-layout -->
       </div>
