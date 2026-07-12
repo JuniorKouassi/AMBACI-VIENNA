@@ -235,12 +235,7 @@
           <p class="section-subtitle">L'Ambassade de Côte d'Ivoire à Vienne est compétente pour les ressortissants résidant dans les 9 pays suivants.</p>
         </div>
 
-        <!-- Globe -->
-        <div id="pays-globe-wrap" style="position:relative;width:100%;max-width:420px;margin:0 auto var(--space-2xl);background:#0a0a10;border-radius:50%;overflow:hidden;aspect-ratio:1/1;">
-          <canvas id="pays-globe" style="width:100%;height:100%;display:block;opacity:0;transition:opacity .6s;cursor:grab;"></canvas>
-        </div>
-
-        <div id="cd-card" style="background:#0e0e10;color:#f4f1ea;font-family:var(--font-ui);padding:clamp(28px,5vw,56px) clamp(18px,4vw,48px);border:1px solid #1f1f24;border-radius:var(--radius-xl);box-shadow:0 24px 60px rgba(0,0,0,.45);box-sizing:border-box;width:100%;">
+<div id="cd-card" style="background:#0e0e10;color:#f4f1ea;font-family:var(--font-ui);padding:clamp(28px,5vw,56px) clamp(18px,4vw,48px);border:1px solid #1f1f24;border-radius:var(--radius-xl);box-shadow:0 24px 60px rgba(0,0,0,.45);box-sizing:border-box;width:100%;">
           <div style="display:flex;gap:clamp(18px,3vw,36px);align-items:flex-start;flex-wrap:wrap;">
             <div class="cd-map-col" style="flex:2 1 460px;min-width:0;position:relative;">
               <svg id="cd-map-svg" viewBox="0 0 1000 720" role="img" aria-label="Carte de la circonscription diplomatique de l'Ambassade de Côte d'Ivoire à Vienne" style="width:100%;height:auto;display:block;border-radius:10px;background:#a8cdde;">
@@ -447,54 +442,6 @@
         }).observe(document.body, { childList: true, subtree: true });
       }
     })();
-  </script>
-
-  <!-- Globe Circonscription -->
-  <script type="module">
-    import createGlobe from './js/cobe.esm.js';
-    function initGlobe() {
-      const canvas = document.getElementById('pays-globe');
-      if (!canvas) return;
-      const wrap = document.getElementById('pays-globe-wrap');
-      let width = wrap.offsetWidth;
-      if (!width) { requestAnimationFrame(initGlobe); return; }
-      let phi = -0.28, ptrDown = null, ptrMove = 0, rot = 0;
-      createGlobe(canvas, {
-        devicePixelRatio: Math.min(window.devicePixelRatio, 2),
-        width: width * 2, height: width * 2,
-        phi: -0.28, theta: 0.42,
-        dark: 1, diffuse: 1.2,
-        mapSamples: 16000, mapBrightness: 6,
-        baseColor: [0.08, 0.08, 0.14],
-        markerColor: [0.98, 0.498, 0.082],
-        glowColor: [0.22, 0.22, 0.38],
-        markers: [
-          { location: [48.2082, 16.3738], size: 0.09 },
-          { location: [47.4979, 19.0402], size: 0.055 },
-          { location: [46.0569, 14.5058], size: 0.05 },
-          { location: [48.1486, 17.1077], size: 0.05 },
-          { location: [45.8150, 15.9819], size: 0.05 },
-          { location: [44.8176, 20.4633], size: 0.055 },
-          { location: [44.4268, 26.1025], size: 0.06 },
-          { location: [43.8563, 18.4131], size: 0.05 },
-          { location: [47.0105, 28.8638], size: 0.05 },
-        ],
-        onRender(state) {
-          if (!ptrDown) phi += 0.003;
-          state.phi = phi + rot;
-          const w = wrap.offsetWidth;
-          state.width = w * 2; state.height = w * 2;
-        },
-      });
-      canvas.addEventListener('pointerdown', e => { ptrDown = e.clientX - ptrMove; canvas.style.cursor = 'grabbing'; });
-      canvas.addEventListener('pointerup',  () => { ptrDown = null; canvas.style.cursor = 'grab'; });
-      canvas.addEventListener('pointerout', () => { ptrDown = null; canvas.style.cursor = 'grab'; });
-      canvas.addEventListener('mousemove',  e => { if (ptrDown !== null) { ptrMove = e.clientX - ptrDown; rot = ptrMove / 200; } });
-      canvas.addEventListener('touchmove',  e => { if (e.touches[0] && ptrDown !== null) { ptrMove = e.touches[0].clientX - ptrDown; rot = ptrMove / 200; } }, { passive: true });
-      setTimeout(() => { canvas.style.opacity = '1'; }, 200);
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGlobe);
-    else requestAnimationFrame(initGlobe);
   </script>
 </body>
 </html>

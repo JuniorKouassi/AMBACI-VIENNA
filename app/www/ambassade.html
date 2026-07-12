@@ -116,12 +116,8 @@
     <h2 class="m-section-title" data-i18n="pays.title">Circonscription diplomatique</h2>
     <p class="m-section-sub" data-i18n="pays.sub">9 pays d'Europe centrale et des Balkans</p>
 
-    <!-- Globe -->
-    <div id="pays-globe-wrap" style="position:relative;width:100%;max-width:320px;margin:var(--space-lg) auto var(--space-xl);background:#0a0a10;border-radius:50%;overflow:hidden;aspect-ratio:1/1;">
-      <canvas id="pays-globe" style="width:100%;height:100%;display:block;opacity:0;transition:opacity .6s;cursor:grab;"></canvas>
-    </div>
 
-    <!-- Carte interactive -->
+<!-- Carte interactive -->
     <style>
       .cd-map .cc{cursor:pointer;outline:none;stroke:#0e0e10;stroke-width:1;transition:fill .2s,filter .2s,stroke .2s,stroke-width .2s;}
       .cd-map .cc[data-role="juris"]{fill:#009E60;}
@@ -319,54 +315,6 @@
       window.addEventListener('load',function(){[500,1500].forEach(function(t){setTimeout(function(){Array.from(document.body.children).forEach(pos);},t);});});
       new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType!==1)return;var f=n.tagName==='IFRAME'?n:n.querySelector('iframe');if(!f)return;f.style.setProperty('width','min(calc(100vw - 2rem), 340px)','important');f.style.setProperty('height','min(60vh, 480px)','important');f.style.setProperty('max-width','340px','important');f.style.setProperty('max-height','480px','important');});});}).observe(document.body,{childList:true,subtree:true});
     })();
-  </script>
-
-  <!-- Globe Circonscription -->
-  <script type="module">
-    import createGlobe from './js/cobe.esm.js';
-    function initGlobe() {
-      const canvas = document.getElementById('pays-globe');
-      if (!canvas) return;
-      const wrap = document.getElementById('pays-globe-wrap');
-      let width = wrap.offsetWidth;
-      if (!width) { requestAnimationFrame(initGlobe); return; }
-      let phi = -0.28, ptrDown = null, ptrMove = 0, rot = 0;
-      createGlobe(canvas, {
-        devicePixelRatio: Math.min(window.devicePixelRatio, 2),
-        width: width * 2, height: width * 2,
-        phi: -0.28, theta: 0.42,
-        dark: 1, diffuse: 1.2,
-        mapSamples: 16000, mapBrightness: 6,
-        baseColor: [0.08, 0.08, 0.14],
-        markerColor: [0.98, 0.498, 0.082],
-        glowColor: [0.22, 0.22, 0.38],
-        markers: [
-          { location: [48.2082, 16.3738], size: 0.09 },
-          { location: [47.4979, 19.0402], size: 0.055 },
-          { location: [46.0569, 14.5058], size: 0.05 },
-          { location: [48.1486, 17.1077], size: 0.05 },
-          { location: [45.8150, 15.9819], size: 0.05 },
-          { location: [44.8176, 20.4633], size: 0.055 },
-          { location: [44.4268, 26.1025], size: 0.06 },
-          { location: [43.8563, 18.4131], size: 0.05 },
-          { location: [47.0105, 28.8638], size: 0.05 },
-        ],
-        onRender(state) {
-          if (!ptrDown) phi += 0.003;
-          state.phi = phi + rot;
-          const w = wrap.offsetWidth;
-          state.width = w * 2; state.height = w * 2;
-        },
-      });
-      canvas.addEventListener('pointerdown', e => { ptrDown = e.clientX - ptrMove; canvas.style.cursor = 'grabbing'; });
-      canvas.addEventListener('pointerup',  () => { ptrDown = null; canvas.style.cursor = 'grab'; });
-      canvas.addEventListener('pointerout', () => { ptrDown = null; canvas.style.cursor = 'grab'; });
-      canvas.addEventListener('mousemove',  e => { if (ptrDown !== null) { ptrMove = e.clientX - ptrDown; rot = ptrMove / 200; } });
-      canvas.addEventListener('touchmove',  e => { if (e.touches[0] && ptrDown !== null) { ptrMove = e.touches[0].clientX - ptrDown; rot = ptrMove / 200; } }, { passive: true });
-      setTimeout(() => { canvas.style.opacity = '1'; }, 200);
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGlobe);
-    else requestAnimationFrame(initGlobe);
   </script>
 </body>
 </html>
