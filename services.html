@@ -148,7 +148,19 @@
         <div id="carte-consulaire" style="margin-bottom:var(--space-3xl);">
           <span class="badge" data-i18n="srv.badge.cc">Carte d'identité consulaire</span>
           <h2 class="section-title" style="margin-bottom:var(--space-xl);" data-i18n="cc.h2">Carte consulaire</h2>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-xl);align-items:start;">
+
+            <!-- 3D Card Preview -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:.75rem;">
+              <div id="cc-tilt-wrap" style="width:100%;max-width:420px;perspective:1000px;">
+                <div id="cc-tilt-card" style="position:relative;overflow:hidden;border-radius:14px;will-change:transform;box-shadow:0 20px 60px rgba(0,0,0,.22),0 4px 16px rgba(0,0,0,.12);cursor:pointer;transform-style:preserve-3d;">
+                  <img src="img/card ambaci.png" alt="Aperçu Carte Consulaire" style="width:100%;display:block;border-radius:14px;">
+                  <div id="cc-tilt-glare" style="position:absolute;inset:0;pointer-events:none;opacity:0;border-radius:14px;transition:opacity .3s;"></div>
+                </div>
+              </div>
+              <p style="font-size:.75rem;color:var(--grey-500);letter-spacing:.06em;text-transform:uppercase;" data-i18n="cc.preview.label">Aperçu de la carte</p>
+            </div>
+
             <button type="button" id="cc-open-btn" class="service-detail-card" style="text-align:left;border:1px solid var(--grey-200);cursor:pointer;font:inherit;width:100%;">
               <div class="service-detail-header">
                 <div class="service-detail-icon" aria-hidden="true"><i class="fa-solid fa-id-card"></i></div>
@@ -777,6 +789,51 @@
         }).observe(document.body, { childList: true, subtree: true });
       }
     })();
+  </script>
+
+  <!-- 3D Tilt Card -->
+  <script>
+  (function() {
+    const card  = document.getElementById('cc-tilt-card');
+    const glare = document.getElementById('cc-tilt-glare');
+    if (!card || !glare) return;
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canHover || reduced) return;
+
+    const MAX = 12, STIFF = 200, DAMP = 15, MASS = 0.3;
+    let rx = 0, ry = 0, vrx = 0, vry = 0, trx = 0, try_ = 0, raf;
+
+    function step() {
+      const dt = 1/60;
+      vrx += ((-STIFF*(rx-trx) - DAMP*vrx) / MASS) * dt;
+      vry += ((-STIFF*(ry-try_) - DAMP*vry) / MASS) * dt;
+      rx  += vrx * dt;
+      ry  += vry * dt;
+      card.style.transform = 'rotateX('+rx.toFixed(3)+'deg) rotateY('+ry.toFixed(3)+'deg)';
+      if (Math.abs(rx-trx)>.01 || Math.abs(ry-try_)>.01 || Math.abs(vrx)>.01 || Math.abs(vry)>.01)
+        raf = requestAnimationFrame(step);
+    }
+
+    card.addEventListener('mousemove', function(e) {
+      const r  = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top)  / r.height;
+      try_  = (px - .5) * MAX;
+      trx   = (.5 - py) * MAX;
+      glare.style.background = 'radial-gradient(circle at '+Math.round(px*100)+'% '+Math.round(py*100)+'%, rgba(255,255,255,.28), transparent 55%)';
+      glare.style.opacity = '1';
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(step);
+    });
+
+    card.addEventListener('mouseleave', function() {
+      trx = 0; try_ = 0;
+      glare.style.opacity = '0';
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(step);
+    });
+  })();
   </script>
 </body>
 </html>
