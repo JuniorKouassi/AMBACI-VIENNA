@@ -288,7 +288,7 @@ const translations = {
     'cc.card.title': 'Demande de carte consulaire',
     'cc.card.sub': 'Constituer et envoyer votre dossier en ligne',
     'cc.card.desc': 'Vérifiez votre éligibilité et envoyez votre dossier complet (formulaire + pièces jointes) directement depuis cette page.',
-    'cc.fees': 'Frais', 'cc.preview.label': 'Aperçu de la carte',
+    'cc.fees': 'Frais', 'cc.preview.label': 'Aperçu de la carte', 'cc.preview.expand': 'Agrandir', 'cc.preview.expand.title': 'Cliquer pour agrandir', 'cc.lightbox.close': 'Fermer', 'cc.lightbox.aria': 'Carte consulaire agrandie',
     'cc.title': 'Carte consulaire',
     'cc.eligibility.title': "Conditions d'éligibilité",
     'cc.eligibility.text': "Être ivoirien vivant dans la circonscription diplomatique de l'ambassade (Autriche, Hongrie, Croatie, Serbie, Slovaquie, Slovénie, Roumanie, Bosnie-Herzégovine, Moldavie).",
@@ -856,7 +856,7 @@ const translations = {
     'cc.card.title': 'Antrag auf Konsularkarte',
     'cc.card.sub': 'Stellen Sie Ihren Antrag online zusammen und senden Sie ihn ab',
     'cc.card.desc': 'Prüfen Sie Ihre Berechtigung und senden Sie Ihre vollständigen Unterlagen (Formular + Anhänge) direkt über diese Seite.',
-    'cc.fees': 'Gebühr', 'cc.preview.label': 'Kartenvorschau',
+    'cc.fees': 'Gebühr', 'cc.preview.label': 'Kartenvorschau', 'cc.preview.expand': 'Vergrößern', 'cc.preview.expand.title': 'Zum Vergrößern klicken', 'cc.lightbox.close': 'Schließen', 'cc.lightbox.aria': 'Vergrößerte Konsularkarte',
     'cc.title': 'Konsularkarte',
     'cc.eligibility.title': 'Zulassungsvoraussetzungen',
     'cc.eligibility.text': 'Ivorische Staatsangehörigkeit und Wohnsitz im konsularischen Amtsbereich der Botschaft (Österreich, Ungarn, Kroatien, Serbien, Slowakei, Slowenien, Rumänien, Bosnien und Herzegowina, Moldawien).',
@@ -1380,7 +1380,7 @@ const translations = {
     'cc.card.title': 'Consular card request',
     'cc.card.sub': 'Build and submit your application online',
     'cc.card.desc': 'Check your eligibility and send your complete application (form + attachments) directly from this page.',
-    'cc.fees': 'Fee', 'cc.preview.label': 'Card preview',
+    'cc.fees': 'Fee', 'cc.preview.label': 'Card preview', 'cc.preview.expand': 'Expand', 'cc.preview.expand.title': 'Click to expand', 'cc.lightbox.close': 'Close', 'cc.lightbox.aria': 'Expanded consular card',
     'cc.title': 'Consular card',
     'cc.eligibility.title': 'Eligibility requirements',
     'cc.eligibility.text': "Be an Ivorian national residing within the embassy's consular district (Austria, Hungary, Croatia, Serbia, Slovakia, Slovenia, Romania, Bosnia and Herzegovina, Moldova).",
@@ -1731,6 +1731,16 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const key = el.dataset.i18nHtml;
     if (translations[lang][key] !== undefined) el.innerHTML = translations[lang][key];
+  });
+
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const key = el.dataset.i18nTitle;
+    if (translations[lang][key] !== undefined) el.title = translations[lang][key];
+  });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const key = el.dataset.i18nAria;
+    if (translations[lang][key] !== undefined) el.setAttribute('aria-label', translations[lang][key]);
   });
 
   document.documentElement.lang = lang === 'de' ? 'de' : lang === 'en' ? 'en' : 'fr';
