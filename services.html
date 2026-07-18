@@ -762,6 +762,23 @@
     <a href="decouvrir-autriche.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Découvrir</span></a>
   </nav>
   <script src="js/main.js"></script>
+  <script>
+  /* Pulsing border rings — service cards */
+  (function() {
+    function addRing(el, cls, r) {
+      if (!el) return;
+      var w = document.createElement('div');
+      w.className = 'pb-ring-wrapper' + (cls ? ' ' + cls : '');
+      if (r) w.style.setProperty('--pb-r', r);
+      el.parentNode.insertBefore(w, el);
+      w.appendChild(el);
+    }
+    addRing(document.getElementById('cc-tilt-wrap'), 'pb-ring-cc-tilt', '14px');
+    document.querySelectorAll('.service-detail-card').forEach(function(el) {
+      addRing(el);
+    });
+  })();
+  </script>
   <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
   <script>
     (function() {

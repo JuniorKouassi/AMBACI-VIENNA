@@ -1503,13 +1503,13 @@ fastbots-widget,
 @keyframes pb-pulse { 0%,100% { opacity:.72; } 50% { opacity:1; } }
 .pb-ring-wrapper {
   position: relative;
-  border-radius: 24px;
+  border-radius: var(--pb-r, 24px);
 }
 .pb-ring-wrapper::before {
   content: '';
   position: absolute;
   inset: -2.5px;
-  border-radius: 26.5px;
+  border-radius: calc(var(--pb-r, 24px) + 2.5px);
   background: conic-gradient(
     from var(--pb-a),
     transparent 0%,
@@ -1527,5 +1527,7 @@ fastbots-widget,
   z-index: 2;
 }
 .pb-ring-wrapper > .hero-card { border-color: transparent; }
+.pb-ring-wrapper > .service-detail-card { border-color: transparent; height: 100%; }
+.pb-ring-cc-tilt { width: 100%; max-width: 420px; }
 .pb-ring-video { grid-area: video; align-self: center; }
 @media (max-width: 1024px) { .pb-ring-hero { display: none !important; } }
