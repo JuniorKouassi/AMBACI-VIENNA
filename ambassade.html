@@ -399,6 +399,17 @@
     <a href="decouvrir-autriche.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Découvrir</span></a>
   </nav>
   <script src="js/main.js"></script>
+  <script>
+  /* Pulsing border ring — ambassador photo */
+  (function() {
+    var el = document.querySelector('.amb-photo-wrap');
+    if (!el) return;
+    var w = document.createElement('div');
+    w.className = 'pb-ring-wrapper';
+    el.parentNode.insertBefore(w, el);
+    w.appendChild(el);
+  })();
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="js/circonscription-map.js"></script>
