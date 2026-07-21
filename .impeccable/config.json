@@ -2,7 +2,9 @@
   "detector": {
     "ignoreRules": [],
     "ignoreFiles": [
-      ".A Projects/AMBACI VIENNA/app/www/annonces.html"
+      ".A Projects/AMBACI VIENNA/app/www/annonces.html",
+      ".A Projects/AMBACI VIENNA/app/www/decouvrir.html",
+      "app/www/decouvrir.html"
     ],
     "ignoreValues": []
   }
