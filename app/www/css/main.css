@@ -540,7 +540,7 @@ a.service-detail-card:hover .service-detail-header {
 .requirement-list { display: flex; flex-direction: column; gap: var(--space-sm); margin: var(--space-md) 0; }
 .requirement-list li { display: flex; gap: var(--space-sm); align-items: flex-start; font-size: 0.9375rem; color: var(--grey-700); }
 .requirement-list li::before { content: '✓'; flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--green); color: var(--white); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-.service-tarif { display: flex; align-items: center; justify-content: space-between; padding: var(--space-md); background: var(--orange-pale); border-radius: var(--radius-md); margin-top: var(--space-lg); border-left: 3px solid var(--orange); }
+.service-tarif { display: flex; align-items: center; justify-content: space-between; padding: var(--space-md); background: var(--orange-pale); border-radius: var(--radius-md); margin-top: var(--space-lg); box-shadow: inset 3px 0 0 var(--orange); }
 .service-tarif span:first-child { font-size: 0.875rem; color: var(--grey-700); }
 .service-tarif strong { font-size: 1.125rem; color: var(--dark); }
 
@@ -1232,7 +1232,7 @@ fastbots-widget,
   box-shadow: 0 6px 24px rgba(37,211,102,.45), 0 2px 8px rgba(0,0,0,.15);
   z-index: 9998;
   text-decoration: none;
-  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
 }
 
 /* Anneau pulse permanent */
@@ -1340,9 +1340,11 @@ fastbots-widget,
 
 @media (max-width: 768px) {
   .bottom-nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     position: fixed;
     bottom: 0; left: 0; right: 0;
+    width: 100%;
     height: 64px;
     background: var(--white);
     border-top: 1px solid var(--grey-200);
@@ -1352,8 +1354,6 @@ fastbots-widget,
   }
 
   .bottom-nav-item {
-    flex: 1;
-    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1399,7 +1399,7 @@ fastbots-widget,
   outline: none;
   stroke: #0e0e10;
   stroke-width: 1;
-  transition: fill .2s, filter .2s, stroke .2s, stroke-width .2s;
+  transition: fill .2s, filter .2s, stroke .2s;
 }
 .cd-map .cc[data-role="juris"] { fill: #009E60; }
 .cd-map .cc[data-role="seat"]  { fill: #F77F00; }
@@ -1472,7 +1472,7 @@ fastbots-widget,
 }
 .cc-modal-body h3:first-child { margin-top: 0; }
 .cc-eligibility {
-  background: var(--orange-pale); border-left: 3px solid var(--orange);
+  background: var(--orange-pale); box-shadow: inset 3px 0 0 var(--orange);
   border-radius: var(--radius-md); padding: var(--space-md);
   font-size: .9375rem; color: var(--grey-700);
 }
