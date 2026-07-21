@@ -1,0 +1,9 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [
+      ".A Projects/AMBACI VIENNA/app/www/annonces.html"
+    ],
+    "ignoreValues": []
+  }
+}
