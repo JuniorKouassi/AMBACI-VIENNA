@@ -7,7 +7,7 @@ const translations = {
 
   /* ==================== FRANÇAIS ==================== */
   fr: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
     'topbar.hours':  'Lun–Ven : 09h30 – 16h00',
     'nav.home':      'Accueil',
     'nav.embassy':   "L'Ambassade",
@@ -156,7 +156,7 @@ const translations = {
     'month.jan':'Jan','month.feb':'Fév','month.mar':'Mar','month.apr':'Avr',
     'month.may':'Mai','month.jun':'Jun','month.jul':'Jul','month.aug':'Aoû',
     'month.sep':'Sep','month.oct':'Oct','month.nov':'Nov','month.dec':'Déc',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage', 'pays.at':'Autriche','pays.at.cap':'Wien (siège)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333', 'pays.at':'Autriche','pays.at.cap':'Wien (siège)',
     'pays.hu':'Hongrie','pays.si':'Slovénie','pays.sk':'Slovaquie',
     'pays.hr':'Croatie','pays.rs':'Serbie','pays.ro':'Roumanie','pays.ba':'Bosnie-Herzégovine','pays.md':'Moldavie',
     'actu.tag.event':'Événement','actu.tag.info':'Information','actu.tag.mission':'Mission économique',
@@ -580,7 +580,7 @@ const translations = {
 
   /* ==================== DEUTSCH ==================== */
   de: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3. Stock, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3. Stock, Tür 332-333, 1190 Wien',
     'topbar.hours':  'Mo–Fr : 09:30 – 16:00 Uhr',
     'nav.home':      'Startseite',
     'nav.embassy':   'Die Botschaft',
@@ -726,7 +726,7 @@ const translations = {
     'month.jan':'Jan','month.feb':'Feb','month.mar':'Mär','month.apr':'Apr',
     'month.may':'Mai','month.jun':'Jun','month.jul':'Jul','month.aug':'Aug',
     'month.sep':'Sep','month.oct':'Okt','month.nov':'Nov','month.dec':'Dez',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3. Stock', 'pays.at':'Österreich','pays.at.cap':'Wien (Sitz)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3. Stock, Tür 332-333', 'pays.at':'Österreich','pays.at.cap':'Wien (Sitz)',
     'pays.hu':'Ungarn','pays.si':'Slowenien','pays.sk':'Slowakei',
     'pays.hr':'Kroatien','pays.rs':'Serbien','pays.ro':'Rumänien','pays.ba':'Bosnien und Herzegowina','pays.md':'Moldawien',
     'actu.tag.event':'Veranstaltung','actu.tag.info':'Information','actu.tag.mission':'Wirtschaftsmission',
@@ -1147,7 +1147,7 @@ const translations = {
 
   /* ==================== ENGLISH ==================== */
   en: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3rd Floor, 1190 Vienna',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3rd Floor, Door 332-333, 1190 Vienna',
     'topbar.hours':  'Mon–Fri : 9:30 AM – 4:00 PM',
     'nav.home':      'Home',
     'nav.embassy':   'The Embassy',
@@ -1250,7 +1250,7 @@ const translations = {
     'month.jan':'Jan','month.feb':'Feb','month.mar':'Mar','month.apr':'Apr',
     'month.may':'May','month.jun':'Jun','month.jul':'Jul','month.aug':'Aug',
     'month.sep':'Sep','month.oct':'Oct','month.nov':'Nov','month.dec':'Dec',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3rd Floor', 'pays.at':'Austria','pays.at.cap':'Vienna (seat)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3rd Floor, Door 332-333', 'pays.at':'Austria','pays.at.cap':'Vienna (seat)',
     'pays.hu':'Hungary','pays.si':'Slovenia','pays.sk':'Slovakia',
     'pays.hr':'Croatia','pays.rs':'Serbia','pays.ro':'Romania','pays.ba':'Bosnia-Herzegovina','pays.md':'Moldova',
     'actu.tag.event':'Event','actu.tag.info':'Information','actu.tag.mission':'Economic Mission',
