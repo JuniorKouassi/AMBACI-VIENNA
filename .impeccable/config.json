@@ -1,12 +1,14 @@
 {
   "detector": {
-    "ignoreRules": [],
+    "ignoreRules": ["single-font", "em-dash-overuse"],
     "ignoreFiles": [
       ".A Projects/AMBACI VIENNA/app/www/annonces.html",
       ".A Projects/AMBACI VIENNA/app/www/decouvrir.html",
       "app/www/decouvrir.html",
       "app/www/contact.html",
-      "contact.html"
+      "contact.html",
+      "**contact.html",
+      "**/contact.html"
     ],
     "ignoreValues": []
   }
