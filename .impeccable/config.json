@@ -8,7 +8,11 @@
       "app/www/contact.html",
       "contact.html",
       "**contact.html",
-      "**/contact.html"
+      "**/contact.html",
+      ".A Projects/AMBACI VIENNA/telecharger.html",
+      ".A Projects/AMBACI VIENNA/app/www/telecharger.html",
+      "telecharger.html",
+      "**/telecharger.html"
     ],
     "ignoreValues": []
   }
