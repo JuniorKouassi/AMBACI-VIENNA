@@ -318,48 +318,117 @@
     </section>
 
     <!-- ===== RÉSEAU DIPLOMATIQUE ===== -->
-    <section style="padding:var(--space-3xl) 0;background:var(--dark);">
+    <section id="reseau" style="padding:var(--space-3xl) 0;background:var(--grey-100);">
       <div class="container">
-
-        <div style="margin-bottom:var(--space-2xl);">
-          <span class="badge" style="background:rgba(247,127,0,.15);color:var(--orange);" data-i18n="pamb.net.badge">Réseau extérieur</span>
-          <h2 class="section-title" style="color:var(--white);" data-i18n="pamb.net.title">Réseau diplomatique ivoirien dans le monde</h2>
-          <p style="color:rgba(255,255,255,.7);font-size:.9375rem;line-height:1.7;max-width:640px;" data-i18n="pamb.net.desc">Ambassades, consulats généraux, missions et délégations permanentes répartis à travers le monde entier.</p>
+        <div class="section-header" style="margin-bottom:var(--space-2xl);">
+          <span class="badge" data-i18n="pamb.net.badge">Réseau extérieur</span>
+          <h2 class="section-title" data-i18n="pamb.net.title">Réseau diplomatique ivoirien dans le monde</h2>
+          <p class="section-subtitle" data-i18n="pamb.net.desc">Ambassades, consulats généraux, missions et délégations permanentes répartis à travers le monde entier.</p>
         </div>
-
-        <!-- Statistiques -->
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--space-md);margin-bottom:var(--space-2xl);">
-          <div style="background:rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;border:1px solid rgba(255,255,255,.08);">
-            <b style="display:block;font-size:1.9rem;font-weight:700;color:var(--orange);font-family:var(--font-primary);line-height:1;">44</b>
-            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-top:.4rem;" data-i18n="pamb.net.amb">Ambassades</span>
+        <div id="net-map" style="background:#0e0e10;color:#f4f1ea;padding:clamp(22px,3.2vw,48px);border:1px solid #1f1f24;border-radius:var(--radius-xl);box-shadow:0 24px 60px rgba(0,0,0,.45);overflow:hidden;">
+          <style>
+#net-map *{box-sizing:border-box;}
+#net-map .nm-stats{display:flex;flex-wrap:wrap;gap:clamp(14px,2.4vw,40px);padding-bottom:1.4rem;border-bottom:1px solid #1f1f24;margin-bottom:1.4rem;}
+#net-map .nm-stat b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:600;line-height:1;}
+#net-map .nm-stat span{display:block;margin-top:.4rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#9a978f;}
+#net-map .nm-stat.o b{color:#F77F00;}#net-map .nm-stat.g b{color:#009E60;}#net-map .nm-stat.s b{color:#e8d9b5;}
+#net-map .nm-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 1.1rem;}
+#net-map .nm-chip{background:transparent;color:#9a978f;border:1px solid #1f1f24;cursor:pointer;font:inherit;font-size:.78rem;font-weight:600;letter-spacing:.04em;padding:.45rem .9rem;border-radius:999px;display:inline-flex;align-items:center;gap:.5rem;transition:background .18s,color .18s,border-color .18s;}
+#net-map .nm-chip:hover{border-color:#3a3a44;color:#f4f1ea;}
+#net-map .nm-chip i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto;}
+#net-map .nm-chip[aria-pressed="true"]{background:#22222a;color:#f4f1ea;border-color:#3d3d48;}
+#net-map .nm-chip.acc[aria-pressed="true"]{background:#F77F00;color:#1a1205;border-color:#F77F00;}
+#net-map .nm-spacer{flex:1 1 auto;}
+#net-map .nm-search{background:#101014;border:1px solid #1f1f24;border-radius:999px;padding:.45rem 1rem;color:#f4f1ea;font:inherit;font-size:.82rem;min-width:180px;}
+#net-map .nm-search::placeholder{color:#6e6b64;}
+#net-map .nm-search:focus{outline:none;border-color:#3d3d48;}
+#net-map .nm-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:clamp(16px,2vw,28px);align-items:start;}
+@media(max-width:1080px){#net-map .nm-grid{grid-template-columns:1fr;}}
+#net-map .nm-mapbox{position:relative;background:#a9d3e8;border:1px solid #1f1f24;border-radius:12px;overflow:hidden;}
+#net-map svg.nm-map{display:block;width:100%;height:auto;}
+#net-map .land{fill:#34343c;stroke:#46464f;stroke-width:.5;vector-effect:non-scaling-stroke;shape-rendering:geometricPrecision;}
+#net-map .home{fill:#009E60;stroke:#0d3;stroke-width:.6;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .15s;}
+#net-map .home:hover{fill:#00c97b;}
+#net-map .home.on{fill:#00d585;stroke:#fff;stroke-width:1.2;}
+#net-map .circ{fill:rgba(0,158,96,.42);stroke:#00d585;stroke-width:.9;stroke-opacity:.9;cursor:pointer;vector-effect:non-scaling-stroke;transition:fill .15s;}
+#net-map .circ:hover{fill:rgba(0,213,133,.6);}
+#net-map .circ.on{fill:rgba(0,213,133,.72);stroke-width:1.6;}
+#net-map .caplab{font-size:11px;font-weight:600;fill:#fff;stroke:none;letter-spacing:.01em;pointer-events:none;}
+#net-map .circlab{font-size:14px;font-weight:800;fill:#fff;stroke:none;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;}
+#net-map .selc{cursor:pointer;transition:fill .15s;fill:rgba(247,127,0,.16);stroke:#F77F00;stroke-width:1;stroke-opacity:.75;vector-effect:non-scaling-stroke;}
+#net-map .graticule{fill:none;stroke:#8dbdd6;stroke-width:.5;}
+#net-map .sphere{fill:#a9d3e8;stroke:#6ea6c2;stroke-width:.8;}
+#net-map .arc{fill:none;stroke:#F77F00;stroke-opacity:.17;stroke-width:.7;pointer-events:none;}
+#net-map .pin{cursor:pointer;}
+#net-map .pin circle.dot{stroke:#0e0e10;stroke-width:1.1;transition:r .16s;}
+#net-map .pin circle.halo{fill:none;stroke-opacity:.9;}
+#net-map .pin.dim{opacity:.16;pointer-events:none;}
+#net-map .lab{font-size:11.5px;font-weight:600;fill:#f4f1ea;stroke:none;letter-spacing:.01em;pointer-events:none;}
+#net-map .nm-credit{position:absolute;right:10px;bottom:8px;font-size:.62rem;letter-spacing:.08em;color:#5e5b55;text-transform:uppercase;}
+#net-map .nm-zoombtns{position:absolute;left:10px;bottom:10px;display:flex;gap:6px;}
+#net-map .nm-zoombtns button{width:28px;height:28px;border-radius:7px;background:rgba(22,22,26,.9);border:1px solid #1f1f24;color:#9a978f;font:inherit;font-size:.95rem;cursor:pointer;line-height:1;}
+#net-map .nm-zoombtns button:hover{color:#f4f1ea;border-color:#3d3d48;}
+#net-map .nm-closebtn{position:absolute;right:10px;top:10px;display:inline-flex;align-items:center;gap:.5rem;background:rgba(22,22,26,.94);border:1px solid #2f2f38;color:#f4f1ea;font:inherit;font-size:1.05rem;line-height:1;padding:.42rem .7rem;border-radius:999px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.45);}
+#net-map .nm-closebtn[hidden]{display:none;}
+#net-map .nm-closebtn span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#9a978f;}
+#net-map .nm-closebtn:hover{border-color:#F77F00;}
+#net-map .nm-closebtn:hover span{color:#f4f1ea;}
+#net-map .nm-tip{position:absolute;pointer-events:none;opacity:0;transform:translate(-50%,-118%);background:#101014ee;border:1px solid #2c2c34;border-radius:9px;padding:.5rem .7rem;font-size:.78rem;line-height:1.4;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.5);transition:opacity .12s;}
+#net-map .nm-tip b{display:block;font-size:.86rem;margin-bottom:.15rem;}
+#net-map .nm-tip em{font-style:normal;color:#9a978f;display:block;font-size:.72rem;}
+#net-map .nm-aside{background:#16161a;border:1px solid #1f1f24;border-radius:12px;padding:1.1rem 1.1rem 1.2rem;position:sticky;top:16px;max-height:calc(100vh - 40px);overflow:auto;}
+#net-map .nm-aside::-webkit-scrollbar{width:8px;}#net-map .nm-aside::-webkit-scrollbar-thumb{background:#2a2a32;border-radius:8px;}
+#net-map .nm-detail{border-bottom:1px solid #1f1f24;padding-bottom:1rem;margin-bottom:1rem;}
+#net-map .nm-detail img{width:56px;height:37px;border-radius:5px;object-fit:cover;display:block;margin-bottom:.7rem;box-shadow:0 2px 6px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);}
+#net-map .nm-detail h2{font-family:'Playfair Display',Georgia,serif;font-size:1.35rem;font-weight:600;margin:0 0 .1rem;color:#f4f1ea;}
+#net-map .nm-cty{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#9a978f;margin:0 0 .8rem;}
+#net-map .nm-postrow{display:flex;gap:.55rem;align-items:flex-start;font-size:.85rem;line-height:1.45;margin-top:.5rem;color:#cfccc4;}
+#net-map .nm-postrow i{width:9px;height:9px;border-radius:50%;flex:0 0 auto;margin-top:.38rem;}
+#net-map .nm-postrow strong{color:#f4f1ea;font-weight:600;}
+#net-map .nm-hint{color:#9a978f;font-size:.85rem;line-height:1.6;margin:0;}
+#net-map .nm-regh{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#9a978f;margin:1.1rem 0 .45rem;padding-top:.7rem;border-top:1px solid #1f1f24;}
+#net-map .nm-regh:first-of-type{border-top:0;padding-top:0;margin-top:0;}
+#net-map .nm-item{width:100%;text-align:left;background:transparent;border:0;border-radius:7px;color:#cfccc4;font:inherit;font-size:.85rem;padding:.4rem .5rem;cursor:pointer;display:flex;align-items:center;gap:.5rem;transition:background .15s,color .15s;}
+#net-map .nm-item:hover{background:#1e1e24;color:#f4f1ea;}
+#net-map .nm-item[aria-current="true"]{background:#22222a;color:#f4f1ea;}
+#net-map .nm-item .dots{display:inline-flex;gap:3px;flex:0 0 auto;}
+#net-map .nm-item .dots i{width:7px;height:7px;border-radius:50%;display:block;}
+#net-map .nm-cn{margin-left:auto;color:#6e6b64;font-size:.72rem;}
+#net-map .nm-footer{color:#5e5b55;font-size:.72rem;line-height:1.6;margin-top:1.4rem;padding-top:1rem;border-top:1px solid #1f1f24;}
+          </style>
+          <div class="nm-stats">
+            <div class="nm-stat o"><b>44</b><span data-i18n="pamb.net.amb">Ambassades</span></div>
+            <div class="nm-stat g"><b>7</b><span data-i18n="pamb.net.cg">Consulats généraux</span></div>
+            <div class="nm-stat s"><b>7</b><span data-i18n="pamb.net.mis">Missions &amp; délégations</span></div>
+            <div class="nm-stat"><b>31</b><span data-i18n="pamb.net.circ">Circonscriptions</span></div>
+            <div class="nm-stat"><b>50</b><span data-i18n="pamb.net.villes">Villes</span></div>
+            <div class="nm-stat"><b>43</b><span data-i18n="pamb.net.pays">Pays de résidence</span></div>
           </div>
-          <div style="background:rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;border:1px solid rgba(255,255,255,.08);">
-            <b style="display:block;font-size:1.9rem;font-weight:700;color:#009E60;font-family:var(--font-primary);line-height:1;">7</b>
-            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-top:.4rem;" data-i18n="pamb.net.cg">Consulats généraux</span>
+          <div class="nm-toolbar">
+            <button class="nm-chip" id="nf-all" aria-pressed="true" data-i18n="net.filter.all">Tous les postes</button>
+            <button class="nm-chip" id="nf-amb" aria-pressed="false"><i style="background:#F77F00"></i><span data-i18n="pamb.net.amb">Ambassades</span></button>
+            <button class="nm-chip" id="nf-con" aria-pressed="false"><i style="background:#009E60"></i><span data-i18n="pamb.net.cg">Consulats généraux</span></button>
+            <button class="nm-chip" id="nf-mis" aria-pressed="false"><i style="background:#e8d9b5"></i><span data-i18n="pamb.net.mis">Missions</span></button>
+            <button class="nm-chip" id="nf-cir" aria-pressed="false"><i style="background:#00d585"></i><span data-i18n="net.filter.circ">Circonscriptions</span></button>
+            <span class="nm-spacer"></span>
+            <button class="nm-chip acc" id="nt-arc" aria-pressed="true" data-i18n="net.filter.arcs">Liaisons depuis Abidjan</button>
+            <input class="nm-search" id="nq" type="search" placeholder="Rechercher…" data-i18n-placeholder="net.search.ph" aria-label="Rechercher">
           </div>
-          <div style="background:rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;border:1px solid rgba(255,255,255,.08);">
-            <b style="display:block;font-size:1.9rem;font-weight:700;color:#e8d9b5;font-family:var(--font-primary);line-height:1;">7</b>
-            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-top:.4rem;" data-i18n="pamb.net.mis">Missions &amp; délégations</span>
+          <div class="nm-grid">
+            <div class="nm-mapbox" id="nmapbox">
+              <svg class="nm-map" id="nsvg" viewBox="0 0 1600 860" role="img" aria-label="Carte mondiale des représentations diplomatiques de la Côte d'Ivoire"></svg>
+              <div class="nm-tip" id="ntip"></div>
+              <button class="nm-closebtn" id="nzclose" hidden aria-label="Revenir à la carte du monde">×<span data-i18n="net.close">Vue mondiale</span></button>
+              <div class="nm-zoombtns"><button id="nzin" aria-label="Zoomer">+</button><button id="nzout" aria-label="Dézoomer">−</button><button id="nzres" style="width:auto;padding:0 .55rem;font-size:.7rem;">Reset</button></div>
+              <div class="nm-credit">Natural Earth · d3-geo</div>
+            </div>
+            <aside class="nm-aside">
+              <div class="nm-detail" id="ndetail"><p class="nm-hint" data-i18n="net.hint">Sélectionnez un point sur la carte, ou un poste dans la liste ci-dessous, pour afficher le détail.</p></div>
+              <div id="nlist"></div>
+            </aside>
           </div>
-          <div style="background:rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;border:1px solid rgba(255,255,255,.08);">
-            <b style="display:block;font-size:1.9rem;font-weight:700;color:var(--white);font-family:var(--font-primary);line-height:1;">31</b>
-            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-top:.4rem;" data-i18n="pamb.net.circ">Circonscriptions</span>
-          </div>
-          <div style="background:rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;border:1px solid rgba(255,255,255,.08);">
-            <b style="display:block;font-size:1.9rem;font-weight:700;color:var(--white);font-family:var(--font-primary);line-height:1;">50</b>
-            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-top:.4rem;" data-i18n="pamb.net.villes">Villes</span>
-          </div>
-          <div style="background:rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-align:center;border:1px solid rgba(255,255,255,.08);">
-            <b style="display:block;font-size:1.9rem;font-weight:700;color:var(--white);font-family:var(--font-primary);line-height:1;">43</b>
-            <span style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);display:block;margin-top:.4rem;" data-i18n="pamb.net.pays">Pays de résidence</span>
-          </div>
+          <div class="nm-footer" data-i18n="net.footer">Ambassade = représentation bilatérale auprès d'un État · Consulat général = poste consulaire pour une circonscription · Mission permanente = représentation auprès d'une organisation internationale.</div>
         </div>
-
-        <!-- Carte interactive -->
-        <div style="border-radius:var(--radius-xl);overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 60px rgba(0,0,0,.5);">
-          <iframe src="https://ambacivienna.kouassij019.workers.dev/reseau-diplomatique.html" style="width:100%;height:720px;border:0;display:block;" title="Réseau diplomatique ivoirien dans le monde" loading="lazy"></iframe>
-        </div>
-
       </div>
     </section>
 
@@ -462,6 +531,191 @@
   <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="js/circonscription-map.js"></script>
   <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
+  <!-- Diplomatic network map — inline D3, IIFE-scoped to avoid global conflicts -->
+  <script>
+(function(){
+var AMB='amb',CON='con',MIS='mis';
+var COLOR={amb:'#F77F00',con:'#009E60',mis:'#e8d9b5'};
+var LABEL_FR={amb:'Ambassade',con:'Consulat général',mis:'Mission / délégation'};
+var LABEL_DE={amb:'Botschaft',con:'Generalkonsulat',mis:'Mission / Delegation'};
+var LABEL_EN={amb:'Embassy',con:'Consulate general',mis:'Mission / delegation'};
+function getLang(){return localStorage.getItem('ambaci-lang')||'fr';}
+function getLabel(){var l=getLang();return l==='de'?LABEL_DE:l==='en'?LABEL_EN:LABEL_FR;}
+var REGS_FR=["Afrique","Europe","Amériques","Asie & Moyen-Orient"];
+var REGS_DE={Afrique:'Afrika',Europe:'Europa',Amériques:'Amerika','Asie & Moyen-Orient':'Asien & Mittlerer Osten'};
+var REGS_EN={Afrique:'Africa',Europe:'Europe',Amériques:'Americas','Asie & Moyen-Orient':'Asia & Middle East'};
+function dispReg(r){var l=getLang();return l==='de'?REGS_DE[r]:l==='en'?REGS_EN[r]:r;}
+var CITIES=[
+ {city:"Pretoria",country:"Afrique du Sud",iso:"za",reg:"Afrique",lat:-25.7479,lon:28.2293,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Alger",country:"Algérie",iso:"dz",reg:"Afrique",lat:36.7538,lon:3.0588,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Luanda",country:"Angola",iso:"ao",reg:"Afrique",lat:-8.839,lon:13.2894,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Ouagadougou",country:"Burkina Faso",iso:"bf",reg:"Afrique",lat:12.3714,lon:-1.5197,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Yaoundé",country:"Cameroun",iso:"cm",reg:"Afrique",lat:3.848,lon:11.5021,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Brazzaville",country:"République du Congo",iso:"cg",reg:"Afrique",lat:-4.2634,lon:15.2429,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Kinshasa",country:"RD Congo",iso:"cd",reg:"Afrique",lat:-4.4419,lon:15.2663,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Le Caire",country:"Égypte",iso:"eg",reg:"Afrique",lat:30.0444,lon:31.2357,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Addis-Abeba",country:"Éthiopie",iso:"et",reg:"Afrique",lat:9.03,lon:38.74,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"},{t:MIS,n:"Délégation permanente auprès de l'Union africaine"}]},
+ {city:"Libreville",country:"Gabon",iso:"ga",reg:"Afrique",lat:0.4162,lon:9.4673,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Accra",country:"Ghana",iso:"gh",reg:"Afrique",lat:5.6037,lon:-0.187,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Conakry",country:"Guinée",iso:"gn",reg:"Afrique",lat:9.6412,lon:-13.5784,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Malabo",country:"Guinée équatoriale",iso:"gq",reg:"Afrique",lat:3.75,lon:8.7833,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Monrovia",country:"Liberia",iso:"lr",reg:"Afrique",lat:6.3005,lon:-10.7969,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Tripoli",country:"Libye",iso:"ly",reg:"Afrique",lat:32.8872,lon:13.1913,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Bamako",country:"Mali",iso:"ml",reg:"Afrique",lat:12.6392,lon:-8.0029,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Rabat",country:"Maroc",iso:"ma",reg:"Afrique",lat:34.0209,lon:-6.8416,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Laâyoune",country:"Maroc",iso:"ma",reg:"Afrique",lat:27.15,lon:-13.2,posts:[{t:CON,n:"Consulat général"}]},
+ {city:"Abuja",country:"Nigeria",iso:"ng",reg:"Afrique",lat:9.0765,lon:7.3986,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Dakar",country:"Sénégal",iso:"sn",reg:"Afrique",lat:14.7167,lon:-17.4677,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"N'Djaména",country:"Tchad",iso:"td",reg:"Afrique",lat:12.1348,lon:15.0557,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Tunis",country:"Tunisie",iso:"tn",reg:"Afrique",lat:36.8065,lon:10.1815,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Berlin",country:"Allemagne",iso:"de",reg:"Europe",lat:52.52,lon:13.405,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Vienne",country:"Autriche",iso:"at",reg:"Europe",lat:48.2082,lon:16.3738,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"},{t:MIS,n:"Mission permanente auprès de l'ONU (Vienne)"},{t:MIS,n:"Représentation auprès de l'AIEA, de l'ONUDI et de l'ONUV"}]},
+ {city:"Copenhague",country:"Danemark",iso:"dk",reg:"Europe",lat:55.6761,lon:12.5683,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Madrid",country:"Espagne",iso:"es",reg:"Europe",lat:40.4168,lon:-3.7038,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Paris",country:"France",iso:"fr",reg:"Europe",lat:48.8566,lon:2.3522,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"},{t:CON,n:"Consulat général"},{t:MIS,n:"Délégation permanente auprès de l'UNESCO"}]},
+ {city:"Lyon",country:"France",iso:"fr",reg:"Europe",lat:45.764,lon:4.8357,posts:[{t:CON,n:"Consulat général"}]},
+ {city:"Bruxelles",country:"Belgique",iso:"be",reg:"Europe",lat:50.8503,lon:4.3517,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"},{t:MIS,n:"Mission auprès de l'Union européenne"}]},
+ {city:"La Haye",country:"Pays-Bas",iso:"nl",reg:"Europe",lat:52.0705,lon:4.3007,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Rome",country:"Italie",iso:"it",reg:"Europe",lat:41.9028,lon:12.4964,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"},{t:AMB,n:"Ambassade près le Saint-Siège"}]},
+ {city:"Milan",country:"Italie",iso:"it",reg:"Europe",lat:45.4642,lon:9.19,posts:[{t:CON,n:"Consulat général"}]},
+ {city:"Lisbonne",country:"Portugal",iso:"pt",reg:"Europe",lat:38.7223,lon:-9.1393,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Londres",country:"Royaume-Uni",iso:"gb",reg:"Europe",lat:51.5074,lon:-0.1278,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Moscou",country:"Russie",iso:"ru",reg:"Europe",lat:55.7558,lon:37.6173,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Berne",country:"Suisse",iso:"ch",reg:"Europe",lat:46.948,lon:7.4474,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Genève",country:"Suisse",iso:"ch",reg:"Europe",lat:46.2044,lon:6.1432,posts:[{t:MIS,n:"Mission permanente auprès de l'ONU (Genève)"}]},
+ {city:"Ottawa",country:"Canada",iso:"ca",reg:"Amériques",lat:45.4215,lon:-75.6972,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Washington D.C.",country:"États-Unis",iso:"us",reg:"Amériques",lat:38.9072,lon:-77.0369,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"New York",country:"États-Unis",iso:"us",reg:"Amériques",lat:40.7128,lon:-74.006,posts:[{t:MIS,n:"Mission permanente auprès de l'ONU (New York)"},{t:CON,n:"Consulat général"}]},
+ {city:"Mexico",country:"Mexique",iso:"mx",reg:"Amériques",lat:19.4326,lon:-99.1332,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Brasília",country:"Brésil",iso:"br",reg:"Amériques",lat:-15.7939,lon:-47.8828,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Riyad",country:"Arabie Saoudite",iso:"sa",reg:"Asie & Moyen-Orient",lat:24.7136,lon:46.6753,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Djeddah",country:"Arabie Saoudite",iso:"sa",reg:"Asie & Moyen-Orient",lat:21.4858,lon:39.1925,posts:[{t:CON,n:"Consulat général"}]},
+ {city:"Pékin",country:"Chine",iso:"cn",reg:"Asie & Moyen-Orient",lat:39.9042,lon:116.4074,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Guangzhou",country:"Chine",iso:"cn",reg:"Asie & Moyen-Orient",lat:23.1291,lon:113.2644,posts:[{t:CON,n:"Consulat général"}]},
+ {city:"Séoul",country:"Corée du Sud",iso:"kr",reg:"Asie & Moyen-Orient",lat:37.5665,lon:126.978,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"New Delhi",country:"Inde",iso:"in",reg:"Asie & Moyen-Orient",lat:28.6139,lon:77.209,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Tel Aviv",country:"Israël",iso:"il",reg:"Asie & Moyen-Orient",lat:32.0853,lon:34.7818,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]},
+ {city:"Tokyo",country:"Japon",iso:"jp",reg:"Asie & Moyen-Orient",lat:35.6762,lon:139.6503,posts:[{t:AMB,n:"Ambassade de Côte d'Ivoire"}]}
+];
+var ISO_C={bw:72,ls:426,na:516,sz:748,zw:716,km:174,sc:690,mg:450,mu:480,mz:508,zm:894,mw:454,ne:562,cf:140,sd:729,er:232,ke:404,ug:800,tz:834,so:706,dj:262,st:678,tg:768,bj:204,gw:624,sl:694,bi:108,rw:646,cv:132,gm:270,mr:478,ar:32,cl:152,co:170,uy:858,py:600,ve:862,ec:218,pe:604,bs:44,ht:332,jm:388,tt:780,gd:308,dm:212,cu:192,ni:558,hn:340,bh:48,kw:414,om:512,ye:887,kp:408,th:764,vn:704,kh:116,mm:104,la:418,mn:496,sg:702,my:458,pg:598,bd:50,lk:144,np:524,ph:608,nz:554,tw:158,id:360,au:36,pl:616,cz:203,lu:442,fi:246,no:578,se:752,ad:20,mc:492,gr:300,bg:100,al:8,cy:196,me:499,mt:470,sm:674,ie:372,ua:804,by:112,kz:398,tj:762,kg:417,am:51};
+var ISO_N=Object.assign({},ISO_C,{hu:348,si:705,sk:703,hr:191,rs:688,ro:642,ba:70,md:498,za:710,dz:12,ao:24,bf:854,cm:120,cg:178,cd:180,eg:818,et:231,ga:266,gh:288,gn:324,gq:226,lr:430,ly:434,ml:466,ma:504,ng:566,sn:686,td:148,tn:788,de:276,at:40,be:56,dk:208,es:724,fr:250,it:380,nl:528,pt:620,gb:826,ru:643,ch:756,ca:124,us:840,mx:484,br:76,sa:682,cn:156,kr:410,in:356,il:376,jp:392});
+var CIRC={"Pretoria":["bw","ls","na","sz","zw","km","sc","mg","mu"],"Luanda":["mz","zm","mw"],"Ouagadougou":["ne"],"Yaoundé":["cf","td"],"Le Caire":["sd","er"],"Addis-Abeba":["ke","ug","tz","so","dj"],"Libreville":["st"],"Accra":["tg","bj"],"Conakry":["gw"],"Monrovia":["sl"],"Kinshasa":["bi","rw"],"Dakar":["cv","gm","mr"],"Tunis":["ly"],"Brasília":["ar","cl","co","uy","py","ve","ec","pe"],"Washington D.C.":["bs","ht","jm","tt","gd","dm"],"Mexico":["cu","ni","hn"],"Riyad":["bh","kw","om","ye"],"Pékin":["kp","th","vn","kh","mm","la","mn"],"Séoul":["sg","my","pg"],"New Delhi":["bd","lk","np"],"Tokyo":["ph","nz","tw","id","au"],"Berlin":["pl","cz"],"Vienne":["hu","rs","ba","si","hr","md","ro","sk"],"Bruxelles":["lu"],"Copenhague":["fi","no","se"],"Madrid":["ad"],"Paris":["mc"],"Rome":["gr","bg","al","cy","me","mt","sm"],"Londres":["ie"],"Moscou":["ua","by","kz","tj","kg","am"]};
+var CNAME2={bw:"Botswana",ls:"Lesotho",na:"Namibie",sz:"Eswatini",zw:"Zimbabwe",km:"Comores",sc:"Seychelles",mg:"Madagascar",mu:"Maurice",mz:"Mozambique",zm:"Zambie",mw:"Malawi",ne:"Niger",cf:"République centrafricaine",td:"Tchad",sd:"Soudan",er:"Érythrée",ke:"Kenya",ug:"Ouganda",tz:"Tanzanie",so:"Somalie",dj:"Djibouti",st:"Sao Tomé-et-Principe",tg:"Togo",bj:"Bénin",gw:"Guinée-Bissau",sl:"Sierra Leone",bi:"Burundi",rw:"Rwanda",cv:"Cap-Vert",gm:"Gambie",mr:"Mauritanie",ly:"Libye",ar:"Argentine",cl:"Chili",co:"Colombie",uy:"Uruguay",py:"Paraguay",ve:"Venezuela",ec:"Équateur",pe:"Pérou",bs:"Bahamas",ht:"Haïti",jm:"Jamaïque",tt:"Trinité-et-Tobago",gd:"Grenade",dm:"Dominique",cu:"Cuba",ni:"Nicaragua",hn:"Honduras",bh:"Bahreïn",kw:"Koweït",om:"Oman",ye:"Yémen",kp:"Corée du Nord",th:"Thaïlande",vn:"Viêt Nam",kh:"Cambodge",mm:"Birmanie",la:"Laos",mn:"Mongolie",sg:"Singapour",my:"Malaisie",pg:"Papouasie-Nouvelle-Guinée",bd:"Bangladesh",lk:"Sri Lanka",np:"Népal",ph:"Philippines",nz:"Nouvelle-Zélande",tw:"Taïwan",id:"Indonésie",au:"Australie",pl:"Pologne",cz:"Tchéquie",lu:"Luxembourg",fi:"Finlande",no:"Norvège",se:"Suède",ad:"Andorre",mc:"Monaco",gr:"Grèce",bg:"Bulgarie",al:"Albanie",cy:"Chypre",me:"Monténégro",mt:"Malte",sm:"Saint-Marin",ie:"Irlande",ua:"Ukraine",by:"Bélarus",kz:"Kazakhstan",tj:"Tadjikistan",kg:"Kirghizstan",am:"Arménie"};
+var LABXY={ro:[45.85,24.90],hu:[47.05,19.80],hr:[45.55,17.30],ba:[44.15,17.75],sk:[48.72,19.60],si:[46.15,14.90],rs:[44.05,20.90],md:[47.15,28.55],me:[42.80,19.30],al:[40.90,20.10],bg:[42.75,25.30],gr:[39.60,21.90]};
+var CAPXY={hu:[47.5,19.04],si:[46.06,14.51],sk:[48.15,17.11],hr:[45.81,15.98],rs:[44.79,20.45],ro:[44.43,26.1],ba:[43.86,18.41],md:[47.01,28.86],bw:[-24.65,25.91],ls:[-29.31,27.48],na:[-22.56,17.08],sz:[-26.32,31.13],zw:[-17.83,31.05],km:[-11.7,43.24],sc:[-4.62,55.45],mg:[-18.88,47.51],mu:[-20.16,57.5],mz:[-25.97,32.58],zm:[-15.39,28.32],mw:[-13.96,33.79],ne:[13.51,2.11],cf:[4.39,18.56],td:[12.13,15.06],sd:[15.5,32.56],er:[15.34,38.93],ke:[-1.29,36.82],ug:[0.35,32.58],tz:[-6.16,35.75],so:[2.05,45.32],dj:[11.59,43.15],st:[0.34,6.73],tg:[6.17,1.23],bj:[6.5,2.62],gw:[11.86,-15.6],sl:[8.48,-13.23],bi:[-3.43,29.93],rw:[-1.94,30.06],cv:[14.93,-23.51],gm:[13.45,-16.58],mr:[18.08,-15.98],ly:[32.89,13.19],ar:[-34.6,-58.38],cl:[-33.45,-70.67],co:[4.71,-74.07],uy:[-34.9,-56.16],py:[-25.28,-57.64],ve:[10.48,-66.9],ec:[-0.18,-78.47],pe:[-12.05,-77.04],bs:[25.06,-77.34],ht:[18.54,-72.34],jm:[17.97,-76.79],tt:[10.65,-61.51],gd:[12.05,-61.75],dm:[15.3,-61.39],cu:[23.11,-82.37],ni:[12.11,-86.24],hn:[14.07,-87.19],bh:[26.23,50.59],kw:[29.38,47.99],om:[23.59,58.41],ye:[15.37,44.19],kp:[39.04,125.76],th:[13.76,100.5],vn:[21.03,105.85],kh:[11.56,104.92],mm:[19.75,96.13],la:[17.97,102.63],mn:[47.89,106.91],sg:[1.35,103.82],my:[3.14,101.69],pg:[-9.44,147.18],bd:[23.81,90.41],lk:[6.93,79.86],np:[27.72,85.32],ph:[14.6,120.98],nz:[-41.29,174.78],tw:[25.03,121.57],id:[-6.21,106.85],au:[-35.28,149.13],pl:[52.23,21.01],cz:[50.08,14.44],lu:[49.61,6.13],fi:[60.17,24.94],no:[59.91,10.75],se:[59.33,18.07],ad:[42.51,1.52],mc:[43.73,7.42],gr:[37.98,23.73],bg:[42.7,23.32],al:[41.33,19.82],cy:[35.19,33.38],me:[42.44,19.26],mt:[35.9,14.51],sm:[43.94,12.45],ie:[53.35,-6.26],ua:[50.45,30.52],by:[53.9,27.56],kz:[51.17,71.45],tj:[38.56,68.79],kg:[42.87,74.59],am:[40.18,44.51]};
+var CAPS={hu:"Budapest",si:"Ljubljana",sk:"Bratislava",hr:"Zagreb",rs:"Belgrade",ro:"Bucarest",ba:"Sarajevo",md:"Chișinău",bw:"Gaborone",ls:"Maseru",na:"Windhoek",sz:"Mbabane",zw:"Harare",km:"Moroni",sc:"Victoria",mg:"Antananarivo",mu:"Port-Louis",mz:"Maputo",zm:"Lusaka",mw:"Lilongwe",ne:"Niamey",cf:"Bangui",td:"N'Djaména",sd:"Khartoum",er:"Asmara",ke:"Nairobi",ug:"Kampala",tz:"Dodoma",so:"Mogadiscio",dj:"Djibouti",st:"São Tomé",tg:"Lomé",bj:"Porto-Novo",gw:"Bissau",sl:"Freetown",bi:"Gitega",rw:"Kigali",cv:"Praia",gm:"Banjul",mr:"Nouakchott",ly:"Tripoli",ar:"Buenos Aires",cl:"Santiago",co:"Bogota",uy:"Montevideo",py:"Asuncion",ve:"Caracas",ec:"Quito",pe:"Lima",bs:"Nassau",ht:"Port-au-Prince",jm:"Kingston",tt:"Port-d'Espagne",gd:"Saint-Georges",dm:"Roseau",cu:"La Havane",ni:"Managua",hn:"Tegucigalpa",bh:"Manama",kw:"Koweït",om:"Mascate",ye:"Sanaa",kp:"Pyongyang",th:"Bangkok",vn:"Hanoï",kh:"Phnom Penh",mm:"Naypyidaw",la:"Vientiane",mn:"Oulan-Bator",sg:"Singapour",my:"Kuala Lumpur",pg:"Port Moresby",bd:"Dacca",lk:"Colombo",np:"Katmandou",ph:"Manille",nz:"Wellington",tw:"Taipei",id:"Jakarta",au:"Canberra",pl:"Varsovie",cz:"Prague",lu:"Luxembourg",fi:"Helsinki",no:"Oslo",se:"Stockholm",ad:"Andorre-la-Vieille",mc:"Monaco",gr:"Athènes",bg:"Sofia",al:"Tirana",cy:"Nicosie",me:"Podgorica",mt:"La Valette",sm:"Saint-Marin",ie:"Dublin",ua:"Kiev",by:"Minsk",kz:"Astana",tj:"Douchanbé",kg:"Bichkek",am:"Erevan"};
+var MFA="https://www.diplomatie.gouv.ci";
+var CNAME=Object.assign({},CNAME2,{hu:"Hongrie",si:"Slovénie",sk:"Slovaquie",hr:"Croatie",rs:"Serbie",ro:"Roumanie",ba:"Bosnie-Herzégovine",md:"Moldavie"});
+var CINFO={hu:{cap:"Budapest",txt:"État membre de l'Union européenne, situé au cœur de l'Europe centrale."},si:{cap:"Ljubljana",txt:"Pays alpin au carrefour de l'Europe centrale, membre de l'Union européenne."},sk:{cap:"Bratislava",txt:"Jeune République d'Europe centrale, membre de l'Union européenne et de la zone euro."},hr:{cap:"Zagreb",txt:"Pays côtier de la mer Adriatique, dernier pays intégré à l'Union européenne (2013)."},rs:{cap:"Belgrade",txt:"Pays candidat à l'adhésion à l'Union européenne, situé au cœur des Balkans."},ro:{cap:"Bucarest",txt:"Grand pays d'Europe du Sud-Est, membre de l'Union européenne depuis 2007."},ba:{cap:"Sarajevo",txt:"État des Balkans en cours d'intégration européenne, à la croisée des cultures."},md:{cap:"Chișinău",txt:"État d'Europe orientale en cours de rapprochement avec l'Union européenne."}};
+var CONTACTS={"Pretoria":{amb:{tel:"+27 12 342 6913",adr:"795 Government Avenue, Arcadia 0083, Pretoria"}},"Alger":{amb:{tel:"+213 21 69 23 78",adr:"Hydra Le Paradou, Immeuble « Le Bosquet », B.P. 260 Hydra, Alger"}},"Luanda":{amb:{tel:"+244 222 44 08 78",adr:"75, Rua Eng° Armindo de Andrade, Miramar, C.P. 432, Luanda"}},"Ouagadougou":{amb:{tel:"+226 50 31 82 28",adr:"Place des Nations Unies, 01 B.P. 20 Ouagadougou 01"}},"Yaoundé":{amb:{tel:"+237 221 32 91",adr:"Quartier Bastos, rue 1983, résidence 140, B.P. 1715 Yaoundé"}},"Kinshasa":{amb:{tel:"+243 139 81 88",adr:"68, avenue de la Justice, Gombe, B.P. 9197 Kinshasa 1"}},"Le Caire":{amb:{tel:"+20 2 303 4373",adr:"9, avenue Shehab, rue Ibrahim Soliman, Mohandessine, Le Caire"}},"Addis-Abeba":{amb:{tel:"+251 113 71 26 58",adr:"P.O. Box 3668, Addis-Abeba"},mis:{tel:"+251 113 71 26 58",adr:"P.O. Box 3668, Addis-Abeba"}},"Libreville":{amb:{tel:"+241 73 82 70",adr:"Charbonnages, B.P. 3861, Libreville"}},"Accra":{amb:{tel:"+233 21 77 46 11",adr:"9, Eighteenth Lane, P.O. Box 3445, Accra",web:"https://ghana.diplomatie.gouv.ci"}},"Conakry":{amb:{tel:"+224 45 10 82",adr:"Boulevard du Commerce, B.P. 5258, Conakry"}},"Monrovia":{amb:{tel:"+231 666 60 92",adr:"Warner Avenue, 17-18 Streets, Sinkor, P.O. Box 126, Monrovia"}},"Tripoli":{amb:{tel:"+218 21 340 06 46",adr:"P.O. Box 1401, Tripoli"}},"Bamako":{amb:{tel:"+223 221 22 89",adr:"Square Patrice Lumumba, Immeuble CNAR 3e étage, B.P. E 3644, Bamako"}},"Rabat":{amb:{tel:"+212 537 76 31 51",adr:"21, rue de Tedders, B.P. 192, Rabat"}},"Abuja":{amb:{tel:"+234 9 413 3087",adr:"2630 Gourara Street, Abuja"}},"Dakar":{amb:{tel:"+221 869 02 70",adr:"Avenue Birago Diop, Point E, villa n° 4252, B.P. 359, Dakar",web:"http://www.ambaci-dakar.org"}},"N'Djaména":{amb:{tel:"+235 22 49 18 53",adr:"N'Djaména"}},"Tunis":{amb:{tel:"+216 71 75 48 14",adr:"17, rue El Mansoura, 1002 El Menzah IV, Tunis",web:"https://tunisie.diplomatie.gouv.ci"}},"Vienne":{amb:{tel:"+43 1 581007610",adr:"Muthgasse 13/3/332/333, 1190 Vienne"},mis:{tel:"+43 1 581007610",adr:"Muthgasse 13/3/332/333, 1190 Vienne"}},"Bruxelles":{amb:{tel:"+32 2 672 23 57",adr:"234, avenue Franklin Roosevelt, 1050 Bruxelles"},mis:{tel:"+32 2 672 23 57",adr:"234, avenue Franklin Roosevelt, 1050 Bruxelles"}},"Copenhague":{amb:{tel:"+39 39 62 88 21",adr:"Gersonsvej 8, 2900 Hellerup, Copenhague"}},"Madrid":{amb:{tel:"+34 91 562 69 16",adr:"Calle de Serrano 154, 28006 Madrid"}},"Paris":{amb:{tel:"+33 1 53 64 62 62",adr:"102, avenue Raymond Poincaré, 75116 Paris",web:"https://france.diplomatie.gouv.ci",cu:"https://www.france.diplomatie.gouv.ci/contacts.php"},con:{tel:"+33 1 40 58 44 53",adr:"18, rue Léonard de Vinci, 75116 Paris",web:"https://france.diplomatie.gouv.ci",cu:"https://www.france.diplomatie.gouv.ci/contacts.php"},mis:{tel:"+33 1 45 68 33 30",adr:"1, rue Miollis, 75015 Paris",web:"https://unesco.diplomatie.gouv.ci"}},"Lyon":{con:{tel:"+33 4 72 43 92 33",adr:"44, avenue Foch, 69006 Lyon"}},"Rome":{amb:{tel:"+39 06 4423 1129",adr:"Via Guglielmo Saliceto 8, 00161 Rome"},"Ambassade près le Saint-Siège":{tel:"+39 06 6865 740",adr:"Via Sforza Pallavicini 11, 00164 Rome"}},"La Haye":{amb:{adr:"Laan van Meerdervoort, 2517 AK La Haye"}},"Londres":{amb:{tel:"+44 20 7235 6991",adr:"2 Upper Belgrave Street, Londres SW1X 8BJ"}},"Moscou":{amb:{tel:"+7 495 201 23 75",adr:"14/9 Korobeinikov Pereulok, 119034 Moscou"}},"Berne":{amb:{tel:"+41 31 350 80 80",adr:"51 Thormannstrasse, CH-3005 Berne"}},"Genève":{mis:{tel:"+41 22 717 02 50",adr:"149H, route de Ferney, C.P. 315, 1218 Le Grand-Saconnex, Genève"}},"Ottawa":{amb:{tel:"+1 613 236 9919",adr:"9, avenue Marlborough, Ottawa (Ontario) K1N 8E6",web:"https://canada.diplomatie.gouv.ci"}},"Washington D.C.":{amb:{tel:"+1 202 797 0300",adr:"2424 Massachusetts Avenue NW, Washington D.C. 20008"}},"New York":{mis:{tel:"+1 646 649 5061",adr:"800 2nd Avenue, 5th Floor, New York, NY 10017"},con:{tel:"+1 646 649 5061",adr:"800 2nd Avenue, New York, NY 10017"}},"Mexico":{amb:{tel:"+52 55 5280 8573",adr:"Tennyson 67, Col. Polanco, CP 11560, Mexico D.F."}},"Brasília":{amb:{tel:"+55 61 3321 4656",adr:"Av. das Nações, lote 09, CEP 70473-900, Brasília DF"}},"Riyad":{amb:{tel:"+966 1 482 55 82",adr:"Abdul Rahman Al Tabichi, villa n° 10, Al-Mouhamadia, P.O. Box 94303, Riyad 11693"}},"Pékin":{amb:{tel:"+86 10 6532 1223",adr:"9 Bei Xiao Jie, San Li Tun, Beijing 100600"}},"Séoul":{amb:{tel:"+82 2 3785 0561",adr:"794-4 Hannam-dong, Yongsan-ku, Séoul 140-894"}},"New Delhi":{amb:{tel:"+91 11 4170 4234",adr:"B-9/6 Vasant Vihar, New Delhi 110057"}},"Tel Aviv":{amb:{tel:"+972 3 612 66 77",adr:"South Africa Building, 25 Bezalel Street, Ramat Gan, Tel Aviv"}},"Tokyo":{amb:{tel:"+81 3 5454 1401",adr:"2-19-12 Uehara, Shibuya-ku, Tokyo 151-0064"}}};
+var HOME={city:"Abidjan",country:"Côte d'Ivoire",lat:5.345,lon:-4.024};
+var MFA_INFO={nom:"Ministère d'État, Ministère des Affaires étrangères, de l'Intégration africaine et de la Diaspora",adr:"Abidjan-Plateau, Avenue Amadou Gon Coulibaly — Cité administrative, Tour E",bp:"01 BP 1373 Abidjan 01",tel:["+225 27 20 32 08 88","+225 27 20 32 15 58"],mail:"dcrp@diplomatie.gouv.ci",web:"https://web.diplomatie.gouv.ci"};
+var CI_ID=384;
+var rank={amb:0,con:1,mis:2};
+CITIES.forEach(function(c,i){c.i=i;c.circ=CIRC[c.city]||null;c.posts.sort(function(a,b){return rank[a.t]-rank[b.t];});c.types=[...new Set(c.posts.map(function(p){return p.t;}))];var m=CONTACTS[c.city]||{};c.posts.forEach(function(p){p.c=m[p.n]||m[p.t]||null;});});
+var svg=d3.select('#nsvg'),W=1600,H=860;
+var tip=document.getElementById('ntip'),mapbox=document.getElementById('nmapbox');
+var state={filter:null,sel:null,hov:null,hovL:null,arcs:true,q:'',circSel:null,home:false};
+var proj=d3.geoNaturalEarth1();
+var path=d3.geoPath(proj);
+var gRoot=svg.append('g');
+var gGeo=gRoot.append('g'),gArc=gRoot.append('g'),gPin=gRoot.append('g'),gLab=gRoot.append('g');
+var gSel=null,gCirc=null,gCap=null,gCapLab=null,gCircLab=null,curK=1;
+function pxRatio(){var n=svg.node?svg.node():null;var w=n?n.getBoundingClientRect().width:0;return w>0?W/w:1;}
+function labScale(){return pxRatio()/curK;}
+function nearestPart(f,px,py){if(!f.geometry||f.geometry.type!=='MultiPolygon')return f;var inside=null,insideA=-1,near=null,nd=Infinity;f.geometry.coordinates.forEach(function(coords){var sub={type:'Feature',geometry:{type:'Polygon',coordinates:coords}};var b=path.bounds(sub);if(!b||!isFinite(b[0][0]))return;var a=(b[1][0]-b[0][0])*(b[1][1]-b[0][1]);var pad=8;if(px>=b[0][0]-pad&&px<=b[1][0]+pad&&py>=b[0][1]-pad&&py<=b[1][1]+pad){if(a>insideA){insideA=a;inside=sub;}}var d=Math.hypot((b[0][0]+b[1][0])/2-px,(b[0][1]+b[1][1])/2-py);if(d<nd){nd=d;near=sub;}});return inside||near||f;}
+function robustBounds(feats,ax,ay){var parts=[];feats.filter(Boolean).forEach(function(f){var g=f.geometry;if(!g)return;var polys=g.type==='MultiPolygon'?g.coordinates:[g.coordinates];polys.forEach(function(coords){var b=path.bounds({type:'Feature',geometry:{type:'Polygon',coordinates:coords}});if(!b||!isFinite(b[0][0])||!isFinite(b[1][1]))return;parts.push({b:b,a:Math.max(1,(b[1][0]-b[0][0])*(b[1][1]-b[0][1]))});});});if(!parts.length)return null;var total=parts.reduce(function(s,p){return s+p.a;},0);parts.sort(function(p,q){return q.a-p.a;});var box=parts[0].b.map(function(p){return p.slice();});var area=function(bb){return Math.max(1,(bb[1][0]-bb[0][0])*(bb[1][1]-bb[0][1]));};for(var i=1;i<parts.length;i++){var p=parts[i];var merged=[[Math.min(box[0][0],p.b[0][0]),Math.min(box[0][1],p.b[0][1])],[Math.max(box[1][0],p.b[1][0]),Math.max(box[1][1],p.b[1][1])]];var grow=area(merged)/area(box);if(p.a/total<0.06&&grow>1.6)continue;box=merged;}if(isFinite(ax)&&isFinite(ay)){box[0][0]=Math.min(box[0][0],ax);box[1][0]=Math.max(box[1][0],ax);box[0][1]=Math.min(box[0][1],ay);box[1][1]=Math.max(box[1][1],ay);}return box;}
+var CI_FEAT=null;
+function showHomeTip(e){var r=mapbox.getBoundingClientRect();tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top-6)+'px';tip.innerHTML='<b>Abidjan</b><em>Côte d\'Ivoire</em><span style="display:block;margin-top:.28rem;color:#00d585">Administration centrale</span>';tip.style.opacity=1;}
+function selectHome(){state.home=!state.home;if(state.home){state.sel=null;state.circSel=null;}paint();if(state.home)focusHome();else svg.transition().duration(600).call(zoom.transform,d3.zoomIdentity);}
+function focusHome(){var hp=proj([HOME.lon,HOME.lat]);var b=CI_FEAT?robustBounds([CI_FEAT],hp[0],hp[1]):null;var k=9,cx=hp[0],cy=hp[1];if(b){var w=b[1][0]-b[0][0],hh=b[1][1]-b[0][1];if(isFinite(w)&&w>0&&isFinite(hh)&&hh>0){k=Math.max(2,Math.min(0.7*W/w,0.7*H/hh,26));cx=(b[0][0]+b[1][0])/2;cy=(b[0][1]+b[1][1])/2;}}svg.transition().duration(850).call(zoom.transform,d3.zoomIdentity.translate(W/2,H/2).scale(k).translate(-cx,-cy));}
+function focusCity(c){if(!c){svg.transition().duration(700).call(zoom.transform,d3.zoomIdentity);return;}var k=6,cx=c.x,cy=c.y;if(c.circFeats&&c.circFeats.length){var b=robustBounds([c.feat].concat(c.circFeats),c.x,c.y)||path.bounds({type:'FeatureCollection',features:[c.feat].concat(c.circFeats).filter(Boolean)});var w=b[1][0]-b[0][0],hh=b[1][1]-b[0][1];if(isFinite(w)&&w>0&&isFinite(hh)&&hh>0){k=Math.max(1.6,Math.min(0.84*W/w,0.84*H/hh,26));cx=(b[0][0]+b[1][0])/2;cy=(b[0][1]+b[1][1])/2;svg.transition().duration(850).call(zoom.transform,d3.zoomIdentity.translate(W/2,H/2).scale(k).translate(-cx,-cy));return;}}var zf=c.zoomFeat||c.feat;if(zf){var b2=robustBounds([zf],c.x,c.y)||path.bounds(zf);var w2=b2[1][0]-b2[0][0],h2=b2[1][1]-b2[0][1];if(isFinite(w2)&&w2>0&&isFinite(h2)&&h2>0){k=Math.max(1.6,Math.min(0.82*W/w2,0.82*H/h2,26));cx=(b2[0][0]+b2[1][0])/2;cy=(b2[0][1]+b2[1][1])/2;cx=cx*0.45+c.x*0.55;cy=cy*0.45+c.y*0.55;}}svg.transition().duration(850).call(zoom.transform,d3.zoomIdentity.translate(W/2,H/2).scale(k).translate(-cx,-cy));}
+var zoom=d3.zoom().scaleExtent([1,40]).translateExtent([[0,0],[W,H]]).on('zoom',function(e){var zc=document.getElementById('nzclose');if(zc)zc.hidden=e.transform.k<1.02&&state.sel===null;gRoot.attr('transform',e.transform);var k=e.transform.k;curK=k;clearTimeout(window.__nlabT);window.__nlabT=setTimeout(function(){if(state.sel!==null&&Math.abs(curK-(window.__nlabK||0))>0.01){window.__nlabK=curK;paint();}},260);var ls=pxRatio()/k;if(gCap){gCap.selectAll('g.pin').attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+ls+')';});}if(gCapLab){gCapLab.selectAll('text').attr('transform',function(d){return'translate('+((d&&d.lx!=null)?d.lx:d.x)+','+d.y+') scale('+ls+')';});}if(gCircLab){gCircLab.selectAll('text.circlab:not(.__m),text.seatlab').attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+ls+')';});}gGeo.selectAll('path.land').attr('stroke-width',null);gArc.selectAll('path').attr('stroke-width',.7/k);gPin.selectAll('g.pin').attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+ls+')';});gLab.selectAll('text').attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+ls+')';});});
+svg.call(zoom);
+d3.select('#nzin').on('click',function(){svg.transition().duration(300).call(zoom.scaleBy,1.6);});
+d3.select('#nzout').on('click',function(){svg.transition().duration(300).call(zoom.scaleBy,1/1.6);});
+function resetView(){state.sel=null;state.circSel=null;state.home=false;paint();document.getElementById('nzclose').hidden=true;svg.transition().duration(600).call(zoom.transform,d3.zoomIdentity);}
+d3.select('#nzres').on('click',resetView);
+d3.select('#nzclose').on('click',resetView);
+Promise.any([d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json'),d3.json('https://unpkg.com/world-atlas@2.0.2/countries-50m.json')]).catch(function(){return d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json');}).then(function(topo){
+  var fc=topojson.feature(topo,topo.objects.countries);
+  var land=fc.features.filter(function(f){return f.properties.name!=='Antarctica';});
+  proj.fitExtent([[26,26],[W-26,H-26]],{type:'FeatureCollection',features:land});
+  gGeo.append('path').attr('class','sphere').attr('d',path({type:'Sphere'}));
+  gGeo.append('path').attr('class','graticule').attr('d',path(d3.geoGraticule10()));
+  gGeo.selectAll('path.land').data(land).join('path').attr('class',function(d){return Number(d.id)===CI_ID?'home':'land';}).attr('d',path).filter(function(d){return Number(d.id)===CI_ID;}).each(function(d){CI_FEAT=d;}).on('mouseenter',function(e){showHomeTip(e);}).on('mousemove',function(e){showHomeTip(e);}).on('mouseleave',function(){tip.style.opacity=0;}).on('click',function(e){e.stopPropagation();selectHome();});
+  gCirc=gGeo.append('g');
+  gSel=gGeo.append('path').attr('class','selc').style('display','none');
+  CITIES.forEach(function(c){c.feat=land.find(function(f){return Number(f.id)===ISO_N[c.iso];})||null;c.circFeats=(c.circ||[]).map(function(k){var f=land.find(function(g){return Number(g.id)===ISO_N[k];});if(f)f.iso2=k;return f;}).filter(Boolean);});
+  var hp=proj([HOME.lon,HOME.lat]);
+  CITIES.forEach(function(c){var p=proj([c.lon,c.lat]);c.x=p[0];c.y=p[1];c.zoomFeat=c.feat?nearestPart(c.feat,c.x,c.y):null;});
+  gArc.selectAll('path').data(CITIES).join('path').attr('class','arc').attr('d',function(c){return path({type:'LineString',coordinates:[[HOME.lon,HOME.lat],[c.lon,c.lat]]});});
+  var pins=gPin.selectAll('g.pin').data(CITIES).join('g').attr('class','pin').attr('transform',function(d){return'translate('+d.x+','+d.y+')';}).on('mouseenter',function(e,d){state.hov=d.i;showTip(e,d);paint();}).on('mousemove',function(e,d){showTip(e,d);}).on('mouseleave',function(){state.hov=null;tip.style.opacity=0;paint();}).on('click',function(e,d){var on=state.sel!==d.i;state.sel=on?d.i:null;state.circSel=null;state.home=false;paint();focusCity(on?d:null);});
+  pins.append('circle').attr('class','halo').attr('r',9).attr('stroke','none');
+  pins.append('circle').attr('class','dot').attr('r',function(d){return d.posts.length>1?6:4.6;}).attr('fill',function(d){return COLOR[d.posts[0].t];});
+  pins.filter(function(d){return d.posts.length>1;}).append('circle').attr('r',function(d){return d.posts.length>2?9.5:8;}).attr('fill','none').attr('stroke',function(d){return COLOR[d.posts[d.posts.length-1].t];}).attr('stroke-width',1.2).attr('stroke-opacity',.85);
+  gPin.append('g').attr('class','pin home-pin').datum({x:hp[0],y:hp[1]}).attr('transform','translate('+hp[0]+','+hp[1]+')').style('cursor','pointer').on('mouseenter',function(e){showHomeTip(e);}).on('mousemove',function(e){showHomeTip(e);}).on('mouseleave',function(){tip.style.opacity=0;}).on('click',function(e){e.stopPropagation();selectHome();}).call(function(g){g.append('circle').attr('r',13).attr('fill','transparent');g.append('circle').attr('r',5.4).attr('fill','#fff').attr('stroke','#009E60').attr('stroke-width',2.4);g.append('circle').attr('r',11).attr('fill','none').attr('stroke','#009E60').attr('stroke-opacity',.5).attr('stroke-width',1);});
+  gLab.append('text').datum({x:hp[0],y:hp[1]}).attr('class','lab').attr('transform','translate('+hp[0]+','+hp[1]+')').attr('text-anchor','middle').attr('dy',22).style('fill','#00d585').style('font-size','11px').text('ABIDJAN');
+  gCap=gRoot.append('g');gCircLab=gRoot.append('g');gCapLab=gRoot.append('g');
+  gLab.selectAll('text.city').data(CITIES).join('text').attr('class','lab city').attr('transform',function(d){return'translate('+d.x+','+d.y+')';}).attr('text-anchor','middle').attr('dy',function(d){return d.posts.length>2?-19:-17;}).text(function(d){return d.city;}).style('opacity',0);
+  buildList();paint();
+}).catch(function(){document.getElementById('nmapbox').insertAdjacentHTML('beforeend','<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#9a978f;font-size:.85rem;text-align:center;padding:2rem;">La carte n\'a pas pu être chargée. Vérifiez votre connexion.</div>');});
+function match(c){if(state.filter==='cir'){if(!(c.circ&&c.circ.length))return false;}else if(state.filter&&!c.types.includes(state.filter))return false;if(state.q){var s=(c.city+' '+c.country+' '+c.posts.map(function(p){return p.n;}).join(' ')).toLowerCase();if(!s.includes(state.q))return false;}return true;}
+function showTip(e,d){var r=mapbox.getBoundingClientRect();tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top-6)+'px';var lbl=getLabel();tip.innerHTML='<b>'+d.city+'</b><em>'+d.country+'</em>'+d.posts.map(function(p){return'<span style="display:block;margin-top:.28rem;color:'+COLOR[p.t]+'">'+lbl[p.t]+'</span>';}).join('');tip.style.opacity=1;}
+function drawCircLabels(names){gCircLab.selectAll('text.circlab:not(.__m)').data(names,function(d){return d.iso2;}).join('text').attr('class','circlab').attr('text-anchor','middle').style('font-size',function(d){return d.fs+'px';}).attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+labScale()+')';}).each(function(d){var ln=d.lines&&d.lines.length?d.lines:[d.name];this.textContent='';ln.forEach(function(t,ix){var ts=document.createElementNS('http://www.w3.org/2000/svg','tspan');ts.setAttribute('x',0);ts.setAttribute('dy',(ix===0?d.dy:d.fs*1.05));ts.textContent=t;this.appendChild(ts);}.bind(this));});gCircLab.selectAll('line.leader').data(names.filter(function(d){return d.out;}),function(d){return d.iso2;}).join('line').attr('class','leader').attr('stroke','#eafff5').attr('stroke-width',0.6).attr('stroke-opacity',.75).attr('vector-effect','non-scaling-stroke').style('pointer-events','none').attr('x1',function(d){return d.x;}).attr('y1',function(d){return d.y+d.dy*labScale()*0.4;}).attr('x2',function(d){return d.out[0];}).attr('y2',function(d){return d.out[1];});}
+function paint(){
+  gPin.selectAll('g.pin').filter(function(d){return d.i!==undefined;}).classed('dim',function(d){return!match(d);});
+  gPin.selectAll('g.pin').filter(function(d){return d.i!==undefined;}).select('circle.halo').attr('stroke',function(d){return(state.sel===d.i||state.hov===d.i||state.hovL===d.i)?'#fff':'none';}).attr('stroke-width',2).attr('r',function(d){return d.posts.length>2?13:11;});
+  gLab.selectAll('text.city').style('opacity',function(d){return(state.sel===d.i||state.hov===d.i||state.hovL===d.i)&&match(d)?1:0;});
+  if(gCirc){var s=state.sel!==null?CITIES[state.sel]:null;var fs=(s&&s.circFeats)?s.circFeats:[];
+    if(gCap){var caps=fs.map(function(f){var xy=CAPXY[f.iso2];if(!xy)return null;var p=proj([xy[1],xy[0]]);return{iso2:f.iso2,x:p[0],y:p[1],name:CAPS[f.iso2]||''};}).filter(Boolean);
+      var cg=gCap.selectAll('g.pin').data(caps,function(d){return d.iso2;}).join(function(en){var g=en.append('g').attr('class','pin').style('pointer-events','none');g.append('circle').attr('r',3.2).attr('fill','#fff').attr('stroke','#00794a').attr('stroke-width',1.6);return g;});
+      cg.attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+labScale()+')';});
+      gCapLab.selectAll('text').data(caps,function(d){return d.iso2;}).join('text').attr('class','caplab').attr('text-anchor','middle').attr('dy',17).text(function(d){return d.name;}).attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+labScale()+')';});
+      var S=curK/pxRatio();var ck=(s?s.city:'')+'|'+Math.round(curK*100)+'|'+Math.round(pxRatio()*100);
+      if(window.__nlabCache&&window.__nlabCache.k===ck){var nm2=window.__nlabCache.names,cp2=window.__nlabCache.caps;gCapLab.selectAll('text').data(cp2,function(d){return d.iso2;}).join('text').attr('class','caplab').attr('text-anchor','middle').attr('dy',function(d){return d.ldy!=null?d.ldy:17;}).text(function(d){return d.name;}).attr('transform',function(d){return'translate('+(d.lx!=null?d.lx:d.x)+','+d.y+') scale('+labScale()+')';});drawCircLabels(nm2);}
+      else{var placed=[];var ov=function(r,p){return Math.max(0,Math.min(r.x2,p.x2)-Math.max(r.x1,p.x1))*Math.max(0,Math.min(r.y2,p.y2)-Math.max(r.y1,p.y1));};var cost=function(r){return placed.reduce(function(s,p){return s+ov(r,p);},0);};var rect=function(X,Y,dy,w,hgt){return{x1:X-w/2,x2:X+w/2,y1:Y+dy-hgt,y2:Y+dy+3};};var mNode=gCircLab.selectAll('text.__m').data([0]).join('text').attr('class','__m circlab').style('visibility','hidden').node();var measure=function(txt,fpx,cls){mNode.setAttribute('class','__m '+cls);mNode.style.fontSize=fpx+'px';mNode.textContent=txt;var w=0;try{w=mNode.getComputedTextLength();}catch(e){w=txt.length*fpx*0.62;}return w;};
+      if(s){var cw=measure(s.city,11.5,'lab');placed.push(rect(s.x*S,s.y*S,(s.posts.length>2?-19:-17),cw,11.5));placed.push(rect(s.x*S,s.y*S,7,30,26));}
+      caps.forEach(function(c){var w=measure(c.name,11,'caplab');var bp=null;for(var dyi=0,DYS=[17,-13,28,-24,40,-36];dyi<DYS.length;dyi++){var dy=DYS[dyi];for(var fxi=0,FXS=[0,-0.6,0.6,-1.1,1.1];fxi<FXS.length;fxi++){var fx=FXS[fxi];var X=c.x+fx*w*labScale(),r2=rect(X*S,c.y*S,dy,w,11),cc=cost(r2);if(cc===0){bp={x:X,dy:dy,r:r2,c:0};break;}if(!bp||cc<bp.c)bp={x:X,dy:dy,r:r2,c:cc};}if(bp&&bp.c===0)break;}if(!bp)bp={x:c.x,dy:17,r:rect(c.x*S,c.y*S,17,w,11)};c.lx=bp.x;c.ldy=bp.dy;placed.push(bp.r);c._X=bp.x*S;c._Y=c.y*S;});
+      gCapLab.selectAll('text').data(caps,function(d){return d.iso2;}).join('text').attr('class','caplab').attr('text-anchor','middle').attr('dy',function(d){return d.ldy!=null?d.ldy:17;}).text(function(d){return d.name;}).attr('transform',function(d){return'translate('+(d.lx!=null?d.lx:d.x)+','+d.y+') scale('+labScale()+')';});
+      var capAt={};caps.forEach(function(c){capAt[c.iso2]=c;});var names=[];
+      fs.forEach(function(f){var nm=CNAME[f.iso2]||'';if(!nm)return;var ctr=path.centroid(f),b=path.bounds(f);var bw=(b[1][0]-b[0][0])*S,bh=(b[1][1]-b[0][1])*S;var cp=capAt[f.iso2];var fit=14,w=measure(nm,fit,'circlab');var avail=bw*0.94;if(w>avail&&avail>0){fit=Math.max(9,fit*(avail/w));w=measure(nm,fit,'circlab');}var hgt=fit;var inside=function(X,Y){try{var g=proj.invert([X,Y]);return!!(g&&d3.geoContains(f,g));}catch(err){return false;}};var anchors=[];if(LABXY[f.iso2]){var p=proj([LABXY[f.iso2][1],LABXY[f.iso2][0]]);if(p)anchors.push(p);}if(isFinite(ctr[0]))anchors.push([ctr[0],ctr[1]]);var polys=(f.geometry.type==='MultiPolygon')?f.geometry.coordinates:[f.geometry.coordinates];polys.forEach(function(pc){var ct=path.centroid({type:'Feature',geometry:{type:'Polygon',coordinates:pc}});if(isFinite(ct[0]))anchors.push([ct[0],ct[1]]);});if(cp)anchors.push([cp.x,cp.y]);var DY=[-5,-18,28,-32],DX=[0,-1,1];var bpad=6;var parts2=nm.includes('-')?nm.split('-').map(function(p,ix,ar){return ix<ar.length-1?p+'-':p;}):(nm.includes(' ')?nm.split(' '):null);var variants=[[nm]];if(parts2&&parts2.length===2)variants.push(parts2);var best=null,bestLines=[nm];var lw=function(ls2,fpx){return Math.max.apply(null,ls2.map(function(t){return measure(t,fpx,'circlab');}));};var micro=(bw<lw(variants[variants.length-1],7)*1.02)||bh<10;if(!micro){outer:for(var vi=0;vi<variants.length;vi++){var ln=variants[vi];for(var fpi=0,FPS=[fit,fit-2,fit-4,9,7.5];fpi<FPS.length;fpi++){var fpx=FPS[fpi];if(fpx<7)continue;var wpx=lw(ln,fpx),hw=wpx/2*labScale(),lh=fpx*1.05,blk=lh*(ln.length-1);for(var ai=0;ai<anchors.length;ai++){for(var di=0;di<DY.length;di++){for(var dxi=0;dxi<DX.length;dxi++){var dy0=DY[di],fx2=DX[dxi];var dy=dy0-blk/2;var X=anchors[ai][0]+fx2*wpx*labScale(),Y=anchors[ai][1],off=dy*labScale(),bot=(dy+blk)*labScale(),top2=off-fpx*labScale()*0.78;if(X-hw<b[0][0]||X+hw>b[1][0]||Y+top2<b[0][1]||Y+bot>b[1][1])continue;var r3=rect(X*S,Y*S,dy,wpx,fpx+blk);var cc2=cost(r3);if(best&&cc2>=best.c)continue;var pts=[[X,Y+off],[X-hw,Y+off],[X+hw,Y+off],[X,Y+top2],[X-hw,Y+top2],[X+hw,Y+top2],[X-hw,Y+bot],[X+hw,Y+bot]];if(pts.some(function(pt){return!inside(pt[0],pt[1]);}))continue;if(cc2===0){best={r:r3,x:X,y:Y,dy:dy,fs:fpx,c:0};bestLines=ln;break outer;}best={r:r3,x:X,y:Y,dy:dy,fs:fpx,c:cc2};bestLines=ln;}}}}}};
+      if(!best){var fpx2=9,wpx2=measure(nm,fpx2,'circlab'),hw2=wpx2/2*labScale();var ax=isFinite(ctr[0])?ctr[0]:(b[0][0]+b[1][0])/2,ay2=isFinite(ctr[1])?ctr[1]:(b[0][1]+b[1][1])/2;var half=(b[1][0]-b[0][0])/2,vhalf=(b[1][1]-b[0][1])/2;var slots=[[hw2+half*S+bpad,4],[-hw2-half*S-bpad,4],[0,-vhalf*S-bpad-6],[0,vhalf*S+bpad+12],[hw2+half*S+bpad,-14],[-hw2-half*S-bpad,-14],[hw2+half*S+bpad,22],[-hw2-half*S-bpad,22]];for(var si=0;si<slots.length;si++){var sl=slots[si];var X2=ax+sl[0]/S,r4=rect(X2*S,ay2*S,sl[1],wpx2,fpx2),cc3=cost(r4);if(cc3===0){best={r:r4,x:X2,y:ay2,dy:sl[1],fs:fpx2,c:0,out:[ax,ay2]};break;}if(!best||cc3<best.c)best={r:r4,x:X2,y:ay2,dy:sl[1],fs:fpx2,c:cc3,out:[ax,ay2]};}bestLines=[nm];}
+      if(best)fit=best.fs;if(best){placed.push(best.r);names.push({iso2:f.iso2,x:best.x,y:best.y,name:nm,lines:bestLines,dy:best.dy,fs:fit,out:best.out||null});}});
+      drawCircLabels(names);
+      if(s&&s.feat){var sf=s.feat,sc=path.centroid(sf);if(isFinite(sc[0])){var ww=measure(s.country,13,'circlab');var inS=function(X,Y){try{var g=proj.invert([X,Y]);return!!(g&&d3.geoContains(sf,g));}catch(e){return false;}};var shw=ww/2*labScale();var sp=null;for(var dyi2=0,DYS2=[-34,-52,34,52,-70,70,5];dyi2<DYS2.length;dyi2++){var dy2=DYS2[dyi2];var off2=dy2*labScale(),top3=off2-13*labScale()*0.78;var ok=[[sc[0],sc[1]+off2],[sc[0]-shw,sc[1]+off2],[sc[0]+shw,sc[1]+off2],[sc[0],sc[1]+top3],[sc[0]-shw,sc[1]+top3],[sc[0]+shw,sc[1]+top3]].every(function(pt){return inS(pt[0],pt[1]);});if(!ok)continue;var r5=rect(sc[0]*S,sc[1]*S,dy2,ww,13);var cc4=cost(r5);if(cc4===0){sp={dy:dy2,r:r5,c:0};break;}if(!sp||cc4<sp.c)sp={dy:dy2,r:r5,c:cc4};}if(!sp)sp={dy:-34,r:rect(sc[0]*S,sc[1]*S,-34,ww,13)};placed.push(sp.r);gCircLab.selectAll('text.seatlab').data([{x:sc[0],y:sc[1],name:s.country}]).join('text').attr('class','seatlab').attr('text-anchor','middle').attr('dy',sp.dy).style('font-size','13px').style('font-weight',800).style('fill','#ffd9a8').style('letter-spacing','.06em').style('text-transform','uppercase').style('pointer-events','none').text(function(d){return d.name;}).attr('transform',function(d){return'translate('+d.x+','+d.y+') scale('+labScale()+')';});}}
+      window.__nlabCache={k:ck,names:names,caps:caps};}
+    }
+    gCirc.selectAll('path').data(fs,function(f){return f.id;}).join('path').attr('d',path).attr('class',function(f){return'circ'+(state.circSel===f.iso2?' on':'');}).on('click',function(e,f){e.stopPropagation();state.circSel=state.circSel===f.iso2?null:f.iso2;paint();}).each(function(f){var t=this.querySelector('title');if(!t){t=document.createElementNS('http://www.w3.org/2000/svg','title');this.appendChild(t);}t.textContent=CNAME[f.iso2]||'';});
+  }
+  if(gSel){var s2=state.sel!==null?CITIES[state.sel]:null;if(s2&&s2.feat){gSel.style('display',null).attr('d',path(s2.feat)).style('pointer-events','auto').style('fill',state.circSel==='__seat'?'rgba(247,127,0,.42)':null).on('mouseenter',function(){this.style.fill='rgba(247,127,0,.32)';}).on('mouseleave',function(){this.style.fill=state.circSel==='__seat'?'rgba(247,127,0,.42)':'';}).on('click',function(e){e.stopPropagation();state.circSel=state.circSel==='__seat'?null:'__seat';paint();});}else gSel.style('display','none');}
+  gArc.selectAll('path').style('display',function(c){return state.arcs&&match(c)?null:'none';}).attr('stroke-opacity',function(c){return state.sel===c.i?.85:.17;});
+  document.querySelectorAll('.nm-item').forEach(function(b){var c=CITIES[+b.dataset.i];b.setAttribute('aria-current',state.sel===c.i?'true':'false');b.style.display=match(c)?'':'none';});
+  document.querySelectorAll('.nm-regh').forEach(function(h){var any=[].slice.call(document.querySelectorAll('.nm-item[data-reg="'+h.dataset.reg+'"]')).some(function(b){return b.style.display!=='none';});h.style.display=any?'':'none';});
+  gGeo.selectAll('path.home').classed('on',state.home);
+  drawDetail();
+  var zc2=document.getElementById('nzclose');if(zc2&&(state.sel!==null||state.home))zc2.hidden=false;
+}
+function drawDetail(){
+  var el=document.getElementById('ndetail');var lbl=getLabel();
+  if(state.home){var m=MFA_INFO;el.innerHTML='<img src="https://flagcdn.com/ci.svg" alt="Drapeau — Côte d\'Ivoire"><h2>Abidjan</h2><p class="nm-cty">Côte d\'Ivoire — Administration centrale</p><div class="nm-postrow"><i style="background:#00c97b"></i><span><strong>'+m.nom+'</strong><br><span style="color:#9a978f;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase">Tutelle du réseau diplomatique</span><span style="display:block;margin-top:.35rem;font-size:.8rem;line-height:1.5"><span style="color:#9a978f">'+m.adr+'<br>'+m.bp+'</span><br>'+m.tel.map(function(t){return'<a href="tel:'+t.replace(/[^+0-9]/g,'')+'" style="color:#F77F00;text-decoration:none;font-weight:600">'+t+'</a>';}).join('<br>')+'<br><a href="mailto:'+m.mail+'" style="color:#00c97b;text-decoration:none">'+m.mail+'</a><br><a href="'+m.web+'" target="_blank" rel="noopener" style="color:#00c97b;text-decoration:none">web.diplomatie.gouv.ci ↗</a></span></span></div><div style="margin-top:.9rem;padding-top:.8rem;border-top:1px solid #1f1f24"><p style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#00d585;margin:0 0 .5rem">Réseau piloté depuis Abidjan</p><p style="color:#cfccc4;font-size:.8rem;line-height:1.6;margin:0">44 ambassades · 7 consulats généraux · 7 missions et délégations permanentes · 31 circonscriptions diplomatiques.</p></div><p style="color:#5e5b55;font-size:.7rem;line-height:1.5;margin:.9rem 0 0">Coordonnées publiées par le ministère.</p>';return;}
+  var i=state.sel!==null?state.sel:state.hov;
+  if(i===null||i===undefined){el.innerHTML='<p class="nm-hint">'+getHintText()+'</p>';return;}
+  var c=CITIES[i];
+  if(state.circSel==='__seat'&&c.circ&&c.circ.length){el.innerHTML='<img src="https://flagcdn.com/'+c.iso+'.svg" alt="Drapeau — '+c.country+'"><h2>'+c.country+'</h2><p class="nm-cty">Siège — '+c.city+'</p><p style="color:#9a978f;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin:.2rem 0 .15rem">Pays couverts</p><p style="color:#cfccc4;font-size:.84rem;line-height:1.65;margin:0">'+c.circ.map(function(k){return CNAME[k]||k.toUpperCase();}).join(' · ')+'</p><button id="nbackpost" style="margin-top:1rem;background:transparent;border:1px solid #2f2f38;color:#9a978f;font:inherit;font-size:.78rem;padding:.4rem .8rem;border-radius:999px;cursor:pointer">← Retour</button>';var bs=document.getElementById('nbackpost');if(bs)bs.onclick=function(){state.circSel=null;paint();};return;}
+  if(state.circSel&&c.circ&&c.circ.includes(state.circSel)){var k=state.circSel,inf=CINFO[k]||{};el.innerHTML='<img src="https://flagcdn.com/'+k+'.svg" alt="Drapeau — '+CNAME[k]+'"><h2>'+CNAME[k]+'</h2><p class="nm-cty">Circonscription de '+c.city+'</p><p style="color:#9a978f;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin:.2rem 0 .15rem">Capitale</p><p style="color:#f4f1ea;font-size:.95rem;margin:0 0 .8rem">'+(inf.cap||CAPS[k]||'—')+'</p>'+(inf.txt?'<p style="color:#cfccc4;font-size:.84rem;line-height:1.65;margin:0">'+inf.txt+'</p>':'')+'<p style="color:#cfccc4;font-size:.8rem;line-height:1.6;margin:.9rem 0 0">Relations assurées par l\'Ambassade à '+c.city+' ('+c.country+').</p><button id="nbackpost" style="margin-top:1rem;background:transparent;border:1px solid #2f2f38;color:#9a978f;font:inherit;font-size:.78rem;padding:.4rem .8rem;border-radius:999px;cursor:pointer">← Retour</button>';var bb=document.getElementById('nbackpost');if(bb)bb.onclick=function(){state.circSel=null;paint();};return;}
+  el.innerHTML='<img src="https://flagcdn.com/'+c.iso+'.svg" alt="Drapeau — '+c.country+'"><h2>'+c.city+'</h2><p class="nm-cty">'+c.country+'</p>'+c.posts.map(function(p){var k=p.c||{};var lines=[];if(k.adr)lines.push('<span style="color:#9a978f">'+k.adr+'</span>');if(k.tel)lines.push('<a href="tel:'+k.tel.replace(/[^+0-9]/g,'')+'" style="color:#F77F00;text-decoration:none;font-weight:600">'+k.tel+'</a>');lines.push(k.cu?'<a href="'+k.cu+'" target="_blank" rel="noopener" style="color:#00c97b;text-decoration:none">Écrire au poste ↗</a>':k.web?'<a href="'+k.web+'" target="_blank" rel="noopener" style="color:#00c97b;text-decoration:none">Site du poste ↗</a>':'<a href="'+MFA+'" target="_blank" rel="noopener" style="color:#00c97b;text-decoration:none">Contact via diplomatie.gouv.ci ↗</a>');return'<div class="nm-postrow"><i style="background:'+COLOR[p.t]+'"></i><span><strong>'+p.n+'</strong><br><span style="color:#9a978f;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase">'+lbl[p.t]+'</span><span style="display:block;margin-top:.35rem;font-size:.8rem;line-height:1.5">'+lines.join('<br>')+'</span></span></div>';}).join('')+(c.circ&&c.circ.length?'<div style="margin-top:.9rem;padding-top:.8rem;border-top:1px solid #1f1f24"><p style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:#00d585;margin:0 0 .5rem">Circonscription diplomatique</p><p style="color:#cfccc4;font-size:.8rem;line-height:1.6;margin:0">'+[c.country+' (siège)'].concat(c.circ.map(function(k){return CNAME[k]||k.toUpperCase();})).join(' · ')+'</p></div>':'')+'<p style="color:#5e5b55;font-size:.7rem;line-height:1.5;margin:.9rem 0 0">Coordonnées issues des annuaires publics.</p>';
+}
+function getHintText(){var l=getLang();if(l==='de')return'Klicken Sie auf einen Punkt auf der Karte oder wählen Sie unten einen Posten aus, um Details anzuzeigen.';if(l==='en')return'Select a point on the map or a post from the list below to view details.';return'Sélectionnez un point sur la carte, ou un poste dans la liste ci-dessous, pour afficher le détail.';}
+function buildList(){var wrap=document.getElementById('nlist');wrap.innerHTML=REGS_FR.map(function(r){return'<p class="nm-regh" data-reg="'+r+'">'+dispReg(r)+'</p>'+CITIES.filter(function(c){return c.reg===r;}).map(function(c){return'<button class="nm-item" data-i="'+c.i+'" data-reg="'+r+'"><span class="dots">'+c.types.map(function(t){return'<i style="background:'+COLOR[t]+'"></i>';}).join('')+'</span>'+c.city+'<span class="nm-cn">'+c.country+'</span></button>';}).join('');}).join('');wrap.querySelectorAll('.nm-item').forEach(function(b){var i=+b.dataset.i;b.onclick=function(){var on=state.sel!==i;state.sel=on?i:null;state.circSel=null;state.home=false;paint();focusCity(on?CITIES[i]:null);};b.onmouseenter=function(){state.hovL=i;paint();};b.onmouseleave=function(){state.hovL=null;paint();};});}
+var chips={all:document.getElementById('nf-all'),amb:document.getElementById('nf-amb'),con:document.getElementById('nf-con'),mis:document.getElementById('nf-mis'),cir:document.getElementById('nf-cir')};
+function setFilter(f){state.filter=f;Object.entries(chips).forEach(function(e){e[1].setAttribute('aria-pressed',(f===null?e[0]==='all':e[0]===f)?'true':'false');});paint();}
+chips.all.onclick=function(){setFilter(null);};chips.amb.onclick=function(){setFilter(AMB);};chips.con.onclick=function(){setFilter(CON);};chips.mis.onclick=function(){setFilter(MIS);};chips.cir.onclick=function(){setFilter('cir');};
+var tarc=document.getElementById('nt-arc');tarc.onclick=function(){state.arcs=!state.arcs;tarc.setAttribute('aria-pressed',state.arcs?'true':'false');paint();};
+document.getElementById('nq').oninput=function(e){state.q=e.target.value.trim().toLowerCase();paint();};
+document.addEventListener('langchange',function(){buildList();paint();});
+})();
+  </script>
   <script>
     (function() {
       var skip = ['whatsapp-fab','wa-label','bottom-nav','site-header','alert-banner','top-bar','main-nav','menu-toggle'];

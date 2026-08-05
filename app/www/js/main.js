@@ -448,6 +448,9 @@ const translations = {
     'pamb.net.circ': 'Circonscriptions',
     'pamb.net.villes':'Villes',
     'pamb.net.pays': 'Pays de résidence',
+    'net.filter.all':'Tous les postes','net.filter.circ':'Circonscriptions','net.filter.arcs':'Liaisons depuis Abidjan',
+    'net.search.ph':'Rechercher une ville, un pays…','net.hint':'Sélectionnez un point sur la carte, ou un poste dans la liste ci-dessous, pour afficher le détail.','net.close':'Vue mondiale',
+    'net.footer':'Ambassade = représentation bilatérale auprès d\'un État · Consulat général = poste consulaire pour une circonscription · Mission permanente = représentation auprès d\'une organisation internationale.',
     'badge.ci':'La Côte d\'Ivoire', 'ci.title':"Découvrir la Côte d'Ivoire",
     'ci.republic':"République de Côte d'Ivoire",
     'ci.area':'Superficie', 'ci.pop':'Population',
@@ -1047,6 +1050,9 @@ const translations = {
     'pamb.net.circ': 'Amtsbezirke',
     'pamb.net.villes':'Städte',
     'pamb.net.pays': 'Gastländer',
+    'net.filter.all':'Alle Posten','net.filter.circ':'Wahlkreise','net.filter.arcs':'Verbindungen ab Abidjan',
+    'net.search.ph':'Stadt oder Land suchen…','net.hint':'Klicken Sie auf einen Punkt auf der Karte oder wählen Sie unten einen Posten aus, um Details anzuzeigen.','net.close':'Weltansicht',
+    'net.footer':'Botschaft = bilaterale Vertretung bei einem Staat · Generalkonsulat = Konsularposten für einen Amtsbezirk · Ständige Mission = Vertretung bei einer internationalen Organisation.',
     'badge.ci':'Côte d\'Ivoire', 'ci.title':'Côte d\'Ivoire entdecken',
     'ci.republic':"Republik Côte d'Ivoire",
     'ci.area':'Fläche', 'ci.pop':'Bevölkerung',
@@ -1606,6 +1612,9 @@ const translations = {
     'pamb.net.circ': 'Constituencies',
     'pamb.net.villes':'Cities',
     'pamb.net.pays': 'Countries of residence',
+    'net.filter.all':'All posts','net.filter.circ':'Constituencies','net.filter.arcs':'Links from Abidjan',
+    'net.search.ph':'Search a city or country…','net.hint':'Select a point on the map or a post from the list below to view details.','net.close':'World view',
+    'net.footer':'Embassy = bilateral representation to a State · Consulate general = consular post for a constituency · Permanent mission = representation to an international organisation.',
     'badge.ci':"Côte d'Ivoire", 'ci.title':"Discover Côte d'Ivoire",
     'ci.republic':"Republic of Côte d'Ivoire",
     'ci.area':'Area', 'ci.pop':'Population',
@@ -1846,6 +1855,11 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n-aria]').forEach(el => {
     const key = el.dataset.i18nAria;
     if (translations[lang][key] !== undefined) el.setAttribute('aria-label', translations[lang][key]);
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (translations[lang][key] !== undefined) el.placeholder = translations[lang][key];
   });
 
   document.documentElement.lang = lang === 'de' ? 'de' : lang === 'en' ? 'en' : 'fr';
