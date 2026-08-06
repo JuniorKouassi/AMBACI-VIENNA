@@ -158,6 +158,7 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
 .top-bar a:hover { color: var(--orange-light); }
 .top-bar .top-bar-left, .top-bar .top-bar-right { display: flex; align-items: center; gap: var(--space-md); }
 .top-bar-icon { font-size: 0.875rem; margin-right: 4px; }
+.top-bar span:has([data-i18n="topbar.hours"]) { display: none; }
 
 /* ============================================================
    HEADER
