@@ -535,6 +535,10 @@ a.service-detail-card:hover {
 a.service-detail-card:hover .service-detail-header {
   background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 50%, var(--green) 100%);
 }
+
+/* Cartes de formulaires (téléchargements) */
+.dl-card { transition: transform var(--transition), box-shadow var(--transition); }
+.dl-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
 .service-detail-header h3 { font-size: 1.125rem; font-weight: 700; }
 .service-detail-header p { font-size: 0.8125rem; color: rgba(255,255,255,.78); }
 .service-detail-body { padding: var(--space-xl); }
