@@ -537,8 +537,21 @@ a.service-detail-card:hover .service-detail-header {
 }
 
 /* Cartes de formulaires (téléchargements) */
-.dl-card { transition: transform var(--transition), box-shadow var(--transition); }
+.dl-cat-head { display: flex; align-items: baseline; gap: var(--space-lg); margin-bottom: var(--space-2xl); }
+.dl-catnum { font-family: var(--font-primary); font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 700; color: var(--grey-200); line-height: 1; flex-shrink: 0; }
+.dl-card { position: relative; background: var(--white); border: 1px solid var(--grey-200); border-left: 3px solid var(--dl-accent, var(--orange)); border-radius: var(--radius-lg); padding: var(--space-xl); display: flex; flex-direction: column; transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition); }
 .dl-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.dl-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-md); }
+.dl-icon { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--dl-accent, var(--orange)); color: var(--dl-accent, var(--orange)); background: var(--dl-accent-soft, transparent); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0; }
+.dl-meta { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; color: var(--grey-500); white-space: nowrap; margin-top: 2px; }
+.dl-eyebrow { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dl-accent, var(--orange)); margin-bottom: 2px; }
+.dl-title { font-family: var(--font-primary); font-size: 1.125rem; font-weight: 700; color: var(--dark); line-height: 1.35; margin-bottom: .35rem; }
+.dl-subtitle { font-size: .8125rem; font-weight: 600; color: var(--dl-accent, var(--orange)); margin-bottom: .6rem; }
+.dl-desc { font-size: .875rem; color: var(--grey-600, #5c5646); line-height: 1.65; flex: 1; margin-bottom: var(--space-lg); }
+.dl-download { margin-top: auto; display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-sm); padding: .75rem 1.1rem; border-radius: var(--radius-md); background: var(--grey-100); color: var(--dark); font-weight: 600; font-size: .875rem; text-decoration: none; transition: background .18s ease, color .18s ease; }
+.dl-download:hover { background: var(--dl-accent, var(--orange)); color: var(--white); }
+.dl-download svg { flex-shrink: 0; transition: transform .18s ease; }
+.dl-download:hover svg { transform: translateX(3px); }
 .service-detail-header h3 { font-size: 1.125rem; font-weight: 700; }
 .service-detail-header p { font-size: 0.8125rem; color: rgba(255,255,255,.78); }
 .service-detail-body { padding: var(--space-xl); }

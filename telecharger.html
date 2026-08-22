@@ -105,80 +105,62 @@
     <!-- ===== CAT 1 : PASSEPORT & IDENTITÉ ===== -->
     <section style="padding:var(--space-3xl) 0;background:var(--grey-100);">
       <div class="container">
-        <div style="margin-bottom:var(--space-2xl);">
-          <span class="badge" data-i18n="dl.cat.passport">Passeport &amp; Identité</span>
-          <h2 class="section-title" data-i18n="dl.cat.passport">Passeport &amp; Identité</h2>
+        <div class="dl-cat-head">
+          <span class="dl-catnum" aria-hidden="true">01</span>
+          <div>
+            <span class="badge" data-i18n="dl.cat.passport">Passeport &amp; Identité</span>
+            <h2 class="section-title" data-i18n="dl.cat.passport">Passeport &amp; Identité</h2>
+          </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:var(--space-xl);">
 
           <!-- Formulaire passeport -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:var(--orange);flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange-light),var(--orange));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(247,127,0,.35);"><i class="fa-solid fa-passport" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;">Passeport</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Formulaire de demande de passeport</h3>
-              <p style="font-size:.8125rem;color:var(--orange);font-weight:600;margin-bottom:var(--space-md);">Passeport ordinaire / biométrique à l'étranger</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Formulaire officiel du Ministère de la Sécurité. À compléter et signer avant votre rendez-vous consulaire. Joindre les pièces justificatives.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 68 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:var(--orange);--dl-accent-soft:rgba(247,127,0,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-passport" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f01.size">PDF &middot; 68 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/formulaire-passeport.pdf" download="Formulaire-Passeport-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f01.eyebrow">Passeport</span>
+            <h3 class="dl-title" data-i18n="dl.f01.title">Formulaire de demande de passeport</h3>
+            <p class="dl-subtitle" data-i18n="dl.f01.sub">Passeport ordinaire / biométrique à l'étranger</p>
+            <p class="dl-desc" data-i18n="dl.f01.desc">Formulaire officiel du Ministère de la Sécurité. À compléter et signer avant votre rendez-vous consulaire. Joindre les pièces justificatives.</p>
+            <a href="forms/formulaire-passeport.pdf" download="Formulaire-Passeport-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
           <!-- Fiche d'immatriculation -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:var(--orange);flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange-light),var(--orange));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(247,127,0,.35);"><i class="fa-solid fa-clipboard-list" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;">Immatriculation</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Fiche d'immatriculation consulaire</h3>
-              <p style="font-size:.8125rem;color:var(--orange);font-weight:600;margin-bottom:var(--space-md);">Inscription au registre des Ivoiriens de l'étranger</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Obligatoire pour tout ressortissant ivoirien résidant en Autriche. L'immatriculation facilite l'accès aux services consulaires et protège vos droits à l'étranger.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 124 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:var(--orange);--dl-accent-soft:rgba(247,127,0,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f02.size">PDF &middot; 124 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/fiche-immatriculation.pdf" download="Fiche-Immatriculation-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f02.eyebrow">Immatriculation</span>
+            <h3 class="dl-title" data-i18n="dl.f02.title">Fiche d'immatriculation consulaire</h3>
+            <p class="dl-subtitle" data-i18n="dl.f02.sub">Inscription au registre des Ivoiriens de l'étranger</p>
+            <p class="dl-desc" data-i18n="dl.f02.desc">Obligatoire pour tout ressortissant ivoirien résidant en Autriche. L'immatriculation facilite l'accès aux services consulaires et protège vos droits à l'étranger.</p>
+            <a href="forms/fiche-immatriculation.pdf" download="Fiche-Immatriculation-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
           <!-- Attestation parentale -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:var(--orange);flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--orange-light),var(--orange));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(247,127,0,.35);"><i class="fa-solid fa-users" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;">Mineur</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Attestation parentale</h3>
-              <p style="font-size:.8125rem;color:var(--orange);font-weight:600;margin-bottom:var(--space-md);">Autorisation pour passeport et/ou acte de naissance d'un mineur</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Autorisation délivrée par le ou les parents pour l'établissement d'un passeport ou d'un acte de naissance pour un enfant mineur. Signature légalisée requise.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 100 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:var(--orange);--dl-accent-soft:rgba(247,127,0,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f03.size">PDF &middot; 100 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/attestation-parentale.pdf" download="Attestation-Parentale-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f03.eyebrow">Mineur</span>
+            <h3 class="dl-title" data-i18n="dl.f03.title">Attestation parentale</h3>
+            <p class="dl-subtitle" data-i18n="dl.f03.sub">Autorisation pour passeport et/ou acte de naissance d'un mineur</p>
+            <p class="dl-desc" data-i18n="dl.f03.desc">Autorisation délivrée par le ou les parents pour l'établissement d'un passeport ou d'un acte de naissance pour un enfant mineur. Signature légalisée requise.</p>
+            <a href="forms/attestation-parentale.pdf" download="Attestation-Parentale-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
         </div>
       </div>
@@ -187,34 +169,30 @@
     <!-- ===== CAT 2 : VISA ===== -->
     <section style="padding:var(--space-3xl) 0;background:var(--white);">
       <div class="container">
-        <div style="margin-bottom:var(--space-2xl);">
-          <span class="badge" style="background:rgba(26,115,232,.1);color:#1a73e8;" data-i18n="dl.cat.visa">Visa</span>
-          <h2 class="section-title" data-i18n="dl.cat.visa">Visa</h2>
+        <div class="dl-cat-head">
+          <span class="dl-catnum" aria-hidden="true">02</span>
+          <div>
+            <span class="badge" style="background:rgba(26,115,232,.1);color:#1a73e8;" data-i18n="dl.cat.visa">Visa</span>
+            <h2 class="section-title" data-i18n="dl.cat.visa">Visa</h2>
+          </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:var(--space-xl);">
 
           <!-- Formulaire visa -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:#1a73e8;flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,#5b9cf6,#1a73e8);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(26,115,232,.35);"><i class="fa-solid fa-plane-departure" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:#1a73e8;text-transform:uppercase;letter-spacing:.05em;">Visa</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Formulaire de demande de visa</h3>
-              <p style="font-size:.8125rem;color:#1a73e8;font-weight:600;margin-bottom:var(--space-md);">Visa ordinaire, de courtoisie ou diplomatique</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Formulaire à utiliser pour toute demande de visa d'entrée en Côte d'Ivoire. Toutes les rubriques obligatoires doivent être complétées. Une photo d'identité récente est requise.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 125 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:#1a73e8;--dl-accent-soft:rgba(26,115,232,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f04.size">PDF &middot; 125 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/formulaire-visa.pdf" download="Formulaire-Visa-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;background:#1a73e8;border-color:#1a73e8;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f04.eyebrow">Visa</span>
+            <h3 class="dl-title" data-i18n="dl.f04.title">Formulaire de demande de visa</h3>
+            <p class="dl-subtitle" data-i18n="dl.f04.sub">Visa ordinaire, de courtoisie ou diplomatique</p>
+            <p class="dl-desc" data-i18n="dl.f04.desc">Formulaire à utiliser pour toute demande de visa d'entrée en Côte d'Ivoire. Toutes les rubriques obligatoires doivent être complétées. Une photo d'identité récente est requise.</p>
+            <a href="forms/formulaire-visa.pdf" download="Formulaire-Visa-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
         </div>
       </div>
@@ -223,34 +201,30 @@
     <!-- ===== CAT 3 : ÉTAT CIVIL ===== -->
     <section style="padding:var(--space-3xl) 0;background:var(--grey-100);">
       <div class="container">
-        <div style="margin-bottom:var(--space-2xl);">
-          <span class="badge" style="background:rgba(46,125,50,.1);color:#2e7d32;" data-i18n="dl.cat.civil">État civil</span>
-          <h2 class="section-title" data-i18n="dl.cat.civil">État civil</h2>
+        <div class="dl-cat-head">
+          <span class="dl-catnum" aria-hidden="true">03</span>
+          <div>
+            <span class="badge" style="background:rgba(46,125,50,.1);color:#2e7d32;" data-i18n="dl.cat.civil">État civil</span>
+            <h2 class="section-title" data-i18n="dl.cat.civil">État civil</h2>
+          </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:var(--space-xl);">
 
           <!-- Transcription naissance -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:#2e7d32;flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,#4caf50,#2e7d32);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(46,125,50,.35);"><i class="fa-solid fa-baby" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:#2e7d32;text-transform:uppercase;letter-spacing:.05em;">État civil</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Transcription d'acte de naissance</h3>
-              <p style="font-size:.8125rem;color:#2e7d32;font-weight:600;margin-bottom:var(--space-md);">Enfants nés à l'étranger de parents ivoiriens</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Formulaire utilisé pour l'inscription d'un acte de naissance étranger dans les registres de l'état civil ivoirien. Obligatoire pour l'obtention de la nationalité et du passeport.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 131 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:#2e7d32;--dl-accent-soft:rgba(46,125,50,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-baby" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f05.size">PDF &middot; 131 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/transcription-naissance.pdf" download="Transcription-Naissance-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;background:#2e7d32;border-color:#2e7d32;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f05.eyebrow">État civil</span>
+            <h3 class="dl-title" data-i18n="dl.f05.title">Transcription d'acte de naissance</h3>
+            <p class="dl-subtitle" data-i18n="dl.f05.sub">Enfants nés à l'étranger de parents ivoiriens</p>
+            <p class="dl-desc" data-i18n="dl.f05.desc">Formulaire utilisé pour l'inscription d'un acte de naissance étranger dans les registres de l'état civil ivoirien. Obligatoire pour l'obtention de la nationalité et du passeport.</p>
+            <a href="forms/transcription-naissance.pdf" download="Transcription-Naissance-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
         </div>
       </div>
@@ -259,103 +233,78 @@
     <!-- ===== CAT 4 : DOCUMENTS OFFICIELS ===== -->
     <section style="padding:var(--space-3xl) 0;background:var(--white);">
       <div class="container">
-        <div style="margin-bottom:var(--space-2xl);">
-          <span class="badge" style="background:rgba(55,71,79,.1);color:#37474f;" data-i18n="dl.cat.official">Documents officiels</span>
-          <h2 class="section-title" data-i18n="dl.cat.official">Documents officiels</h2>
+        <div class="dl-cat-head">
+          <span class="dl-catnum" aria-hidden="true">04</span>
+          <div>
+            <span class="badge" style="background:rgba(55,71,79,.1);color:#37474f;" data-i18n="dl.cat.official">Documents officiels</span>
+            <h2 class="section-title" data-i18n="dl.cat.official">Documents officiels</h2>
+          </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:var(--space-xl);">
 
           <!-- Procuration -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:#37474f;flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,#546e7a,#37474f);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(55,71,79,.35);"><i class="fa-solid fa-handshake" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:#37474f;text-transform:uppercase;letter-spacing:.05em;">Procuration</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Procuration consulaire</h3>
-              <p style="font-size:.8125rem;color:#37474f;font-weight:600;margin-bottom:var(--space-md);">Mandat pour agir au nom d'un tiers</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Permet à une personne désignée d'effectuer des démarches administratives en votre nom auprès de l'ambassade ou sur le territoire ivoirien.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 89 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:#37474f;--dl-accent-soft:rgba(55,71,79,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-handshake" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f06.size">PDF &middot; 89 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/procuration-ambassade.pdf" download="Procuration-Consulaire-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;background:#37474f;border-color:#37474f;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f06.eyebrow">Procuration</span>
+            <h3 class="dl-title" data-i18n="dl.f06.title">Procuration consulaire</h3>
+            <p class="dl-subtitle" data-i18n="dl.f06.sub">Mandat pour agir au nom d'un tiers</p>
+            <p class="dl-desc" data-i18n="dl.f06.desc">Permet à une personne désignée d'effectuer des démarches administratives en votre nom auprès de l'ambassade ou sur le territoire ivoirien.</p>
+            <a href="forms/procuration-ambassade.pdf" download="Procuration-Consulaire-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
           <!-- Légalisation -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:#37474f;flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,#546e7a,#37474f);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(55,71,79,.35);"><i class="fa-solid fa-stamp" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:#37474f;text-transform:uppercase;letter-spacing:.05em;">Légalisation</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Demande de légalisation</h3>
-              <p style="font-size:.8125rem;color:#37474f;font-weight:600;margin-bottom:var(--space-md);">Légalisation de documents administratifs ou notariés</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Formulaire pour la légalisation de documents ivoiriens ou étrangers destinés à être utilisés en Côte d'Ivoire ou dans un pays tiers. Applicable aux actes notariés, administratifs et commerciaux.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 121 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:#37474f;--dl-accent-soft:rgba(55,71,79,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-stamp" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f07.size">PDF &middot; 121 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/demande-legalisation.pdf" download="Demande-Legalisation-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;background:#37474f;border-color:#37474f;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f07.eyebrow">Légalisation</span>
+            <h3 class="dl-title" data-i18n="dl.f07.title">Demande de légalisation</h3>
+            <p class="dl-subtitle" data-i18n="dl.f07.sub">Légalisation de documents administratifs ou notariés</p>
+            <p class="dl-desc" data-i18n="dl.f07.desc">Formulaire pour la légalisation de documents ivoiriens ou étrangers destinés à être utilisés en Côte d'Ivoire ou dans un pays tiers. Applicable aux actes notariés, administratifs et commerciaux.</p>
+            <a href="forms/demande-legalisation.pdf" download="Demande-Legalisation-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
           <!-- Laissez-passer -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:#37474f;flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,#546e7a,#37474f);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(55,71,79,.35);"><i class="fa-solid fa-id-card" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:#37474f;text-transform:uppercase;letter-spacing:.05em;">Laissez-passer</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Demande de laissez-passer</h3>
-              <p style="font-size:.8125rem;color:#37474f;font-weight:600;margin-bottom:var(--space-md);">Titre de voyage provisoire en cas d'urgence</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Document de voyage temporaire délivré en cas de perte, de vol ou d'expiration du passeport. Valable pour un aller simple vers la Côte d'Ivoire.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 139 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:#37474f;--dl-accent-soft:rgba(55,71,79,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-id-card" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f08.size">PDF &middot; 139 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/demande-laissez-passer.pdf" download="Demande-Laissez-Passer-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;background:#37474f;border-color:#37474f;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f08.eyebrow">Laissez-passer</span>
+            <h3 class="dl-title" data-i18n="dl.f08.title">Demande de laissez-passer</h3>
+            <p class="dl-subtitle" data-i18n="dl.f08.sub">Titre de voyage provisoire en cas d'urgence</p>
+            <p class="dl-desc" data-i18n="dl.f08.desc">Document de voyage temporaire délivré en cas de perte, de vol ou d'expiration du passeport. Valable pour un aller simple vers la Côte d'Ivoire.</p>
+            <a href="forms/demande-laissez-passer.pdf" download="Demande-Laissez-Passer-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
           <!-- Renonciation à la nationalité -->
-          <div class="dl-card" style="background:var(--white);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);display:flex;flex-direction:column;"><div style="height:4px;background:#37474f;flex-shrink:0;"></div>
-            <div style="padding:var(--space-xl);">
-              <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg);">
-                <span style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,#546e7a,#37474f);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(55,71,79,.35);"><i class="fa-solid fa-file-signature" style="font-size:1.25rem;color:var(--white);"></i></span>
-                <span style="font-size:.75rem;font-weight:700;color:#37474f;text-transform:uppercase;letter-spacing:.05em;">Nationalité</span>
-              </div>
-              <h3 style="font-family:var(--font-primary);font-size:1.0625rem;font-weight:700;color:var(--dark);margin-bottom:var(--space-sm);">Renonciation à la nationalité ivoirienne</h3>
-              <p style="font-size:.8125rem;color:#37474f;font-weight:600;margin-bottom:var(--space-md);">Demande d'attestation de transmission de renonciation</p>
-              <p style="font-size:.875rem;color:var(--grey-600);line-height:1.6;margin-bottom:var(--space-lg);">Formulaire à remplir pour initier la procédure de renonciation à la nationalité ivoirienne. À déposer à l'ambassade accompagné des pièces justificatives requises.</p>
-              <div style="display:flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-md);background:var(--grey-100);border-radius:var(--radius-md);font-size:.8125rem;color:var(--grey-600);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span>PDF &middot; 89 Ko</span>
-              </div>
+          <article class="dl-card" style="--dl-accent:#37474f;--dl-accent-soft:rgba(55,71,79,.08);">
+            <div class="dl-card-head">
+              <span class="dl-icon"><i class="fa-solid fa-file-signature" aria-hidden="true"></i></span>
+              <span class="dl-meta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="dl.f09.size">PDF &middot; 89 Ko</span></span>
             </div>
-            <div style="padding:0 var(--space-xl) var(--space-xl);margin-top:auto;">
-              <a href="forms/renonciation-nationalite.pdf" download="Renonciation-Nationalite-AMBACI.pdf" class="btn btn-primary" style="width:100%;justify-content:center;background:#37474f;border-color:#37474f;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                <span data-i18n="dl.btn">Télécharger le PDF</span>
-              </a>
-            </div>
-          </div>
+            <span class="dl-eyebrow" data-i18n="dl.f09.eyebrow">Nationalité</span>
+            <h3 class="dl-title" data-i18n="dl.f09.title">Renonciation à la nationalité ivoirienne</h3>
+            <p class="dl-subtitle" data-i18n="dl.f09.sub">Demande d'attestation de transmission de renonciation</p>
+            <p class="dl-desc" data-i18n="dl.f09.desc">Formulaire à remplir pour initier la procédure de renonciation à la nationalité ivoirienne. À déposer à l'ambassade accompagné des pièces justificatives requises.</p>
+            <a href="forms/renonciation-nationalite.pdf" download="Renonciation-Nationalite-AMBACI.pdf" class="dl-download">
+              <span data-i18n="dl.btn">Télécharger le PDF</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
         </div>
       </div>
