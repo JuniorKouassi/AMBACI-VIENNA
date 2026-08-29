@@ -602,6 +602,7 @@ const translations = {
     /* Organigramme */
     'nav.org':              'Organigramme',
     'cta.btn.org':          'Organigramme →',
+    'lang.search.ph':       'Rechercher une langue…',
     'porg.breadcrumb':      'Organigramme',
     'porg.h1':              'Organigramme',
     'porg.desc':            "Structure organisationnelle de l'Ambassade et Représentation Permanente de la Côte d'Ivoire à Vienne.",
@@ -1212,6 +1213,7 @@ const translations = {
     /* Organigramme */
     'nav.org':              'Organigramm',
     'cta.btn.org':          'Organigramm →',
+    'lang.search.ph':       'Sprache suchen…',
     'porg.breadcrumb':      'Organigramm',
     'porg.h1':              'Organigramm',
     'porg.desc':            'Organisationsstruktur der Botschaft und Ständigen Vertretung von Côte d\'Ivoire in Wien.',
@@ -1822,6 +1824,7 @@ const translations = {
     /* Organigramme */
     'nav.org':              'Org. Chart',
     'cta.btn.org':          'Org. Chart →',
+    'lang.search.ph':       'Search language…',
     'porg.breadcrumb':      'Org. Chart',
     'porg.h1':              'Organizational Chart',
     'porg.desc':            "Organizational structure of the Embassy and Permanent Mission of Côte d'Ivoire in Vienna.",
@@ -1839,18 +1842,349 @@ const translations = {
     'porg.role.sae':        'First Secretary',
     'porg.role.pat':        'Administrative and Technical Staff',
     'porg.footer.label':    "Embassy of Côte d'Ivoire — Vienna, Austria",
+  },
+
+  /* ==================== MAGYAR (Hongrie) ==================== */
+  hu: {
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.hours':  'H–P: 09.30 – 16.00',
+    'nav.home':      'Kezdőlap',
+    'nav.embassy':   'A Nagykövetség',
+    'nav.services':  'Konzuli szolgáltatások',
+    'nav.contact':   'Kapcsolat és nyitvatartás',
+    'nav.downloads': 'Letöltések',
+    'nav.annonces':  'Információk és közlemények',
+    'nav.discover':  'Ausztria felfedezése',
+    'nav.org':       'Szervezeti felépítés',
+    'lang.search.ph':'Nyelv keresése…',
+    'footer.desc':   "Elefántcsontpart Köztársaság ausztriai nagykövetsége, amely Közép-Európa 9 országát látja el. Hivatalos konzuli szolgálat a Külügyminisztérium felügyelete alatt.",
+    'footer.srv':    'Szolgáltatások', 'footer.info':'Információk', 'footer.contact':'Kapcsolat',
+    'footer.nav':    'Navigáció',
+    'footer.nav.ambassador': 'A Nagykövet',
+    'footer.nav.circonscrip': 'Diplomáciai körzet',
+    'footer.nav.reseau': 'Világméretű diplomáciai hálózat',
+    'footer.nav.contact': 'Kapcsolat',
+    'footer.srv.passport': 'Útlevél',
+    'footer.srv.visa':     'Vízum',
+    'footer.srv.civil':    'Anyakönyvi ügyek',
+    'footer.srv.legal':    'Hitelesítés',
+    'footer.srv.cert':     'Igazolások',
+    'footer.legal':  'Jogi nyilatkozat', 'footer.privacy':'Adatvédelmi szabályzat',
+    'footer.access': 'Akadálymentesség', 'footer.sitemap':'Oldaltérkép',
+    'footer.copy':   '© 2025 Elefántcsontpart Köztársaság ausztriai nagykövetsége. Minden jog fenntartva.',
+    'footer.link.amb':'→ A Nagykövet',
+    'logo.name':     'Elefántcsontpart Nagykövetsége',
+    'logo.subtitle': 'Elefántcsontparti Köztársaság — Bécs, Ausztria',
+  },
+
+  /* ==================== SLOVENŠČINA (Slovénie) ==================== */
+  sl: {
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
+    'nav.home':      'Domov',
+    'nav.embassy':   'Veleposlaništvo',
+    'nav.services':  'Konzularne storitve',
+    'nav.contact':   'Kontakt in uradne ure',
+    'nav.downloads': 'Prenosi',
+    'nav.annonces':  'Informacije in obvestila',
+    'nav.discover':  'Odkrijte Avstrijo',
+    'nav.org':       'Organigram',
+    'lang.search.ph':'Iskanje jezika …',
+    'footer.desc':   "Veleposlaništvo Republike Slonokoščene obale v Avstriji, ki pokriva 9 držav srednje Evrope. Uradna konzularna služba pod pristojnostjo Ministrstva za zunanje zadeve.",
+    'footer.srv':    'Storitve', 'footer.info':'Informacije', 'footer.contact':'Kontakt',
+    'footer.nav':    'Navigacija',
+    'footer.nav.ambassador': 'Veleposlanik',
+    'footer.nav.circonscrip': 'Diplomatsko območje',
+    'footer.nav.reseau': 'Svetovna diplomatska mreža',
+    'footer.nav.contact': 'Kontakt',
+    'footer.srv.passport': 'Potni list',
+    'footer.srv.visa':     'Vizum',
+    'footer.srv.civil':    'Matične zadeve',
+    'footer.srv.legal':    'Overitev',
+    'footer.srv.cert':     'Potrdila',
+    'footer.legal':  'Pravno obvestilo', 'footer.privacy':'Politika zasebnosti',
+    'footer.access': 'Dostopnost', 'footer.sitemap':'Zemljevid strani',
+    'footer.copy':   '© 2025 Veleposlaništvo Republike Slonokoščene obale v Avstriji. Vse pravice pridržane.',
+    'footer.link.amb':'→ Veleposlanik',
+    'logo.name':     'Veleposlaništvo Slonokoščene obale',
+    'logo.subtitle': 'Republika Slonokoščena obala — Dunaj, Avstrija',
+  },
+
+  /* ==================== SLOVENČINA (Slovaquie) ==================== */
+  sk: {
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.hours':  'Po–Pi: 09.30 – 16.00',
+    'nav.home':      'Domov',
+    'nav.embassy':   'Veľvyslanectvo',
+    'nav.services':  'Konzulárne služby',
+    'nav.contact':   'Kontakt a úradné hodiny',
+    'nav.downloads': 'Na stiahnutie',
+    'nav.annonces':  'Informácie a oznámenia',
+    'nav.discover':  'Objavte Rakúsko',
+    'nav.org':       'Organizačná štruktúra',
+    'lang.search.ph':'Hľadať jazyk…',
+    'footer.desc':   "Veľvyslanectvo Republiky Pobrežia Slonoviny v Rakúsku, ktoré pokrýva 9 krajín strednej Európy. Oficiálna konzulárna služba pod dohľadom Ministerstva zahraničných vecí.",
+    'footer.srv':    'Služby', 'footer.info':'Informácie', 'footer.contact':'Kontakt',
+    'footer.nav':    'Navigácia',
+    'footer.nav.ambassador': 'Veľvyslanec',
+    'footer.nav.circonscrip': 'Diplomatický obvod',
+    'footer.nav.reseau': 'Celosvetová diplomatická sieť',
+    'footer.nav.contact': 'Kontakt',
+    'footer.srv.passport': 'Cestovný pas',
+    'footer.srv.visa':     'Vízum',
+    'footer.srv.civil':    'Matričné doklady',
+    'footer.srv.legal':    'Overenie',
+    'footer.srv.cert':     'Osvedčenia',
+    'footer.legal':  'Právne upozornenie', 'footer.privacy':'Zásady ochrany osobných údajov',
+    'footer.access': 'Prístupnosť', 'footer.sitemap':'Mapa stránky',
+    'footer.copy':   '© 2025 Veľvyslanectvo Republiky Pobrežia Slonoviny v Rakúsku. Všetky práva vyhradené.',
+    'footer.link.amb':'→ Veľvyslanec',
+    'logo.name':     'Veľvyslanectvo Pobrežia Slonoviny',
+    'logo.subtitle': 'Republika Pobrežie Slonoviny — Viedeň, Rakúsko',
+  },
+
+  /* ==================== HRVATSKI (Croatie) ==================== */
+  hr: {
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
+    'nav.home':      'Početna',
+    'nav.embassy':   'Veleposlanstvo',
+    'nav.services':  'Konzularne usluge',
+    'nav.contact':   'Kontakt i radno vrijeme',
+    'nav.downloads': 'Preuzimanja',
+    'nav.annonces':  'Informacije i obavijesti',
+    'nav.discover':  'Otkrijte Austriju',
+    'nav.org':       'Organizacijska shema',
+    'lang.search.ph':'Pretraži jezik…',
+    'footer.desc':   "Veleposlanstvo Republike Obale Bjelokosti u Austriji, koje pokriva 9 zemalja srednje Europe. Službena konzularna služba pod nadležnošću Ministarstva vanjskih poslova.",
+    'footer.srv':    'Usluge', 'footer.info':'Informacije', 'footer.contact':'Kontakt',
+    'footer.nav':    'Navigacija',
+    'footer.nav.ambassador': 'Veleposlanik',
+    'footer.nav.circonscrip': 'Diplomatsko područje',
+    'footer.nav.reseau': 'Svjetska diplomatska mreža',
+    'footer.nav.contact': 'Kontakt',
+    'footer.srv.passport': 'Putovnica',
+    'footer.srv.visa':     'Viza',
+    'footer.srv.civil':    'Matične knjige',
+    'footer.srv.legal':    'Ovjera',
+    'footer.srv.cert':     'Potvrde',
+    'footer.legal':  'Pravna napomena', 'footer.privacy':'Politika privatnosti',
+    'footer.access': 'Pristupačnost', 'footer.sitemap':'Karta stranice',
+    'footer.copy':   '© 2025 Veleposlanstvo Republike Obale Bjelokosti u Austriji. Sva prava pridržana.',
+    'footer.link.amb':'→ Veleposlanik',
+    'logo.name':     'Veleposlanstvo Obale Bjelokosti',
+    'logo.subtitle': 'Republika Obala Bjelokosti — Beč, Austrija',
+  },
+
+  /* ==================== SRPSKI (Serbie) ==================== */
+  sr: {
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
+    'nav.home':      'Početna',
+    'nav.embassy':   'Ambasada',
+    'nav.services':  'Konzularne usluge',
+    'nav.contact':   'Kontakt i radno vreme',
+    'nav.downloads': 'Preuzimanja',
+    'nav.annonces':  'Informacije i obaveštenja',
+    'nav.discover':  'Otkrijte Austriju',
+    'nav.org':       'Organizaciona struktura',
+    'lang.search.ph':'Pretraga jezika…',
+    'footer.desc':   "Ambasada Republike Obale Slonovače u Austriji, koja pokriva 9 zemalja centralne Evrope. Zvanična konzularna služba pod nadležnošću Ministarstva spoljnih poslova.",
+    'footer.srv':    'Usluge', 'footer.info':'Informacije', 'footer.contact':'Kontakt',
+    'footer.nav':    'Navigacija',
+    'footer.nav.ambassador': 'Ambasador',
+    'footer.nav.circonscrip': 'Diplomatski okrug',
+    'footer.nav.reseau': 'Svetska diplomatska mreža',
+    'footer.nav.contact': 'Kontakt',
+    'footer.srv.passport': 'Pasoš',
+    'footer.srv.visa':     'Viza',
+    'footer.srv.civil':    'Matične knjige',
+    'footer.srv.legal':    'Overa',
+    'footer.srv.cert':     'Potvrde',
+    'footer.legal':  'Pravna napomena', 'footer.privacy':'Politika privatnosti',
+    'footer.access': 'Pristupačnost', 'footer.sitemap':'Mapa sajta',
+    'footer.copy':   '© 2025 Ambasada Republike Obale Slonovače u Austriji. Sva prava zadržana.',
+    'footer.link.amb':'→ Ambasador',
+    'logo.name':     'Ambasada Obale Slonovače',
+    'logo.subtitle': 'Republika Obala Slonovače — Beč, Austrija',
+  },
+
+  /* ==================== ROMÂNĂ (Roumanie / Moldavie) ==================== */
+  ro: {
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.hours':  'Lun–Vin: 09.30 – 16.00',
+    'nav.home':      'Acasă',
+    'nav.embassy':   'Ambasada',
+    'nav.services':  'Servicii consulare',
+    'nav.contact':   'Contact și program',
+    'nav.downloads': 'Descărcări',
+    'nav.annonces':  'Informații și anunțuri',
+    'nav.discover':  'Descoperă Austria',
+    'nav.org':       'Organigramă',
+    'lang.search.ph':'Căutați limba…',
+    'footer.desc':   "Ambasada Republicii Côte d'Ivoire în Austria, care deservește 9 țări din Europa Centrală. Serviciu consular oficial sub autoritatea Ministerului Afacerilor Externe.",
+    'footer.srv':    'Servicii', 'footer.info':'Informații', 'footer.contact':'Contact',
+    'footer.nav':    'Navigare',
+    'footer.nav.ambassador': 'Ambasadorul',
+    'footer.nav.circonscrip': 'Circumscripție diplomatică',
+    'footer.nav.reseau': 'Rețeaua diplomatică mondială',
+    'footer.nav.contact': 'Contact',
+    'footer.srv.passport': 'Pașaport',
+    'footer.srv.visa':     'Viză',
+    'footer.srv.civil':    'Stare civilă',
+    'footer.srv.legal':    'Legalizare',
+    'footer.srv.cert':     'Certificate',
+    'footer.legal':  'Mențiuni legale', 'footer.privacy':'Politica de confidențialitate',
+    'footer.access': 'Accesibilitate', 'footer.sitemap':'Harta site-ului',
+    'footer.copy':   '© 2025 Ambasada Republicii Côte d\'Ivoire în Austria. Toate drepturile rezervate.',
+    'footer.link.amb':'→ Ambasadorul',
+    'logo.name':     "Ambasada Republicii Côte d'Ivoire",
+    'logo.subtitle': "Republica Côte d'Ivoire — Viena, Austria",
+  },
+
+  /* ==================== BOSANSKI (Bosnie-Herzégovine) ==================== */
+  bs: {
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
+    'nav.home':      'Početna',
+    'nav.embassy':   'Ambasada',
+    'nav.services':  'Konzularne usluge',
+    'nav.contact':   'Kontakt i radno vrijeme',
+    'nav.downloads': 'Preuzimanja',
+    'nav.annonces':  'Informacije i obavještenja',
+    'nav.discover':  'Otkrijte Austriju',
+    'nav.org':       'Organizaciona struktura',
+    'lang.search.ph':'Pretraga jezika…',
+    'footer.desc':   "Ambasada Republike Obala Slonovače u Austriji, koja pokriva 9 zemalja centralne Evrope. Zvanična konzularna služba pod nadležnošću Ministarstva vanjskih poslova.",
+    'footer.srv':    'Usluge', 'footer.info':'Informacije', 'footer.contact':'Kontakt',
+    'footer.nav':    'Navigacija',
+    'footer.nav.ambassador': 'Ambasador',
+    'footer.nav.circonscrip': 'Diplomatski okrug',
+    'footer.nav.reseau': 'Svjetska diplomatska mreža',
+    'footer.nav.contact': 'Kontakt',
+    'footer.srv.passport': 'Pasoš',
+    'footer.srv.visa':     'Viza',
+    'footer.srv.civil':    'Matične knjige',
+    'footer.srv.legal':    'Ovjera',
+    'footer.srv.cert':     'Potvrde',
+    'footer.legal':  'Pravna napomena', 'footer.privacy':'Politika privatnosti',
+    'footer.access': 'Pristupačnost', 'footer.sitemap':'Mapa sajta',
+    'footer.copy':   '© 2025 Ambasada Republike Obala Slonovače u Austriji. Sva prava zadržana.',
+    'footer.link.amb':'→ Ambasador',
+    'logo.name':     'Ambasada Obale Slonovače',
+    'logo.subtitle': 'Republika Obala Slonovače — Beč, Austrija',
   }
 };
+
+/* ============================================================
+   Sélecteur de langue — bouton déroulant scrollable
+   ============================================================ */
+const LANGS = [
+  { code: 'fr', label: 'Français',        flag: 'fi-fr' },
+  { code: 'de', label: 'Deutsch',         flag: 'fi-at' },
+  { code: 'en', label: 'English',         flag: 'fi-gb' },
+  { code: 'hu', label: 'Magyar',          flag: 'fi-hu' },
+  { code: 'sl', label: 'Slovenščina',     flag: 'fi-si' },
+  { code: 'sk', label: 'Slovenčina',      flag: 'fi-sk' },
+  { code: 'hr', label: 'Hrvatski',        flag: 'fi-hr' },
+  { code: 'sr', label: 'Srpski',          flag: 'fi-rs' },
+  { code: 'ro', label: 'Română',          flag: 'fi-ro' },
+  { code: 'bs', label: 'Bosanski',        flag: 'fi-ba' },
+];
+
+function updateLangSwitcherUI(lang) {
+  const meta = LANGS.find(l => l.code === lang) || LANGS[0];
+  document.querySelectorAll('.lang-switcher').forEach(sw => {
+    const flagEl = sw.querySelector('.lang-dd-flag');
+    const codeEl = sw.querySelector('.lang-dd-code');
+    if (flagEl) flagEl.className = 'fi ' + meta.flag + ' lang-dd-flag';
+    if (codeEl) codeEl.textContent = meta.code.toUpperCase();
+    sw.querySelectorAll('.lang-dd-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.lang === lang);
+    });
+  });
+}
+
+function buildLangSwitcher() {
+  document.querySelectorAll('.lang-switcher').forEach(container => {
+    const currentLang = (translations[document.documentElement.lang] ? document.documentElement.lang : 'fr');
+    const meta = LANGS.find(l => l.code === currentLang) || LANGS[0];
+    const searchPh = (translations[currentLang] && translations[currentLang]['lang.search.ph']) || 'Search language…';
+
+    container.innerHTML =
+      '<button type="button" class="lang-dd-btn" aria-haspopup="listbox" aria-expanded="false">' +
+        '<span class="fi ' + meta.flag + ' lang-dd-flag"></span>' +
+        '<span class="lang-dd-code">' + meta.code.toUpperCase() + '</span>' +
+        '<svg class="lang-dd-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>' +
+      '</button>' +
+      '<div class="lang-dd-panel" hidden>' +
+        '<div class="lang-dd-search-wrap"><input type="text" class="lang-dd-search" placeholder="' + searchPh + '"></div>' +
+        '<ul class="lang-dd-list" role="listbox">' +
+          LANGS.map(l =>
+            '<li role="option" tabindex="-1" data-lang="' + l.code + '" class="lang-dd-item' + (l.code === currentLang ? ' active' : '') + '">' +
+              '<span class="fi ' + l.flag + '"></span>' +
+              '<span class="lang-dd-name">' + l.label + '</span>' +
+              '<span class="lang-dd-code2">' + l.code.toUpperCase() + '</span>' +
+            '</li>'
+          ).join('') +
+        '</ul>' +
+      '</div>';
+
+    const btn = container.querySelector('.lang-dd-btn');
+    const panel = container.querySelector('.lang-dd-panel');
+    const search = container.querySelector('.lang-dd-search');
+    const list = container.querySelector('.lang-dd-list');
+
+    function openPanel() {
+      panel.hidden = false;
+      container.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      search.value = '';
+      list.querySelectorAll('.lang-dd-item').forEach(i => { i.hidden = false; });
+      search.focus();
+    }
+    function closePanel() {
+      panel.hidden = true;
+      container.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (panel.hidden) openPanel(); else closePanel();
+    });
+
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      list.querySelectorAll('.lang-dd-item').forEach(item => {
+        const name = item.querySelector('.lang-dd-name').textContent.toLowerCase();
+        const code = item.dataset.lang.toLowerCase();
+        item.hidden = q.length > 0 && !name.includes(q) && !code.includes(q);
+      });
+    });
+
+    list.querySelectorAll('.lang-dd-item').forEach(item => {
+      item.addEventListener('click', () => {
+        setLang(item.dataset.lang);
+        closePanel();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target)) closePanel();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) { closePanel(); btn.focus(); }
+    });
+  });
+}
+buildLangSwitcher();
 
 /* ============================================================
    setLang — applique la langue choisie
    ============================================================ */
 function setLang(lang) {
   if (!translations[lang]) return;
-
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
@@ -1877,8 +2211,9 @@ function setLang(lang) {
     if (translations[lang][key] !== undefined) el.placeholder = translations[lang][key];
   });
 
-  document.documentElement.lang = lang === 'de' ? 'de' : lang === 'en' ? 'en' : 'fr';
+  document.documentElement.lang = lang;
   localStorage.setItem('ambaci-lang', lang);
+  if (typeof updateLangSwitcherUI === 'function') updateLangSwitcherUI(lang);
 
   document.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
 }
@@ -1886,10 +2221,10 @@ function setLang(lang) {
 // Priority: 1) saved user choice  2) browser/phone language  3) French default
 try {
   const saved = localStorage.getItem('ambaci-lang');
-  if (saved && ['fr', 'en', 'de'].includes(saved)) {
+  if (saved && LANGS.some(l => l.code === saved)) {
     setLang(saved);
   } else {
-    const supported = ['fr', 'en', 'de'];
+    const supported = LANGS.map(l => l.code);
     const detected = (navigator.languages && navigator.languages.length
       ? Array.from(navigator.languages)
       : [navigator.language || '']

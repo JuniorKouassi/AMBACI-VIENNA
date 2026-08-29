@@ -693,30 +693,16 @@ img { max-width: 100%; height: auto; }
   .logo-text span   { display: none; }
 
   /* Sélecteur de langue avec drapeaux — compact */
-  .lang-switcher {
-    border: 1.5px solid var(--grey-300) !important;
-    border-radius: var(--radius-sm) !important;
-    overflow: hidden !important;
+  .lang-dd-btn {
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.6rem !important;
+    gap: 0.25rem !important;
   }
-  .lang-btn {
-    padding: 0.22rem 0.28rem !important;
-    font-size: 0.56rem !important;
-    font-weight: 800 !important;
-    gap: 0.18rem !important;
-    min-width: 0 !important;
+  .lang-dd-btn .fi {
+    width: 14px !important;
+    height: 10px !important;
   }
-  .lang-btn .fi {
-    width: 10px !important;
-    height: 7px !important;
-    display: inline-block !important;
-    border-radius: 1px !important;
-  }
-  .lang-sep { background: var(--grey-300) !important; }
-  .lang-btn.active {
-    color: var(--orange) !important;
-    background: rgba(247,127,0,.1) !important;
-  }
-  .lang-btn:not(.active) { color: var(--grey-700) !important; }
+  .lang-dd-panel { width: 200px !important; right: -8px !important; }
 
   /* Hero */
   .hero { padding: 2rem 0 2.5rem; }
@@ -917,10 +903,9 @@ img { max-width: 100%; height: auto; }
 
   /* Langue : taille minimale, ne rétrécit pas */
   .lang-switcher    { flex-shrink: 0; }
-  .lang-btn         { padding: 0.2rem 0.26rem !important; font-size: 0.55rem !important;
-                      gap: 0.14rem !important; min-width: 0 !important; }
-  .lang-btn .fi     { width: 10px !important; height: 7px !important; }
-  .lang-sep         { width: 1px !important; }
+  .lang-dd-btn      { padding: 0.2rem 0.3rem !important; font-size: 0.55rem !important; gap: 0.2rem !important; }
+  .lang-dd-btn .fi  { width: 12px !important; height: 8px !important; }
+  .lang-dd-panel    { width: 190px !important; right: -8px !important; }
 
   /* ══ HERO — 2 colonnes, hauteur ~340px disponible ════════════ */
   .hero             { padding: 0.875rem 0 1rem; }
@@ -1068,27 +1053,21 @@ img { max-width: 100%; height: auto; }
 .footer-social[title="Linktree"]:hover  { background: #43E55E; border-color: #43E55E; color: #000; }
 
 /* ============================================================
-   SÉLECTEUR DE LANGUE
+   SÉLECTEUR DE LANGUE — bouton déroulant scrollable
    ============================================================ */
-.lang-switcher {
+.lang-switcher { position: relative; flex-shrink: 0; }
+.lang-dd-btn {
   display: flex;
   align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  background: none;
   border: 1px solid var(--grey-300);
   border-radius: var(--radius-sm);
-  overflow: visible;
-  flex-shrink: 0;
-}
-.lang-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.3rem 0.6rem;
-  background: none;
-  border: none;
   color: var(--grey-700);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
   font-family: var(--font-ui);
@@ -1096,15 +1075,68 @@ img { max-width: 100%; height: auto; }
   transition: all var(--transition);
   white-space: nowrap;
 }
-.lang-btn .fi {
+.lang-dd-btn:hover { color: var(--orange); border-color: var(--orange); }
+.lang-switcher.open .lang-dd-btn { color: var(--orange); border-color: var(--orange); background: rgba(247,127,0,.08); }
+.lang-dd-btn .fi {
   width: 18px; height: 13px;
   border-radius: 2px;
   flex-shrink: 0;
   box-shadow: 0 0 0 1px rgba(0,0,0,.1);
 }
-.lang-btn:hover { color: var(--dark); background: var(--grey-100); border-radius: 4px; }
-.lang-btn.active { color: var(--orange); background: rgba(247,127,0,.12); border-radius: 4px; }
-.lang-sep { width: 1px; height: 18px; background: var(--grey-300); flex-shrink: 0; }
+.lang-dd-caret { transition: transform var(--transition); flex-shrink: 0; }
+.lang-switcher.open .lang-dd-caret { transform: rotate(180deg); }
+
+.lang-dd-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 200;
+  width: 230px;
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.lang-dd-panel[hidden] { display: none; }
+.lang-dd-search-wrap { padding: 0.5rem; border-bottom: 1px solid var(--grey-200); }
+.lang-dd-search {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--grey-300);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-family: var(--font-ui);
+  color: var(--dark);
+}
+.lang-dd-search:focus { outline: none; border-color: var(--orange); }
+.lang-dd-list { list-style: none; margin: 0; padding: 0.35rem; max-height: 260px; overflow-y: auto; }
+.lang-dd-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: var(--grey-700);
+  transition: background .15s, color .15s;
+}
+.lang-dd-item:hover { background: var(--grey-100); }
+.lang-dd-item.active { background: rgba(247,127,0,.12); color: var(--orange); font-weight: 700; }
+.lang-dd-item[hidden] { display: none; }
+.lang-dd-item .fi {
+  width: 18px; height: 13px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+}
+.lang-dd-name { flex: 1; }
+.lang-dd-code2 { font-size: 0.68rem; font-weight: 700; color: var(--grey-500); letter-spacing: .04em; }
+.lang-dd-list::-webkit-scrollbar { width: 7px; }
+.lang-dd-list::-webkit-scrollbar-thumb { background: var(--grey-300); border-radius: 8px; }
 
 /* ============================================================
    ÉLÉPHANT WATERMARK
