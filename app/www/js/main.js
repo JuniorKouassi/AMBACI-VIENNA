@@ -1861,7 +1861,7 @@ const translations = {
 
   /* ==================== MAGYAR (Hongrie) ==================== */
   hu: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3. emelet, Ajtó 332-333, 1190 Wien',
     'topbar.hours':  'H–P: 09.30 – 16.00',
     'nav.home':      'Kezdőlap',
     'nav.embassy':   'A Nagykövetség',
@@ -1940,7 +1940,7 @@ const translations = {
     'day.mon':'Hétfő','day.tue':'Kedd','day.wed':'Szerda','day.thu':'Csütörtök','day.fri':'Péntek','day.sat':'Szombat','day.sun':'Vasárnap','day.closed':'Zárva',
     'hours.val':'09.30 – 16.00','info.note':'Zárva az osztrák és ivóri munkaszüneti napokon.',
     'month.jan':'Jan','month.feb':'Feb','month.mar':'Már','month.apr':'Ápr','month.may':'Máj','month.jun':'Jún','month.jul':'Júl','month.aug':'Aug','month.sep':'Szep','month.oct':'Okt','month.nov':'Nov','month.dec':'Dec',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333','pays.at':'Ausztria','pays.at.cap':'Bécs (székhely)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3. emelet, Ajtó 332-333','pays.at':'Ausztria','pays.at.cap':'Bécs (székhely)',
     'pays.hu':'Magyarország','pays.si':'Szlovénia','pays.sk':'Szlovákia','pays.hr':'Horvátország','pays.rs':'Szerbia','pays.ro':'Románia','pays.ba':'Bosznia-Hercegovina','pays.md':'Moldova',
     'actu.tag.event':'Esemény','actu.tag.info':'Információ','actu.tag.mission':'Gazdasági küldöttség',
     'srv.badge.passport':'Úti okmány','srv.badge.visa':'Beutazási vízum','srv.badge.identity':'Személyazonosság',
@@ -2110,7 +2110,7 @@ const translations = {
 
   /* ==================== SLOVENŠČINA (Slovénie) ==================== */
   sl: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3. nadstropje, Vrata 332-333, 1190 Wien',
     'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
     'nav.home':      'Domov',
     'nav.embassy':   'Veleposlaništvo',
@@ -2189,7 +2189,7 @@ const translations = {
     'day.mon':'Ponedeljek','day.tue':'Torek','day.wed':'Sreda','day.thu':'Četrtek','day.fri':'Petek','day.sat':'Sobota','day.sun':'Nedelja','day.closed':'Zaprto',
     'hours.val':'09.30 – 16.00','info.note':'Zaprto ob avstrijskih in ivoirskih praznikih.',
     'month.jan':'Jan','month.feb':'Feb','month.mar':'Mar','month.apr':'Apr','month.may':'Maj','month.jun':'Jun','month.jul':'Jul','month.aug':'Avg','month.sep':'Sep','month.oct':'Okt','month.nov':'Nov','month.dec':'Dec',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333','pays.at':'Avstrija','pays.at.cap':'Dunaj (sedež)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3. nadstropje, Vrata 332-333','pays.at':'Avstrija','pays.at.cap':'Dunaj (sedež)',
     'pays.hu':'Madžarska','pays.si':'Slovenija','pays.sk':'Slovaška','pays.hr':'Hrvaška','pays.rs':'Srbija','pays.ro':'Romunija','pays.ba':'Bosna in Hercegovina','pays.md':'Moldavija',
     'actu.tag.event':'Dogodek','actu.tag.info':'Informacija','actu.tag.mission':'Gospodarska misija',
     'srv.badge.passport':'Potovalni dokument','srv.badge.visa':'Vstopni vizum','srv.badge.identity':'Identiteta',
@@ -2359,7 +2359,7 @@ const translations = {
 
   /* ==================== SLOVENČINA (Slovaquie) ==================== */
   sk: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3. poschodie, Dvere 332-333, 1190 Wien',
     'topbar.hours':  'Po–Pi: 09.30 – 16.00',
     'nav.home':      'Domov',
     'nav.embassy':   'Veľvyslanectvo',
@@ -2438,7 +2438,7 @@ const translations = {
     'day.mon':'Pondelok','day.tue':'Utorok','day.wed':'Streda','day.thu':'Štvrtok','day.fri':'Piatok','day.sat':'Sobota','day.sun':'Nedeľa','day.closed':'Zatvorené',
     'hours.val':'09.30 – 16.00','info.note':'Zatvorené počas rakúskych a pobrežnoslonovinských sviatkov.',
     'month.jan':'Jan','month.feb':'Feb','month.mar':'Mar','month.apr':'Apr','month.may':'Máj','month.jun':'Jún','month.jul':'Júl','month.aug':'Aug','month.sep':'Sep','month.oct':'Okt','month.nov':'Nov','month.dec':'Dec',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333','pays.at':'Rakúsko','pays.at.cap':'Viedeň (sídlo)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3. poschodie, Dvere 332-333','pays.at':'Rakúsko','pays.at.cap':'Viedeň (sídlo)',
     'pays.hu':'Maďarsko','pays.si':'Slovinsko','pays.sk':'Slovensko','pays.hr':'Chorvátsko','pays.rs':'Srbsko','pays.ro':'Rumunsko','pays.ba':'Bosna a Hercegovina','pays.md':'Moldavsko',
     'actu.tag.event':'Podujatie','actu.tag.info':'Informácia','actu.tag.mission':'Hospodárska misia',
     'srv.badge.passport':'Cestovný doklad','srv.badge.visa':'Vstupné vízum','srv.badge.identity':'Totožnosť',
@@ -2608,7 +2608,7 @@ const translations = {
 
   /* ==================== HRVATSKI (Croatie) ==================== */
   hr: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3. kat, Vrata 332-333, 1190 Wien',
     'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
     'nav.home':      'Početna',
     'nav.embassy':   'Veleposlanstvo',
@@ -2687,7 +2687,7 @@ const translations = {
     'day.mon':'Ponedjeljak','day.tue':'Utorak','day.wed':'Srijeda','day.thu':'Četvrtak','day.fri':'Petak','day.sat':'Subota','day.sun':'Nedjelja','day.closed':'Zatvoreno',
     'hours.val':'09.30 – 16.00','info.note':'Zatvoreno austrijskim i praznicima Obale Bjelokosti.',
     'month.jan':'Sij','month.feb':'Velj','month.mar':'Ožu','month.apr':'Tra','month.may':'Svi','month.jun':'Lip','month.jul':'Srp','month.aug':'Kol','month.sep':'Ruj','month.oct':'Lis','month.nov':'Stu','month.dec':'Pro',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333','pays.at':'Austrija','pays.at.cap':'Beč (sjedište)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3. kat, Vrata 332-333','pays.at':'Austrija','pays.at.cap':'Beč (sjedište)',
     'pays.hu':'Mađarska','pays.si':'Slovenija','pays.sk':'Slovačka','pays.hr':'Hrvatska','pays.rs':'Srbija','pays.ro':'Rumunjska','pays.ba':'Bosna i Hercegovina','pays.md':'Moldova',
     'actu.tag.event':'Događaj','actu.tag.info':'Informacija','actu.tag.mission':'Gospodarska misija',
     'srv.badge.passport':'Putna isprava','srv.badge.visa':'Ulazna viza','srv.badge.identity':'Identitet',
@@ -2857,7 +2857,7 @@ const translations = {
 
   /* ==================== SRPSKI (Serbie) ==================== */
   sr: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3. sprat, Vrata 332-333, 1190 Wien',
     'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
     'nav.home':      'Početna',
     'nav.embassy':   'Ambasada',
@@ -2936,7 +2936,7 @@ const translations = {
     'day.mon':'Ponedeljak','day.tue':'Utorak','day.wed':'Sreda','day.thu':'Četvrtak','day.fri':'Petak','day.sat':'Subota','day.sun':'Nedelja','day.closed':'Zatvoreno',
     'hours.val':'09.30 – 16.00','info.note':'Zatvoreno austrijskim i praznicima Obale Slonovače.',
     'month.jan':'Jan','month.feb':'Feb','month.mar':'Mar','month.apr':'Apr','month.may':'Maj','month.jun':'Jun','month.jul':'Jul','month.aug':'Avg','month.sep':'Sep','month.oct':'Okt','month.nov':'Nov','month.dec':'Dec',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333','pays.at':'Austrija','pays.at.cap':'Beč (sedište)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3. sprat, Vrata 332-333','pays.at':'Austrija','pays.at.cap':'Beč (sedište)',
     'pays.hu':'Mađarska','pays.si':'Slovenija','pays.sk':'Slovačka','pays.hr':'Hrvatska','pays.rs':'Srbija','pays.ro':'Rumunija','pays.ba':'Bosna i Hercegovina','pays.md':'Moldavija',
     'actu.tag.event':'Događaj','actu.tag.info':'Informacija','actu.tag.mission':'Ekonomska misija',
     'srv.badge.passport':'Putna isprava','srv.badge.visa':'Ulazna viza','srv.badge.identity':'Identitet',
@@ -3106,7 +3106,7 @@ const translations = {
 
   /* ==================== ROMÂNĂ (Roumanie / Moldavie) ==================== */
   ro: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - Etajul 3, Ușa 332-333, 1190 Wien',
     'topbar.hours':  'Lun–Vin: 09.30 – 16.00',
     'nav.home':      'Acasă',
     'nav.embassy':   'Ambasada',
@@ -3185,7 +3185,7 @@ const translations = {
     'day.mon':'Luni', 'day.tue':'Marți', 'day.wed':'Miercuri', 'day.thu':'Joi', 'day.fri':'Vineri', 'day.sat':'Sâmbătă', 'day.sun':'Duminică', 'day.closed':'Închis',
     'hours.val':'09.30 – 16.00', 'info.note':'Închis în zilele de sărbătoare austriece și ivoriene.',
     'month.jan':'Ian', 'month.feb':'Feb', 'month.mar':'Mar', 'month.apr':'Apr', 'month.may':'Mai', 'month.jun':'Iun', 'month.jul':'Iul', 'month.aug':'Aug', 'month.sep':'Sep', 'month.oct':'Oct', 'month.nov':'Noi', 'month.dec':'Dec',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333', 'pays.at':'Austria', 'pays.at.cap':'Viena (sediu)',
+    'addr.street':'Michael-Neumann-Gasse 2 - Etajul 3, Ușa 332-333', 'pays.at':'Austria', 'pays.at.cap':'Viena (sediu)',
     'pays.hu':'Ungaria', 'pays.si':'Slovenia', 'pays.sk':'Slovacia', 'pays.hr':'Croația', 'pays.rs':'Serbia', 'pays.ro':'România', 'pays.ba':'Bosnia și Herțegovina', 'pays.md':'Moldova',
     'actu.tag.event':'Eveniment', 'actu.tag.info':'Informație', 'actu.tag.mission':'Misiune economică',
     'srv.badge.passport':'Document de călătorie', 'srv.badge.visa':'Viză de intrare', 'srv.badge.identity':'Identitate',
@@ -3355,7 +3355,7 @@ const translations = {
 
   /* ==================== BOSANSKI (Bosnie-Herzégovine) ==================== */
   bs: {
-    'topbar.address':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333, 1190 Wien',
+    'topbar.address':'Michael-Neumann-Gasse 2 - 3. sprat, Vrata 332-333, 1190 Wien',
     'topbar.hours':  'Pon–Pet: 09.30 – 16.00',
     'nav.home':      'Početna',
     'nav.embassy':   'Ambasada',
@@ -3434,7 +3434,7 @@ const translations = {
     'day.mon':'Ponedjeljak','day.tue':'Utorak','day.wed':'Srijeda','day.thu':'Četvrtak','day.fri':'Petak','day.sat':'Subota','day.sun':'Nedjelja','day.closed':'Zatvoreno',
     'hours.val':'09.30 – 16.00','info.note':'Zatvoreno austrijskim i praznicima Obale Slonovače.',
     'month.jan':'Jan','month.feb':'Feb','month.mar':'Mar','month.apr':'Apr','month.may':'Maj','month.jun':'Jun','month.jul':'Jul','month.aug':'Aug','month.sep':'Sep','month.oct':'Okt','month.nov':'Nov','month.dec':'Dec',
-    'addr.street':'Michael-Neumann-Gasse 2 - 3ème Etage, Porte 332-333','pays.at':'Austrija','pays.at.cap':'Beč (sjedište)',
+    'addr.street':'Michael-Neumann-Gasse 2 - 3. sprat, Vrata 332-333','pays.at':'Austrija','pays.at.cap':'Beč (sjedište)',
     'pays.hu':'Mađarska','pays.si':'Slovenija','pays.sk':'Slovačka','pays.hr':'Hrvatska','pays.rs':'Srbija','pays.ro':'Rumunija','pays.ba':'Bosna i Hercegovina','pays.md':'Moldavija',
     'actu.tag.event':'Događaj','actu.tag.info':'Informacija','actu.tag.mission':'Ekonomska misija',
     'srv.badge.passport':'Putna isprava','srv.badge.visa':'Ulazna viza','srv.badge.identity':'Identitet',
