@@ -2,12 +2,21 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ambacivienna",
   "compatibility_date": "2026-06-19",
+  "main": "worker/index.js",
   "observability": {
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ambaci-bookings",
+      "database_id": "330b6116-0267-4a88-8c77-782e41c89ab6"
+    }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]

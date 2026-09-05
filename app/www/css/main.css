@@ -1581,3 +1581,122 @@ fastbots-widget,
 .pb-ring-cc-tilt { width: 100%; max-width: 420px; }
 .pb-ring-video { grid-area: video; align-self: center; }
 @media (max-width: 1024px) { .pb-ring-hero { display: none !important; } }
+
+/* ============================================================
+   RENDEZ-VOUS — Booking flow
+   ============================================================ */
+.rdv-stepper-wrap { background: var(--white); border-bottom: 1px solid var(--grey-200); padding: var(--space-lg) 0; }
+.rdv-stepper { display: flex; align-items: flex-start; width: 100%; max-width: 720px; margin: 0 auto; }
+.rdv-stepper .rdv-step-item { display: flex; align-items: flex-start; flex: 1; }
+.rdv-stepper .rdv-circle {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.875rem;
+  background: var(--white); border: 2px solid var(--grey-300); color: var(--grey-500);
+  flex-shrink: 0; transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.rdv-stepper .rdv-step-col { display: flex; flex-direction: column; align-items: center; gap: var(--space-sm); flex-shrink: 0; }
+.rdv-stepper .rdv-step-label { font-size: 0.75rem; font-weight: 600; color: var(--grey-500); white-space: nowrap; }
+.rdv-stepper .rdv-line { height: 2px; flex: 1; background: var(--grey-300); margin: 19px 10px 0; }
+.rdv-stepper .rdv-step-item.is-done .rdv-circle { background: var(--green); border-color: var(--green); color: var(--white); }
+.rdv-stepper .rdv-step-item.is-done .rdv-step-label { color: var(--dark); }
+.rdv-stepper .rdv-step-item.is-done .rdv-line { background: var(--green); }
+.rdv-stepper .rdv-step-item.is-active .rdv-circle { background: var(--orange); border-color: var(--orange); color: var(--white); }
+.rdv-stepper .rdv-step-item.is-active .rdv-step-label { color: var(--dark); }
+
+.rdv-body { padding: var(--space-3xl) 0 var(--space-4xl); }
+.rdv-step[hidden] { display: none; }
+
+button.service-card { font: inherit; text-align: left; cursor: pointer; width: 100%; }
+
+.rdv-step2-grid, .rdv-step3-grid { display: grid; grid-template-columns: 1fr 360px; gap: var(--space-xl); align-items: start; }
+.rdv-card { background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+
+.rdv-selected-service { display: flex; align-items: center; gap: var(--space-md); padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--grey-200); }
+.rdv-selected-service .ic { width: 38px; height: 38px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--orange-light), var(--orange)); display: flex; align-items: center; justify-content: center; color: var(--white); flex-shrink: 0; }
+.rdv-selected-service .txt { flex: 1; }
+.rdv-selected-service .txt b { display: block; font-size: 0.875rem; color: var(--dark); }
+.rdv-selected-service a { font-size: 0.8125rem; font-weight: 700; color: var(--orange-dark); }
+
+.rdv-cal-card { padding: var(--space-lg) var(--space-lg) var(--space-xl); }
+.rdv-cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-lg); }
+.rdv-cal-head h4 { font-family: var(--font-primary); font-size: 1.0625rem; color: var(--dark); margin: 0; text-transform: capitalize; }
+.rdv-cal-nav-btn { width: 30px; height: 30px; border-radius: var(--radius-md); border: 1px solid var(--grey-300); background: var(--white); display: flex; align-items: center; justify-content: center; color: var(--grey-700); font-size: 0.875rem; cursor: pointer; }
+.rdv-cal-nav-btn:hover { background: var(--grey-100); }
+.rdv-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.rdv-cal-dow { text-align: center; font-size: 0.71875rem; font-weight: 700; color: var(--grey-500); padding-bottom: 6px; text-transform: uppercase; }
+.rdv-cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 0.84375rem; border-radius: var(--radius-sm); color: var(--dark); background: none; border: none; font: inherit; cursor: default; }
+.rdv-cal-day.is-muted { color: var(--grey-300); }
+.rdv-cal-day.is-closed { color: var(--grey-300); background: var(--grey-100); }
+.rdv-cal-day.is-avail { background: var(--green-pale); color: var(--green-dark); font-weight: 600; cursor: pointer; }
+.rdv-cal-day.is-avail:hover { background: var(--green-light); color: var(--white); }
+.rdv-cal-day.is-selected { background: var(--orange); color: var(--white); font-weight: 700; cursor: pointer; }
+.rdv-cal-legend { display: flex; gap: var(--space-lg); margin-top: var(--space-lg); flex-wrap: wrap; }
+.rdv-cal-legend .lg { display: flex; align-items: center; gap: 7px; font-size: 0.75rem; color: var(--grey-700); }
+.rdv-cal-legend .dot { width: 11px; height: 11px; border-radius: 4px; display: inline-block; }
+.rdv-cal-legend .dot-avail { background: var(--green-pale); border: 1px solid var(--green-light); }
+.rdv-cal-legend .dot-selected { background: var(--orange); }
+.rdv-cal-legend .dot-closed { background: var(--grey-100); border: 1px solid var(--grey-300); }
+
+.rdv-slots-card { padding: var(--space-lg) var(--space-lg) var(--space-xl); }
+.rdv-slots-card h4 { font-family: var(--font-primary); font-size: 1rem; color: var(--dark); margin: 0 0 4px; }
+.rdv-date-line { font-size: 0.8125rem; color: var(--grey-500); margin: 0 0 var(--space-lg); }
+.rdv-hint { font-size: 0.875rem; color: var(--grey-500); margin: 0; }
+.rdv-slot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.rdv-slot { padding: 10px 0; text-align: center; border-radius: var(--radius-md); font-size: 0.84375rem; font-weight: 600; border: 1.5px solid var(--grey-300); color: var(--grey-700); background: var(--white); font: inherit; cursor: pointer; }
+.rdv-slot.is-avail { border-color: var(--green-light); color: var(--green-dark); }
+.rdv-slot.is-avail:hover { background: var(--green-pale); }
+.rdv-slot.is-selected { background: var(--orange); border-color: var(--orange); color: var(--white); }
+.rdv-slot.is-booked { background: var(--grey-100); color: var(--grey-300); text-decoration: line-through; border-color: var(--grey-200); cursor: not-allowed; }
+.rdv-slots-actions { margin-top: var(--space-lg); display: flex; justify-content: flex-end; }
+
+.rdv-form-card { padding: var(--space-xl) var(--space-xl) var(--space-lg); }
+.rdv-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-bottom: var(--space-md); }
+.rdv-form-row.full { grid-template-columns: 1fr; }
+.rdv-field label { display: block; font-size: 0.78125rem; font-weight: 700; color: var(--grey-700); margin-bottom: 6px; }
+.rdv-field input, .rdv-field select { width: 100%; padding: 0.6875rem 0.8125rem; border: 1.5px solid var(--grey-300); border-radius: var(--radius-md); font-size: 0.875rem; font-family: inherit; color: var(--dark); background: var(--white); }
+.rdv-field input:focus, .rdv-field select:focus { outline: none; border-color: var(--orange); }
+
+.rdv-docs-box { display: flex; gap: var(--space-md); background: var(--orange-pale); border: 1px solid var(--orange-light); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); margin: var(--space-lg) 0; }
+.rdv-docs-box .ic { flex-shrink: 0; width: 34px; height: 34px; border-radius: var(--radius-md); background: var(--orange); color: var(--white); display: flex; align-items: center; justify-content: center; }
+.rdv-docs-box h5 { margin: 0 0 var(--space-sm); font-size: 0.875rem; color: var(--dark); font-weight: 700; }
+.rdv-docs-box ul { margin: 0; padding-left: 1.125rem; font-size: 0.84375rem; color: var(--grey-700); line-height: 1.8; }
+
+.rdv-confirm-row { display: flex; align-items: flex-start; gap: 10px; margin: var(--space-lg) 0; }
+.rdv-confirm-row input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--orange); flex-shrink: 0; }
+.rdv-confirm-row span { font-size: 0.84375rem; color: var(--grey-700); line-height: 1.5; }
+.rdv-error { color: #C0392B; font-size: 0.84375rem; margin: 0 0 var(--space-md); }
+.rdv-form-actions { display: flex; justify-content: flex-end; }
+
+.rdv-summary-card { padding: var(--space-lg); }
+.rdv-summary-card h4 { font-family: var(--font-primary); font-size: 1rem; color: var(--dark); margin: 0 0 var(--space-md); }
+.rdv-sum-row { display: flex; gap: var(--space-md); align-items: flex-start; padding: 0.6875rem 0; border-bottom: 1px solid var(--grey-200); }
+.rdv-sum-row:last-child { border-bottom: none; }
+.rdv-sum-row .ic { width: 30px; height: 30px; border-radius: 7px; background: var(--green-pale); color: var(--green-dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.rdv-sum-row .txt span { display: block; font-size: 0.71875rem; color: var(--grey-500); }
+.rdv-sum-row .txt b { font-size: 0.84375rem; color: var(--dark); }
+.rdv-summary-card a.rdv-modify { display: block; margin-top: var(--space-md); font-size: 0.78125rem; font-weight: 700; color: var(--orange-dark); text-align: center; }
+
+.rdv-confirm-wrap { display: flex; justify-content: center; }
+.rdv-confirm-card { max-width: 600px; width: 100%; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); padding: var(--space-3xl); text-align: center; }
+.rdv-confirm-check { width: 76px; height: 76px; border-radius: 50%; background: var(--green-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-lg); color: var(--green); }
+.rdv-confirm-card h2 { font-family: var(--font-primary); font-size: 1.625rem; color: var(--dark); margin: 0 0 var(--space-md); }
+.rdv-confirm-card > p { font-size: 0.90625rem; color: var(--grey-700); line-height: 1.7; max-width: 440px; margin: 0 auto var(--space-xl); }
+.rdv-confirm-summary { background: var(--grey-100); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: left; margin-bottom: var(--space-lg); }
+.rdv-confirm-summary .row { display: flex; justify-content: space-between; padding: 0.5625rem 0; border-bottom: 1px solid var(--grey-200); font-size: 0.84375rem; }
+.rdv-confirm-summary .row:last-child { border-bottom: none; }
+.rdv-confirm-summary .row span:first-child { color: var(--grey-500); }
+.rdv-confirm-summary .row span:last-child { color: var(--dark); font-weight: 700; }
+.rdv-confirm-summary .row.ref span:last-child { color: var(--orange-dark); letter-spacing: 0.03em; }
+.rdv-confirm-note { display: flex; gap: var(--space-md); text-align: left; background: var(--orange-pale); border: 1px solid var(--orange-light); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); margin-bottom: var(--space-xl); font-size: 0.8125rem; color: var(--grey-700); line-height: 1.6; }
+.rdv-confirm-note .ic { flex-shrink: 0; width: 28px; height: 28px; border-radius: 7px; background: var(--orange); color: var(--white); display: flex; align-items: center; justify-content: center; }
+.rdv-confirm-actions { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .rdv-step2-grid, .rdv-step3-grid { grid-template-columns: 1fr; }
+  .rdv-stepper .rdv-step-label { display: none; }
+}
+@media (max-width: 560px) {
+  .rdv-form-row { grid-template-columns: 1fr; }
+  .rdv-slot-grid { grid-template-columns: repeat(2, 1fr); }
+}
