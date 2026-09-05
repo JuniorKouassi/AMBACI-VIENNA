@@ -1588,6 +1588,7 @@ fastbots-widget,
 .rdv-stepper-wrap { background: var(--white); border-bottom: 1px solid var(--grey-200); padding: var(--space-lg) 0; }
 .rdv-stepper { display: flex; align-items: flex-start; width: 100%; max-width: 720px; margin: 0 auto; }
 .rdv-stepper .rdv-step-item { display: flex; align-items: flex-start; flex: 1; }
+.rdv-stepper .rdv-step-item:last-child { flex: 0 0 auto; }
 .rdv-stepper .rdv-circle {
   width: 38px; height: 38px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -1604,7 +1605,7 @@ fastbots-widget,
 .rdv-stepper .rdv-step-item.is-active .rdv-circle { background: var(--orange); border-color: var(--orange); color: var(--white); }
 .rdv-stepper .rdv-step-item.is-active .rdv-step-label { color: var(--dark); }
 
-.rdv-body { padding: var(--space-3xl) 0 var(--space-4xl); }
+.rdv-body { padding-top: var(--space-3xl); padding-bottom: var(--space-4xl); }
 .rdv-step[hidden] { display: none; }
 
 .rdv-svc-grid {
