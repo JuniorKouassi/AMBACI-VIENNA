@@ -1607,7 +1607,34 @@ fastbots-widget,
 .rdv-body { padding: var(--space-3xl) 0 var(--space-4xl); }
 .rdv-step[hidden] { display: none; }
 
-button.service-card { font: inherit; text-align: left; cursor: pointer; width: 100%; }
+.rdv-svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--space-lg);
+}
+button.rdv-svc-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--grey-200);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  width: 100%;
+}
+button.rdv-svc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--orange); }
+button.rdv-svc-card:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.rdv-svc-icon { width: 52px; height: 52px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--orange-light), var(--orange)); display: flex; align-items: center; justify-content: center; color: var(--white); flex-shrink: 0; }
+.rdv-svc-card h3 { font-size: 1.0625rem; font-weight: 700; color: var(--dark); line-height: 1.3; margin: 0; }
+.rdv-svc-card p { font-size: 0.875rem; color: var(--grey-700); line-height: 1.6; flex: 1; margin: 0; }
+.rdv-svc-link { font-size: 0.875rem; font-weight: 600; color: var(--orange); display: flex; align-items: center; gap: 4px; margin-top: auto; transition: gap var(--transition); }
+.rdv-svc-card:hover .rdv-svc-link { gap: 8px; }
 
 .rdv-step2-grid, .rdv-step3-grid { display: grid; grid-template-columns: 1fr 360px; gap: var(--space-xl); align-items: start; }
 .rdv-card { background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
