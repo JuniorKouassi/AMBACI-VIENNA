@@ -257,23 +257,30 @@ async function handleCreateBooking(request, env) {
   const serviceLabel = SERVICE_LABELS[body.service];
   const dateLabel = formatDateFr(body.date);
 
-  await sendEmail(env, {
-    to: booking.email,
-    subject: `Confirmation de rendez-vous — ${serviceLabel} — ${reference}`,
-    html: `<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;">
-      <h2 style="color:#0A1F10;">Rendez-vous confirmé</h2>
-      <p>Bonjour ${escapeHtml(booking.first_name)},</p>
-      <p>Votre rendez-vous au service consulaire de l'Ambassade de Côte d'Ivoire en Autriche a bien été enregistré.</p>
-      <table style="width:100%;border-collapse:collapse;margin:16px 0;">
-        <tr><td style="padding:6px 0;color:#8A8570;">Service</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(serviceLabel)}</td></tr>
-        <tr><td style="padding:6px 0;color:#8A8570;">Date</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(dateLabel)}</td></tr>
-        <tr><td style="padding:6px 0;color:#8A8570;">Heure</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(body.time)}</td></tr>
-        <tr><td style="padding:6px 0;color:#8A8570;">Référence</td><td style="padding:6px 0;font-weight:bold;color:#D96C00;">${escapeHtml(reference)}</td></tr>
-      </table>
-      <p>Merci de vous présenter 10 minutes avant l'heure prévue, muni d'une pièce d'identité et des documents requis pour votre démarche.</p>
-      <p style="color:#8A8570;font-size:13px;">Ambassade de la République de Côte d'Ivoire en Autriche — Michael-Neumann-Gasse 2, 1190 Wien</p>
-    </div>`,
-  }).catch((e) => console.error(e));
+  // Resend's shared onboarding@resend.dev address can only deliver to the
+  // account owner, never to a visitor's own address — so the confirmation
+  // email to the applicant only goes out once a verified sending domain is
+  // configured (EMAIL_FROM secret set). Until then, skip it silently; the
+  // visitor still sees their confirmation on-screen with an .ics download.
+  if (env.EMAIL_FROM) {
+    await sendEmail(env, {
+      to: booking.email,
+      subject: `Confirmation de rendez-vous — ${serviceLabel} — ${reference}`,
+      html: `<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;">
+        <h2 style="color:#0A1F10;">Rendez-vous confirmé</h2>
+        <p>Bonjour ${escapeHtml(booking.first_name)},</p>
+        <p>Votre rendez-vous au service consulaire de l'Ambassade de Côte d'Ivoire en Autriche a bien été enregistré.</p>
+        <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+          <tr><td style="padding:6px 0;color:#8A8570;">Service</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(serviceLabel)}</td></tr>
+          <tr><td style="padding:6px 0;color:#8A8570;">Date</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(dateLabel)}</td></tr>
+          <tr><td style="padding:6px 0;color:#8A8570;">Heure</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(body.time)}</td></tr>
+          <tr><td style="padding:6px 0;color:#8A8570;">Référence</td><td style="padding:6px 0;font-weight:bold;color:#D96C00;">${escapeHtml(reference)}</td></tr>
+        </table>
+        <p>Merci de vous présenter 10 minutes avant l'heure prévue, muni d'une pièce d'identité et des documents requis pour votre démarche.</p>
+        <p style="color:#8A8570;font-size:13px;">Ambassade de la République de Côte d'Ivoire en Autriche — Michael-Neumann-Gasse 2, 1190 Wien</p>
+      </div>`,
+    }).catch((e) => console.error(e));
+  }
 
   if (env.NOTIFY_EMAIL) {
     await sendEmail(env, {
