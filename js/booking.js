@@ -71,7 +71,7 @@
 
   // --- Step 1 ---
   function initStep1() {
-    document.querySelectorAll('#rdv-step-1 .service-card').forEach((card) => {
+    document.querySelectorAll('#rdv-step-1 .rdv-svc-card').forEach((card) => {
       card.addEventListener('click', () => {
         state.service = card.dataset.service;
         renderSelectedServiceBadge();
