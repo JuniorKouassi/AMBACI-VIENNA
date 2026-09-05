@@ -1607,6 +1607,8 @@ fastbots-widget,
 
 .rdv-body { padding-top: var(--space-3xl); padding-bottom: var(--space-4xl); }
 .rdv-step[hidden] { display: none; }
+.rdv-step .section-eyebrow { display: block; margin-bottom: var(--space-sm); }
+.rdv-step .section-title { margin: 0 0 var(--space-xl); }
 
 .rdv-svc-grid {
   display: grid;
