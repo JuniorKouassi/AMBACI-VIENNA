@@ -47,7 +47,7 @@
     ['rdv-step-1','rdv-step-2','rdv-step-3','rdv-step-4','rdv-stepper',
      'rdv-cal-grid','rdv-cal-month-label','rdv-cal-prev','rdv-cal-next',
      'rdv-selected-ic','rdv-selected-label','rdv-back-to-1','rdv-back-to-2',
-     'rdv-date-line','rdv-slots-container','rdv-step2-continue',
+     'rdv-date-line','rdv-slots-container','rdv-step2-continue','rdv-step2-back','rdv-step3-back',
      'rdv-docs-service','rdv-docs-list','rdv-docs-confirm','rdv-form','rdv-form-error','rdv-submit-btn',
      'rdv-sum-service','rdv-sum-date','rdv-sum-time',
      'rdv-c-service','rdv-c-date','rdv-c-time','rdv-c-ref','rdv-add-cal'].forEach((id) => {
@@ -67,6 +67,15 @@
       item.classList.toggle('is-done', s < n);
     });
     window.scrollTo({ top: document.querySelector('.rdv-stepper-wrap').offsetTop - 90, behavior: 'smooth' });
+  }
+
+  function initStepperNav() {
+    els['rdv-stepper'].addEventListener('click', (e) => {
+      if (state.step === 4) return; // no editing after a booking is confirmed
+      const item = e.target.closest('.rdv-step-item');
+      if (!item || !item.classList.contains('is-done')) return;
+      goToStep(Number(item.dataset.step));
+    });
   }
 
   // --- Step 1 ---
@@ -204,6 +213,7 @@
       loadMonth();
     });
     els['rdv-back-to-1'].addEventListener('click', (e) => { e.preventDefault(); goToStep(1); });
+    els['rdv-step2-back'].addEventListener('click', () => goToStep(1));
     els['rdv-step2-continue'].addEventListener('click', () => {
       if (!state.date || !state.time) return;
       renderSelectedServiceBadge();
@@ -218,6 +228,7 @@
   // --- Step 3 : form submission ---
   function initStep3() {
     els['rdv-back-to-2'].addEventListener('click', (e) => { e.preventDefault(); goToStep(2); });
+    els['rdv-step3-back'].addEventListener('click', () => goToStep(2));
 
     els['rdv-form'].addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -317,6 +328,7 @@
     initStep2();
     initStep3();
     initStep4();
+    initStepperNav();
   });
 
   document.addEventListener('langchange', () => {

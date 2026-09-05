@@ -1602,6 +1602,8 @@ fastbots-widget,
 .rdv-stepper .rdv-step-item.is-done .rdv-circle { background: var(--green); border-color: var(--green); color: var(--white); }
 .rdv-stepper .rdv-step-item.is-done .rdv-step-label { color: var(--dark); }
 .rdv-stepper .rdv-step-item.is-done .rdv-line { background: var(--green); }
+.rdv-stepper .rdv-step-item.is-done .rdv-step-col { cursor: pointer; }
+.rdv-stepper .rdv-step-item.is-done .rdv-circle:hover { box-shadow: 0 0 0 4px var(--green-pale); }
 .rdv-stepper .rdv-step-item.is-active .rdv-circle { background: var(--orange); border-color: var(--orange); color: var(--white); }
 .rdv-stepper .rdv-step-item.is-active .rdv-step-label { color: var(--dark); }
 
@@ -1678,7 +1680,7 @@ button.rdv-svc-card:focus-visible { outline: 3px solid var(--orange); outline-of
 .rdv-slot.is-avail:hover { background: var(--green-pale); }
 .rdv-slot.is-selected { background: var(--orange); border-color: var(--orange); color: var(--white); }
 .rdv-slot.is-booked { background: var(--grey-100); color: var(--grey-300); text-decoration: line-through; border-color: var(--grey-200); cursor: not-allowed; }
-.rdv-slots-actions { margin-top: var(--space-lg); display: flex; justify-content: flex-end; }
+.rdv-slots-actions { margin-top: var(--space-lg); display: flex; justify-content: space-between; gap: var(--space-md); }
 
 .rdv-form-card { padding: var(--space-xl) var(--space-xl) var(--space-lg); }
 .rdv-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-bottom: var(--space-md); }
@@ -1696,7 +1698,7 @@ button.rdv-svc-card:focus-visible { outline: 3px solid var(--orange); outline-of
 .rdv-confirm-row input { margin-top: 3px; width: 17px; height: 17px; accent-color: var(--orange); flex-shrink: 0; }
 .rdv-confirm-row span { font-size: 0.84375rem; color: var(--grey-700); line-height: 1.5; }
 .rdv-error { color: #C0392B; font-size: 0.84375rem; margin: 0 0 var(--space-md); }
-.rdv-form-actions { display: flex; justify-content: flex-end; }
+.rdv-form-actions { display: flex; justify-content: space-between; gap: var(--space-md); flex-wrap: wrap; }
 
 .rdv-summary-card { padding: var(--space-lg); }
 .rdv-summary-card h4 { font-family: var(--font-primary); font-size: 1rem; color: var(--dark); margin: 0 0 var(--space-md); }
