@@ -236,13 +236,22 @@
   .zoombtns2d button:hover { color: var(--text); border-color: rgba(255,255,255,.3); }
   #map2d-zres { width: auto; padding: 0 10px; font-size: 10.5px; }
 
+  /* Mobile: the fixed full-viewport overlay (globe behind, HUD floating on
+     top) is replaced by a normal stacked page — topbar, then a bounded globe
+     box, then search/list, then the town panel, each in its own space with
+     no overlap, and the page scrolls to reveal whatever doesn't fit. */
   @media (max-width: 860px) {
-    .hud { overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    .bottom-row { flex-direction: column; align-items: stretch; }
-    .panel { width: auto; max-height: 46vh; }
-    .city-rail { width: auto; max-width: none; max-height: 28vh; }
+    html, body { height: auto; min-height: 100%; overflow-y: auto; overflow-x: hidden; }
+    .hud { position: static; overflow: visible; }
+    .stage { position: relative; inset: auto; width: 100%; height: 42vh; min-height: 240px; flex-shrink: 0; }
+    .hint { transform: translate(-50%, 30px); font-size: 11px; }
+    .spacer { display: none; }
+    .bottom-row { flex-direction: column; align-items: stretch; padding: 16px 18px 28px; gap: 16px; }
+    .city-rail { width: auto; max-width: none; max-height: none; }
+    .city-list { max-height: 38vh; }
+    .panel { width: auto; max-height: none; overflow-y: visible; }
     .headline { max-width: none; }
-    .mapbox2d { top: 88px; width: 92vw; height: 44vh; }
+    .mapbox2d { position: fixed; top: 12vh; left: 50%; width: 92vw; height: 64vh; }
   }
   @media (max-width: 560px) {
     .topbar, .headline, .bottom-row { padding-left: 18px; padding-right: 18px; }
@@ -251,10 +260,6 @@
 </style>
 </head>
 <body>
-
-<div class="stage">
-  <canvas id="globe-canvas"></canvas>
-</div>
 
 <div class="hud">
   <div class="topbar">
@@ -270,8 +275,12 @@
     </div>
   </div>
 
+  <div class="stage">
+    <canvas id="globe-canvas"></canvas>
+    <div class="hint" id="drag-hint" data-i18n="net3d.hint">Glissez pour explorer librement</div>
+  </div>
+
   <div class="spacer"></div>
-  <div class="hint" id="drag-hint" data-i18n="net3d.hint">Glissez pour explorer librement</div>
 
   <div class="mapbox2d" id="mapbox2d" hidden>
     <svg id="svg2d" viewBox="0 0 900 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Circonscription diplomatique"></svg>
@@ -418,6 +427,69 @@ var CIRC={
 };
 var CNAME2={bw:"Botswana",ls:"Lesotho",na:"Namibie",sz:"Eswatini",zw:"Zimbabwe",km:"Comores",sc:"Seychelles",mg:"Madagascar",mu:"Maurice",mz:"Mozambique",zm:"Zambie",mw:"Malawi",ne:"Niger",cf:"République centrafricaine",td:"Tchad",sd:"Soudan",er:"Érythrée",ke:"Kenya",ug:"Ouganda",tz:"Tanzanie",so:"Somalie",dj:"Djibouti",st:"Sao Tomé-et-Principe",tg:"Togo",bj:"Bénin",gw:"Guinée-Bissau",sl:"Sierra Leone",bi:"Burundi",rw:"Rwanda",cv:"Cap-Vert",gm:"Gambie",mr:"Mauritanie",ly:"Libye",ar:"Argentine",cl:"Chili",co:"Colombie",uy:"Uruguay",py:"Paraguay",ve:"Venezuela",ec:"Équateur",pe:"Pérou",bs:"Bahamas",ht:"Haïti",jm:"Jamaïque",tt:"Trinité-et-Tobago",gd:"Grenade",dm:"Dominique",cu:"Cuba",ni:"Nicaragua",hn:"Honduras",bh:"Bahreïn",kw:"Koweït",om:"Oman",ye:"Yémen",kp:"Corée du Nord",th:"Thaïlande",vn:"Viêt Nam",kh:"Cambodge",mm:"Birmanie",la:"Laos",mn:"Mongolie",sg:"Singapour",my:"Malaisie",pg:"Papouasie-Nouvelle-Guinée",bd:"Bangladesh",lk:"Sri Lanka",np:"Népal",ph:"Philippines",nz:"Nouvelle-Zélande",tw:"Taïwan",id:"Indonésie",au:"Australie",pl:"Pologne",cz:"Tchéquie",lu:"Luxembourg",fi:"Finlande",no:"Norvège",se:"Suède",ad:"Andorre",mc:"Monaco",gr:"Grèce",bg:"Bulgarie",al:"Albanie",cy:"Chypre",me:"Monténégro",mt:"Malte",sm:"Saint-Marin",ie:"Irlande",ua:"Ukraine",by:"Bélarus",kz:"Kazakhstan",tj:"Tadjikistan",kg:"Kirghizstan",am:"Arménie"};
 var CNAME=Object.assign({},CNAME2,{hu:"Hongrie",si:"Slovénie",sk:"Slovaquie",hr:"Croatie",rs:"Serbie",ro:"Roumanie",ba:"Bosnie-Herzégovine",md:"Moldavie"});
+// Multilingual search aliases: lets the search box match a city/country typed
+// in any of the site's 10 languages, regardless of which language is active.
+var COUNTRY_I18N={
+"Afrique du Sud":{en:"South Africa",de:"Südafrika",hu:"Dél-Afrika",sl:"Južna Afrika",sk:"Južná Afrika",hr:"Južnoafrička Republika",sr:"Južnoafrička Republika",ro:"Africa de Sud",bs:"Južnoafrička Republika"},
+"Algérie":{en:"Algeria",de:"Algerien",hu:"Algéria",sl:"Alžirija",sk:"Alžírsko",hr:"Alžir",sr:"Alžir",ro:"Algeria",bs:"Alžir"},
+"Burkina Faso":{en:"Burkina Faso",de:"Burkina Faso",hu:"Burkina Faso"},
+"Cameroun":{en:"Cameroon",de:"Kamerun",hu:"Kamerun",sl:"Kamerun",sk:"Kamerun",hr:"Kamerun",sr:"Kamerun",ro:"Camerun",bs:"Kamerun"},
+"République du Congo":{en:"Republic of the Congo",de:"Republik Kongo",hu:"Kongói Köztársaság",sl:"Republika Kongo",sk:"Konžská republika",hr:"Republika Kongo",sr:"Republika Kongo",ro:"Republica Congo",bs:"Republika Kongo"},
+"RD Congo":{en:"DR Congo",de:"Demokratische Republik Kongo",hu:"Kongói Demokratikus Köztársaság",sl:"Demokratična republika Kongo",sk:"Konžská demokratická republika",hr:"Demokratska Republika Kongo",sr:"Demokratska Republika Kongo",ro:"Republica Democrată Congo",bs:"Demokratska Republika Kongo"},
+"Égypte":{en:"Egypt",de:"Ägypten",hu:"Egyiptom",sl:"Egipt",sk:"Egypt",hr:"Egipat",sr:"Egipat",ro:"Egipt",bs:"Egipat"},
+"Éthiopie":{en:"Ethiopia",de:"Äthiopien",hu:"Etiópia",sl:"Etiopija",sk:"Etiópia",hr:"Etiopija",sr:"Etiopija",ro:"Etiopia",bs:"Etiopija"},
+"Gabon":{en:"Gabon",de:"Gabun"},
+"Ghana":{en:"Ghana",de:"Ghana",hu:"Ghána",sl:"Gana",sk:"Ghana",hr:"Gana",sr:"Gana",ro:"Ghana",bs:"Gana"},
+"Guinée":{en:"Guinea",de:"Guinea",hu:"Guinea",sl:"Gvineja",sk:"Guinea",hr:"Gvineja",sr:"Gvineja",ro:"Guineea",bs:"Gvineja"},
+"Guinée équatoriale":{en:"Equatorial Guinea",de:"Äquatorialguinea",hu:"Egyenlítői-Guinea",sl:"Ekvatorialna Gvineja",sk:"Rovníková Guinea",hr:"Ekvatorska Gvineja",sr:"Ekvatorijalna Gvineja",ro:"Guineea Ecuatorială",bs:"Ekvatorijalna Gvineja"},
+"Liberia":{en:"Liberia",de:"Liberia",hu:"Libéria",sl:"Liberija",sk:"Libéria",hr:"Liberija",sr:"Liberija",ro:"Liberia",bs:"Liberija"},
+"Libye":{en:"Libya",de:"Libyen",hu:"Líbia",sl:"Libija",sk:"Líbya",hr:"Libija",sr:"Libija",ro:"Libia",bs:"Libija"},
+"Maroc":{en:"Morocco",de:"Marokko",hu:"Marokkó",sl:"Maroko",sk:"Maroko",hr:"Maroko",sr:"Maroko",ro:"Maroc",bs:"Maroko"},
+"Nigeria":{en:"Nigeria",de:"Nigeria",hu:"Nigéria",sl:"Nigerija",sk:"Nigéria",hr:"Nigerija",sr:"Nigerija",ro:"Nigeria",bs:"Nigerija"},
+"Sénégal":{en:"Senegal",de:"Senegal",hu:"Szenegál"},
+"Tchad":{en:"Chad",de:"Tschad",hu:"Csád",sl:"Čad",sk:"Čad",hr:"Čad",sr:"Čad",ro:"Ciad",bs:"Čad"},
+"Tunisie":{en:"Tunisia",de:"Tunesien",hu:"Tunézia",sl:"Tunizija",sk:"Tunisko",hr:"Tunis",sr:"Tunis",ro:"Tunisia",bs:"Tunis"},
+"Allemagne":{en:"Germany",de:"Deutschland",hu:"Németország",sl:"Nemčija",sk:"Nemecko",hr:"Njemačka",sr:"Nemačka",ro:"Germania",bs:"Njemačka"},
+"Autriche":{en:"Austria",de:"Österreich",hu:"Ausztria",sl:"Avstrija",sk:"Rakúsko",hr:"Austrija",sr:"Austrija",ro:"Austria",bs:"Austrija"},
+"Danemark":{en:"Denmark",de:"Dänemark",hu:"Dánia",sl:"Danska",sk:"Dánsko",hr:"Danska",sr:"Danska",ro:"Danemarca",bs:"Danska"},
+"Espagne":{en:"Spain",de:"Spanien",hu:"Spanyolország",sl:"Španija",sk:"Španielsko",hr:"Španjolska",sr:"Španija",ro:"Spania",bs:"Španija"},
+"France":{en:"France",de:"Frankreich",hu:"Franciaország",sl:"Francija",sk:"Francúzsko",hr:"Francuska",sr:"Francuska",ro:"Franța",bs:"Francuska"},
+"Belgique":{en:"Belgium",de:"Belgien",hu:"Belgium",sl:"Belgija",sk:"Belgicko",hr:"Belgija",sr:"Belgija",ro:"Belgia",bs:"Belgija"},
+"Pays-Bas":{en:"Netherlands",de:"Niederlande",hu:"Hollandia",sl:"Nizozemska",sk:"Holandsko",hr:"Nizozemska",sr:"Holandija",ro:"Țările de Jos",bs:"Holandija"},
+"Italie":{en:"Italy",de:"Italien",hu:"Olaszország",sl:"Italija",sk:"Taliansko",hr:"Italija",sr:"Italija",ro:"Italia",bs:"Italija"},
+"Portugal":{en:"Portugal",de:"Portugal",hu:"Portugália",sl:"Portugalska",sk:"Portugalsko",hr:"Portugal",sr:"Portugalija",ro:"Portugalia",bs:"Portugal"},
+"Royaume-Uni":{en:"United Kingdom",de:"Vereinigtes Königreich",hu:"Egyesült Királyság",sl:"Združeno kraljestvo",sk:"Spojené kráľovstvo",hr:"Ujedinjeno Kraljevstvo",sr:"Ujedinjeno Kraljevstvo",ro:"Regatul Unit",bs:"Ujedinjeno Kraljevstvo"},
+"Russie":{en:"Russia",de:"Russland",hu:"Oroszország",sl:"Rusija",sk:"Rusko",hr:"Rusija",sr:"Rusija",ro:"Rusia",bs:"Rusija"},
+"Suisse":{en:"Switzerland",de:"Schweiz",hu:"Svájc",sl:"Švica",sk:"Švajčiarsko",hr:"Švicarska",sr:"Švajcarska",ro:"Elveția",bs:"Švicarska"},
+"Canada":{en:"Canada",de:"Kanada",hu:"Kanada"},
+"États-Unis":{en:"United States",de:"Vereinigte Staaten",hu:"Egyesült Államok",sl:"Združene države Amerike",sk:"Spojené štáty",hr:"Sjedinjene Američke Države",sr:"Sjedinjene Američke Države",ro:"Statele Unite",bs:"Sjedinjene Američke Države"},
+"Mexique":{en:"Mexico",de:"Mexiko",hu:"Mexikó",sl:"Mehika",sk:"Mexiko",hr:"Meksiko",sr:"Meksiko",ro:"Mexic",bs:"Meksiko"},
+"Brésil":{en:"Brazil",de:"Brasilien",hu:"Brazília",sl:"Brazilija",sk:"Brazília",hr:"Brazil",sr:"Brazil",ro:"Brazilia",bs:"Brazil"},
+"Arabie Saoudite":{en:"Saudi Arabia",de:"Saudi-Arabien",hu:"Szaúd-Arábia",sl:"Savdska Arabija",sk:"Saudská Arábia",hr:"Saudijska Arabija",sr:"Saudijska Arabija",ro:"Arabia Saudită",bs:"Saudijska Arabija"},
+"Chine":{en:"China",de:"China",hu:"Kína",sl:"Kitajska",sk:"Čína",hr:"Kina",sr:"Kina",ro:"China",bs:"Kina"},
+"Corée du Sud":{en:"South Korea",de:"Südkorea",hu:"Dél-Korea",sl:"Južna Koreja",sk:"Južná Kórea",hr:"Južna Koreja",sr:"Južna Koreja",ro:"Coreea de Sud",bs:"Južna Koreja"},
+"Inde":{en:"India",de:"Indien",hu:"India",sl:"Indija",sk:"India",hr:"Indija",sr:"Indija",ro:"India",bs:"Indija"},
+"Israël":{en:"Israel",de:"Israel",hu:"Izrael",sl:"Izrael",sk:"Izrael",hr:"Izrael",sr:"Izrael",ro:"Israel",bs:"Izrael"},
+"Japon":{en:"Japan",de:"Japan",hu:"Japán",sl:"Japonska",sk:"Japonsko",hr:"Japan",sr:"Japan",ro:"Japonia",bs:"Japan"}
+};
+var CITY_I18N={
+"Alger":{en:"Algiers",de:"Algier"},
+"Le Caire":{en:"Cairo",de:"Kairo",hu:"Kairó",sl:"Kairo",sk:"Káhira",hr:"Kairo",sr:"Kairo",ro:"Cairo",bs:"Kairo"},
+"Addis-Abeba":{en:"Addis Ababa"},
+"Vienne":{en:"Vienna",de:"Wien",hu:"Bécs",sl:"Dunaj",sk:"Viedeň",hr:"Beč",sr:"Beč",ro:"Viena",bs:"Beč"},
+"Copenhague":{en:"Copenhagen",de:"Kopenhagen",hu:"Koppenhága",sl:"Kopenhagen",sk:"Kodaň",hr:"Kopenhagen",sr:"Kopenhagen",ro:"Copenhaga",bs:"Kopenhagen"},
+"Bruxelles":{en:"Brussels",de:"Brüssel",hu:"Brüsszel",sl:"Bruselj",sk:"Brusel",sr:"Brisel"},
+"La Haye":{en:"The Hague",de:"Den Haag"},
+"Rome":{en:"Rome",de:"Rom",hu:"Róma",sl:"Rim",sk:"Rím",hr:"Rim",sr:"Rim",ro:"Roma",bs:"Rim"},
+"Lisbonne":{en:"Lisbon",de:"Lissabon",hu:"Lisszabon",sl:"Lizbona",sk:"Lisabon",hr:"Lisabon",sr:"Lisabon",ro:"Lisabona",bs:"Lisabon"},
+"Londres":{en:"London",de:"London",sk:"Londýn",ro:"Londra"},
+"Moscou":{en:"Moscow",de:"Moskau",hu:"Moszkva",sl:"Moskva",sk:"Moskva",hr:"Moskva",sr:"Moskva",ro:"Moscova",bs:"Moskva"},
+"Genève":{en:"Geneva",de:"Genf",hu:"Genf",sl:"Ženeva",sk:"Ženeva",hr:"Ženeva",sr:"Ženeva",ro:"Geneva",bs:"Ženeva"},
+"Riyad":{en:"Riyadh",de:"Riad"},
+"Djeddah":{en:"Jeddah",de:"Dschidda"},
+"Pékin":{en:"Beijing",de:"Peking",hu:"Peking",sl:"Peking",sk:"Peking",hr:"Peking",sr:"Peking",ro:"Beijing",bs:"Peking"},
+"Séoul":{en:"Seoul",de:"Seoul",hu:"Szöul",sl:"Seul",sk:"Soul",hr:"Seul",sr:"Seul",ro:"Seul",bs:"Seul"}
+};
 var CINFO={
  hu:{cap:"Budapest",txt:"État membre de l'Union européenne, situé au cœur de l'Europe centrale."},
  si:{cap:"Ljubljana",txt:"Pays alpin au carrefour de l'Europe centrale, membre de l'Union européenne."},
@@ -555,7 +627,16 @@ window.addEventListener('storage', function (e) {
 (function () {
 
   var canvas = document.getElementById('globe-canvas');
-  var W = window.innerWidth, H = window.innerHeight;
+  // The globe's own box (.stage) fills the viewport on desktop but is a
+  // bounded, in-flow box on mobile — size the renderer/camera/raycaster off
+  // its own rect rather than window dimensions so both cases work.
+  var stageEl = canvas.parentElement;
+  function stageSize() {
+    var r = stageEl.getBoundingClientRect();
+    return { w: r.width || window.innerWidth, h: r.height || window.innerHeight };
+  }
+  var sz0 = stageSize();
+  var W = sz0.w, H = sz0.h;
 
   // Push the globe right of center so the search/filter sidebar (bottom-left)
   // sits over dark background instead of covering the sphere.
@@ -1042,10 +1123,22 @@ window.addEventListener('storage', function (e) {
       return false;
     }
     if (state.q) {
-      var s = (c.city + ' ' + c.country + ' ' + c.posts.map(function (p) { return p.n; }).join(' ')).toLowerCase();
+      var s = searchHaystack(c);
       if (s.indexOf(state.q) === -1) return false;
     }
     return true;
+  }
+
+  function searchHaystack(c) {
+    if (!c._haystack) {
+      var parts = [c.city, c.country].concat(c.posts.map(function (p) { return p.n; }));
+      var cityAliases = CITY_I18N[c.city];
+      if (cityAliases) { for (var k in cityAliases) parts.push(cityAliases[k]); }
+      var countryAliases = COUNTRY_I18N[c.country];
+      if (countryAliases) { for (var k2 in countryAliases) parts.push(countryAliases[k2]); }
+      c._haystack = parts.join(' ').toLowerCase();
+    }
+    return c._haystack;
   }
 
   function currentVisibleIds() {
@@ -1229,8 +1322,9 @@ window.addEventListener('storage', function (e) {
   function onPointerDown(ev) {
     var x = ev.clientX !== undefined ? ev.clientX : ev.touches[0].clientX;
     var y = ev.clientY !== undefined ? ev.clientY : ev.touches[0].clientY;
-    mouse.x = (x / window.innerWidth) * 2 - 1;
-    mouse.y = -(y / window.innerHeight) * 2 + 1;
+    var rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((x - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((y - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(mouse, camera);
     var hits = raycaster.intersectObjects(Object.values(markers));
     if (hits.length) {
@@ -1241,7 +1335,8 @@ window.addEventListener('storage', function (e) {
   renderer.domElement.addEventListener('pointerdown', onPointerDown);
 
   window.addEventListener('resize', function () {
-    W = window.innerWidth; H = window.innerHeight;
+    var sz = stageSize();
+    W = sz.w; H = sz.h;
     camera.aspect = W / H;
     var offset = W > 860 ? 1.1 : 0;
     if (offset !== GLOBE_OFFSET_X) {
