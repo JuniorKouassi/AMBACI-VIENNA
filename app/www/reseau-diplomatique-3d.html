@@ -1254,6 +1254,54 @@ window.addEventListener('storage', function (e) {
     return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
   }
 
+  // Builds (and caches) two independent haystacks per hub: its own
+  // direct name/country/post text, and — per circumscription country —
+  // that country's own name/capital text. Kept separate (rather than one
+  // merged blob) so the list can tell "this hub itself matched" apart from
+  // "a country it merely covers matched", and label results accordingly.
+  function buildHaystacks(c) {
+    if (c._directHay !== undefined) return;
+    var parts = [c.city, c.country].concat(c.posts.map(function (p) { return p.n; }));
+    var cityAliases = CITY_I18N[c.city];
+    if (cityAliases) { for (var k in cityAliases) parts.push(cityAliases[k]); }
+    var countryAliases = COUNTRY_I18N[c.country];
+    if (countryAliases) { for (var k2 in countryAliases) parts.push(countryAliases[k2]); }
+    c._directHay = foldAccents(parts.join(' ').toLowerCase());
+
+    c._circHay = {};
+    if (c.circ) {
+      c.circ.forEach(function (iso) {
+        var p2 = [CNAME[iso], CAPITALS[iso]];
+        if (CAPITAL_ALIASES[iso]) p2 = p2.concat(CAPITAL_ALIASES[iso]);
+        var circAliases = CIRC_COUNTRY_I18N[iso];
+        if (circAliases) { for (var k3 in circAliases) p2.push(circAliases[k3]); }
+        c._circHay[iso] = foldAccents(p2.filter(Boolean).join(' ').toLowerCase());
+      });
+    }
+  }
+
+  function directMatch(c) {
+    buildHaystacks(c);
+    return !state.q || c._directHay.indexOf(state.q) !== -1;
+  }
+
+  // Which of this hub's circumscription countries match the current query,
+  // and what to label each one — the country's own capital when that's what
+  // matched (e.g. searching "Bratislava"), otherwise its (French) name.
+  function circMatchDetails(c) {
+    buildHaystacks(c);
+    if (!state.q || !c.circ) return [];
+    var out = [];
+    c.circ.forEach(function (iso) {
+      if (c._circHay[iso].indexOf(state.q) === -1) return;
+      var capParts = [CAPITALS[iso]].concat(CAPITAL_ALIASES[iso] || []).filter(Boolean);
+      var capHay = foldAccents(capParts.join(' ').toLowerCase());
+      var label = capHay.indexOf(state.q) !== -1 ? CAPITALS[iso] : (CNAME[iso] || iso.toUpperCase());
+      out.push({ iso: iso, label: label });
+    });
+    return out;
+  }
+
   function matchCity(c) {
     if (state.filter === 'cir') {
       if (!(c.circ && c.circ.length)) return false;
@@ -1261,35 +1309,9 @@ window.addEventListener('storage', function (e) {
       return false;
     }
     if (state.q) {
-      var s = searchHaystack(c);
-      if (s.indexOf(state.q) === -1) return false;
+      if (!directMatch(c) && circMatchDetails(c).length === 0) return false;
     }
     return true;
-  }
-
-  function searchHaystack(c) {
-    if (!c._haystack) {
-      var parts = [c.city, c.country].concat(c.posts.map(function (p) { return p.n; }));
-      var cityAliases = CITY_I18N[c.city];
-      if (cityAliases) { for (var k in cityAliases) parts.push(cityAliases[k]); }
-      var countryAliases = COUNTRY_I18N[c.country];
-      if (countryAliases) { for (var k2 in countryAliases) parts.push(countryAliases[k2]); }
-      // Every country in this hub's diplomatic circumscription — plus its
-      // capital (and any commonly-used alternate city name) — should also
-      // find this record, so a non-post town like Bratislava (covered by
-      // Vienna) or a country name like "Slovaquie" is searchable too.
-      if (c.circ) {
-        c.circ.forEach(function (iso) {
-          if (CNAME[iso]) parts.push(CNAME[iso]);
-          if (CAPITALS[iso]) parts.push(CAPITALS[iso]);
-          if (CAPITAL_ALIASES[iso]) parts.push.apply(parts, CAPITAL_ALIASES[iso]);
-          var circAliases = CIRC_COUNTRY_I18N[iso];
-          if (circAliases) { for (var k3 in circAliases) parts.push(circAliases[k3]); }
-        });
-      }
-      c._haystack = foldAccents(parts.join(' ').toLowerCase());
-    }
-    return c._haystack;
   }
 
   function currentVisibleIds() {
@@ -1307,20 +1329,34 @@ window.addEventListener('storage', function (e) {
     wrap.innerHTML = '';
     var any = false;
     REGIONS.forEach(function (reg) {
-      var items = CITIES.filter(function (c) { return c.reg === reg && matchCity(c); });
-      if (!items.length) return;
+      var rows = [];
+      CITIES.forEach(function (c) {
+        if (c.reg !== reg) return;
+        if (state.filter === 'cir') {
+          if (!(c.circ && c.circ.length)) return;
+        } else if (state.filter && c.types.indexOf(state.filter) === -1) {
+          return;
+        }
+        if (!state.q) { rows.push({ c: c, label: c.city, sub: c.country }); return; }
+        if (directMatch(c)) rows.push({ c: c, label: c.city, sub: c.country });
+        circMatchDetails(c).forEach(function (m) {
+          rows.push({ c: c, label: m.label, sub: '→ ' + c.city + ', ' + c.country });
+        });
+      });
+      if (!rows.length) return;
       any = true;
       var group = document.createElement('div');
       group.className = 'region-group';
       var title = document.createElement('div');
       title.className = 'region-title';
-      title.textContent = reg + ' (' + items.length + ')';
+      title.textContent = reg + ' (' + rows.length + ')';
       group.appendChild(title);
-      items.forEach(function (c) {
+      rows.forEach(function (row) {
+        var c = row.c;
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'list-item' + (c.id === activeId ? ' is-active' : '');
-        b.innerHTML = '<span class="li-dots">' + dotsHtml(c) + '</span><span class="li-city">' + c.city + '</span><span class="li-country">' + c.country + '</span>';
+        b.innerHTML = '<span class="li-dots">' + dotsHtml(c) + '</span><span class="li-city">' + row.label + '</span><span class="li-country">' + row.sub + '</span>';
         b.addEventListener('click', function () { focusCity(c.id); });
         group.appendChild(b);
       });
