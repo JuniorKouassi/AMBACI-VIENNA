@@ -500,6 +500,137 @@ var CINFO={
  ba:{cap:"Sarajevo",txt:"État des Balkans en cours d'intégration européenne, à la croisée des cultures."},
  md:{cap:"Chișinău",txt:"État d'Europe orientale en cours de rapprochement avec l'Union européenne."}
 };
+// Capital-city names for every circumscription country (CNAME2/CNAME), so a
+// town that isn't itself a post — e.g. Bratislava, covered by Vienna — is
+// still searchable and resolves to the hub city that covers it.
+var CAPITALS={
+ bw:"Gaborone",ls:"Maseru",na:"Windhoek",sz:"Mbabane",zw:"Harare",km:"Moroni",sc:"Victoria",mg:"Antananarivo",mu:"Port-Louis",mz:"Maputo",zm:"Lusaka",mw:"Lilongwe",ne:"Niamey",cf:"Bangui",td:"N'Djaména",sd:"Khartoum",er:"Asmara",ke:"Nairobi",ug:"Kampala",tz:"Dodoma",so:"Mogadiscio",dj:"Djibouti",st:"São Tomé",tg:"Lomé",bj:"Porto-Novo",gw:"Bissau",sl:"Freetown",bi:"Gitega",rw:"Kigali",cv:"Praia",gm:"Banjul",mr:"Nouakchott",ly:"Tripoli",
+ ar:"Buenos Aires",cl:"Santiago",co:"Bogotá",uy:"Montevideo",py:"Asunción",ve:"Caracas",ec:"Quito",pe:"Lima",
+ bs:"Nassau",ht:"Port-au-Prince",jm:"Kingston",tt:"Port d'Espagne",gd:"Saint-Georges",dm:"Roseau",cu:"La Havane",ni:"Managua",hn:"Tegucigalpa",
+ bh:"Manama",kw:"Koweït",om:"Mascate",ye:"Sanaa",
+ kp:"Pyongyang",th:"Bangkok",vn:"Hanoï",kh:"Phnom Penh",mm:"Naypyidaw",la:"Vientiane",mn:"Oulan-Bator",sg:"Singapour",my:"Kuala Lumpur",pg:"Port Moresby",bd:"Dacca",lk:"Colombo",np:"Katmandou",ph:"Manille",nz:"Wellington",tw:"Taipei",id:"Jakarta",au:"Canberra",
+ pl:"Varsovie",cz:"Prague",lu:"Luxembourg",fi:"Helsinki",no:"Oslo",se:"Stockholm",ad:"Andorre-la-Vieille",mc:"Monaco",gr:"Athènes",bg:"Sofia",al:"Tirana",cy:"Nicosie",me:"Podgorica",mt:"La Valette",sm:"Saint-Marin",ie:"Dublin",
+ ua:"Kiev",by:"Minsk",kz:"Astana",tj:"Douchanbé",kg:"Bichkek",am:"Erevan"
+};
+Object.keys(CINFO).forEach(function (iso) { CAPITALS[iso] = CINFO[iso].cap; });
+// A handful of countries are as commonly searched by a second city name
+// (former/legislative capital, main commercial hub, or the English spelling
+// where it differs from the French name stored in CAPITALS) as by the
+// official French one.
+var CAPITAL_ALIASES={
+ bi:["Bujumbura"],tz:["Dar es-Salaam","Dar es Salaam"],bj:["Cotonou"],mm:["Rangoun","Rangoon"],lk:["Sri Jayawardenepura Kotte"],ci:["Yamoussoukro"],
+ so:["Mogadishu"],tt:["Port of Spain"],gd:["St. George's","Saint George's"],cu:["Havana"],kw:["Kuwait City"],om:["Muscat"],
+ mn:["Ulaanbaatar"],sg:["Singapore"],bd:["Dhaka"],np:["Kathmandu"],ph:["Manila"],pl:["Warsaw"],ad:["Andorra la Vella"],
+ gr:["Athens"],cy:["Nicosia"],mt:["Valletta"],ua:["Kyiv"],tj:["Dushanbe"],kg:["Bishkek"],am:["Yerevan"],ro:["Bucharest"],mu:["Port Louis"]
+};
+// Country names, in the site's other 9 languages, for every circumscription
+// country (keyed by ISO code, mirroring CNAME) — same purpose as
+// COUNTRY_I18N above but for the countries covered indirectly through a
+// hub's circumscription rather than hosting a direct post.
+var CIRC_COUNTRY_I18N={
+ bw:{en:"Botswana",de:"Botswana",hu:"Botswana",sl:"Bocvana",sk:"Botswana",hr:"Bocvana",sr:"Bocvana",ro:"Botswana",bs:"Bocvana"},
+ ls:{en:"Lesotho",de:"Lesotho",hu:"Lesotho",sl:"Lesoto",sk:"Lesotho",hr:"Lesoto",sr:"Lesoto",ro:"Lesotho",bs:"Lesoto"},
+ na:{en:"Namibia",de:"Namibia",hu:"Namíbia",sl:"Namibija",sk:"Namíbia",hr:"Namibija",sr:"Namibija",ro:"Namibia",bs:"Namibija"},
+ sz:{en:"Eswatini",de:"Eswatini",hu:"Eszvatini",sl:"Esvatini",sk:"Eswatini",hr:"Esvatini",sr:"Esvatini",ro:"Eswatini",bs:"Esvatini"},
+ zw:{en:"Zimbabwe",de:"Simbabwe",hu:"Zimbabwe",sl:"Zimbabve",sk:"Zimbabwe",hr:"Zimbabve",sr:"Zimbabve",ro:"Zimbabwe",bs:"Zimbabve"},
+ km:{en:"Comoros",de:"Komoren",hu:"Comore-szigetek",sl:"Komori",sk:"Komory",hr:"Komori",sr:"Komori",ro:"Comore",bs:"Komori"},
+ sc:{en:"Seychelles",de:"Seychellen",hu:"Seychelle-szigetek",sl:"Sejšeli",sk:"Seychely",hr:"Sejšeli",sr:"Sejšeli",ro:"Seychelles",bs:"Sejšeli"},
+ mg:{en:"Madagascar",de:"Madagaskar",hu:"Madagaszkár",sl:"Madagaskar",sk:"Madagaskar",hr:"Madagaskar",sr:"Madagaskar",ro:"Madagascar",bs:"Madagaskar"},
+ mu:{en:"Mauritius",de:"Mauritius",hu:"Mauritius",sl:"Mauritius",sk:"Maurícius",hr:"Mauricijus",sr:"Mauricijus",ro:"Mauritius",bs:"Mauricijus"},
+ mz:{en:"Mozambique",de:"Mosambik",hu:"Mozambik",sl:"Mozambik",sk:"Mozambik",hr:"Mozambik",sr:"Mozambik",ro:"Mozambic",bs:"Mozambik"},
+ zm:{en:"Zambia",de:"Sambia",hu:"Zambia",sl:"Zambija",sk:"Zambia",hr:"Zambija",sr:"Zambija",ro:"Zambia",bs:"Zambija"},
+ mw:{en:"Malawi",de:"Malawi",hu:"Malawi",sl:"Malavi",sk:"Malawi",hr:"Malavi",sr:"Malavi",ro:"Malawi",bs:"Malavi"},
+ ne:{en:"Niger",de:"Niger",hu:"Niger",sl:"Niger",sk:"Niger",hr:"Niger",sr:"Niger",ro:"Niger",bs:"Niger"},
+ cf:{en:"Central African Republic",de:"Zentralafrikanische Republik",hu:"Közép-afrikai Köztársaság",sl:"Srednjeafriška republika",sk:"Stredoafrická republika",hr:"Srednjoafrička Republika",sr:"Centralnoafrička Republika",ro:"Republica Centrafricană",bs:"Centralnoafrička Republika"},
+ td:{en:"Chad",de:"Tschad",hu:"Csád",sl:"Čad",sk:"Čad",hr:"Čad",sr:"Čad",ro:"Ciad",bs:"Čad"},
+ sd:{en:"Sudan",de:"Sudan",hu:"Szudán",sl:"Sudan",sk:"Sudán",hr:"Sudan",sr:"Sudan",ro:"Sudan",bs:"Sudan"},
+ er:{en:"Eritrea",de:"Eritrea",hu:"Eritrea",sl:"Eritreja",sk:"Eritrea",hr:"Eritreja",sr:"Eritreja",ro:"Eritreea",bs:"Eritreja"},
+ ke:{en:"Kenya",de:"Kenia",hu:"Kenya",sl:"Kenija",sk:"Keňa",hr:"Kenija",sr:"Kenija",ro:"Kenya",bs:"Kenija"},
+ ug:{en:"Uganda",de:"Uganda",hu:"Uganda",sl:"Uganda",sk:"Uganda",hr:"Uganda",sr:"Uganda",ro:"Uganda",bs:"Uganda"},
+ tz:{en:"Tanzania",de:"Tansania",hu:"Tanzánia",sl:"Tanzanija",sk:"Tanzánia",hr:"Tanzanija",sr:"Tanzanija",ro:"Tanzania",bs:"Tanzanija"},
+ so:{en:"Somalia",de:"Somalia",hu:"Szomália",sl:"Somalija",sk:"Somálsko",hr:"Somalija",sr:"Somalija",ro:"Somalia",bs:"Somalija"},
+ dj:{en:"Djibouti",de:"Dschibuti",hu:"Dzsibuti",sl:"Džibuti",sk:"Džibutsko",hr:"Džibuti",sr:"Džibuti",ro:"Djibouti",bs:"Džibuti"},
+ st:{en:"São Tomé and Príncipe",de:"São Tomé und Príncipe",hu:"São Tomé és Príncipe",sl:"Sao Tome in Principe",sk:"Svätý Tomáš a Princov ostrov",hr:"Sveti Toma i Princip",sr:"Sao Tome i Principe",ro:"São Tomé și Príncipe",bs:"Sao Tome i Principe"},
+ tg:{en:"Togo",de:"Togo",hu:"Togo",sl:"Togo",sk:"Togo",hr:"Togo",sr:"Togo",ro:"Togo",bs:"Togo"},
+ bj:{en:"Benin",de:"Benin",hu:"Benin",sl:"Benin",sk:"Benin",hr:"Benin",sr:"Benin",ro:"Benin",bs:"Benin"},
+ gw:{en:"Guinea-Bissau",de:"Guinea-Bissau",hu:"Bissau-Guinea",sl:"Gvineja Bissau",sk:"Guinea-Bissau",hr:"Gvineja Bisau",sr:"Gvineja Bisau",ro:"Guineea-Bissau",bs:"Gvineja Bisau"},
+ sl:{en:"Sierra Leone",de:"Sierra Leone",hu:"Sierra Leone",sl:"Sierra Leone",sk:"Sierra Leone",hr:"Sijera Leone",sr:"Sijera Leone",ro:"Sierra Leone",bs:"Sijera Leone"},
+ bi:{en:"Burundi",de:"Burundi",hu:"Burundi",sl:"Burundi",sk:"Burundi",hr:"Burundi",sr:"Burundi",ro:"Burundi",bs:"Burundi"},
+ rw:{en:"Rwanda",de:"Ruanda",hu:"Ruanda",sl:"Ruanda",sk:"Rwanda",hr:"Ruanda",sr:"Ruanda",ro:"Ruanda",bs:"Ruanda"},
+ cv:{en:"Cape Verde",de:"Kap Verde",hu:"Zöld-foki Köztársaság",sl:"Zelenortski otoki",sk:"Kapverdy",hr:"Zelenortska Republika",sr:"Zelenortska Republika",ro:"Capul Verde",bs:"Zelenortska Republika"},
+ gm:{en:"Gambia",de:"Gambia",hu:"Gambia",sl:"Gambija",sk:"Gambia",hr:"Gambija",sr:"Gambija",ro:"Gambia",bs:"Gambija"},
+ mr:{en:"Mauritania",de:"Mauretanien",hu:"Mauritánia",sl:"Mavretanija",sk:"Mauritánia",hr:"Mauritanija",sr:"Mauritanija",ro:"Mauritania",bs:"Mauritanija"},
+ ly:{en:"Libya",de:"Libyen",hu:"Líbia",sl:"Libija",sk:"Líbya",hr:"Libija",sr:"Libija",ro:"Libia",bs:"Libija"},
+ ar:{en:"Argentina",de:"Argentinien",hu:"Argentína",sl:"Argentina",sk:"Argentína",hr:"Argentina",sr:"Argentina",ro:"Argentina",bs:"Argentina"},
+ cl:{en:"Chile",de:"Chile",hu:"Chile",sl:"Čile",sk:"Čile",hr:"Čile",sr:"Čile",ro:"Chile",bs:"Čile"},
+ co:{en:"Colombia",de:"Kolumbien",hu:"Kolumbia",sl:"Kolumbija",sk:"Kolumbia",hr:"Kolumbija",sr:"Kolumbija",ro:"Columbia",bs:"Kolumbija"},
+ uy:{en:"Uruguay",de:"Uruguay",hu:"Uruguay",sl:"Urugvaj",sk:"Uruguaj",hr:"Urugvaj",sr:"Urugvaj",ro:"Uruguay",bs:"Urugvaj"},
+ py:{en:"Paraguay",de:"Paraguay",hu:"Paraguay",sl:"Paragvaj",sk:"Paraguaj",hr:"Paragvaj",sr:"Paragvaj",ro:"Paraguay",bs:"Paragvaj"},
+ ve:{en:"Venezuela",de:"Venezuela",hu:"Venezuela",sl:"Venezuela",sk:"Venezuela",hr:"Venezuela",sr:"Venecuela",ro:"Venezuela",bs:"Venecuela"},
+ ec:{en:"Ecuador",de:"Ecuador",hu:"Ecuador",sl:"Ekvador",sk:"Ekvádor",hr:"Ekvador",sr:"Ekvador",ro:"Ecuador",bs:"Ekvador"},
+ pe:{en:"Peru",de:"Peru",hu:"Peru",sl:"Peru",sk:"Peru",hr:"Peru",sr:"Peru",ro:"Peru",bs:"Peru"},
+ bs:{en:"Bahamas",de:"Bahamas",hu:"Bahamák",sl:"Bahami",sk:"Bahamy",hr:"Bahami",sr:"Bahami",ro:"Bahamas",bs:"Bahami"},
+ ht:{en:"Haiti",de:"Haiti",hu:"Haiti",sl:"Haiti",sk:"Haiti",hr:"Haiti",sr:"Haiti",ro:"Haiti",bs:"Haiti"},
+ jm:{en:"Jamaica",de:"Jamaika",hu:"Jamaica",sl:"Jamajka",sk:"Jamajka",hr:"Jamajka",sr:"Jamajka",ro:"Jamaica",bs:"Jamajka"},
+ tt:{en:"Trinidad and Tobago",de:"Trinidad und Tobago",hu:"Trinidad és Tobago",sl:"Trinidad in Tobago",sk:"Trinidad a Tobago",hr:"Trinidad i Tobago",sr:"Trinidad i Tobago",ro:"Trinidad și Tobago",bs:"Trinidad i Tobago"},
+ gd:{en:"Grenada",de:"Grenada",hu:"Grenada",sl:"Grenada",sk:"Grenada",hr:"Grenada",sr:"Grenada",ro:"Grenada",bs:"Grenada"},
+ dm:{en:"Dominica",de:"Dominica",hu:"Dominika",sl:"Dominika",sk:"Dominika",hr:"Dominika",sr:"Dominika",ro:"Dominica",bs:"Dominika"},
+ cu:{en:"Cuba",de:"Kuba",hu:"Kuba",sl:"Kuba",sk:"Kuba",hr:"Kuba",sr:"Kuba",ro:"Cuba",bs:"Kuba"},
+ ni:{en:"Nicaragua",de:"Nicaragua",hu:"Nicaragua",sl:"Nikaragva",sk:"Nikaragua",hr:"Nikaragva",sr:"Nikaragva",ro:"Nicaragua",bs:"Nikaragva"},
+ hn:{en:"Honduras",de:"Honduras",hu:"Honduras",sl:"Honduras",sk:"Honduras",hr:"Honduras",sr:"Honduras",ro:"Honduras",bs:"Honduras"},
+ bh:{en:"Bahrain",de:"Bahrain",hu:"Bahrein",sl:"Bahrajn",sk:"Bahrajn",hr:"Bahrein",sr:"Bahrein",ro:"Bahrain",bs:"Bahrein"},
+ kw:{en:"Kuwait",de:"Kuwait",hu:"Kuvait",sl:"Kuvajt",sk:"Kuvajt",hr:"Kuvajt",sr:"Kuvajt",ro:"Kuweit",bs:"Kuvajt"},
+ om:{en:"Oman",de:"Oman",hu:"Omán",sl:"Oman",sk:"Omán",hr:"Oman",sr:"Oman",ro:"Oman",bs:"Oman"},
+ ye:{en:"Yemen",de:"Jemen",hu:"Jemen",sl:"Jemen",sk:"Jemen",hr:"Jemen",sr:"Jemen",ro:"Yemen",bs:"Jemen"},
+ kp:{en:"North Korea",de:"Nordkorea",hu:"Észak-Korea",sl:"Severna Koreja",sk:"Severná Kórea",hr:"Sjeverna Koreja",sr:"Severna Koreja",ro:"Coreea de Nord",bs:"Sjeverna Koreja"},
+ th:{en:"Thailand",de:"Thailand",hu:"Thaiföld",sl:"Tajska",sk:"Thajsko",hr:"Tajland",sr:"Tajland",ro:"Thailanda",bs:"Tajland"},
+ vn:{en:"Vietnam",de:"Vietnam",hu:"Vietnám",sl:"Vietnam",sk:"Vietnam",hr:"Vijetnam",sr:"Vijetnam",ro:"Vietnam",bs:"Vijetnam"},
+ kh:{en:"Cambodia",de:"Kambodscha",hu:"Kambodzsa",sl:"Kambodža",sk:"Kambodža",hr:"Kambodža",sr:"Kambodža",ro:"Cambodgia",bs:"Kambodža"},
+ mm:{en:"Myanmar",de:"Myanmar",hu:"Mianmar",sl:"Mjanmar",sk:"Mjanmarsko",hr:"Mjanmar",sr:"Mjanmar",ro:"Myanmar",bs:"Mjanmar"},
+ la:{en:"Laos",de:"Laos",hu:"Laosz",sl:"Laos",sk:"Laos",hr:"Laos",sr:"Laos",ro:"Laos",bs:"Laos"},
+ mn:{en:"Mongolia",de:"Mongolei",hu:"Mongólia",sl:"Mongolija",sk:"Mongolsko",hr:"Mongolija",sr:"Mongolija",ro:"Mongolia",bs:"Mongolija"},
+ sg:{en:"Singapore",de:"Singapur",hu:"Szingapúr",sl:"Singapur",sk:"Singapur",hr:"Singapur",sr:"Singapur",ro:"Singapore",bs:"Singapur"},
+ my:{en:"Malaysia",de:"Malaysia",hu:"Malajzia",sl:"Malezija",sk:"Malajzia",hr:"Malezija",sr:"Malezija",ro:"Malaysia",bs:"Malezija"},
+ pg:{en:"Papua New Guinea",de:"Papua-Neuguinea",hu:"Pápua Új-Guinea",sl:"Papua Nova Gvineja",sk:"Papua-Nová Guinea",hr:"Papua Nova Gvineja",sr:"Papua Nova Gvineja",ro:"Papua Noua Guinee",bs:"Papua Nova Gvineja"},
+ bd:{en:"Bangladesh",de:"Bangladesch",hu:"Banglades",sl:"Bangladeš",sk:"Bangladéš",hr:"Bangladeš",sr:"Bangladeš",ro:"Bangladesh",bs:"Bangladeš"},
+ lk:{en:"Sri Lanka",de:"Sri Lanka",hu:"Srí Lanka",sl:"Šrilanka",sk:"Srí Lanka",hr:"Šri Lanka",sr:"Šri Lanka",ro:"Sri Lanka",bs:"Šri Lanka"},
+ np:{en:"Nepal",de:"Nepal",hu:"Nepál",sl:"Nepal",sk:"Nepál",hr:"Nepal",sr:"Nepal",ro:"Nepal",bs:"Nepal"},
+ ph:{en:"Philippines",de:"Philippinen",hu:"Fülöp-szigetek",sl:"Filipini",sk:"Filipíny",hr:"Filipini",sr:"Filipini",ro:"Filipine",bs:"Filipini"},
+ nz:{en:"New Zealand",de:"Neuseeland",hu:"Új-Zéland",sl:"Nova Zelandija",sk:"Nový Zéland",hr:"Novi Zeland",sr:"Novi Zeland",ro:"Noua Zeelandă",bs:"Novi Zeland"},
+ tw:{en:"Taiwan",de:"Taiwan",hu:"Tajvan",sl:"Tajvan",sk:"Taiwan",hr:"Tajvan",sr:"Tajvan",ro:"Taiwan",bs:"Tajvan"},
+ id:{en:"Indonesia",de:"Indonesien",hu:"Indonézia",sl:"Indonezija",sk:"Indonézia",hr:"Indonezija",sr:"Indonezija",ro:"Indonezia",bs:"Indonezija"},
+ au:{en:"Australia",de:"Australien",hu:"Ausztrália",sl:"Avstralija",sk:"Austrália",hr:"Australija",sr:"Australija",ro:"Australia",bs:"Australija"},
+ pl:{en:"Poland",de:"Polen",hu:"Lengyelország",sl:"Poljska",sk:"Poľsko",hr:"Poljska",sr:"Poljska",ro:"Polonia",bs:"Poljska"},
+ cz:{en:"Czechia",de:"Tschechien",hu:"Csehország",sl:"Češka",sk:"Česko",hr:"Češka",sr:"Češka",ro:"Cehia",bs:"Češka"},
+ lu:{en:"Luxembourg",de:"Luxemburg",hu:"Luxemburg",sl:"Luksemburg",sk:"Luxembursko",hr:"Luksemburg",sr:"Luksemburg",ro:"Luxemburg",bs:"Luksemburg"},
+ fi:{en:"Finland",de:"Finnland",hu:"Finnország",sl:"Finska",sk:"Fínsko",hr:"Finska",sr:"Finska",ro:"Finlanda",bs:"Finska"},
+ no:{en:"Norway",de:"Norwegen",hu:"Norvégia",sl:"Norveška",sk:"Nórsko",hr:"Norveška",sr:"Norveška",ro:"Norvegia",bs:"Norveška"},
+ se:{en:"Sweden",de:"Schweden",hu:"Svédország",sl:"Švedska",sk:"Švédsko",hr:"Švedska",sr:"Švedska",ro:"Suedia",bs:"Švedska"},
+ ad:{en:"Andorra",de:"Andorra",hu:"Andorra",sl:"Andora",sk:"Andorra",hr:"Andora",sr:"Andora",ro:"Andorra",bs:"Andora"},
+ mc:{en:"Monaco",de:"Monaco",hu:"Monaco",sl:"Monako",sk:"Monako",hr:"Monako",sr:"Monako",ro:"Monaco",bs:"Monako"},
+ gr:{en:"Greece",de:"Griechenland",hu:"Görögország",sl:"Grčija",sk:"Grécko",hr:"Grčka",sr:"Grčka",ro:"Grecia",bs:"Grčka"},
+ bg:{en:"Bulgaria",de:"Bulgarien",hu:"Bulgária",sl:"Bolgarija",sk:"Bulharsko",hr:"Bugarska",sr:"Bugarska",ro:"Bulgaria",bs:"Bugarska"},
+ al:{en:"Albania",de:"Albanien",hu:"Albánia",sl:"Albanija",sk:"Albánsko",hr:"Albanija",sr:"Albanija",ro:"Albania",bs:"Albanija"},
+ cy:{en:"Cyprus",de:"Zypern",hu:"Ciprus",sl:"Ciper",sk:"Cyprus",hr:"Cipar",sr:"Kipar",ro:"Cipru",bs:"Kipar"},
+ me:{en:"Montenegro",de:"Montenegro",hu:"Montenegró",sl:"Črna gora",sk:"Čierna Hora",hr:"Crna Gora",sr:"Crna Gora",ro:"Muntenegru",bs:"Crna Gora"},
+ mt:{en:"Malta",de:"Malta",hu:"Málta",sl:"Malta",sk:"Malta",hr:"Malta",sr:"Malta",ro:"Malta",bs:"Malta"},
+ sm:{en:"San Marino",de:"San Marino",hu:"San Marino",sl:"San Marino",sk:"San Maríno",hr:"San Marino",sr:"San Marino",ro:"San Marino",bs:"San Marino"},
+ ie:{en:"Ireland",de:"Irland",hu:"Írország",sl:"Irska",sk:"Írsko",hr:"Irska",sr:"Irska",ro:"Irlanda",bs:"Irska"},
+ ua:{en:"Ukraine",de:"Ukraine",hu:"Ukrajna",sl:"Ukrajina",sk:"Ukrajina",hr:"Ukrajina",sr:"Ukrajina",ro:"Ucraina",bs:"Ukrajina"},
+ by:{en:"Belarus",de:"Belarus",hu:"Fehéroroszország",sl:"Belorusija",sk:"Bielorusko",hr:"Bjelorusija",sr:"Belorusija",ro:"Belarus",bs:"Bjelorusija"},
+ kz:{en:"Kazakhstan",de:"Kasachstan",hu:"Kazahsztán",sl:"Kazahstan",sk:"Kazachstan",hr:"Kazahstan",sr:"Kazahstan",ro:"Kazahstan",bs:"Kazahstan"},
+ tj:{en:"Tajikistan",de:"Tadschikistan",hu:"Tádzsikisztán",sl:"Tadžikistan",sk:"Tadžikistan",hr:"Tadžikistan",sr:"Tadžikistan",ro:"Tadjikistan",bs:"Tadžikistan"},
+ kg:{en:"Kyrgyzstan",de:"Kirgisistan",hu:"Kirgizisztán",sl:"Kirgizistan",sk:"Kirgizsko",hr:"Kirgistan",sr:"Kirgistan",ro:"Kârgâzstan",bs:"Kirgistan"},
+ am:{en:"Armenia",de:"Armenien",hu:"Örményország",sl:"Armenija",sk:"Arménsko",hr:"Armenija",sr:"Armenija",ro:"Armenia",bs:"Armenija"},
+ hu:{en:"Hungary",de:"Ungarn",hu:"Magyarország",sl:"Madžarska",sk:"Maďarsko",hr:"Mađarska",sr:"Mađarska",ro:"Ungaria",bs:"Mađarska"},
+ si:{en:"Slovenia",de:"Slowenien",hu:"Szlovénia",sl:"Slovenija",sk:"Slovinsko",hr:"Slovenija",sr:"Slovenija",ro:"Slovenia",bs:"Slovenija"},
+ sk:{en:"Slovakia",de:"Slowakei",hu:"Szlovákia",sl:"Slovaška",sk:"Slovensko",hr:"Slovačka",sr:"Slovačka",ro:"Slovacia",bs:"Slovačka"},
+ hr:{en:"Croatia",de:"Kroatien",hu:"Horvátország",sl:"Hrvaška",sk:"Chorvátsko",hr:"Hrvatska",sr:"Hrvatska",ro:"Croația",bs:"Hrvatska"},
+ rs:{en:"Serbia",de:"Serbien",hu:"Szerbia",sl:"Srbija",sk:"Srbsko",hr:"Srbija",sr:"Srbija",ro:"Serbia",bs:"Srbija"},
+ ro:{en:"Romania",de:"Rumänien",hu:"Románia",sl:"Romunija",sk:"Rumunsko",hr:"Rumunjska",sr:"Rumunija",ro:"România",bs:"Rumunija"},
+ ba:{en:"Bosnia and Herzegovina",de:"Bosnien und Herzegowina",hu:"Bosznia-Hercegovina",sl:"Bosna in Hercegovina",sk:"Bosna a Hercegovina",hr:"Bosna i Hercegovina",sr:"Bosna i Hercegovina",ro:"Bosnia și Herțegovina",bs:"Bosna i Hercegovina"},
+ md:{en:"Moldova",de:"Moldau",hu:"Moldova",sl:"Moldavija",sk:"Moldavsko",hr:"Moldavija",sr:"Moldavija",ro:"Republica Moldova",bs:"Moldavija"}
+};
 var CONTACTS={
  "Pretoria":{amb:{tel:"+27 12 342 6913",adr:"795 Government Avenue, Arcadia 0083, Pretoria"}},
  "Alger":{amb:{tel:"+213 21 69 23 78",adr:"Hydra Le Paradou, Immeuble « Le Bosquet », B.P. 260 Hydra, Alger"}},
@@ -1116,6 +1247,13 @@ window.addEventListener('storage', function (e) {
   // --- Search + filter (mirrors the real Réseau diplomatique page) ---
   var state = { q: '', filter: null };
 
+  // Strips accents (é→e, ș→s, š→s…) so a query typed without diacritics —
+  // very common for foreign place names — still matches (e.g. "Chisinau"
+  // finds "Chișinău", "Sao Tome" finds "São Tomé").
+  function foldAccents(s) {
+    return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
   function matchCity(c) {
     if (state.filter === 'cir') {
       if (!(c.circ && c.circ.length)) return false;
@@ -1136,7 +1274,20 @@ window.addEventListener('storage', function (e) {
       if (cityAliases) { for (var k in cityAliases) parts.push(cityAliases[k]); }
       var countryAliases = COUNTRY_I18N[c.country];
       if (countryAliases) { for (var k2 in countryAliases) parts.push(countryAliases[k2]); }
-      c._haystack = parts.join(' ').toLowerCase();
+      // Every country in this hub's diplomatic circumscription — plus its
+      // capital (and any commonly-used alternate city name) — should also
+      // find this record, so a non-post town like Bratislava (covered by
+      // Vienna) or a country name like "Slovaquie" is searchable too.
+      if (c.circ) {
+        c.circ.forEach(function (iso) {
+          if (CNAME[iso]) parts.push(CNAME[iso]);
+          if (CAPITALS[iso]) parts.push(CAPITALS[iso]);
+          if (CAPITAL_ALIASES[iso]) parts.push.apply(parts, CAPITAL_ALIASES[iso]);
+          var circAliases = CIRC_COUNTRY_I18N[iso];
+          if (circAliases) { for (var k3 in circAliases) parts.push(circAliases[k3]); }
+        });
+      }
+      c._haystack = foldAccents(parts.join(' ').toLowerCase());
     }
     return c._haystack;
   }
@@ -1216,7 +1367,7 @@ window.addEventListener('storage', function (e) {
   filterChips.mis.addEventListener('click', function () { setFilter('mis'); });
   filterChips.cir.addEventListener('click', function () { setFilter('cir'); });
   document.getElementById('q').addEventListener('input', function (e) {
-    state.q = e.target.value.trim().toLowerCase();
+    state.q = foldAccents(e.target.value.trim().toLowerCase());
     applyFilterAndSearch();
   });
 
