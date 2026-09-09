@@ -33,7 +33,7 @@
     overflow-x: hidden;
   }
 
-  .stage { position: fixed; inset: 0; }
+  .stage { position: fixed; inset: 0; z-index: 0; }
   #globe-canvas { position: absolute; inset: 0; display: block; }
 
   .hud {
@@ -53,6 +53,7 @@
   .topbar > *, .bottom-row > * { pointer-events: auto; }
 
   .topbar {
+    position: relative; z-index: 2;
     display: flex; align-items: flex-start; justify-content: space-between;
     gap: 12px 24px; padding: 28px 32px 0; flex-wrap: wrap;
   }
@@ -88,6 +89,7 @@
   .spacer { flex: 1; min-height: 0; }
 
   .bottom-row {
+    position: relative; z-index: 2;
     display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;
     padding: 0 32px 28px; flex-wrap: wrap;
   }
@@ -195,13 +197,14 @@
   .hint {
     position: absolute; left: 50%; top: 50%; transform: translate(-50%, 120px);
     font-size: 11.5px; color: var(--text-soft); text-align: center; opacity: .7;
-    pointer-events: none;
+    pointer-events: none; z-index: 1;
   }
 
   /* --- 2D constituency map: appears on top of the globe, which never changes
      size — only this flat map zooms in to frame the host country + its
      circumscription neighbours. --- */
   .mapbox2d {
+    z-index: 3;
     position: absolute; left: 50%; top: 100px; transform: translateX(-50%);
     width: min(760px, 88vw); height: min(460px, 52vh);
     background: rgba(10,22,14,.9); backdrop-filter: blur(16px);
@@ -219,6 +222,19 @@
   .map2d-caplabel { font-size: 9px; font-weight: 500; fill: rgba(255,255,255,.92); text-anchor: middle; pointer-events: none; text-transform: uppercase; letter-spacing: .01em; paint-order: stroke; stroke: rgba(6,16,10,.85); stroke-width: 2.5px; }
   .map2d-home-country { font-size: 15px; font-weight: 800; fill: var(--orange-soft); text-anchor: middle; pointer-events: none; text-transform: uppercase; letter-spacing: .06em; paint-order: stroke; stroke: rgba(6,16,10,.55); stroke-width: 4px; }
   .map2d-countrylabel { font-size: 12px; font-weight: 800; fill: rgba(255,255,255,.9); text-anchor: middle; pointer-events: none; text-transform: uppercase; letter-spacing: .06em; paint-order: stroke; stroke: rgba(6,16,10,.55); stroke-width: 4px; }
+  /* The specific country a search matched — a bright border (+ label tint)
+     so the visitor can immediately pick it out among its neighbours. */
+  .map2d-land.map2d-searched { stroke: #ffe066; stroke-width: 2.4; filter: drop-shadow(0 0 5px rgba(255,224,102,.85)); }
+  .map2d-countrylabel.map2d-searchedlabel { fill: #ffe066; }
+  .map2d-caption {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+    padding: 11px 46px 11px 18px; text-align: center;
+    background: linear-gradient(0deg, rgba(6,16,10,.94), rgba(6,16,10,.55));
+    border-top: 1px solid var(--line);
+    font-size: 12px; line-height: 1.4; color: var(--text-soft);
+  }
+  .map2d-caption[hidden] { display: none; }
+  .map2d-caption b { color: #ffe066; font-weight: 700; }
 
   .closebtn2d {
     position: absolute; right: 10px; top: 10px; display: inline-flex; align-items: center; gap: 8px;
@@ -290,6 +306,7 @@
       <button id="map2d-zout" type="button" aria-label="Dézoomer">−</button>
       <button id="map2d-zres" type="button" aria-label="Réinitialiser">Reset</button>
     </div>
+    <div class="map2d-caption" id="map2d-caption" hidden></div>
   </div>
 
   <div class="bottom-row">
@@ -715,7 +732,7 @@ var WORLD_LAND = [{"type":"Feature","id":716,"name":"Zimbabwe","geometry":{"type
 // in that file's navbar/menu/WhatsApp wiring, which assumes DOM elements this
 // standalone page doesn't have). Keeps this page's language in sync with the
 // rest of the site via the shared 'ambaci-lang' localStorage key.
-var NET3D_I18N = {"fr":{"pamb.net.amb":"Ambassades","pamb.net.cg":"Consulats généraux","pamb.net.mis":"Missions & délégations","pamb.net.circ":"Circonscriptions","pamb.net.villes":"Villes","pamb.net.pays":"Pays de résidence","net.filter.all":"Tous les postes","net.filter.circ":"Circonscriptions","net.search.ph":"Rechercher une ville, un pays…","net.close":"Vue mondiale","pays.title":"Circonscription diplomatique","net3d.reset":"Vue d'ensemble","net3d.hint":"Glissez pour explorer librement","net3d.time":"Heure locale","net3d.date":"Date locale","net3d.siege":"Siège","net3d.mfa":"Ministère des Affaires étrangères","net3d.web":"Site internet","net3d.contact":"Contact consulaire"},"de":{"pamb.net.amb":"Botschaften","pamb.net.cg":"Generalkonsulate","pamb.net.mis":"Missionen & Delegationen","pamb.net.circ":"Amtsbezirke","pamb.net.villes":"Städte","pamb.net.pays":"Gastländer","net.filter.all":"Alle Posten","net.filter.circ":"Wahlkreise","net.search.ph":"Stadt oder Land suchen…","net.close":"Weltansicht","pays.title":"Diplomatischer Amtsbereich","net3d.reset":"Gesamtansicht","net3d.hint":"Ziehen, um frei zu erkunden","net3d.time":"Ortszeit","net3d.date":"Ortsdatum","net3d.siege":"Sitz","net3d.mfa":"Ministerium für Auswärtige Angelegenheiten","net3d.web":"Webseite","net3d.contact":"Konsularischer Kontakt"},"en":{"pamb.net.amb":"Embassies","pamb.net.cg":"Consulates general","pamb.net.mis":"Missions & delegations","pamb.net.circ":"Constituencies","pamb.net.villes":"Cities","pamb.net.pays":"Countries of residence","net.filter.all":"All posts","net.filter.circ":"Constituencies","net.search.ph":"Search a city or country…","net.close":"World view","pays.title":"Diplomatic Constituency","net3d.reset":"Overview","net3d.hint":"Drag to explore freely","net3d.time":"Local time","net3d.date":"Local date","net3d.siege":"Headquarters","net3d.mfa":"Ministry of Foreign Affairs","net3d.web":"Website","net3d.contact":"Consular contact"},"hu":{"pamb.net.amb":"Nagykövetségek","pamb.net.cg":"Főkonzulátusok","pamb.net.mis":"Missziók és delegációk","pamb.net.circ":"Illetékességi körzetek","pamb.net.villes":"Városok","pamb.net.pays":"Fogadó országok","net.filter.all":"Összes poszt","net.filter.circ":"Illetékességi körzetek","net.search.ph":"Keressen várost, országot…","net.close":"Világnézet","pays.title":"Diplomáciai körzet","net3d.reset":"Áttekintés","net3d.hint":"Húzza szabad felfedezéshez","net3d.time":"Helyi idő","net3d.date":"Helyi dátum","net3d.siege":"Székhely","net3d.mfa":"Külügyminisztérium","net3d.web":"Weboldal","net3d.contact":"Konzuli kapcsolat"},"sl":{"pamb.net.amb":"Veleposlaništva","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije in delegacije","pamb.net.circ":"Območja pristojnosti","pamb.net.villes":"Mesta","pamb.net.pays":"Države gostiteljice","net.filter.all":"Vsa mesta","net.filter.circ":"Območja pristojnosti","net.search.ph":"Iščite mesto, državo…","net.close":"Svetovni pogled","pays.title":"Diplomatsko območje","net3d.reset":"Pregled","net3d.hint":"Povlecite za prost ogled","net3d.time":"Lokalni čas","net3d.date":"Lokalni datum","net3d.siege":"Sedež","net3d.mfa":"Ministrstvo za zunanje zadeve","net3d.web":"Spletna stran","net3d.contact":"Konzularni stik"},"sk":{"pamb.net.amb":"Veľvyslanectvá","pamb.net.cg":"Generálne konzuláty","pamb.net.mis":"Misie a delegácie","pamb.net.circ":"Obvody pôsobnosti","pamb.net.villes":"Mestá","pamb.net.pays":"Hostiteľské krajiny","net.filter.all":"Všetky zastúpenia","net.filter.circ":"Obvody pôsobnosti","net.search.ph":"Hľadajte mesto, krajinu…","net.close":"Svetový pohľad","pays.title":"Diplomatický obvod","net3d.reset":"Prehľad","net3d.hint":"Potiahnutím voľne preskúmajte","net3d.time":"Miestny čas","net3d.date":"Miestny dátum","net3d.siege":"Sídlo","net3d.mfa":"Ministerstvo zahraničných vecí","net3d.web":"Webová stránka","net3d.contact":"Konzulárny kontakt"},"hr":{"pamb.net.amb":"Veleposlanstva","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije i delegacije","pamb.net.circ":"Područja nadležnosti","pamb.net.villes":"Gradovi","pamb.net.pays":"Zemlje domaćini","net.filter.all":"Sva predstavništva","net.filter.circ":"Područja nadležnosti","net.search.ph":"Pretražite grad, zemlju…","net.close":"Svjetski prikaz","pays.title":"Diplomatsko područje","net3d.reset":"Pregled","net3d.hint":"Povucite za slobodno istraživanje","net3d.time":"Lokalno vrijeme","net3d.date":"Lokalni datum","net3d.siege":"Sjedište","net3d.mfa":"Ministarstvo vanjskih poslova","net3d.web":"Web stranica","net3d.contact":"Konzularni kontakt"},"sr":{"pamb.net.amb":"Ambasade","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije i delegacije","pamb.net.circ":"Okruzi nadležnosti","pamb.net.villes":"Gradovi","pamb.net.pays":"Zemlje domaćini","net.filter.all":"Sva predstavništva","net.filter.circ":"Okruzi nadležnosti","net.search.ph":"Pretražite grad, zemlju…","net.close":"Svetski prikaz","pays.title":"Diplomatski okrug","net3d.reset":"Pregled","net3d.hint":"Prevucite za slobodno istraživanje","net3d.time":"Lokalno vreme","net3d.date":"Lokalni datum","net3d.siege":"Sedište","net3d.mfa":"Ministarstvo spoljnih poslova","net3d.web":"Veb sajt","net3d.contact":"Konzularni kontakt"},"ro":{"pamb.net.amb":"Ambasade","pamb.net.cg":"Consulate generale","pamb.net.mis":"Misiuni și delegații","pamb.net.circ":"Circumscripții","pamb.net.villes":"Orașe","pamb.net.pays":"Țări de reședință","net.filter.all":"Toate posturile","net.filter.circ":"Circumscripții","net.search.ph":"Căutați un oraș, o țară…","net.close":"Vedere mondială","pays.title":"Circumscripție diplomatică","net3d.reset":"Prezentare generală","net3d.hint":"Trageți pentru a explora liber","net3d.time":"Ora locală","net3d.date":"Data locală","net3d.siege":"Sediu","net3d.mfa":"Ministerul Afacerilor Externe","net3d.web":"Site web","net3d.contact":"Contact consular"},"bs":{"pamb.net.amb":"Ambasade","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije i delegacije","pamb.net.circ":"Okruzi nadležnosti","pamb.net.villes":"Gradovi","pamb.net.pays":"Zemlje domaćini","net.filter.all":"Sva predstavništva","net.filter.circ":"Okruzi nadležnosti","net.search.ph":"Pretražite grad, zemlju…","net.close":"Svjetski prikaz","pays.title":"Diplomatski okrug","net3d.reset":"Pregled","net3d.hint":"Povucite za slobodno istraživanje","net3d.time":"Lokalno vrijeme","net3d.date":"Lokalni datum","net3d.siege":"Sjedište","net3d.mfa":"Ministarstvo vanjskih poslova","net3d.web":"Web stranica","net3d.contact":"Konzularni kontakt"}};
+var NET3D_I18N = {"fr":{"pamb.net.amb":"Ambassades","pamb.net.cg":"Consulats généraux","pamb.net.mis":"Missions & délégations","pamb.net.circ":"Circonscriptions","pamb.net.villes":"Villes","pamb.net.pays":"Pays de résidence","net.filter.all":"Tous les postes","net.filter.circ":"Circonscriptions","net.search.ph":"Rechercher une ville, un pays…","net.close":"Vue mondiale","pays.title":"Circonscription diplomatique","net3d.reset":"Vue d'ensemble","net3d.hint":"Glissez pour explorer librement","net3d.time":"Heure locale","net3d.date":"Date locale","net3d.siege":"Siège","net3d.mfa":"Ministère des Affaires étrangères","net3d.web":"Site internet","net3d.contact":"Contact consulaire","net3d.circCaption":"{country} dépend de l'Ambassade de Côte d'Ivoire à {city}."},"de":{"pamb.net.amb":"Botschaften","pamb.net.cg":"Generalkonsulate","pamb.net.mis":"Missionen & Delegationen","pamb.net.circ":"Amtsbezirke","pamb.net.villes":"Städte","pamb.net.pays":"Gastländer","net.filter.all":"Alle Posten","net.filter.circ":"Wahlkreise","net.search.ph":"Stadt oder Land suchen…","net.close":"Weltansicht","pays.title":"Diplomatischer Amtsbereich","net3d.reset":"Gesamtansicht","net3d.hint":"Ziehen, um frei zu erkunden","net3d.time":"Ortszeit","net3d.date":"Ortsdatum","net3d.siege":"Sitz","net3d.mfa":"Ministerium für Auswärtige Angelegenheiten","net3d.web":"Webseite","net3d.contact":"Konsularischer Kontakt","net3d.circCaption":"{country} untersteht der Botschaft von Côte d'Ivoire in {city}."},"en":{"pamb.net.amb":"Embassies","pamb.net.cg":"Consulates general","pamb.net.mis":"Missions & delegations","pamb.net.circ":"Constituencies","pamb.net.villes":"Cities","pamb.net.pays":"Countries of residence","net.filter.all":"All posts","net.filter.circ":"Constituencies","net.search.ph":"Search a city or country…","net.close":"World view","pays.title":"Diplomatic Constituency","net3d.reset":"Overview","net3d.hint":"Drag to explore freely","net3d.time":"Local time","net3d.date":"Local date","net3d.siege":"Headquarters","net3d.mfa":"Ministry of Foreign Affairs","net3d.web":"Website","net3d.contact":"Consular contact","net3d.circCaption":"{country} is covered by the Embassy of Côte d'Ivoire in {city}."},"hu":{"pamb.net.amb":"Nagykövetségek","pamb.net.cg":"Főkonzulátusok","pamb.net.mis":"Missziók és delegációk","pamb.net.circ":"Illetékességi körzetek","pamb.net.villes":"Városok","pamb.net.pays":"Fogadó országok","net.filter.all":"Összes poszt","net.filter.circ":"Illetékességi körzetek","net.search.ph":"Keressen várost, országot…","net.close":"Világnézet","pays.title":"Diplomáciai körzet","net3d.reset":"Áttekintés","net3d.hint":"Húzza szabad felfedezéshez","net3d.time":"Helyi idő","net3d.date":"Helyi dátum","net3d.siege":"Székhely","net3d.mfa":"Külügyminisztérium","net3d.web":"Weboldal","net3d.contact":"Konzuli kapcsolat","net3d.circCaption":"{country}: illetékes Elefántcsontpart nagykövetsége, székhelye {city}."},"sl":{"pamb.net.amb":"Veleposlaništva","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije in delegacije","pamb.net.circ":"Območja pristojnosti","pamb.net.villes":"Mesta","pamb.net.pays":"Države gostiteljice","net.filter.all":"Vsa mesta","net.filter.circ":"Območja pristojnosti","net.search.ph":"Iščite mesto, državo…","net.close":"Svetovni pogled","pays.title":"Diplomatsko območje","net3d.reset":"Pregled","net3d.hint":"Povlecite za prost ogled","net3d.time":"Lokalni čas","net3d.date":"Lokalni datum","net3d.siege":"Sedež","net3d.mfa":"Ministrstvo za zunanje zadeve","net3d.web":"Spletna stran","net3d.contact":"Konzularni stik","net3d.circCaption":"{country} spada pod Veleposlaništvo Slonokoščene obale v mestu {city}."},"sk":{"pamb.net.amb":"Veľvyslanectvá","pamb.net.cg":"Generálne konzuláty","pamb.net.mis":"Misie a delegácie","pamb.net.circ":"Obvody pôsobnosti","pamb.net.villes":"Mestá","pamb.net.pays":"Hostiteľské krajiny","net.filter.all":"Všetky zastúpenia","net.filter.circ":"Obvody pôsobnosti","net.search.ph":"Hľadajte mesto, krajinu…","net.close":"Svetový pohľad","pays.title":"Diplomatický obvod","net3d.reset":"Prehľad","net3d.hint":"Potiahnutím voľne preskúmajte","net3d.time":"Miestny čas","net3d.date":"Miestny dátum","net3d.siege":"Sídlo","net3d.mfa":"Ministerstvo zahraničných vecí","net3d.web":"Webová stránka","net3d.contact":"Konzulárny kontakt","net3d.circCaption":"{country} patrí pod Veľvyslanectvo Pobrežia Slonoviny v meste {city}."},"hr":{"pamb.net.amb":"Veleposlanstva","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije i delegacije","pamb.net.circ":"Područja nadležnosti","pamb.net.villes":"Gradovi","pamb.net.pays":"Zemlje domaćini","net.filter.all":"Sva predstavništva","net.filter.circ":"Područja nadležnosti","net.search.ph":"Pretražite grad, zemlju…","net.close":"Svjetski prikaz","pays.title":"Diplomatsko područje","net3d.reset":"Pregled","net3d.hint":"Povucite za slobodno istraživanje","net3d.time":"Lokalno vrijeme","net3d.date":"Lokalni datum","net3d.siege":"Sjedište","net3d.mfa":"Ministarstvo vanjskih poslova","net3d.web":"Web stranica","net3d.contact":"Konzularni kontakt","net3d.circCaption":"{country} pripada Veleposlanstvu Obale Bjelokosti u gradu {city}."},"sr":{"pamb.net.amb":"Ambasade","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije i delegacije","pamb.net.circ":"Okruzi nadležnosti","pamb.net.villes":"Gradovi","pamb.net.pays":"Zemlje domaćini","net.filter.all":"Sva predstavništva","net.filter.circ":"Okruzi nadležnosti","net.search.ph":"Pretražite grad, zemlju…","net.close":"Svetski prikaz","pays.title":"Diplomatski okrug","net3d.reset":"Pregled","net3d.hint":"Prevucite za slobodno istraživanje","net3d.time":"Lokalno vreme","net3d.date":"Lokalni datum","net3d.siege":"Sedište","net3d.mfa":"Ministarstvo spoljnih poslova","net3d.web":"Veb sajt","net3d.contact":"Konzularni kontakt","net3d.circCaption":"{country} pripada Ambasadi Obale Slonovače u gradu {city}."},"ro":{"pamb.net.amb":"Ambasade","pamb.net.cg":"Consulate generale","pamb.net.mis":"Misiuni și delegații","pamb.net.circ":"Circumscripții","pamb.net.villes":"Orașe","pamb.net.pays":"Țări de reședință","net.filter.all":"Toate posturile","net.filter.circ":"Circumscripții","net.search.ph":"Căutați un oraș, o țară…","net.close":"Vedere mondială","pays.title":"Circumscripție diplomatică","net3d.reset":"Prezentare generală","net3d.hint":"Trageți pentru a explora liber","net3d.time":"Ora locală","net3d.date":"Data locală","net3d.siege":"Sediu","net3d.mfa":"Ministerul Afacerilor Externe","net3d.web":"Site web","net3d.contact":"Contact consular","net3d.circCaption":"{country} depinde de Ambasada Republicii Côte d'Ivoire de la {city}."},"bs":{"pamb.net.amb":"Ambasade","pamb.net.cg":"Generalni konzulati","pamb.net.mis":"Misije i delegacije","pamb.net.circ":"Okruzi nadležnosti","pamb.net.villes":"Gradovi","pamb.net.pays":"Zemlje domaćini","net.filter.all":"Sva predstavništva","net.filter.circ":"Okruzi nadležnosti","net.search.ph":"Pretražite grad, zemlju…","net.close":"Svjetski prikaz","pays.title":"Diplomatski okrug","net3d.reset":"Pregled","net3d.hint":"Povucite za slobodno istraživanje","net3d.time":"Lokalno vrijeme","net3d.date":"Lokalni datum","net3d.siege":"Sjedište","net3d.mfa":"Ministarstvo vanjskih poslova","net3d.web":"Web stranica","net3d.contact":"Konzularni kontakt","net3d.circCaption":"{country} pripada Ambasadi Obale Slonovače u gradu {city}."}};
 
 function net3dLang() {
   try { var l = localStorage.getItem('ambaci-lang'); if (l && NET3D_I18N[l]) return l; } catch (e) {}
@@ -1029,6 +1046,7 @@ window.addEventListener('storage', function (e) {
 
   function hideConstituency() {
     document.getElementById('mapbox2d').hidden = true;
+    document.getElementById('map2d-caption').hidden = true;
   }
 
   function measureWidth2d(text, fontPx, cls) {
@@ -1073,7 +1091,13 @@ window.addEventListener('storage', function (e) {
     [22, -20], [-22, -20], [22, 26], [-22, 26], [0, -46], [0, 48], [-30, 6], [30, 6], [0, -60], [0, 62]
   ];
 
-  function showConstituency(c) {
+  function circCaptionHtml(iso, c) {
+    var tmpl = T('net3d.circCaption', "{country} dépend de l'Ambassade de Côte d'Ivoire à {city}.");
+    var country = CNAME[iso] || iso.toUpperCase();
+    return tmpl.replace('{country}', '<b>' + country + '</b>').replace('{city}', c.city);
+  }
+
+  function showConstituency(c, highlightIso) {
     var hostF = LAND_BY_ID[ISO_N[c.iso]];
     if (!hostF) { hideConstituency(); return; }
     // Reveal the container BEFORE measuring any label: an element under
@@ -1091,6 +1115,7 @@ window.addEventListener('storage', function (e) {
       return { iso2: iso2, feat: f, part: part };
     }).filter(Boolean);
     var circFeats = circPairs.map(function (p) { return p.feat; });
+    var highlightFeat = highlightIso ? (circPairs.filter(function (p) { return p.iso2 === highlightIso; })[0] || {}).feat : null;
 
     var fc = { type: 'FeatureCollection', features: [hostPart].concat(circPairs.map(function (p) { return p.part; })) };
     proj2d.fitExtent([[26, 26], [W2 - 26, H2 - 26]], fc);
@@ -1098,9 +1123,9 @@ window.addEventListener('storage', function (e) {
     gLand2d.selectAll('path').data(WORLD_LAND, function (d) { return d.id; }).join('path')
       .attr('d', path2d)
       .attr('class', function (d) {
-        if (d === hostF) return 'map2d-land map2d-home';
-        if (circFeats.indexOf(d) !== -1) return 'map2d-land map2d-circ';
-        return 'map2d-land';
+        var cls = d === hostF ? 'map2d-land map2d-home' : circFeats.indexOf(d) !== -1 ? 'map2d-land map2d-circ' : 'map2d-land';
+        if (highlightFeat && d === highlightFeat) cls += ' map2d-searched';
+        return cls;
       });
 
     var placed = [];
@@ -1110,7 +1135,8 @@ window.addEventListener('storage', function (e) {
     // text never spills far outside its own borders.
     var countryDefs = [{ part: hostPart, name: c.country, cls: 'map2d-home-country', base: 15 }]
       .concat(circPairs.map(function (p) {
-        return { part: p.part, name: CNAME[p.iso2] || p.feat.name, cls: 'map2d-countrylabel', base: 12 };
+        var cls = 'map2d-countrylabel' + (p.iso2 === highlightIso ? ' map2d-searchedlabel' : '');
+        return { part: p.part, name: CNAME[p.iso2] || p.feat.name, cls: cls, base: 12 };
       }));
     var countryLabels = countryDefs.map(function (d) {
       var ctr = path2d.centroid(d.part);
@@ -1154,6 +1180,15 @@ window.addEventListener('storage', function (e) {
       .attr('x', function (d) { return d.x; }).attr('y', function (d) { return d.y; })
       .text(function (d) { return d.name; });
 
+    var captionEl = document.getElementById('map2d-caption');
+    if (highlightIso && CNAME[highlightIso]) {
+      captionEl.innerHTML = circCaptionHtml(highlightIso, c);
+      captionEl.hidden = false;
+    } else {
+      captionEl.hidden = true;
+      captionEl.innerHTML = '';
+    }
+
     svg2d.call(zoom2d.transform, d3.zoomIdentity);
   }
 
@@ -1165,11 +1200,13 @@ window.addEventListener('storage', function (e) {
   // --- Selection + camera focus ---
   var activeId = HOME.id;
   var animReq = null;
+  var activeHighlightIso = null;
 
-  function focusCity(id, animate) {
+  function focusCity(id, animate, highlightIso) {
     var c = id === HOME.id ? HOME : CITIES.filter(function (x) { return x.id === id; })[0];
     if (!c) return;
     activeId = id;
+    activeHighlightIso = highlightIso || null;
     renderPanel(c);
     buildList();
     updateMarkerEmphasis(id, currentVisibleIds());
@@ -1177,7 +1214,7 @@ window.addEventListener('storage', function (e) {
     // countries) AND for a plain consulate city (country + its own town only —
     // showConstituency already renders just the host when there's no c.circ).
     var hasConsulate = c.types && c.types.indexOf('con') !== -1;
-    if ((c.circ && c.circ.length) || hasConsulate) showConstituency(c); else hideConstituency();
+    if ((c.circ && c.circ.length) || hasConsulate) showConstituency(c, highlightIso); else hideConstituency();
     if (animate === false) return;
 
     // Bring the clicked point to dead-center of the view using exactly two
@@ -1220,6 +1257,7 @@ window.addEventListener('storage', function (e) {
 
   function resetView() {
     activeId = HOME.id;
+    activeHighlightIso = null;
     renderPanel(HOME);
     buildList();
     updateMarkerEmphasis(HOME.id, currentVisibleIds());
@@ -1280,9 +1318,18 @@ window.addEventListener('storage', function (e) {
     }
   }
 
+  // Every word of the query must appear SOMEWHERE in the haystack, not
+  // necessarily contiguously — so "bosnia herz" matches a haystack holding
+  // both "Bosnia and Herzegovina" (the "and" breaks a plain substring test)
+  // and "Bosnie-Herzégovine" (which alone supplies the "herz" word).
+  function matchesQuery(haystack, query) {
+    var words = query.split(/\s+/).filter(Boolean);
+    return words.every(function (w) { return haystack.indexOf(w) !== -1; });
+  }
+
   function directMatch(c) {
     buildHaystacks(c);
-    return !state.q || c._directHay.indexOf(state.q) !== -1;
+    return !state.q || matchesQuery(c._directHay, state.q);
   }
 
   // Which of this hub's circumscription countries match the current query,
@@ -1293,10 +1340,10 @@ window.addEventListener('storage', function (e) {
     if (!state.q || !c.circ) return [];
     var out = [];
     c.circ.forEach(function (iso) {
-      if (c._circHay[iso].indexOf(state.q) === -1) return;
+      if (!matchesQuery(c._circHay[iso], state.q)) return;
       var capParts = [CAPITALS[iso]].concat(CAPITAL_ALIASES[iso] || []).filter(Boolean);
       var capHay = foldAccents(capParts.join(' ').toLowerCase());
-      var label = capHay.indexOf(state.q) !== -1 ? CAPITALS[iso] : (CNAME[iso] || iso.toUpperCase());
+      var label = matchesQuery(capHay, state.q) ? CAPITALS[iso] : (CNAME[iso] || iso.toUpperCase());
       out.push({ iso: iso, label: label });
     });
     return out;
@@ -1340,7 +1387,7 @@ window.addEventListener('storage', function (e) {
         if (!state.q) { rows.push({ c: c, label: c.city, sub: c.country }); return; }
         if (directMatch(c)) rows.push({ c: c, label: c.city, sub: c.country });
         circMatchDetails(c).forEach(function (m) {
-          rows.push({ c: c, label: m.label, sub: '→ ' + c.city + ', ' + c.country });
+          rows.push({ c: c, label: m.label, sub: '→ ' + c.city + ', ' + c.country, iso: m.iso });
         });
       });
       if (!rows.length) return;
@@ -1357,7 +1404,7 @@ window.addEventListener('storage', function (e) {
         b.type = 'button';
         b.className = 'list-item' + (c.id === activeId ? ' is-active' : '');
         b.innerHTML = '<span class="li-dots">' + dotsHtml(c) + '</span><span class="li-city">' + row.label + '</span><span class="li-country">' + row.sub + '</span>';
-        b.addEventListener('click', function () { focusCity(c.id); });
+        b.addEventListener('click', function () { focusCity(c.id, undefined, row.iso); });
         group.appendChild(b);
       });
       wrap.appendChild(group);
@@ -1501,6 +1548,10 @@ window.addEventListener('storage', function (e) {
     buildList();
     var current = activeId === HOME.id ? HOME : CITIES.filter(function (x) { return x.id === activeId; })[0];
     if (current) renderPanel(current);
+    // The 2D constituency map's caption is the one piece of it built from a
+    // translated sentence (its borders/labels are always French) — re-open
+    // it in place so that sentence picks up the new language too.
+    if (current && !document.getElementById('mapbox2d').hidden) showConstituency(current, activeHighlightIso);
   };
 
   // Raycasting: click directly on a marker
