@@ -744,6 +744,37 @@ function T(key, fallback) {
   if (NET3D_I18N.fr && NET3D_I18N.fr[key] !== undefined) return NET3D_I18N.fr[key];
   return fallback;
 }
+// Côte d'Ivoire itself isn't in COUNTRY_I18N (that table covers post
+// countries only) — mirrors the exact exonyms already used site-wide in
+// js/main.js's hero copy, so this stays consistent with the rest of the site.
+var HOME_COUNTRY_I18N = {
+  en: "Côte d'Ivoire", de: "Côte d'Ivoire", hu: "Elefántcsontpart", sl: "Slonokoščene obale",
+  sk: "Pobrežia Slonoviny", hr: "Obale Bjelokosti", sr: "Obale Slonovače", ro: "Côte d'Ivoire", bs: "Obale Slonovače"
+};
+// Localized display names — used everywhere a city/country is shown to the
+// visitor (panel, list, map labels, caption), as opposed to CITY_I18N /
+// COUNTRY_I18N / CIRC_COUNTRY_I18N themselves, which are also consulted by
+// search so a name typed in any language still matches.
+function cityDisplay(cityFr) {
+  var lang = net3dLang();
+  if (lang === 'fr') return cityFr;
+  var m = CITY_I18N[cityFr];
+  return (m && m[lang]) || cityFr;
+}
+function countryDisplay(countryFr) {
+  var lang = net3dLang();
+  if (lang === 'fr') return countryFr;
+  if (countryFr === "Côte d'Ivoire") return HOME_COUNTRY_I18N[lang] || countryFr;
+  var m = COUNTRY_I18N[countryFr];
+  return (m && m[lang]) || countryFr;
+}
+function circCountryDisplay(iso) {
+  var base = CNAME[iso] || iso.toUpperCase();
+  var lang = net3dLang();
+  if (lang === 'fr') return base;
+  var m = CIRC_COUNTRY_I18N[iso];
+  return (m && m[lang]) || base;
+}
 function applyStaticI18n() {
   var lang = net3dLang();
   document.documentElement.lang = lang;
@@ -1093,8 +1124,16 @@ window.addEventListener('storage', function (e) {
 
   function circCaptionHtml(iso, c) {
     var tmpl = T('net3d.circCaption', "{country} dépend de l'Ambassade de Côte d'Ivoire à {city}.");
-    var country = CNAME[iso] || iso.toUpperCase();
-    return tmpl.replace('{country}', '<b>' + country + '</b>').replace('{city}', c.city);
+    var country = circCountryDisplay(iso);
+    var cityName = cityDisplay(c.city);
+    // French contracts "à" + "le"/"les" into "au"/"aux" — "à Le Caire" is
+    // wrong, "au Caire" is correct. Only the French template's "à {city}"
+    // wording ever matches this check, so it's a no-op in every other language.
+    if (tmpl.indexOf('à {city}') !== -1) {
+      if (/^Le /.test(cityName)) { tmpl = tmpl.replace('à {city}', 'au {city}'); cityName = cityName.slice(3); }
+      else if (/^Les /.test(cityName)) { tmpl = tmpl.replace('à {city}', 'aux {city}'); cityName = cityName.slice(4); }
+    }
+    return tmpl.replace('{country}', '<b>' + country + '</b>').replace('{city}', cityName);
   }
 
   function showConstituency(c, highlightIso) {
@@ -1133,10 +1172,10 @@ window.addEventListener('storage', function (e) {
     // Country names first — they get first claim on their preferred spot
     // (the shape's own centroid), shrinking to fit small countries so the
     // text never spills far outside its own borders.
-    var countryDefs = [{ part: hostPart, name: c.country, cls: 'map2d-home-country', base: 15 }]
+    var countryDefs = [{ part: hostPart, name: countryDisplay(c.country), cls: 'map2d-home-country', base: 15 }]
       .concat(circPairs.map(function (p) {
         var cls = 'map2d-countrylabel' + (p.iso2 === highlightIso ? ' map2d-searchedlabel' : '');
-        return { part: p.part, name: CNAME[p.iso2] || p.feat.name, cls: cls, base: 12 };
+        return { part: p.part, name: circCountryDisplay(p.iso2), cls: cls, base: 12 };
       }));
     var countryLabels = countryDefs.map(function (d) {
       var ctr = path2d.centroid(d.part);
@@ -1163,7 +1202,7 @@ window.addEventListener('storage', function (e) {
       var pt = proj2d([xy[1], xy[0]]);
       return { x: pt[0], y: pt[1], name: CAPS[p.iso2] || CNAME[p.iso2] || '' };
     }).filter(Boolean);
-    capDefs.push({ x: hp[0], y: hp[1], name: c.city });
+    capDefs.push({ x: hp[0], y: hp[1], name: cityDisplay(c.city) });
 
     var CAP_FONT = 9;
     var caps = capDefs.map(function (d) {
@@ -1343,7 +1382,7 @@ window.addEventListener('storage', function (e) {
       if (!matchesQuery(c._circHay[iso], state.q)) return;
       var capParts = [CAPITALS[iso]].concat(CAPITAL_ALIASES[iso] || []).filter(Boolean);
       var capHay = foldAccents(capParts.join(' ').toLowerCase());
-      var label = matchesQuery(capHay, state.q) ? CAPITALS[iso] : (CNAME[iso] || iso.toUpperCase());
+      var label = matchesQuery(capHay, state.q) ? CAPITALS[iso] : circCountryDisplay(iso);
       out.push({ iso: iso, label: label });
     });
     return out;
@@ -1384,10 +1423,10 @@ window.addEventListener('storage', function (e) {
         } else if (state.filter && c.types.indexOf(state.filter) === -1) {
           return;
         }
-        if (!state.q) { rows.push({ c: c, label: c.city, sub: c.country }); return; }
-        if (directMatch(c)) rows.push({ c: c, label: c.city, sub: c.country });
+        if (!state.q) { rows.push({ c: c, label: cityDisplay(c.city), sub: countryDisplay(c.country) }); return; }
+        if (directMatch(c)) rows.push({ c: c, label: cityDisplay(c.city), sub: countryDisplay(c.country) });
         circMatchDetails(c).forEach(function (m) {
-          rows.push({ c: c, label: m.label, sub: '→ ' + c.city + ', ' + c.country, iso: m.iso });
+          rows.push({ c: c, label: m.label, sub: '→ ' + cityDisplay(c.city) + ', ' + countryDisplay(c.country), iso: m.iso });
         });
       });
       if (!rows.length) return;
@@ -1491,8 +1530,8 @@ window.addEventListener('storage', function (e) {
       lmEl.innerHTML = '';
       credEl.hidden = true;
     }
-    document.getElementById('p-city').textContent = c.city;
-    document.getElementById('p-country').textContent = c.country;
+    document.getElementById('p-city').textContent = cityDisplay(c.city);
+    document.getElementById('p-country').textContent = countryDisplay(c.country);
 
     var LABEL_KEY = { amb: 'pamb.net.amb', con: 'pamb.net.cg', mis: 'pamb.net.mis' };
     var postsWrap = document.getElementById('p-posts');
@@ -1516,7 +1555,7 @@ window.addEventListener('storage', function (e) {
     var circWrap = document.getElementById('p-circ');
     if (!isHome && c.circ && c.circ.length) {
       circWrap.innerHTML = '<span class="circ-label">' + T('pays.title', 'Circonscription diplomatique') + '</span><div class="circ-list">' +
-        c.circ.map(function (iso) { return '<span class="circ-pill">' + (CNAME[iso] || iso.toUpperCase()) + '</span>'; }).join('') + '</div>';
+        c.circ.map(function (iso) { return '<span class="circ-pill">' + circCountryDisplay(iso) + '</span>'; }).join('') + '</div>';
       circWrap.hidden = false;
     } else {
       circWrap.innerHTML = '';
