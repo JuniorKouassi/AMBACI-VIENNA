@@ -27,8 +27,16 @@ function json(data, status = 200) {
   });
 }
 
+// "Today" as the embassy in Vienna sees it — not the server's (or a visitor's)
+// own UTC/local day, which can be a day off from Vienna's near midnight.
+function todayInVienna() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Vienna' }).format(new Date());
+}
+
 function isConsularDay(dateStr) {
   const d = new Date(dateStr + 'T00:00:00Z');
+  // Same-day booking is never allowed — the earliest bookable day is tomorrow.
+  if (dateStr <= todayInVienna()) return false;
   return CONSULAR_DAYS.includes(d.getUTCDay()) && !HOLIDAYS.has(dateStr);
 }
 
