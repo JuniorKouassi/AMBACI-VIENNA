@@ -26,7 +26,7 @@
   html, body { height: 100%; }
   body {
     margin: 0;
-    background: radial-gradient(120% 140% at 30% 0%, #0F2417 0%, var(--paper) 60%);
+    background: radial-gradient(120% 140% at 60% 40%, #0c1a2a 0%, #050b14 55%, #020409 100%);
     color: var(--text);
     font-family: var(--font-body);
     overflow: hidden;
@@ -855,56 +855,102 @@ window.addEventListener('storage', function (e) {
   globeGroup.position.x = GLOBE_OFFSET_X;
   scene.add(globeGroup);
 
-  // Simplified continent silhouettes (lon, lat) — stylized, not survey-accurate.
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  var maxAniso = renderer.capabilities.getMaxAnisotropy();
+  var texLoader = new THREE.TextureLoader();
+  function loadTex(url, isColor) {
+    var t = texLoader.load(url);
+    if (isColor) t.encoding = THREE.sRGBEncoding;
+    t.anisotropy = maxAniso;
+    return t;
+  }
 
-  function makeEarthTexture() {
-    var W = 2048, H = 1024;
+  // Light rides with the camera so whichever side faces the visitor is always
+  // the lit day side — no posts ever disappear into a night hemisphere.
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  var sun = new THREE.DirectionalLight(0xffffff, 1.05);
+  sun.position.set(-2.5, 2, 4);
+  camera.add(sun);
+  scene.add(camera);
+
+  // NASA Blue Marble satellite imagery, with thin country borders drawn on
+  // top so the diplomatic geography stays readable.
+  var earthMat = new THREE.MeshPhongMaterial({
+    color: 0x1d3a5c,
+    specular: new THREE.Color(0x3a4d63),
+    shininess: 18,
+    normalScale: new THREE.Vector2(0.6, 0.6)
+  });
+  earthMat.normalMap = loadTex('img/globe/earth_normal_2048.jpg', false);
+  earthMat.specularMap = loadTex('img/globe/earth_specular_2048.jpg', false);
+
+  var earthImg = new Image();
+  earthImg.onload = function () {
+    var TW = 4096, TH = 2048;
     var c = document.createElement('canvas');
-    c.width = W; c.height = H;
+    c.width = TW; c.height = TH;
     var ctx = c.getContext('2d');
-    ctx.fillStyle = '#a9d3e8';
-    ctx.fillRect(0, 0, W, H);
-
-    function xy(lon, lat) { return [(lon + 180) / 360 * W, (90 - lat) / 180 * H]; }
-
-    ctx.strokeStyle = 'rgba(70,120,150,0.22)';
-    ctx.lineWidth = 1;
-    for (var lon = -180; lon <= 180; lon += 30) {
-      ctx.beginPath();
-      var p0 = xy(lon, 90), p1 = xy(lon, -90);
-      ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.stroke();
-    }
-    for (var lat = -60; lat <= 60; lat += 30) {
-      if (lat === 0) continue; // the equator reads as a single bright bar across the sphere's widest point — drop it
-      ctx.beginPath();
-      var q0 = xy(-180, lat), q1 = xy(180, lat);
-      ctx.moveTo(q0[0], q0[1]); ctx.lineTo(q1[0], q1[1]); ctx.stroke();
-    }
-
-    ctx.fillStyle = '#3a6b4a';
-    ctx.strokeStyle = 'rgba(160,210,175,0.4)';
-    ctx.lineWidth = 1.5;
+    ctx.drawImage(earthImg, 0, 0, TW, TH);
+    function xy(lon, lat) { return [(lon + 180) / 360 * TW, (90 - lat) / 180 * TH]; }
+    ctx.strokeStyle = 'rgba(255,255,255,0.32)';
+    ctx.lineWidth = 1.4;
+    ctx.lineJoin = 'round';
     COUNTRIES.forEach(function (poly) {
       ctx.beginPath();
       poly.forEach(function (pt, i) {
-        var xyp = xy(pt[0], pt[1]);
-        if (i === 0) ctx.moveTo(xyp[0], xyp[1]); else ctx.lineTo(xyp[0], xyp[1]);
+        var p = xy(pt[0], pt[1]);
+        if (i === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]);
       });
       ctx.closePath();
-      ctx.fill();
       ctx.stroke();
     });
+    var tex = new THREE.CanvasTexture(c);
+    tex.encoding = THREE.sRGBEncoding;
+    tex.anisotropy = maxAniso;
+    earthMat.map = tex;
+    earthMat.color.set(0xffffff);
+    earthMat.needsUpdate = true;
+  };
+  earthImg.src = 'img/globe/earth_atmos_2048.jpg';
 
-    return new THREE.CanvasTexture(c);
-  }
+  globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(R, 96, 96), earthMat));
 
-  var sphereGeo = new THREE.SphereGeometry(R, 64, 64);
-  var sphereMat = new THREE.MeshBasicMaterial({ map: makeEarthTexture() });
-  globeGroup.add(new THREE.Mesh(sphereGeo, sphereMat));
+  // Thin drifting cloud layer — kept faint so embassy markers stay legible.
+  var cloudMat = new THREE.MeshLambertMaterial({
+    map: loadTex('img/globe/earth_clouds_1024.png', true),
+    transparent: true, opacity: 0.32, depthWrite: false
+  });
+  var clouds = new THREE.Mesh(new THREE.SphereGeometry(R * 1.008, 96, 96), cloudMat);
+  globeGroup.add(clouds);
+
+  // Atmosphere: a fresnel rim glow on a slightly larger back-facing shell.
+  var atmosphere = new THREE.Mesh(
+    new THREE.SphereGeometry(R * 1.1, 96, 96),
+    new THREE.ShaderMaterial({
+      vertexShader:
+        'varying vec3 vN; varying vec3 vV;' +
+        'void main(){ vN = normalize(normalMatrix * normal);' +
+        ' vec4 mv = modelViewMatrix * vec4(position,1.0); vV = normalize(-mv.xyz);' +
+        ' gl_Position = projectionMatrix * mv; }',
+      // Back faces point away from the viewer: brightest right at Earth's
+      // limb, fading smoothly to nothing at the shell's outer edge.
+      fragmentShader:
+        'varying vec3 vN; varying vec3 vV;' +
+        'void main(){ float d = clamp(-dot(vN, vV), 0.0, 1.0);' +
+        ' float f = pow(d, 2.2) * 3.2;' +
+        ' gl_FragColor = vec4(0.38, 0.66, 1.0, 1.0) * f; }',
+      side: THREE.BackSide,
+      blending: THREE.AdditiveBlending,
+      transparent: true,
+      depthWrite: false
+    })
+  );
+  atmosphere.position.x = GLOBE_OFFSET_X;
+  scene.add(atmosphere);
 
   // Starfield
   var starGeo = new THREE.BufferGeometry();
-  var starCount = 900;
+  var starCount = 1400;
   var starPos = new Float32Array(starCount * 3);
   for (var i = 0; i < starCount; i++) {
     var r = 40 + Math.random() * 60;
@@ -915,7 +961,7 @@ window.addEventListener('storage', function (e) {
     starPos[i * 3 + 2] = r * Math.cos(phi);
   }
   starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-  var starMat = new THREE.PointsMaterial({ color: 0xbfe8cf, size: 0.05, transparent: true, opacity: 0.55 });
+  var starMat = new THREE.PointsMaterial({ color: 0xe8efff, size: 0.06, transparent: true, opacity: 0.7, sizeAttenuation: true });
   scene.add(new THREE.Points(starGeo, starMat));
 
   function latLonToVec3(lat, lon, radius) {
@@ -1620,6 +1666,7 @@ window.addEventListener('storage', function (e) {
       GLOBE_OFFSET_X = offset;
       camera.position.x = GLOBE_OFFSET_X;
       globeGroup.position.x = GLOBE_OFFSET_X;
+      atmosphere.position.x = GLOBE_OFFSET_X;
       controls.target.x = GLOBE_OFFSET_X;
     }
     camera.updateProjectionMatrix();
@@ -1631,6 +1678,7 @@ window.addEventListener('storage', function (e) {
 
   function animate() {
     requestAnimationFrame(animate);
+    if (!reduceMotion) clouds.rotation.y += 0.00012;
     controls.update();
     renderer.render(scene, camera);
   }
