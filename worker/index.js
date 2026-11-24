@@ -1,6 +1,8 @@
 // AMBACI VIENNA — Consular appointment booking API
-// Routes: GET /api/availability, POST /api/bookings
+// Routes: GET /api/availability, POST /api/bookings, /api/dossiers/* (see dossiers.js)
 // Falls back to static asset serving for everything else.
+
+import { handleDossierApi, bookingDossierCheck, attachBookingToDossier, purgeExpired } from './dossiers.js';
 
 const CONSULAR_DAYS = [2, 3, 4, 5]; // Tue=2 ... Fri=5 (Sunday=0)
 const SLOT_TIMES = ['09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30'];
@@ -193,7 +195,7 @@ async function createCalendarEvent(env, booking) {
 
   const event = {
     summary: `RDV Consulaire — ${SERVICE_LABELS[booking.service] || booking.service} — ${booking.first_name} ${booking.last_name}`,
-    description: `Service: ${SERVICE_LABELS[booking.service] || booking.service}\nEmail: ${booking.email}\nTéléphone: ${booking.phone}\nPays de résidence: ${booking.country}\nRéférence: ${booking.reference}${booking.notes ? `\nNotes: ${booking.notes}` : ''}`,
+    description: `Service: ${SERVICE_LABELS[booking.service] || booking.service}\nEmail: ${booking.email}\nTéléphone: ${booking.phone}\nPays de résidence: ${booking.country}\nRéférence: ${booking.reference}${booking.dossier_reference ? `\nDossier validé: ${booking.dossier_reference}` : ''}${booking.notes ? `\nNotes: ${booking.notes}` : ''}`,
     start: { dateTime: toLocal(startDate), timeZone: 'Europe/Vienna' },
     end: { dateTime: toLocal(endDate), timeZone: 'Europe/Vienna' },
   };
@@ -233,6 +235,12 @@ async function handleCreateBooking(request, env) {
   if (!SLOT_TIMES.includes(body.time)) return json({ error: 'invalid_slot' }, 400);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) return json({ error: 'invalid_email' }, 400);
 
+  // Passport, visa and consular card appointments need a validated dossier (when the
+  // dossier feature is switched on).
+  const gate = await bookingDossierCheck(env, body.dossierToken, body.service);
+  if (!gate.ok) return json({ error: gate.error }, 403);
+  const dossier = gate.dossier;
+
   const reference = genReference();
 
   try {
@@ -255,7 +263,17 @@ async function handleCreateBooking(request, env) {
     first_name: body.firstName.trim(), last_name: body.lastName.trim(),
     email: body.email.trim(), phone: body.phone.trim(), country: body.country.trim(),
     notes: (body.notes || '').trim(),
+    dossier_reference: dossier ? dossier.reference : null,
   };
+
+  if (dossier) {
+    const attached = await attachBookingToDossier(env, dossier, reference, body.date).catch((e) => { console.error(e); return false; });
+    if (!attached) {
+      // The dossier was used by another booking in the meantime: release the slot.
+      await env.DB.prepare('DELETE FROM bookings WHERE reference = ?').bind(reference).run();
+      return json({ error: 'dossier_already_used' }, 403);
+    }
+  }
 
   const eventId = await createCalendarEvent(env, booking).catch((e) => { console.error(e); return null; });
   if (eventId) {
@@ -305,6 +323,7 @@ async function handleCreateBooking(request, env) {
           <tr><td style="padding:6px 0;color:#8A8570;">Téléphone</td><td style="padding:6px 0;">${escapeHtml(booking.phone)}</td></tr>
           <tr><td style="padding:6px 0;color:#8A8570;">Pays de résidence</td><td style="padding:6px 0;">${escapeHtml(booking.country)}</td></tr>
           <tr><td style="padding:6px 0;color:#8A8570;">Référence</td><td style="padding:6px 0;font-weight:bold;color:#D96C00;">${escapeHtml(reference)}</td></tr>
+          ${booking.dossier_reference ? `<tr><td style="padding:6px 0;color:#8A8570;">Dossier validé</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(booking.dossier_reference)}</td></tr>` : ''}
         </table>
         ${booking.notes ? `<p><strong>Notes :</strong> ${escapeHtml(booking.notes)}</p>` : ''}
         ${eventId ? '<p style="color:#007A35;">✓ Ajouté au calendrier partagé.</p>' : '<p style="color:#D96C00;">⚠ Non ajouté au calendrier (vérifier la configuration Google Calendar).</p>'}
@@ -325,7 +344,15 @@ export default {
     if (url.pathname === '/api/bookings' && request.method === 'POST') {
       return handleCreateBooking(request, env);
     }
+    if (url.pathname === '/api/dossiers' || url.pathname.startsWith('/api/dossiers/')) {
+      return handleDossierApi(request, env, url, { sendEmail });
+    }
 
     return env.ASSETS.fetch(request);
+  },
+
+  // Daily clean-up of expired dossiers (see the cron trigger in wrangler.jsonc).
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(purgeExpired(env).then((r) => console.log('dossiers purged:', r.purged)).catch((e) => console.error(e)));
   },
 };

@@ -37,6 +37,7 @@
   const state = {
     step: 1,
     service: null,
+    dossierToken: null,
     date: null,
     time: null,
     monthCursor: (function () { const d = new Date(); return { y: d.getFullYear(), m: d.getMonth() + 1 }; })(),
@@ -78,11 +79,72 @@
     });
   }
 
+  // --- Dossier gate ---
+  // Passport, visa and consular-card appointments need a dossier validated by the consular
+  // service (only when the dossier feature is switched on on the server).
+  async function dossierGate(service) {
+    const D = window.AmbaciDossier;
+    if (!D) return { ok: true };
+    const cfg = await D.config();
+    if (!cfg.enabled || !cfg.bookingNeedsDossier || !cfg.bookingNeedsDossier[service]) return { ok: true };
+    const stored = D.getStored();
+    if (!stored || !stored.token) return { ok: false, reason: 'none' };
+    let d;
+    try { d = await D.me(stored.token); } catch (r) {
+      if (r && r.status === 401) D.clearStored();
+      return { ok: false, reason: 'none' };
+    }
+    if (cfg.bookingNeedsDossier[service].indexOf(d.service) === -1) return { ok: false, reason: 'other' };
+    if (d.bookingReference) return { ok: false, reason: 'booked' };
+    if (d.status === 'validated' && d.canBook) return { ok: true, token: stored.token, dossier: d };
+    return { ok: false, reason: d.status }; // draft | submitted | needs_fix
+  }
+
+  function clearGate() {
+    const box = document.getElementById('rdv-gate');
+    if (box) box.remove();
+  }
+
+  function renderGate(gate, service) {
+    const D = window.AmbaciDossier;
+    D.loadCss();
+    let box = document.getElementById('rdv-gate');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'rdv-gate';
+      box.className = 'dos-gate';
+      box.setAttribute('role', 'status');
+      document.querySelector('#rdv-step-1 .rdv-svc-grid').insertAdjacentElement('afterend', box);
+    }
+    const messages = { none: 'gate.text', other: 'gate.other', booked: 'gate.booked', draft: 'gate.draft', submitted: 'gate.pending', needs_fix: 'gate.fix' };
+    const start = gate.reason === 'none' || gate.reason === 'other';
+    const svc = { passeport: 'passeport_renouvellement', visa: 'visa', carte_consulaire: 'carte_consulaire' }[service];
+    const href = start ? 'dossier.html?service=' + encodeURIComponent(svc) : 'dossier.html';
+    box.innerHTML = '<b>' + D.esc(D.tr('gate.title')) + '</b><p>' + D.esc(D.tr(messages[gate.reason] || 'gate.text')) + '</p>' +
+      '<div><a class="btn btn-primary" href="' + href + '">' + D.esc(D.tr(start ? 'gate.cta' : 'gate.open')) + '</a></div>';
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function prefillFromDossier(d) {
+    const form = els['rdv-form'];
+    if (!form || !d) return;
+    [['firstName', d.firstName], ['lastName', d.lastName], ['email', d.email]].forEach(([name, value]) => {
+      const input = form.elements[name];
+      if (input && !input.value && value) input.value = value;
+    });
+  }
+
   // --- Step 1 ---
   function initStep1() {
     document.querySelectorAll('#rdv-step-1 .rdv-svc-card').forEach((card) => {
-      card.addEventListener('click', () => {
-        state.service = card.dataset.service;
+      card.addEventListener('click', async () => {
+        const service = card.dataset.service;
+        const gate = await dossierGate(service);
+        if (!gate.ok) { renderGate(gate, service); return; }
+        clearGate();
+        state.service = service;
+        state.dossierToken = gate.token || null;
+        prefillFromDossier(gate.dossier);
         renderSelectedServiceBadge();
         renderDocsBox();
         goToStep(2);
@@ -251,6 +313,7 @@
         email: fd.get('email'),
         phone: fd.get('phone'),
         country: fd.get('country'),
+        dossierToken: state.dossierToken || undefined,
       };
 
       els['rdv-submit-btn'].disabled = true;
@@ -264,7 +327,9 @@
         });
         const data = await res.json();
         if (!res.ok) {
-          els['rdv-form-error'].textContent = data.error === 'slot_taken' ? t('rdv.err.slot_taken') : t('rdv.err.generic');
+          const dossierError = typeof data.error === 'string' && data.error.indexOf('dossier_') === 0 && window.AmbaciDossier;
+          els['rdv-form-error'].textContent = data.error === 'slot_taken' ? t('rdv.err.slot_taken')
+            : dossierError ? window.AmbaciDossier.tr('gate.text') : t('rdv.err.generic');
           els['rdv-form-error'].hidden = false;
           els['rdv-submit-btn'].disabled = false;
           els['rdv-submit-btn'].textContent = t('rdv.s3.submit');

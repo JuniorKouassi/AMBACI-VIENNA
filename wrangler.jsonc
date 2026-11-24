@@ -17,6 +17,24 @@
       "database_id": "330b6116-0267-4a88-8c77-782e41c89ab6"
     }
   ],
+  // Private bucket for the documents citizens send before their appointment.
+  // Create it once with:  npx wrangler r2 bucket create ambaci-dossiers
+  "r2_buckets": [
+    {
+      "binding": "DOSSIERS",
+      "bucket_name": "ambaci-dossiers"
+    }
+  ],
+  // Erases expired dossiers every day at 03:15 UTC.
+  "triggers": {
+    "crons": ["15 3 * * *"]
+  },
+  "vars": {
+    // The document pre-submission feature is invisible until this is "true" AND the secret
+    // below is set:  npx wrangler secret put DOSSIER_LINK_SECRET  (same value on the
+    // administration platform, which e-mails the citizens' personal links).
+    "DOSSIERS_ENABLED": "false"
+  },
   "compatibility_flags": [
     "nodejs_compat"
   ]

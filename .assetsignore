@@ -11,3 +11,7 @@ package.json
 package-lock.json
 capacitor.config.json
 *.mp4
+worker
+migrations
+wrangler.jsonc
+store-screenshots
