@@ -25,12 +25,12 @@
   //   3. npx wrangler d1 execute ambaci-bookings --remote --file=migrations/0002_dossiers.sql
   //   4. npx wrangler secret put DOSSIER_LINK_SECRET   (same value on the administration platform)
   //   5. set DOSSIERS_ENABLED to "true" and deploy
-  // "r2_buckets": [
-  //   {
-  //     "binding": "DOSSIERS",
-  //     "bucket_name": "ambaci-dossiers"
-  //   }
-  // ],
+  "r2_buckets": [
+    {
+      "binding": "DOSSIERS",
+      "bucket_name": "ambaci-dossiers"
+    }
+  ],
   // Erases expired dossiers every day at 03:15 UTC.
   "triggers": {
     "crons": ["15 3 * * *"]
@@ -39,7 +39,7 @@
     // The document pre-submission feature is invisible until this is "true" AND the secret
     // below is set:  npx wrangler secret put DOSSIER_LINK_SECRET  (same value on the
     // administration platform, which e-mails the citizens' personal links).
-    "DOSSIERS_ENABLED": "false"
+    "DOSSIERS_ENABLED": "true"
   },
   "compatibility_flags": [
     "nodejs_compat"
