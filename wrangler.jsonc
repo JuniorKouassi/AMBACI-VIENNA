@@ -18,13 +18,19 @@
     }
   ],
   // Private bucket for the documents citizens send before their appointment.
-  // Create it once with:  npx wrangler r2 bucket create ambaci-dossiers
-  "r2_buckets": [
-    {
-      "binding": "DOSSIERS",
-      "bucket_name": "ambaci-dossiers"
-    }
-  ],
+  // Kept commented out until the bucket exists, so that deploying cannot fail. To switch the
+  // dossier feature on (see also DOSSIERS_ENABLED below):
+  //   1. npx wrangler r2 bucket create ambaci-dossiers
+  //   2. uncomment the block below
+  //   3. npx wrangler d1 execute ambaci-bookings --remote --file=migrations/0002_dossiers.sql
+  //   4. npx wrangler secret put DOSSIER_LINK_SECRET   (same value on the administration platform)
+  //   5. set DOSSIERS_ENABLED to "true" and deploy
+  // "r2_buckets": [
+  //   {
+  //     "binding": "DOSSIERS",
+  //     "bucket_name": "ambaci-dossiers"
+  //   }
+  // ],
   // Erases expired dossiers every day at 03:15 UTC.
   "triggers": {
     "crons": ["15 3 * * *"]
