@@ -7,6 +7,16 @@ import { handleDossierApi, bookingDossierCheck, attachBookingToDossier, purgeExp
 const CONSULAR_DAYS = [2, 3, 4, 5]; // Tue=2 ... Fri=5 (Sunday=0)
 const SLOT_TIMES = ['09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30'];
 
+// House rule: appointments need at least 2 days' notice.
+const MIN_NOTICE_DAYS = 2;
+
+// House rule: at most 7 appointments (persons) per day, whatever the number of free time slots.
+const MAX_BOOKINGS_PER_DAY = 7;
+function maxPerDay(env) {
+  const n = parseInt(env && env.MAX_BOOKINGS_PER_DAY, 10);
+  return n > 0 ? n : MAX_BOOKINGS_PER_DAY;
+}
+
 // Fixed public holidays (embassy closed) — extend yearly.
 const HOLIDAYS = new Set([
   '2026-01-01', '2026-05-01', '2026-08-07', '2026-10-26', '2026-12-25', '2026-12-26',
@@ -37,8 +47,11 @@ function todayInVienna() {
 
 function isConsularDay(dateStr) {
   const d = new Date(dateStr + 'T00:00:00Z');
-  // Same-day booking is never allowed — the earliest bookable day is tomorrow.
-  if (dateStr <= todayInVienna()) return false;
+  // Minimum notice: an appointment must be at least MIN_NOTICE_DAYS days ahead
+  // (Wednesday -> from Friday; Thursday/Friday -> the next open consular day).
+  const earliest = new Date(todayInVienna() + 'T00:00:00Z');
+  earliest.setUTCDate(earliest.getUTCDate() + MIN_NOTICE_DAYS);
+  if (dateStr < earliest.toISOString().slice(0, 10)) return false;
   return CONSULAR_DAYS.includes(d.getUTCDay()) && !HOLIDAYS.has(dateStr);
 }
 
@@ -56,7 +69,8 @@ async function handleAvailability(url, env) {
       'SELECT appt_time FROM bookings WHERE appt_date = ? AND status != ?'
     ).bind(date, 'cancelled').all();
     const booked = new Set(results.map((r) => r.appt_time));
-    const slots = SLOT_TIMES.map((t) => ({ time: t, available: !booked.has(t) }));
+    const dayFull = results.length >= maxPerDay(env);
+    const slots = SLOT_TIMES.map((t) => ({ time: t, available: !dayFull && !booked.has(t) }));
     return json({ date, slots });
   }
 
@@ -73,7 +87,7 @@ async function handleAvailability(url, env) {
     for (let d = 1; d <= total; d++) {
       const dateStr = `${month}-${String(d).padStart(2, '0')}`;
       const open = isConsularDay(dateStr);
-      const full = open && (bookedCount[dateStr] || 0) >= SLOT_TIMES.length;
+      const full = open && (bookedCount[dateStr] || 0) >= Math.min(SLOT_TIMES.length, maxPerDay(env));
       days.push({ date: dateStr, available: open && !full });
     }
     return json({ month, days });
@@ -244,14 +258,18 @@ async function handleCreateBooking(request, env) {
   const reference = genReference();
 
   try {
-    await env.DB.prepare(
+    // Atomic: the row is only inserted while the day still has fewer than the maximum.
+    const res = await env.DB.prepare(
       `INSERT INTO bookings (reference, service, appt_date, appt_time, first_name, last_name, email, phone, country, notes)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+       SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+       WHERE (SELECT COUNT(*) FROM bookings WHERE appt_date = ? AND status != 'cancelled') < ?`
     ).bind(
       reference, body.service, body.date, body.time,
       body.firstName.trim(), body.lastName.trim(), body.email.trim(),
-      body.phone.trim(), body.country.trim(), (body.notes || '').trim() || null
+      body.phone.trim(), body.country.trim(), (body.notes || '').trim() || null,
+      body.date, maxPerDay(env)
     ).run();
+    if (!res.meta || res.meta.changes === 0) return json({ error: 'day_full' }, 409);
   } catch (e) {
     if (String(e).includes('UNIQUE')) return json({ error: 'slot_taken' }, 409);
     console.error(e);
@@ -293,16 +311,29 @@ async function handleCreateBooking(request, env) {
       to: booking.email,
       subject: `Confirmation de rendez-vous — ${serviceLabel} — ${reference}`,
       html: `<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;">
+        <div style="background:#007A35;color:#fff;padding:14px 18px;border-radius:8px 8px 0 0;">
+          <div style="font-size:16px;font-weight:bold;">Ambassade de Côte d'Ivoire en Autriche</div>
+          <div style="font-size:12px;opacity:.9;">Service consulaire · Vienne — Ticket de rendez-vous</div>
+        </div>
         <h2 style="color:#0A1F10;">Rendez-vous confirmé</h2>
         <p>Bonjour ${escapeHtml(booking.first_name)},</p>
-        <p>Votre rendez-vous au service consulaire de l'Ambassade de Côte d'Ivoire en Autriche a bien été enregistré.</p>
+        <p>Votre rendez-vous au service consulaire de l'Ambassade de Côte d'Ivoire en Autriche a bien été enregistré. Conservez cet e-mail : il sert de ticket.</p>
         <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+          <tr><td style="padding:6px 0;color:#8A8570;">Titulaire</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(booking.last_name.toUpperCase())} ${escapeHtml(booking.first_name)}</td></tr>
           <tr><td style="padding:6px 0;color:#8A8570;">Service</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(serviceLabel)}</td></tr>
           <tr><td style="padding:6px 0;color:#8A8570;">Date</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(dateLabel)}</td></tr>
           <tr><td style="padding:6px 0;color:#8A8570;">Heure</td><td style="padding:6px 0;font-weight:bold;">${escapeHtml(body.time)}</td></tr>
           <tr><td style="padding:6px 0;color:#8A8570;">Référence</td><td style="padding:6px 0;font-weight:bold;color:#D96C00;">${escapeHtml(reference)}</td></tr>
         </table>
-        <p>Merci de vous présenter 10 minutes avant l'heure prévue, muni d'une pièce d'identité et des documents requis pour votre démarche.</p>
+        <div style="background:#FFF0E0;padding:12px 16px;border-radius:8px;">
+          <strong>À apporter</strong>
+          <ul style="margin:6px 0 0;padding-left:18px;">
+            <li>Une pièce d'identité en cours de validité et ce ticket (papier ou téléphone).</li>
+            <li>Les originaux des documents requis pour votre démarche.</li>
+            <li>Présentez-vous 10 minutes avant l'heure indiquée.</li>
+          </ul>
+        </div>
+        <p style="font-size:13px;">Adresse : Michael-Neumann-Gasse 2, 3ème étage, 1190 Wien</p>
         <p style="color:#8A8570;font-size:13px;">Ambassade de la République de Côte d'Ivoire en Autriche — Michael-Neumann-Gasse 2, 1190 Wien</p>
       </div>`,
     }).catch((e) => console.error(e));

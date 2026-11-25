@@ -298,9 +298,61 @@
               <div data-i18n="rdv.s4.note">Vous recevrez un rappel par e-mail 48h avant votre rendez-vous. Pensez à apporter tous les documents requis pour votre démarche.</div>
             </div>
 
+            <div class="rdv-print-warn" id="rdv-print-warn" role="alert">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18h.01"></path></svg>
+              <div>
+                <strong data-i18n="rdv.s4.warn.title">Imprimez votre ticket avant de quitter cette page.</strong><br>
+                <span data-i18n="rdv.s4.warn.text">Vous en aurez besoin le jour du rendez-vous. Une fois la page fermée, vous ne pourrez plus le réimprimer ici.</span>
+              </div>
+            </div>
+
             <div class="rdv-confirm-actions">
+              <button type="button" class="btn btn-primary" id="rdv-print" data-i18n="rdv.s4.print">Imprimer mon ticket</button>
               <button type="button" class="btn btn-outline" id="rdv-add-cal" data-i18n="rdv.s4.addcal">Ajouter à mon calendrier</button>
-              <a href="index.html" class="btn btn-ghost" data-i18n="rdv.s4.home">Retour à l'accueil</a>
+              <a href="index.html" class="btn btn-ghost" id="rdv-home" data-i18n="rdv.s4.home">Retour à l'accueil</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Printable ticket: hidden on screen, the only thing shown when printing -->
+        <div class="rdv-ticket" id="rdv-ticket" aria-hidden="true">
+          <div class="tk-head">
+            <div class="tk-flag"><i></i><i></i><i></i></div>
+            <div><b data-i18n="rdv.tk.title">Ambassade de Côte d'Ivoire en Autriche</b><span data-i18n="rdv.tk.sub">Service consulaire · Vienne</span></div>
+          </div>
+          <div class="tk-main">
+            <div>
+              <small data-i18n="rdv.tk.when">Votre rendez-vous</small>
+              <div class="tk-date" id="tk-date"></div>
+              <div class="tk-time" id="tk-time"></div>
+            </div>
+            <div class="tk-qr" id="tk-qr"></div>
+          </div>
+          <div class="tk-cut"></div>
+          <div class="tk-info">
+            <div><small data-i18n="rdv.tk.ref">Référence</small><div class="tk-mono" id="tk-ref"></div></div>
+            <div><small data-i18n="rdv.tk.service">Démarche</small><div id="tk-service"></div></div>
+            <div><small data-i18n="rdv.tk.holder">Titulaire</small><div id="tk-holder"></div></div>
+            <div><small data-i18n="rdv.tk.addr">Adresse</small><div>Michael-Neumann-Gasse 2, 3ème étage, 1190 Wien</div></div>
+          </div>
+          <div class="tk-foot">
+            <b data-i18n="rdv.tk.bring">À apporter</b>
+            <ul>
+              <li data-i18n="rdv.tk.b1">Une pièce d'identité en cours de validité et ce ticket (papier ou téléphone).</li>
+              <li data-i18n="rdv.tk.b2">Les originaux des documents requis pour votre démarche.</li>
+              <li data-i18n="rdv.tk.b3">Présentez-vous 10 minutes avant l'heure indiquée.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Shown when the visitor tries to leave without having printed -->
+        <div class="rdv-leave" id="rdv-leave" hidden>
+          <div class="rdv-leave-box" role="dialog" aria-modal="true" aria-labelledby="rdv-leave-title">
+            <h3 id="rdv-leave-title" data-i18n="rdv.leave.title">Votre ticket n'est pas imprimé</h3>
+            <p data-i18n="rdv.leave.text">Sans ce ticket, vous risquez de ne pas retrouver votre référence le jour du rendez-vous.</p>
+            <div class="rdv-leave-actions">
+              <button type="button" class="btn btn-primary" id="rdv-leave-print" data-i18n="rdv.leave.print">Imprimer maintenant</button>
+              <button type="button" class="btn btn-outline" id="rdv-leave-go" data-i18n="rdv.leave.go">Quitter quand même</button>
             </div>
           </div>
         </div>
@@ -372,6 +424,7 @@
   </nav>
   <script src="js/main.js"></script>
   <script src="js/dossier-core.js"></script>
-  <script src="js/booking.js"></script>
+  <script src="js/qrcode.min.js"></script>
+<script src="js/booking.js"></script>
 </body>
 </html>

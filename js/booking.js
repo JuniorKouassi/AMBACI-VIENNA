@@ -316,6 +316,8 @@
         dossierToken: state.dossierToken || undefined,
       };
 
+      state.holder = `${String(fd.get('lastName') || '').trim().toUpperCase()} ${String(fd.get('firstName') || '').trim()}`.trim();
+
       els['rdv-submit-btn'].disabled = true;
       els['rdv-submit-btn'].textContent = t('rdv.submitting');
 
@@ -328,7 +330,7 @@
         const data = await res.json();
         if (!res.ok) {
           const dossierError = typeof data.error === 'string' && data.error.indexOf('dossier_') === 0 && window.AmbaciDossier;
-          els['rdv-form-error'].textContent = data.error === 'slot_taken' ? t('rdv.err.slot_taken')
+          els['rdv-form-error'].textContent = (data.error === 'slot_taken' || data.error === 'day_full') ? t('rdv.err.slot_taken')
             : dossierError ? window.AmbaciDossier.tr('gate.text') : t('rdv.err.generic');
           els['rdv-form-error'].hidden = false;
           els['rdv-submit-btn'].disabled = false;
@@ -352,7 +354,105 @@
     els['rdv-c-time'].textContent = state.time;
     els['rdv-c-ref'].textContent = data.reference;
     state.lastBooking = data;
+    buildTicket(data);
+    armLeaveGuard();
     goToStep(4);
+  }
+
+  // --- Printable ticket + "print before leaving" guard ---
+  const isNativeApp = () => !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  const guard = { active: false, printed: false, href: null };
+
+  function qrSvg(text) {
+    try {
+      const qr = window.AmbaciQR.create(text, { errorCorrectionLevel: 'M' });
+      const n = qr.modules.size, d = qr.modules.data;
+      let path = '';
+      for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (d[y * n + x]) path += `M${x + 2} ${y + 2}h1v1h-1z`;
+      return `<svg viewBox="0 0 ${n + 4} ${n + 4}" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#fff"/><path d="${path}" fill="#1a1a1a"/></svg>`;
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function buildTicket(data) {
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set('tk-date', formatDateLabel(state.date));
+    set('tk-time', state.time);
+    set('tk-ref', data.reference);
+    set('tk-service', t(SERVICE_LABEL_KEYS[state.service]));
+    set('tk-holder', state.holder || '');
+    const qr = document.getElementById('tk-qr');
+    if (qr) qr.innerHTML = qrSvg(data.reference);
+    // Printing shows only this element: it must sit directly under <body>.
+    const tk = document.getElementById('rdv-ticket');
+    if (tk && tk.parentNode !== document.body) document.body.appendChild(tk);
+  }
+
+  function printTicket() {
+    document.body.classList.add('is-ticket-print');
+    window.addEventListener('afterprint', () => document.body.classList.remove('is-ticket-print'), { once: true });
+    markPrinted();
+    setTimeout(() => window.print(), 60);
+  }
+
+  function markPrinted() {
+    guard.printed = true;
+    const warn = document.getElementById('rdv-print-warn');
+    if (warn) warn.classList.add('is-done');
+    const home = document.getElementById('rdv-home');
+    if (home) home.classList.remove('is-locked');
+  }
+
+  function showLeaveModal(show) {
+    const m = document.getElementById('rdv-leave');
+    if (m) m.hidden = !show;
+  }
+
+  function armLeaveGuard() {
+    const printBtn = document.getElementById('rdv-print');
+    const warn = document.getElementById('rdv-print-warn');
+    // The phone app has no print dialog: the ticket is not offered there.
+    if (isNativeApp()) {
+      if (printBtn) printBtn.hidden = true;
+      if (warn) warn.hidden = true;
+      return;
+    }
+    guard.active = true;
+    guard.printed = false;
+    if (warn) warn.classList.remove('is-done');
+    const home = document.getElementById('rdv-home');
+    if (home) home.classList.add('is-locked');
+  }
+
+  function initTicket() {
+    const printBtn = document.getElementById('rdv-print');
+    if (printBtn) printBtn.addEventListener('click', printTicket);
+    const leavePrint = document.getElementById('rdv-leave-print');
+    if (leavePrint) leavePrint.addEventListener('click', () => { showLeaveModal(false); printTicket(); });
+    const leaveGo = document.getElementById('rdv-leave-go');
+    if (leaveGo) leaveGo.addEventListener('click', () => {
+      guard.active = false;
+      showLeaveModal(false);
+      if (guard.href) window.location.href = guard.href;
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') showLeaveModal(false); });
+
+    // Refresh / close tab / typed address: the browser asks for confirmation (its own wording).
+    window.addEventListener('beforeunload', (e) => {
+      if (guard.active && !guard.printed) { e.preventDefault(); e.returnValue = ''; }
+    });
+    // Clicks on links of the site: our own reminder, with a print button.
+    document.addEventListener('click', (e) => {
+      if (!guard.active || guard.printed) return;
+      const a = e.target.closest && e.target.closest('a[href]');
+      if (!a || a.target === '_blank') return;
+      const href = a.getAttribute('href') || '';
+      if (!href || href.charAt(0) === '#' || /^(javascript:|mailto:|tel:)/i.test(href)) return;
+      e.preventDefault();
+      guard.href = a.href;
+      showLeaveModal(true);
+    }, true);
   }
 
   function pad(n) { return String(n).padStart(2, '0'); }
@@ -393,6 +493,7 @@
     initStep2();
     initStep3();
     initStep4();
+    initTicket();
     initStepperNav();
   });
 
