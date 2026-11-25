@@ -1775,3 +1775,21 @@ button.rdv-svc-card:focus-visible { outline: 3px solid var(--orange); outline-of
   body.is-ticket-print > *:not(.rdv-ticket) { display: none !important; }
   body.is-ticket-print .rdv-ticket { display: block !important; width: 138mm; margin: 0; border-radius: 0; }
 }
+
+/* ============================================================
+   ASSISTANT VIRTUEL — carte de la page Contact (plus de bouton flottant)
+   The chat widget's round bubble and greeting are hidden; the card opens the chat.
+   ============================================================ */
+#chat-widget-push-to-talk, #welcomeMessages { display: none !important; }
+.ast-card { margin-top: var(--space-lg); display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-lg); align-items: center; background: var(--green-pale, #e0f3e8); border: 1px solid #b9e2c8; border-radius: var(--radius-lg); padding: var(--space-lg); }
+.ast-card[hidden] { display: none; }
+.ast-bot { width: 56px; height: 56px; border-radius: 50%; background: var(--green-dark); display: grid; place-items: center; flex: none; }
+.ast-tx h3 { margin: 0 0 2px; font-size: 1.15rem; }
+.ast-tx p { margin: 0; color: var(--grey-700); font-size: .9rem; }
+.ast-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dark); color: #fff; border: 0; border-radius: 999px; padding: .7rem 1.25rem; font: 600 .9rem inherit; font-family: inherit; cursor: pointer; white-space: nowrap; }
+.ast-btn:hover { background: var(--green); }
+@media (max-width: 640px) {
+  .ast-card { grid-template-columns: auto 1fr; padding: var(--space-md); }
+  .ast-bot { width: 44px; height: 44px; }
+  .ast-btn { grid-column: 1 / -1; justify-content: center; }
+}

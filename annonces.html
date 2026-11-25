@@ -877,47 +877,6 @@
     <a href="decouvrir-autriche.html" class="bottom-nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span>Découvrir</span></a>
   </nav>
   <script src="js/main.js"></script>
-  <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="cmppvtl84043jqo1pmmppwavq"></script>
-  <script>
-    (function() {
-      var skip = ['whatsapp-fab','wa-label','bottom-nav','site-header','alert-banner','top-bar','main-nav','menu-toggle'];
-      function pos(el) {
-        if (!el || el.nodeType !== 1) return;
-        if (skip.some(function(c){ return el.classList && el.classList.contains(c); })) return;
-        if (['main-nav','menu-toggle'].indexOf(el.id) > -1) return;
-        var s = window.getComputedStyle(el);
-        if (s.position !== 'fixed') return;
-        var mob = window.innerWidth <= 768;
-        el.style.setProperty('bottom', mob ? 'calc(68px + 0.75rem + 58px + 1rem)' : 'calc(2rem + 90px + 1rem)', 'important');
-        el.style.setProperty('right', mob ? '1rem' : '2rem', 'important');
-      }
-      new MutationObserver(function(ms) {
-        ms.forEach(function(m) {
-          m.addedNodes.forEach(function(n) { setTimeout(function(){ pos(n); }, 400); });
-        });
-      }).observe(document.body, { childList: true });
-      window.addEventListener('load', function() {
-        [500, 1500].forEach(function(t) {
-          setTimeout(function() { Array.from(document.body.children).forEach(pos); }, t);
-        });
-      });
-      if (window.innerWidth <= 768) {
-        new MutationObserver(function(ms) {
-          ms.forEach(function(m) {
-            m.addedNodes.forEach(function(n) {
-              if (n.nodeType !== 1) return;
-              var iframe = n.tagName === 'IFRAME' ? n : n.querySelector('iframe');
-              if (!iframe) return;
-              iframe.style.setProperty('width',      'min(calc(100vw - 2rem), 340px)', 'important');
-              iframe.style.setProperty('height',     'min(60vh, 480px)',                'important');
-              iframe.style.setProperty('max-width',  '340px',                           'important');
-              iframe.style.setProperty('max-height', '480px',                           'important');
-            });
-          });
-        }).observe(document.body, { childList: true, subtree: true });
-      }
-    })();
-  </script>
 </body>
 </html>
 
