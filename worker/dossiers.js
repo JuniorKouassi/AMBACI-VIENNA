@@ -36,6 +36,8 @@ const DOC = {
   residence: () => doc('residence', true, t('Justificatif de résidence', 'Meldebestätigung / Wohnsitznachweis', 'Proof of residence'), t('Moins de 3 mois', 'Nicht älter als 3 Monate', 'Less than 3 months old')),
   photo: () => doc('photo', true, t('Photo d’identité', 'Passfoto', 'ID photo'), t('Couleur, fond blanc, visage dégagé', 'Farbe, weißer Hintergrund, Gesicht frei', 'Colour, white background, face uncovered')),
   payment: () => doc('payment', false, t('Preuve de paiement des frais consulaires', 'Zahlungsnachweis der Konsulargebühren', 'Proof of payment of the consular fees'), t('Si vous avez déjà payé en ligne', 'Falls bereits online bezahlt', 'If you have already paid online')),
+  paymentRequired: () => doc('payment', true, t('Preuve de paiement des frais consulaires', 'Zahlungsnachweis der Konsulargebühren', 'Proof of payment of the consular fees')),
+  form: (label) => doc('form', true, label, t('À télécharger dans la page Téléchargements', 'Auf der Seite „Downloads“ herunterladen', 'Download it from the Downloads page')),
 };
 
 export const SERVICES = {
@@ -97,13 +99,104 @@ export const SERVICES = {
       DOC.payment(),
     ],
   },
+
+  // ---- Légalisation et certification ----
+  legalisation_actes: {
+    booking: 'legalisation',
+    label: t('Légalisation d’actes ou de signature (particulier)', 'Beglaubigung von Urkunden oder Unterschriften (Privatperson)', 'Legalisation of documents or signature (individual)'),
+    docs: [
+      DOC.form(t('Formulaire de demande de légalisation', 'Antragsformular für die Beglaubigung', 'Legalisation request form')),
+      doc('to_legalise', true, t('Original du document à légaliser', 'Original des zu beglaubigenden Dokuments', 'Original of the document to legalise'), t('Acte portant votre signature, ou certificat de célibat, casier judiciaire, certificat de nationalité, extrait d’acte de naissance, procuration, autorisation parentale, autre acte administratif ivoirien', 'Dokument mit Ihrer Unterschrift oder Ledigkeitsbescheinigung, Führungszeugnis, Staatsangehörigkeitsbescheinigung, Geburtsurkunde, Vollmacht, Elterneinverständnis, andere ivorische Verwaltungsurkunde', 'Document bearing your signature, or certificate of celibacy, criminal record, nationality certificate, birth certificate extract, power of attorney, parental authorisation, other administrative document issued in Côte d’Ivoire')),
+      doc('id_principal', true, t('Copie du passeport ou de la pièce d’identité du mandant', 'Kopie des Reisepasses oder Ausweises des Vollmachtgebers', 'Copy of the passport or ID of the principal')),
+      doc('id_agent', false, t('Copie du passeport ou de la pièce d’identité du mandataire', 'Kopie des Reisepasses oder Ausweises des Bevollmächtigten', 'Copy of the passport or ID of the agent'), t('Pour une procuration', 'Bei einer Vollmacht', 'For a power of attorney')),
+      DOC.paymentRequired(),
+    ],
+  },
+  legalisation_entreprises: {
+    booking: 'legalisation',
+    label: t('Légalisation de documents pour entreprises', 'Beglaubigung von Dokumenten für Unternehmen', 'Legalisation of documents for companies'),
+    docs: [
+      doc('company_doc', true, t('Document de l’entreprise à légaliser', 'Zu beglaubigendes Unternehmensdokument', 'Company document to legalise')),
+      doc('id_representative', true, t('Pièce d’identité du représentant', 'Ausweis des Vertreters', 'ID of the representative')),
+      DOC.paymentRequired(),
+    ],
+  },
+  certifier_conforme: {
+    booking: 'legalisation',
+    label: t('Certification conforme', 'Beglaubigte Kopie', 'Certified true copy'),
+    docs: [
+      doc('original', true, t('Document original', 'Originaldokument', 'Original document')),
+      doc('copy', true, t('Copie à certifier conforme', 'Zu beglaubigende Kopie', 'Copy to certify')),
+      doc('id_copy', true, t('Pièce d’identité', 'Ausweisdokument', 'Identity document')),
+      DOC.paymentRequired(),
+    ],
+  },
+
+  // ---- État civil et mariage ----
+  certificat_capacite_mariage: {
+    booking: 'etat_civil',
+    label: t('Certificat de capacité à mariage', 'Ehefähigkeitszeugnis', 'Marriage capacity certificate'),
+    docs: [
+      DOC.form(t('Formulaire de demande dûment rempli et signé', 'Ausgefülltes und unterschriebenes Antragsformular', 'Request form completed and signed')),
+      doc('birth_marriage', true, t('Extrait d’acte de naissance « En vue de mariage »', 'Geburtsurkunden-Auszug „Zur Eheschließung“', 'Birth certificate extract marked “For marriage”'), t('Légalisé par le Ministère de l’Intérieur et le Ministère des Affaires étrangères', 'Beglaubigt durch das Innenministerium und das Außenministerium', 'Legalised by the Ministry of the Interior and the Ministry of Foreign Affairs')),
+      doc('celibacy', true, t('Certificat de célibat', 'Ledigkeitsbescheinigung', 'Certificate of celibacy'), t('Légalisé par le Ministère de l’Intérieur et le Ministère des Affaires étrangères', 'Beglaubigt durch das Innenministerium und das Außenministerium', 'Legalised by the Ministry of the Interior and the Ministry of Foreign Affairs')),
+      doc('passport_copy', true, t('Copie du passeport en cours de validité', 'Kopie des gültigen Reisepasses', 'Copy of a valid passport')),
+      doc('residence_cert', true, t('Attestation de résidence', 'Wohnsitzbescheinigung', 'Certificate of residence')),
+      DOC.paymentRequired(),
+    ],
+  },
+  certificat_de_vie: {
+    booking: 'etat_civil',
+    label: t('Certificat de vie', 'Lebensbescheinigung', 'Certificate of life'),
+    docs: [
+      doc('id_copy', true, t('Pièce d’identité ou passeport', 'Ausweis oder Reisepass', 'ID or passport')),
+      DOC.paymentRequired(),
+    ],
+  },
+  celebration_mariage: {
+    booking: 'etat_civil',
+    label: t('Célébration de mariage', 'Eheschließung', 'Marriage ceremony'),
+    docs: [
+      doc('birth_spouses', true, t('Extrait d’acte de naissance de chacun des futurs époux « En vue de mariage »', 'Geburtsurkunden-Auszug jedes künftigen Ehepartners „Zur Eheschließung“', 'Birth certificate extract of each future spouse, marked “For marriage”'), t('Légalisé par le Ministère de l’Intérieur et le Ministère des Affaires étrangères', 'Beglaubigt durch das Innenministerium und das Außenministerium', 'Legalised by the Ministry of the Interior and the Ministry of Foreign Affairs')),
+    ],
+  },
+
+  // ---- Autres démarches ----
+  authentification_permis: {
+    booking: 'autre',
+    label: t('Authentification de permis de conduire', 'Beglaubigung des Führerscheins', 'Driving licence authentication'),
+    docs: [
+      doc('consular_card', true, t('Carte consulaire', 'Konsularkarte', 'Consular card')),
+      doc('licence_copy', true, t('Copie du permis de conduire (nouvelle formule)', 'Kopie des Führerscheins (neues Format)', 'Copy of the driving licence (new format)')),
+      DOC.form(t('Formulaire de demande d’actes consulaires', 'Antragsformular für konsularische Urkunden', 'Consular acts request form')),
+      doc('id_nationality', true, t('CNI, certificat de nationalité ou passeport en cours de validité', 'Personalausweis, Staatsangehörigkeitsbescheinigung oder gültiger Reisepass', 'National ID, nationality certificate or valid passport'), t('Certificat de nationalité de moins de 2 ans, authentifié par le Ministère de la Justice', 'Staatsangehörigkeitsbescheinigung nicht älter als 2 Jahre, beglaubigt durch das Justizministerium', 'Nationality certificate less than 2 years old, authenticated by the Ministry of Justice')),
+      doc('residence_permit', true, t('Titre de séjour en cours de validité', 'Gültiger Aufenthaltstitel', 'Valid residence permit'), t('Ou preuve des démarches en cours pour l’obtenir', 'Oder Nachweis des laufenden Antrags', 'Or proof that the application is under way')),
+      doc('address_proof', true, t('Justificatif de domicile', 'Wohnsitznachweis', 'Proof of address'), t('Facture ou quittance de loyer', 'Rechnung oder Mietquittung', 'Bill or rent receipt')),
+      doc('hosting', false, t('Attestation d’hébergement légalisée et pièce d’identité de l’hébergeant(e)', 'Beglaubigte Unterkunftsbestätigung und Ausweis des Gastgebers', 'Legalised accommodation certificate and ID of the host'), t('Si vous habitez chez un tiers', 'Falls Sie bei Dritten wohnen', 'If you live with someone else')),
+      doc('payment', true, t('Reçu de paiement des droits de chancellerie', 'Zahlungsbeleg der Kanzleigebühren', 'Receipt for the chancellery fees')),
+    ],
+  },
+  renonciation_nationalite: {
+    booking: 'autre',
+    label: t('Attestation de renonciation à la nationalité ivoirienne', 'Bescheinigung über den Verzicht auf die ivorische Staatsangehörigkeit', 'Renunciation of Ivorian nationality'),
+    docs: [
+      doc('letter', true, t('Demande manuscrite de renonciation', 'Handschriftlicher Verzichtsantrag', 'Handwritten renunciation request'), t('Adressée au Ministre de la Justice', 'Gerichtet an den Justizminister', 'Addressed to the Minister of Justice')),
+      doc('passport', true, t('Passeport ivoirien', 'Ivorischer Reisepass', 'Ivorian passport')),
+      doc('civil_acts', true, t('Actes de l’état civil vous concernant', 'Personenstandsurkunden zu Ihrer Person', 'Civil status documents concerning you')),
+      doc('nationality_cert', true, t('Certificat de nationalité ivoirienne', 'Ivorische Staatsangehörigkeitsbescheinigung', 'Ivorian nationality certificate')),
+      doc('naturalisation', true, t('Photocopie légalisée du certificat de naturalisation', 'Beglaubigte Kopie der Einbürgerungsurkunde', 'Legalised photocopy of the naturalisation certificate')),
+    ],
+  },
 };
 
-// booking service -> dossier services that unlock it
+// booking service -> dossier services that unlock it. Every kind of appointment needs a validated dossier.
 export const BOOKING_NEEDS_DOSSIER = {
   passeport: ['passeport_premiere', 'passeport_renouvellement', 'passeport_urgence'],
   visa: ['visa'],
   carte_consulaire: ['carte_consulaire'],
+  legalisation: ['legalisation_actes', 'legalisation_entreprises', 'certifier_conforme'],
+  etat_civil: ['certificat_capacite_mariage', 'certificat_de_vie', 'celebration_mariage'],
+  autre: ['authentification_permis', 'renonciation_nationalite'],
 };
 
 const CORS = {

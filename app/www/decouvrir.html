@@ -83,8 +83,8 @@
       <span class="alert-icon">⚠️</span>
       <p class="alert-text">
         <strong data-i18n="alert.important">Information importante :</strong>
-        <span data-i18n="alert.text">La prise de rendez-vous est obligatoire pour toute démarche consulaire.</span>
-        <a href="rendez-vous.html" style="color:var(--dark);font-weight:600;text-decoration:underline;" data-i18n="alert.link">Prendre rendez-vous →</a>
+        <span data-dos-notice data-i18n="alert.text">La prise de rendez-vous est obligatoire pour toute démarche consulaire.</span>
+        <a data-dos-link href="rendez-vous.html" style="color:var(--dark);font-weight:600;text-decoration:underline;" data-i18n="alert.link">Prendre rendez-vous →</a>
       </p>
       <button class="alert-close" id="alert-close" aria-label="Fermer l'annonce">×</button>
     </div>
@@ -553,7 +553,7 @@
         <div class="cta-actions">
           <a href="https://wa.me/436765373926" target="_blank" rel="noopener noreferrer" class="btn btn-white" data-i18n="pdec.cta.btn.whatsapp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Contacter sur WhatsApp</a>
           <a href="contact.html" class="btn btn-ghost" data-i18n="pdec.cta.btn.contact">Page Contact</a>
-          <a href="rendez-vous.html" class="btn btn-ghost" data-i18n="pdec.cta.btn.rdv">Prendre rendez-vous</a>
+          <a data-dos-link href="rendez-vous.html" class="btn btn-ghost" data-i18n="pdec.cta.btn.rdv">Prendre rendez-vous</a>
         </div>
       </div>
     </section>
@@ -630,5 +630,7 @@
     <a href="decouvrir.html" class="bottom-nav-item active"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-i18n="nav.bnav.discover">Découvrir</span></a>
   </nav>
   <script src="js/main.js"></script>
+  <script src="js/dossier-core.js"></script>
+  <script src="js/dossier-entry.js"></script>
 </body>
 </html>

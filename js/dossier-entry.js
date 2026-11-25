@@ -77,9 +77,57 @@
     D.onLangChange(show);
   }
 
+  // The dossier behind this device's personal link, or null. Shared by every entry point on the page.
+  var infoPromise = null;
+  function getInfo() {
+    if (!infoPromise) {
+      var stored = D.getStored();
+      infoPromise = stored && stored.token
+        ? D.me(stored.token).catch(function (r) { if (r && r.status === 401) D.clearStored(); return null; })
+        : Promise.resolve(null);
+    }
+    return infoPromise;
+  }
+
+  // What the "appointment" buttons say and where they lead, depending on the visitor's dossier:
+  // nothing sent -> send documents; sent -> track; to correct -> fix; approved -> book.
+  function linkState(info) {
+    if (!info) return { key: 'btn.send', href: 'dossier.html' };
+    if (info.status === 'validated' && info.canBook && !info.bookingReference) return { key: 'btn.book', href: 'rendez-vous.html' };
+    if (info.status === 'submitted' || info.status === 'validated') return { key: 'btn.track', href: 'dossier.html' };
+    if (info.status === 'needs_fix') return { key: 'btn.fix', href: 'dossier.html' };
+    return { key: 'btn.continue', href: 'dossier.html' };
+  }
+
+  // Every "Prendre rendez-vous" button carries data-dos-link; the notice bar text carries data-dos-notice.
+  // Their data-i18n is removed so the general translator does not put the old words back.
+  function smartLinks() {
+    var links = document.querySelectorAll('[data-dos-link]');
+    var notes = document.querySelectorAll('[data-dos-notice]');
+    if (!links.length && !notes.length) return;
+    links.forEach(function (a) {
+      if (a.__arrow === undefined) a.__arrow = /→\s*$/.test(a.textContent);
+      a.removeAttribute('data-i18n');
+    });
+    notes.forEach(function (n) { n.removeAttribute('data-i18n'); });
+    var info = null;
+    function draw() {
+      var st = linkState(info);
+      links.forEach(function (a) {
+        a.setAttribute('href', st.href);
+        a.textContent = tr(st.key) + (a.__arrow ? ' →' : '');
+      });
+      notes.forEach(function (n) { n.textContent = tr(st.key === 'btn.book' ? 'notice.ready' : 'notice.docs'); });
+    }
+    draw();
+    D.onLangChange(draw);
+    getInfo().then(function (d) { info = d; draw(); });
+  }
+
   D.config().then(function (cfg) {
     if (!cfg.enabled) return;
     D.loadCss();
+    smartLinks();
     if (page === 'index' || page === '') home();
     else if (page === 'services') services();
     else if (page === 'politique-de-confidentialite') privacy();

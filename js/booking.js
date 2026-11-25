@@ -80,12 +80,14 @@
   }
 
   // --- Dossier gate ---
-  // Passport, visa and consular-card appointments need a dossier validated by the consular
-  // service (only when the dossier feature is switched on on the server).
+  // Every kind of appointment needs a dossier validated by the consular service
+  // (only when the dossier feature is switched on on the server).
+  let gateCfg = null;
   async function dossierGate(service) {
     const D = window.AmbaciDossier;
     if (!D) return { ok: true };
     const cfg = await D.config();
+    gateCfg = cfg;
     if (!cfg.enabled || !cfg.bookingNeedsDossier || !cfg.bookingNeedsDossier[service]) return { ok: true };
     const stored = D.getStored();
     if (!stored || !stored.token) return { ok: false, reason: 'none' };
@@ -118,7 +120,8 @@
     }
     const messages = { none: 'gate.text', other: 'gate.other', booked: 'gate.booked', draft: 'gate.draft', submitted: 'gate.pending', needs_fix: 'gate.fix' };
     const start = gate.reason === 'none' || gate.reason === 'other';
-    const svc = { passeport: 'passeport_renouvellement', visa: 'visa', carte_consulaire: 'carte_consulaire' }[service];
+    const need = (gateCfg && gateCfg.bookingNeedsDossier && gateCfg.bookingNeedsDossier[service]) || [];
+    const svc = service === 'passeport' ? 'passeport_renouvellement' : need[0];
     const href = start ? 'dossier.html?service=' + encodeURIComponent(svc) : 'dossier.html';
     box.innerHTML = '<b>' + D.esc(D.tr('gate.title')) + '</b><p>' + D.esc(D.tr(messages[gate.reason] || 'gate.text')) + '</p>' +
       '<div><a class="btn btn-primary" href="' + href + '">' + D.esc(D.tr(start ? 'gate.cta' : 'gate.open')) + '</a></div>';

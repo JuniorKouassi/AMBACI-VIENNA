@@ -47,7 +47,15 @@
   function startView() {
     var f = S.form, svcs = S.cfg.services;
     if (!svcs[f.service]) f.service = Object.keys(svcs)[0];
-    var opts = Object.keys(svcs).map(function (k) { return '<option value="' + esc(k) + '"' + (k === f.service ? ' selected' : '') + '>' + esc(D.pick(svcs[k].label)) + '</option>'; }).join('');
+    // Services are grouped by kind of appointment (passport, consular card, visa, civil status, legalisation, other).
+    var groups = ['passeport', 'carte_consulaire', 'visa', 'etat_civil', 'legalisation', 'autre'];
+    var opts = groups.map(function (g) {
+      var keys = Object.keys(svcs).filter(function (k) { return svcs[k].booking === g; });
+      if (!keys.length) return '';
+      return '<optgroup label="' + esc(tr('grp.' + g)) + '">' + keys.map(function (k) {
+        return '<option value="' + esc(k) + '"' + (k === f.service ? ' selected' : '') + '>' + esc(D.pick(svcs[k].label)) + '</option>';
+      }).join('') + '</optgroup>';
+    }).join('');
     var current = S.dossier ? '<div class="dos-banner wait"><span>' + esc(tr('start.current', { ref: S.dossier.reference })) + '</span> <button type="button" class="dos-btn-link" data-act="open-current">' + esc(tr('start.open')) + '</button></div>' : '';
     return current +
       '<form class="dos-card dos-form" id="start-form" novalidate>' +
