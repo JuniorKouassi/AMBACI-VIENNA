@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lecteur vidéo</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111; overflow: hidden; }
+  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+</style>
+</head>
+<body>
+<!--
+  Small player page used by the mobile app. The app's own pages come from the phone's storage, which
+  has no web address, and YouTube then refuses to play embedded videos (error 153). The app puts
+  this page (served from the embassy site, so it has a real https address) in the iframe instead,
+  and this page embeds the YouTube video. Only YouTube video ids are accepted.
+-->
+<script>
+(function () {
+  var m = /[?&]v=([\w-]{11})(?:&|$)/.exec(location.search);
+  if (!m) return;
+  var f = document.createElement('iframe');
+  f.src = 'https://www.youtube.com/embed/' + m[1] +
+    '?playsinline=1&rel=0&modestbranding=1&origin=' + encodeURIComponent(location.origin);
+  f.title = 'YouTube';
+  f.setAttribute('allow', 'autoplay; encrypted-media; fullscreen; picture-in-picture');
+  f.setAttribute('allowfullscreen', '');
+  document.body.appendChild(f);
+})();
+</script>
+</body>
+</html>
