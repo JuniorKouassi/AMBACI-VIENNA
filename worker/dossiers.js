@@ -40,6 +40,18 @@ const DOC = {
   form: (label) => doc('form', true, label, t('À télécharger dans la page Téléchargements', 'Auf der Seite „Downloads“ herunterladen', 'Download it from the Downloads page')),
 };
 
+// Same documents for: authentification de permis, légalisation de documents pour entreprises, certifier conforme.
+const DOCS_PERMIS_LIST = () => [
+    doc('consular_card', true, t('Carte consulaire', 'Konsularkarte', 'Consular card')),
+    doc('licence_copy', true, t('Copie du permis de conduire (nouvelle formule)', 'Kopie des Führerscheins (neues Format)', 'Copy of the driving licence (new format)')),
+    DOC.form(t('Formulaire de demande d’actes consulaires', 'Antragsformular für konsularische Urkunden', 'Consular acts request form')),
+    doc('id_nationality', true, t('CNI, certificat de nationalité ou passeport en cours de validité', 'Personalausweis, Staatsangehörigkeitsbescheinigung oder gültiger Reisepass', 'National ID, nationality certificate or valid passport'), t('Certificat de nationalité de moins de 2 ans, authentifié par le Ministère de la Justice', 'Staatsangehörigkeitsbescheinigung nicht älter als 2 Jahre, beglaubigt durch das Justizministerium', 'Nationality certificate less than 2 years old, authenticated by the Ministry of Justice')),
+    doc('residence_permit', true, t('Titre de séjour en cours de validité', 'Gültiger Aufenthaltstitel', 'Valid residence permit'), t('Ou preuve des démarches en cours pour l’obtenir', 'Oder Nachweis des laufenden Antrags', 'Or proof that the application is under way')),
+    doc('address_proof', true, t('Justificatif de domicile', 'Wohnsitznachweis', 'Proof of address'), t('Facture ou quittance de loyer', 'Rechnung oder Mietquittung', 'Bill or rent receipt')),
+    doc('hosting', false, t('Attestation d’hébergement légalisée et pièce d’identité de l’hébergeant(e)', 'Beglaubigte Unterkunftsbestätigung und Ausweis des Gastgebers', 'Legalised accommodation certificate and ID of the host'), t('Si vous habitez chez un tiers', 'Falls Sie bei Dritten wohnen', 'If you live with someone else')),
+    doc('payment', true, t('Reçu de paiement des droits de chancellerie', 'Zahlungsbeleg der Kanzleigebühren', 'Receipt for the chancellery fees')),
+];
+
 export const SERVICES = {
   passeport_premiere: {
     booking: 'passeport',
@@ -115,21 +127,12 @@ export const SERVICES = {
   legalisation_entreprises: {
     booking: 'legalisation',
     label: t('Légalisation de documents pour entreprises', 'Beglaubigung von Dokumenten für Unternehmen', 'Legalisation of documents for companies'),
-    docs: [
-      doc('company_doc', true, t('Document de l’entreprise à légaliser', 'Zu beglaubigendes Unternehmensdokument', 'Company document to legalise')),
-      doc('id_representative', true, t('Pièce d’identité du représentant', 'Ausweis des Vertreters', 'ID of the representative')),
-      DOC.paymentRequired(),
-    ],
+    docs: DOCS_PERMIS_LIST(),
   },
   certifier_conforme: {
     booking: 'legalisation',
     label: t('Certification conforme', 'Beglaubigte Kopie', 'Certified true copy'),
-    docs: [
-      doc('original', true, t('Document original', 'Originaldokument', 'Original document')),
-      doc('copy', true, t('Copie à certifier conforme', 'Zu beglaubigende Kopie', 'Copy to certify')),
-      doc('id_copy', true, t('Pièce d’identité', 'Ausweisdokument', 'Identity document')),
-      DOC.paymentRequired(),
-    ],
+    docs: DOCS_PERMIS_LIST(),
   },
 
   // ---- État civil et mariage ----
@@ -165,16 +168,7 @@ export const SERVICES = {
   authentification_permis: {
     booking: 'autre',
     label: t('Authentification de permis de conduire', 'Beglaubigung des Führerscheins', 'Driving licence authentication'),
-    docs: [
-      doc('consular_card', true, t('Carte consulaire', 'Konsularkarte', 'Consular card')),
-      doc('licence_copy', true, t('Copie du permis de conduire (nouvelle formule)', 'Kopie des Führerscheins (neues Format)', 'Copy of the driving licence (new format)')),
-      DOC.form(t('Formulaire de demande d’actes consulaires', 'Antragsformular für konsularische Urkunden', 'Consular acts request form')),
-      doc('id_nationality', true, t('CNI, certificat de nationalité ou passeport en cours de validité', 'Personalausweis, Staatsangehörigkeitsbescheinigung oder gültiger Reisepass', 'National ID, nationality certificate or valid passport'), t('Certificat de nationalité de moins de 2 ans, authentifié par le Ministère de la Justice', 'Staatsangehörigkeitsbescheinigung nicht älter als 2 Jahre, beglaubigt durch das Justizministerium', 'Nationality certificate less than 2 years old, authenticated by the Ministry of Justice')),
-      doc('residence_permit', true, t('Titre de séjour en cours de validité', 'Gültiger Aufenthaltstitel', 'Valid residence permit'), t('Ou preuve des démarches en cours pour l’obtenir', 'Oder Nachweis des laufenden Antrags', 'Or proof that the application is under way')),
-      doc('address_proof', true, t('Justificatif de domicile', 'Wohnsitznachweis', 'Proof of address'), t('Facture ou quittance de loyer', 'Rechnung oder Mietquittung', 'Bill or rent receipt')),
-      doc('hosting', false, t('Attestation d’hébergement légalisée et pièce d’identité de l’hébergeant(e)', 'Beglaubigte Unterkunftsbestätigung und Ausweis des Gastgebers', 'Legalised accommodation certificate and ID of the host'), t('Si vous habitez chez un tiers', 'Falls Sie bei Dritten wohnen', 'If you live with someone else')),
-      doc('payment', true, t('Reçu de paiement des droits de chancellerie', 'Zahlungsbeleg der Kanzleigebühren', 'Receipt for the chancellery fees')),
-    ],
+    docs: DOCS_PERMIS_LIST(),
   },
   renonciation_nationalite: {
     booking: 'autre',
